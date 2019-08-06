@@ -205,17 +205,18 @@
           <a href="<?php echo base_url('customers'); ?>" title="Customers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Customers</span></a>
         </li>
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "drivers") ? "active" : "" ?>">
-        <a href="<?php echo base_url('drivers'); ?>" title="Drivers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Drivers</span></a>
+          <!-- <?php echo base_url('drivers'); ?> <?php echo base_url('jobs'); ?>-->
+        <a href="javascript:void(0);" title="Drivers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Drivers</span></a>
         </li>
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "jobs") ? "active" : "" ?>">
-          <a href="<?php echo base_url('jobs'); ?>" title="jobs"><i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">Jobs</span></a>
+          <a href="javascript:void(0);" title="jobs"><i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">Jobs</span></a>
         </li>
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "vehicles") ? "active" : "" ?>">
-          <a href="<?php echo base_url('vehicles'); ?>" title="Vehicles"><i class="fa fa-lg fa-fw fa-taxi"></i> <span class="menu-item-parent">Vehicles</span></a>
+          <a href="javascript:void(0);" title="Vehicles"><i class="fa fa-lg fa-fw fa-taxi"></i> <span class="menu-item-parent">Vehicles</span></a>
         </li>
 
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "reports") ? "active" : "" ?>">
-          <a href="<?php echo base_url('reports'); ?>" title="Reports"><i class="fa fa-lg fa-fw fa-line-chart"></i> <span class="menu-item-parent">Reports</span></a>
+          <a href="javascript:void(0);" title="Reports"><i class="fa fa-lg fa-fw fa-line-chart"></i> <span class="menu-item-parent">Reports</span></a>
         </li>
 
 
