@@ -292,6 +292,17 @@ class Common_model extends CI_Model {
         endif;
         return false;
     } //End Function usersInfo 
+    /**
+     * Generate auth token for API users
+     * Modified in version 2.0
+    */
+    function generate_token(){
+        $this->load->helper('security');
+        $res = do_hash(time().mt_rand());
+        $new_key = substr($res,0,config_item('rest_key_length'));
+        return $new_key;
+
+    }
 
   
 } //end of class

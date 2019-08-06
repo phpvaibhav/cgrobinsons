@@ -180,8 +180,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
 
  <script src="<?php echo $backend_assets; ?>custom/js/listing.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjhKBJtoevmCuR5iD1El6cuDHTMByw9Co&libraries=places" type="text/javascript"></script>
  <script src="<?php echo $backend_assets; ?>admin/js/user.js"></script>
+ <script src="<?php echo $backend_assets; ?>admin/js/location.js"></script>
  <script src="<?php echo $backend_assets; ?>custom/js/custom.js"></script>
+ <script src="<?php echo $backend_assets; ?>custom/js/common.js"></script>
 
     <script>
 

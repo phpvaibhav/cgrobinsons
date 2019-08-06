@@ -201,7 +201,25 @@
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "dashboard") ? "active" : "" ?>">
           <a href="<?php echo base_url('dashboard'); ?>" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
         </li>
-        <li class="<?php echo (strtolower($this->router->fetch_class()) == "customers") ? "active open" : "" ?>">
+        <li class="<?php echo (strtolower($this->router->fetch_class()) == "customers") ? "active" : "" ?>">
+          <a href="<?php echo base_url('customers'); ?>" title="Customers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Customers</span></a>
+        </li>
+        <li class="<?php echo (strtolower($this->router->fetch_class()) == "drivers") ? "active" : "" ?>">
+        <a href="<?php echo base_url('drivers'); ?>" title="Drivers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Drivers</span></a>
+        </li>
+        <li class="<?php echo (strtolower($this->router->fetch_class()) == "jobs") ? "active" : "" ?>">
+          <a href="<?php echo base_url('jobs'); ?>" title="jobs"><i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">Jobs</span></a>
+        </li>
+        <li class="<?php echo (strtolower($this->router->fetch_class()) == "vehicles") ? "active" : "" ?>">
+          <a href="<?php echo base_url('vehicles'); ?>" title="Vehicles"><i class="fa fa-lg fa-fw fa-taxi"></i> <span class="menu-item-parent">Vehicles</span></a>
+        </li>
+
+        <li class="<?php echo (strtolower($this->router->fetch_class()) == "reports") ? "active" : "" ?>">
+          <a href="<?php echo base_url('reports'); ?>" title="Reports"><i class="fa fa-lg fa-fw fa-line-chart"></i> <span class="menu-item-parent">Reports</span></a>
+        </li>
+
+
+      <!--   <li class="<?php echo (strtolower($this->router->fetch_class()) == "customers") ? "active open" : "" ?>">
           <a href="#" title="Customers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Customers</span></a>
           <ul>
             <li class="<?php echo (($this->uri->segment('2') == "" OR $this->uri->segment('2') == "customerDetail") && $this->uri->segment('1') == "customers") ? "active" : ""; ?>">
@@ -213,53 +231,11 @@
               <a href="<?php echo base_url().'add_customer'; ?>" title="Add customer"><span class="menu-item-parent">Add Customer</span></a>
             </li>
           </ul>
-        </li>        
-        <li class="<?php echo (strtolower($this->router->fetch_class()) == "drivers") ? "active open" : "" ?>">
-          <a href="#" title="Drivers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Drivers</span></a>
-          <ul>
-            <li class="<?php echo (($this->uri->segment('2') == "" OR $this->uri->segment('2') == "driverDetail") && $this->uri->segment('1') == "drivers") ? "active" : ""; ?>">
-              <a href="<?php echo base_url().'customers'; ?>" title="Customers"><span class="menu-item-parent">
-            Drivers</span></a>
-            </li>
-
-            <li class="<?php echo ($this->uri->segment('2') == "add_driver" ) ? "active" : ""; ?>">
-              <a href="<?php echo base_url().'service/add_driver'; ?>" title="Add Driver"><span class="menu-item-parent">Add Driver</span></a>
-            </li>
-          </ul>
-        </li>
-        <li class="<?php echo (strtolower($this->router->fetch_class()) == "jobs") ? "active open" : "" ?>">
-          <a href="#" title="Jobs"><i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">Jobs</span></a>
-          <ul>
-            <li class="<?php echo (($this->uri->segment('2') == "" OR $this->uri->segment('2') == "jobDetail") && $this->uri->segment('1') == "jobs") ? "active" : ""; ?>">
-              <a href="<?php echo base_url().'jobs'; ?>" title="Jobs"><span class="menu-item-parent">
-            Jobs</span></a>
-            </li>
-            <li class="<?php echo ($this->uri->segment('2') == "add_job" ) ? "active" : ""; ?>">
-              <a href="<?php echo base_url().'service/add_job'; ?>" title="Add Job"><span class="menu-item-parent">Add Job</span></a>
-            </li>
-          </ul>
-        </li>
+        </li>         -->
+      
+       
         
-      <!--     <li class="<?php echo (strtolower($this->router->fetch_class()) == "service") ? "active open" : "" ?>">
-            <a href="#" title="Services"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">Services</span></a>
-            <ul>
-              <li class="<?php echo (($this->uri->segment('2') == "" OR $this->uri->segment('2') == "serviceDetail") && $this->uri->segment('1') == "service") ? "active" : ""; ?>">
-                <a href="<?php echo base_url().'service'; ?>" title="Services"><span class="menu-item-parent">
-                  <?php echo (isset($user['userType'])&& $user['userType']==2) ? "My Services" :"Services"; ?></span></a>
-              </li>
-              <?php if(isset($user['userType'])&& $user['userType']==2): ?>
-              <li class="<?php echo ($this->uri->segment('2') == "add_service" ) ? "active" : ""; ?>">
-                <a href="<?php echo base_url().'service/add_service'; ?>" title="Add service"><span class="menu-item-parent">Add Service</span></a>
-              </li>
-            <?php endif; ?>
-           
-            </ul> 
-          </li>
-          <?php if(isset($user['userType'])&& $user['userType']==1): ?>
-      <li class="<?php echo (strtolower($this->router->fetch_class()) == "users") ? "active open" : "" ?>">
-            <a href="<?php echo base_url().'users'; ?>"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Users</span></a>
-          </li> 
-        <?php endif; ?> -->
+    
         </ul> 
       </nav>
       
@@ -284,9 +260,24 @@
         </span>
 
         <!-- breadcrumb -->
-       <!--  <ol class="breadcrumb">
-          <li>Home</li><li>Miscellaneous</li><li>Blank Page</li>
-        </ol> -->
+          <?php
+            $segmentSearch   = array('-', '/', '_');
+            $segmentReplace  = array(' ', ' ', ' ');
+            $segments        = $this->uri->segment_array();
+            $segmentCount    = count($this->uri->segment_array());
+          ?>      
+               
+
+        <ol class="breadcrumb">
+          <!-- <li>Home</li><li>Miscellaneous</li><li>Blank Page</li> -->
+          <?php  foreach ($segments as $segment) {
+          if ($foreach_count >= $segmentCount) { ?> 
+               <li class='breadcrumb-item active'><?php echo ucfirst(str_replace($segmentSearch, $segmentReplace, $segment)); ?></li>;
+            <?php  } else {  $last_segment = $last_segment . '/' . $segment; ?>
+             <li class='breadcrumb-item'><a href='<?php echo base_url($last_segment); ?>'><?php  echo ucfirst(str_replace($segmentSearch, $segmentReplace, $segment)); ?></a></li>
+            <?php   }$foreach_count+=1;} ?>
+        
+        </ol>
         <!-- end breadcrumb -->
 
         <!-- You can also add more buttons to the
@@ -329,26 +320,16 @@
           <!-- col -->
           <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
             <!-- sparks -->
-         <!--    <ul id="sparks">
-              <li class="sparks-info">
-                <h5> My Income <span class="txt-color-blue">$47,171</span></h5>
-                <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
-                  1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
-                </div>
-              </li>
-              <li class="sparks-info">
-                <h5> Site Traffic <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
-                <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
-                  110,150,300,130,400,240,220,310,220,300, 270, 210
-                </div>
-              </li>
-              <li class="sparks-info">
-                <h5> Site Orders <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
-                <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
-                  110,150,300,130,400,240,220,310,220,300, 270, 210
-                </div>
-              </li>
-            </ul> -->
+         <ul id="sparks">
+            <?php 
+              if(isset($recordSet) && !empty($recordSet)):
+                foreach ($recordSet as $k => $record) {
+                   echo $record;
+                 } 
+              endif;
+            ?>
+             
+            </ul>
             <!-- end sparks -->
           </div>
           <!-- end col -->
@@ -363,3 +344,4 @@
           -->
         
         <!-- widget grid -->
+        

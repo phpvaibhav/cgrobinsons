@@ -42,7 +42,11 @@ class Admin extends Common_Back_Controller {
     public function dashboard() {
        
         $data['parent'] = "Dashboard";
-        $data['title'] = "Dashboard";
+        $data['title'] = '<i class="fa-fw fa fa-home"></i> Dashboard';
+        $data['customers'] = $this->common_model->get_total_count('users',array('userType' =>1));
+        $data['drivers'] = $this->common_model->get_total_count('users',array('userType' =>2));
+        $data['jobs'] = $this->common_model->get_total_count('jobs');
+        $data['vehicles'] = $this->common_model->get_total_count('vehicles');
         
         $this->load->admin_render('dashboard', $data, '');
     }

@@ -108,8 +108,8 @@ define('ADMIN_AVATAR_PATH', 'uploads/admin/'); //user avatar
 define('ADMIN_DEFAULT_AVATAR', 'backend_assets/img/avatars/1.png'); //user placeholder image
 
 //Title, Site name, Copyright etc
-define('SITE_NAME','CG RONISON`S'); //your project name
-define('COPYRIGHT','&copy; ' . date('Y'). ', CG RONISON`S. All rights reserved.');
+define('SITE_NAME','CG ROBINSON`S'); //your project name
+define('COPYRIGHT','&copy; ' . date('Y'). ', CG ROBINSON`S. All rights reserved.');
 define('INFO_EMAIL','info@project.com'); //your project name
 
 

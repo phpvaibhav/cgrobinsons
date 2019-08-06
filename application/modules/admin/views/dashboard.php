@@ -1,76 +1,62 @@
     <!-- widget grid -->
         <section id="widget-grid" class="">
         
-          <!-- row -->
-          <div class="row">
-            
-            <!-- NEW WIDGET START -->
-            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              
-              <!-- Widget ID (each widget will need unique ID)-->
-              <div class="jarviswidget" id="wid-id-0">
-                <!-- widget options:
-                  usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-                  
-                  data-widget-colorbutton="false" 
-                  data-widget-editbutton="false"
-                  data-widget-togglebutton="false"
-                  data-widget-deletebutton="false"
-                  data-widget-fullscreenbutton="false"
-                  data-widget-custombutton="false"
-                  data-widget-collapsed="true" 
-                  data-widget-sortable="false"
-                  
-                -->
-                <header>
-                  <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-                  <h2>Dashboard</h2>        
-                  
-                </header>
-        
-                <!-- widget div-->
-                <div>
-                  
-                  <!-- widget edit box -->
-                  <div class="jarviswidget-editbox">
-                    <!-- This area used as dropdown edit box -->
-                    <input class="form-control" type="text">  
-                  </div>
-                  <!-- end widget edit box -->
-                  
-                  <!-- widget content -->
-                  <div class="widget-body">
-                    
-                    <!-- this is what the user will see -->
-                    
-                  </div>
-                  <!-- end widget content -->
-                  
+           <!-- Widgets -->
+            <div class="row clearfix">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                  <a href="<?php echo base_url('customers'); ?>">
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <div class="icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <div class="content">
+                            <div class="text">Customers</div>
+                            <div class="number count-to"><?php echo $customers; ?></div>
+                        </div>
+                    </div>
+                  </a>
                 </div>
-                <!-- end widget div -->
-                
-              </div>
-              <!-- end widget -->
-        
-            </article>
-            <!-- WIDGET END -->
-            
-          </div>
-        
-          <!-- end row -->
-        
-          <!-- row -->
-        
-          <div class="row">
-        
-            <!-- a blank row to get started -->
-            <div class="col-sm-12">
-              <!-- your contents here -->
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                  <a href="<?php echo base_url('drivers'); ?>">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <div class="content">
+                            <div class="text">Drivers</div>
+                            <div class="number count-to"><?php echo $drivers; ?></div>
+                        </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                  <a href="<?php echo base_url('jobs'); ?>">
+                    <div class="info-box bg-light-green hover-expand-effect">
+                        <div class="icon">
+                            <i class="fa fa-tasks"></i>
+                        </div>
+                        <div class="content">
+                            <div class="text">Jobs</div>
+                            <div class="number count-to"><?php echo $jobs; ?></div>
+                        </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                  <a href="<?php echo base_url('vehicles'); ?>">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <div class="icon">
+                            <i class="fa fa-taxi"></i>
+                        </div>
+                        <div class="content">
+                            <div class="text">Vehicles</div>
+                            <div class="number count-to"><?php echo $vehicles; ?></div>
+                        </div>
+                    </div>
+                  </a>
+                </div>
             </div>
-              
-          </div>
-        
-          <!-- end row -->
+            <!-- #END# Widgets -->
         
         </section>
         <!-- end widget grid -->
