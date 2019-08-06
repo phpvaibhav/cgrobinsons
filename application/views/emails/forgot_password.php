@@ -29,7 +29,7 @@
 
                             <h3 style="color: #333; font-size: 28px; font-weight: normal; margin: 0; text-transform: capitalize;">Forgot Password</h3>
                             <p style="text-align: left; color: #333; font-size: 16px; line-height: 28px;">Hello <?php echo $full_name; ?>,</p>
-                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">You recently requested to reset your password for your interface account. Please click on button To reset your password: </p>
+                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">You recently requested to reset your password for your cgrobinson`s account. Please click on button To reset your password: </p>
                             <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                           <td align="center">
@@ -54,7 +54,7 @@
                             
                             <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">If you didn't generate this link, don't worry. You can login with your old password. This link is only for one time use.</p>  
 
-                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Thanks,<br><?php echo "Inter face"; ?> team</p>  
+                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Thanks,<br><?php echo "CG ROBINSON`S"; ?> team</p>  
                         </td>
                     </tr>
                 </table>
