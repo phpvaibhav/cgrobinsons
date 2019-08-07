@@ -28,7 +28,7 @@
 						<br>
 
 						<fieldset>
-							
+							<ul class="list-unstyled">
 							<li class="list-group-item">
 								<span class="label label-<?php echo $customermeta['creditHoldStatus'] ?'danger' :'warning'; ?> pull-right"><?php echo $customermeta['creditHoldStatus'] ?'Yes' :'No'; ?></span>	<strong>Credit Hold</strong>
 							
@@ -43,6 +43,7 @@
 								<span class="pull-right"><?php echo $customer['contactNumber']; ?></span>	<strong>Contact Number</strong>
 							</li>
 						</ul>
+					</fieldset>
 						
 					
 					</div>
@@ -56,7 +57,7 @@
 						
 
 						<fieldset>
-							
+							<ul class="list-unstyled">
 							<li class="list-group-item">
 								<p><strong>Address</strong></p>
 								<span class=""><?php echo $customermeta['address']; ?></span>
@@ -87,7 +88,7 @@
 						
 
 						<fieldset>
-							
+							<ul class="list-unstyled">
 							<li class="list-group-item">
 								<p><strong>Address</strong></p>
 								<span class=""><?php echo $customermeta['billAddress']; ?></span>

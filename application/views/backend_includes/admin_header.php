@@ -206,7 +206,7 @@
         </li>
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "drivers") ? "active" : "" ?>">
           <!-- <?php echo base_url('drivers'); ?> <?php echo base_url('jobs'); ?>-->
-        <a href="javascript:void(0);" title="Drivers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Drivers</span></a>
+        <a href="<?php echo base_url('drivers'); ?>" title="Drivers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Drivers</span></a>
         </li>
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "jobs") ? "active" : "" ?>">
           <a href="javascript:void(0);" title="jobs"><i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">Jobs</span></a>
