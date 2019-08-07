@@ -138,7 +138,7 @@
 						</div>
 						<div class="timeline-seperator text-center"></div>
 						<header>
-							<h5>Basic Infotmation</h5>
+							<h5>Basic Information</h5>
 						</header>
 						<div class="timeline-seperator text-center"></div>
 						<br>
@@ -156,7 +156,7 @@
 							</ul>
 						</fieldset>							
 						<header>
-							<h5>Emergency Person Infotmation</h5>
+							<h5>Emergency Person Information</h5>
 						</header>
 						<div class="timeline-seperator text-center"></div>
 						<br>
