@@ -84,7 +84,7 @@ $("#customerAddUpdate").validate({// Rules for form validation
           setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
           if(res.status=='success'){
             toastr.success(res.message, 'Success', {timeOut: 3000});
-            setTimeout(function(){ window.location = base_url+'customers'; },4000);
+            setTimeout(function(){window.location.reload(); },4000);
           }else{
             toastr.error(res.message, 'Alert!', {timeOut: 4000});
           }
@@ -135,7 +135,7 @@ var customer_list = $('#customer_list').DataTable({
 
           });
         /*listing customer_list*/
-       
+//customer status      
 function customerStatus(e){
   swal({
   title: "Are you sure?",
@@ -169,6 +169,108 @@ function(isConfirm) {
                    toastr.success(res.message, 'Success', {timeOut: 3000});
                  //  swal("Success", "Your process  has been successfully done.", "success");
                  $('#customer_list').DataTable().ajax.reload();
+                  }else{
+                    toastr.error(res.message, 'Alert!', {timeOut: 5000});
+                  }
+                  
+                     
+                 }
+             });
+    /*ajax*/
+   
+  } else {
+    //swal("Cancelled", "Your Process has been Cancelled", "error");
+  }
+});
+}
+//customer Credit hold
+function creditHoldStatus(e){
+  swal({
+  title: "Are you sure?",
+  text:  $(e).data('message'),
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonClass: "btn-danger",
+  confirmButtonText: "Yes",
+  cancelButtonText: "No",
+  closeOnConfirm: true,
+  closeOnCancel: true,
+ // showLoaderOnConfirm: true
+},
+function(isConfirm) {
+  if (isConfirm) {
+     $(e).prop('disabled', true);
+    /*ajax*/
+    $.ajax({
+                 type: "POST",
+                 url: base_url+'adminapi/customers/creditHoldStatus',
+                 data: {use:$(e).data('useid') },
+                 headers: { 'authToken':authToken},
+                  cache: false,
+           beforeSend: function() {
+          
+               preLoadshow(true);
+                  },     
+                 success: function (res) {
+                   preLoadshow(false);
+                     $(e).prop('disabled', false);
+                  if(res.status=='success'){
+                   
+                   toastr.success(res.message, 'Success', {timeOut: 3000});
+                 //  swal("Success", "Your process  has been successfully done.", "success");
+               setTimeout(function(){ window.location.reload(); },3000);
+
+                  }else{
+                    toastr.error(res.message, 'Alert!', {timeOut: 5000});
+                  }
+                  
+                     
+                 }
+             });
+    /*ajax*/
+   
+  } else {
+    //swal("Cancelled", "Your Process has been Cancelled", "error");
+  }
+});
+}
+//customer Delete
+function customerDelete(e){
+  swal({
+  title: "Are you sure?",
+  text:  $(e).data('message'),
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonClass: "btn-danger",
+  confirmButtonText: "Yes",
+  cancelButtonText: "No",
+  closeOnConfirm: true,
+  closeOnCancel: true,
+ // showLoaderOnConfirm: true
+},
+function(isConfirm) {
+  if (isConfirm) {
+     $(e).prop('disabled', true);
+    /*ajax*/
+    $.ajax({
+                 type: "POST",
+                 url: base_url+'adminapi/customers/customerDelete',
+                 data: {use:$(e).data('useid') },
+                 headers: { 'authToken':authToken},
+                  cache: false,
+           beforeSend: function() {
+          
+               preLoadshow(true);
+                  },     
+                 success: function (res) {
+                   preLoadshow(false);
+                     $(e).prop('disabled', false);
+                  if(res.status=='success'){
+                   
+                   toastr.success(res.message, 'Success', {timeOut: 3000});
+                 //  swal("Success", "Your process  has been successfully done.", "success");
+                  setTimeout(function(){  window.location = base_url+'customers'; },3000);
+
                   }else{
                     toastr.error(res.message, 'Alert!', {timeOut: 5000});
                   }

@@ -198,7 +198,7 @@
         -->
 
     <ul>
-        <li class="<?php echo (strtolower($this->router->fetch_class()) == "dashboard") ? "active" : "" ?>">
+        <li class="<?php echo (strtolower($this->router->fetch_class()) == "admin") ? "active" : "" ?>">
           <a href="<?php echo base_url('dashboard'); ?>" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
         </li>
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "customers") ? "active" : "" ?>">

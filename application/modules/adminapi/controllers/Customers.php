@@ -7,10 +7,21 @@ class Customers extends Common_Admin_Controller{
         $this->check_admin_service_auth();
     }
     public function addCustomer_post(){
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]',
+       
+
+        $userId  = decoding($this->post('cus'));
+        $where = array('id'=>$userId);
+        $dataExist=$this->common_model->is_data_exists('users',$where);
+        if($dataExist){
+             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        }else{
+            $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]',
             array('is_unique' => 'Email already exist')
         );
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]|max_length[20]');
+             $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]|max_length[20]');
+        }
+        
+       
         $this->form_validation->set_rules('contactNumber', 'Contact Number', 'trim|required|min_length[10]|max_length[20]');
         $this->form_validation->set_rules('fullName', 'full Name', 'trim|required|min_length[2]');
     
@@ -47,14 +58,33 @@ class Customers extends Common_Admin_Controller{
                 $userMeta['billCountry']    = $this->post('country1');
                 $userMeta['billLatitude']   = $this->post('latitude1');
                 $userMeta['billLongitude']  = $this->post('longitude1');
+
+            if($dataExist){
+                 $isemailExist=$this->common_model->is_data_exists('users',array('id !='=>$userId,'email'=> $userData['email']));
+                 if($isemailExist){
+                     $response = array('status'=>FAIL,'message'=>"Email already exist");
+                 }else{
+                    $update = $this->common_model->updateFields('users',$userData,$where);
+                    if($update){
+                    $userMeta['userId'] = $userId;
+                    $this->common_model->updateFields('customerMeta',$userMeta,array('userId'=>$userId));
+                    $response = array('status'=>SUCCESS,'message'=>"Customer record updated successfully.");
+                    }else{
+                    $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
+                    } 
+                 }
+               
+            }else{
                 $userId = $this->common_model->insertData('users',$userData);
                 if($userId){
                     $userMeta['userId'] = $userId;
                     $this->common_model->insertData('customerMeta',$userMeta);
-                     $response = array('status'=>SUCCESS,'message'=>ResponseMessages::getStatusCodeMessage(110));
+                     $response = array('status'=>SUCCESS,'message'=>"Customer record added successfully.");
                 }else{
                      $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
-                }
+                } 
+            }   
+               
            
         }
         $this->response($response);
@@ -127,6 +157,38 @@ class Customers extends Common_Admin_Controller{
         }
         $this->response($response);
     }//end function
+    function creditHoldStatus_post(){
+        $userId  = decoding($this->post('use'));
+   
+        $where = array('userId'=>$userId);
+         $dataExist=$this->common_model->is_data_exists('customerMeta',$where);
+        if($dataExist){
+            $status = $dataExist->creditHoldStatus ? 0:1;
+
+             $dataExist=$this->common_model->updateFields('customerMeta',array('creditHoldStatus'=>$status),$where);
+              $showmsg  ='Customer has been credit hold changed successfully.';
+                $response = array('status'=>SUCCESS,'message'=>$showmsg);
+        }else{
+           $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
+        }
+        $this->response($response);
+    }//end function
+     function customerDelete_post(){
+        $userId  = decoding($this->post('use'));
+   
+        $where = array('id'=>$userId,'userType'=>1);
+         $dataExist=$this->common_model->is_data_exists('users',$where);
+        if($dataExist){
+
+             $dataExist=$this->common_model->deleteData('users',$where);
+              $showmsg  ='Customer has been delete successfully.';
+                $response = array('status'=>SUCCESS,'message'=>$showmsg);
+        }else{
+           $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
+        }
+        $this->response($response);
+    }//end function
+    
 
 }//End Class 
 
