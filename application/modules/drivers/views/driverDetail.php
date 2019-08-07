@@ -88,11 +88,7 @@
 												<i class="fa fa-phone"></i>&nbsp;&nbsp;<span class="txt-color-darken"><?php echo $driver['contactNumber']; ?></span>
 												</p>
 												</li>
-												<li>
-												<p class="text-muted">
-												<i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:<?php echo $driver['email']; ?>"><?php echo $driver['email']; ?></a>
-												</p>
-												</li>
+												
 											
 											
 												</ul>
@@ -129,6 +125,18 @@
 												</p>
 												</li>
 												</ul> -->
+											</div>
+											<div class="col-md-12 col-sm-12">
+												<ul class="list-unstyled">
+												
+												<li>
+												<p class="text-muted">
+												<i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:<?php echo $driver['email']; ?>"><?php echo $driver['email']; ?></a>
+												</p>
+												</li>
+											
+											
+												</ul>
 											</div>
 										</div>
 										<br>
