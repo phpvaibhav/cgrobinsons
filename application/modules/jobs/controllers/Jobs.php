@@ -28,7 +28,8 @@ class Jobs extends Common_Back_Controller {
 
         $data['title'] = "job Detail";
         $where = array('jobId'=>$jobId);
-        $result = $this->common_model->getsingle('jobs',$where);
+        $this->load->model('job_model');
+        $data['job'] = $this->job_model->jobDetail($jobId);
        
         $this->load->admin_render('jobDetail', $data, '');
     } 

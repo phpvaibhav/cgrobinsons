@@ -91,8 +91,8 @@ class Jobs extends Common_Admin_Controller{
             $link  ='javascript:void(0)';
             $action .= "";
        
-       // $userLink = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
-        $userLink = "javascript:void(0);";
+        $userLink = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
+       // $userLink = "javascript:void(0);";
         $action .= '&nbsp;&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
             
 

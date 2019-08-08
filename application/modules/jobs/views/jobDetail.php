@@ -5,145 +5,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-6">
 					<div class="well well-light well-sm margin padding">
-						<div class="row">
-							<div class="col-sm-12">
-								<div id="myCarousel" class="carousel fade profile-carousel">
-									<div class="air air-bottom-right padding-10">
-										<ul class="demo-btns text-center">
-											
-									
-										
-											
-											<li>
-												<a href="javascript:void(0);" class="btn btn-labeled btn-info" data-toggle="modal" data-target="#editDriver"> <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Edit </a>
-											</li>
-											<li>
-												<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="driverDelete(this);" data-message="Are you sure want to delete this driver." data-useid="<?php echo encoding($driver['id']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
-											</li>
-										
-										</ul>
-									</div>
-									<div class="air air-top-left padding-10">
-									
-									</div>
-								
-									<div class="carousel-inner">
-										<!-- Slide 1 -->
-										<div class="item active">
-											<img src="<?php echo $backend_assets; ?>img/demo/s1.jpg" alt="demo user">
-										</div>
-									
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-12">
-								<div class="row">
-									<div class="col-sm-3 profile-pic">
-										<?php 
-										$img = $backend_assets.'img/avatars/sunny-big.png';
-										if(!empty($driver['profileImage'])):
-										$img = base_url().'uploads/users/thumb/'.$driver['profileImage'];
-										endif;
-										?>
-										<img src="<?php echo $img;?>" alt="<?php echo $driver['fullName'];?>">
-									</div>
-									<div class="col-sm-9">
-										<?php $fullName =$driver['fullName'];
-										$name = explode(" ",$fullName);
-										?>
-
-										<h1>
-										<?php for ($i=0; $i <sizeof($name) ; $i++) { 
-										if($i==0){
-										echo $name[0]."&nbsp;";
-										}else{
-										echo '<span class="semi-bold">'.$name[1].'</span>';
-										}
-										} ?>
-										<!-- <span class="semi-bold">Doe</span> -->
-										<br>
-										<small><?php switch ($driver['userType']) {
-										case 1:
-										echo 'Super Admin';
-										break;
-										case 2:
-										echo 'Driver';
-										break;
-										case 3:
-										echo 'Employee';
-										break;
-
-										default:
-										echo 'Unknown';
-										break;
-										}
-
-
-										?></small></h1>
-										<div class="row">
-											<div class="col-md-6 col-sm-6">
-												<ul class="list-unstyled">
-												<li>
-												<p class="text-muted">
-												<i class="fa fa-phone"></i>&nbsp;&nbsp;<span class="txt-color-darken"><?php echo $driver['contactNumber']; ?></span>
-												</p>
-												</li>
-												
-											
-											
-												</ul>
-											</div>										
-											<div class="col-md-6 col-sm-6">
-												<ul class="list-unstyled">
-											
-											
-												<li>
-												<p class="text-muted">
-												<i class="fa fa-birthday-cake"></i>&nbsp;&nbsp;<span class="txt-color-darken"><?php echo date('d M Y',strtotime($drivermeta['dob'])); ?></span>
-												</p>
-												</li>
-												</ul>
-												<!-- <ul class="list-unstyled">
-												<li>
-												<p class="text-muted">
-												<i class="fa fa-phone"></i>&nbsp;&nbsp;(<span class="txt-color-darken">313</span>) <span class="txt-color-darken">464</span> - <span class="txt-color-darken">6473</span>
-												</p>
-												</li>
-												<li>
-												<p class="text-muted">
-												<i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">ceo@smartadmin.com</a>
-												</p>
-												</li>
-												<li>
-												<p class="text-muted">
-												<i class="fa fa-skype"></i>&nbsp;&nbsp;<span class="txt-color-darken">john12</span>
-												</p>
-												</li>
-												<li>
-												<p class="text-muted">
-												<i class="fa fa-calendar"></i>&nbsp;&nbsp;<span class="txt-color-darken">Free after <a href="javascript:void(0);" rel="tooltip" title="" data-placement="top" data-original-title="Create an Appointment">4:30 PM</a></span>
-												</p>
-												</li>
-												</ul> -->
-											</div>
-											<div class="col-md-12 col-sm-12">
-												<ul class="list-unstyled">
-												
-												<li>
-												<p class="text-muted">
-												<i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:<?php echo $driver['email']; ?>"><?php echo $driver['email']; ?></a>
-												</p>
-												</li>
-											
-											
-												</ul>
-											</div>
-										</div>
-										<br>
-									</div>
-								</div>
-							</div>
-						</div>
+						
 						<div class="timeline-seperator text-center"></div>
 						<header>
 							<h5>Basic Information</h5>
@@ -153,36 +15,32 @@
 						<fieldset>
 							<ul class="list-unstyled">
 								<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo date("d F Y",strtotime($drivermeta['doh'])); ?></span>	<strong>Date of Hire</strong>
+									<span class="pull-right txt-color-darken"><?php echo $job['jobName']; ?></span>	<strong> Job Name</strong>
 								</li>
 								<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo $drivermeta['licenseNumber']; ?></span>	<strong>License Number</strong>
+									<span class="pull-right txt-color-darken"><?php echo $job['jobType']; ?></span>	<strong> Job Type</strong>
 								</li>
 								<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo date("d M Y",strtotime($drivermeta['licenseExpiryDate'])); ?></span>	<strong>License Expiry Date</strong>
-								</li>
-							</ul>
-						</fieldset>							
-						<header>
-							<h5>Emergency Person Information</h5>
-						</header>
-						<div class="timeline-seperator text-center"></div>
-						<br>
-						<fieldset>
-							<ul class="list-unstyled">
-								<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo $drivermeta['emergencyPersonName']; ?></span>	<strong>Person Name</strong>
+									<span class="pull-right txt-color-darken"><?php echo $job['customerName']; ?></span>	<strong> Customer Name</strong>
 								</li>
 								<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo $drivermeta['emergencyPersonNumber']; ?></span>	<strong>Person Number</strong>
+									<span class="pull-right txt-color-darken"><?php echo $job['driverName']; ?></span>	<strong> Driver Name</strong>
+								</li>
+								<li class="list-group-item">
+									<span class="pull-right txt-color-darken"><?php echo date("d F Y",strtotime($job['startDate']))." ".$job['startTime']; ?></span>	<strong>Start Date Time</strong>
 								</li>
 								
+							
 							</ul>
-						</fieldset>				
+						</fieldset>							
+						
+						<div class="timeline-seperator text-center"></div>
+								
 					</div>
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-6">
 					<div class="well well-light well-sm margin padding">
+						<div class="timeline-seperator text-center"></div>
 					<header>
 						<h5>Address</h5>
 					</header>
@@ -193,22 +51,22 @@
 							<ul class="list-unstyled">
 								<li class="list-group-item">
 									<p><strong>Address</strong></p>
-									<span class="txt-color-darken"><?php echo $drivermeta['address']; ?></span>
+									<span class="txt-color-darken"><?php echo $job['address']; ?></span>
 								</li>
 								<li class="list-group-item">
-									<span class="pull-right"><?php echo $drivermeta['street']." ".$drivermeta['street2']; ?></span>	<strong>Street</strong>
+									<span class="pull-right"><?php echo $job['street']." ".$job['street2']; ?></span>	<strong>Street</strong>
 								</li>
 								<li class="list-group-item">
-									<span class="pull-right"><?php echo $drivermeta['city']; ?></span>	<strong>City</strong>
+									<span class="pull-right"><?php echo $job['city']; ?></span>	<strong>City</strong>
 								</li>
 								<li class="list-group-item">
-									<span class="pull-right"><?php echo $drivermeta['state']; ?></span>	<strong>State</strong>
+									<span class="pull-right"><?php echo $job['state']; ?></span>	<strong>State</strong>
 								</li>
 								<li class="list-group-item">
-									<span class="pull-right"><?php echo $drivermeta['zip'] ; ?></span>	<strong>Zip</strong>
+									<span class="pull-right"><?php echo $job['zip'] ; ?></span>	<strong>Zip</strong>
 								</li>
 								<li class="list-group-item">
-									<span class="pull-right"><?php echo $drivermeta['country']; ?></span>	<strong>Country</strong>
+									<span class="pull-right"><?php echo $job['country']; ?></span>	<strong>Country</strong>
 								</li>
 								
 							</ul>
