@@ -112,6 +112,7 @@ class Vehicles extends Common_Admin_Controller{
         $row[] = display_placeholder_text($serData->plate); 
         $row[] = display_placeholder_text($serData->color); 
         $row[] = display_placeholder_text($serData->state); 
+        $row[] = display_placeholder_text($serData->fullName); 
         if($serData->status){
         $row[] = '<label class="label label-success">'.$serData->statusShow.'</label>';
         }else{ 

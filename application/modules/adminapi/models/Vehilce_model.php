@@ -5,13 +5,13 @@ class Vehilce_model extends CI_Model {
 
     //var $table , $column_order, $column_search , $order =  '';
     var $table = 'vehicles';
-    var $column_order = array('v.vehicleId','v.year','v.manufacturer','v.model','v.vin','v.plate','v.color','v.state','v.status'); //set column field database for datatable orderable
+    var $column_order = array('v.vehicleId','v.year','v.manufacturer','v.model','v.vin','v.plate','v.color','v.state','v.status','d.fullName'); //set column field database for datatable orderable
     var $column_sel = array('v.vehicleId','v.year','v.manufacturer','v.model','v.vin','v.plate','v.color','v.state','v.status','(case when (v.status = 0) 
         THEN "Inactive" when (v.status = 1) 
         THEN "Active" ELSE
         "Unknown" 
-        END) as statusShow'); //set column field database for datatable orderable
-    var $column_search = array('v.year','v.manufacturer','v.model','v.vin','v.plate','v.color','v.state'); //set column field database for datatable searchable 
+        END) as statusShow','d.fullName'); //set column field database for datatable orderable
+    var $column_search = array('v.year','v.manufacturer','v.model','v.vin','v.plate','v.color','v.state','d.fullName'); //set column field database for datatable searchable 
     var $order = array('v.vehicleId' => 'DESC');  // default order
     var $where = array();
     var $group_by = 'v.vehicleId'; 
@@ -29,6 +29,8 @@ class Vehilce_model extends CI_Model {
         $sel_fields = array_filter($this->column_sel); 
         $this->db->select($sel_fields);
         $this->db->from('vehicles as v');
+        $this->db->join('assignVehicle as av','av.vehicleId = v.vehicleId','left');
+        $this->db->join('users as d','d.id = av.driverId','left');
         $i = 0;
         foreach ($this->column_search as $emp) // loop column 
         {

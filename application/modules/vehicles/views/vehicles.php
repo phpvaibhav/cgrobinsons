@@ -40,6 +40,7 @@
 									<th data-hide="phone,tablet">Plate</th>
 									<th data-hide="phone,tablet">Color</th>
 									<th data-hide="phone,tablet">State</th>
+									<th data-hide="phone,tablet">Assign Driver</th>
 									<th data-hide="phone,tablet">Status</th>
 									<th data-hide="phone,tablet">Action</th>
 								</tr>
