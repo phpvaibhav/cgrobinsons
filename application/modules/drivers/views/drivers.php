@@ -33,9 +33,9 @@
 							<thead>			                
 								<tr>
 									<th data-hide="phone">ID</th>
-									<th data-hide="phone">Driver name</th>
+									<th data-hide="phone">Driver Name</th>
 									<th data-hide="phone,tablet">Email</th>
-									<th data-hide="phone,tablet">Contact number</th>
+									<th data-hide="phone,tablet">Contact Number</th>
 									<th data-hide="phone,tablet">Status</th>
 									<th data-hide="phone,tablet">Action</th>
 								</tr>

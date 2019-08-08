@@ -1,21 +1,21 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Service_model extends CI_Model {
+class Job_model extends CI_Model {
 
     //var $table , $column_order, $column_search , $order =  '';
-    var $table = 'service';
-    var $column_order = array('s.serviceId','s.productName','s.vendor','s.serialNumber','s.purchaseDate','s.contactNumber'); //set column field database for datatable orderable
-    var $column_sel = array('s.serviceId','s.productName','s.vendor','s.serialNumber','s.purchaseDate','s.contactNumber','s.comment','s.status','(case when (s.status = 0) 
-        THEN "Pending" when (s.status = 1) 
-        THEN "In Progress" when (s.status = 2) 
-        THEN "Complete" ELSE
+    var $table = 'jobs';
+    var $column_order = array('j.jobId','j.jobName','j.jobTypeId','j.driverId','j.customerId','j.startDate','j.startTime','j.jobStatus','c.fullName','jt.jobType','d.fullName'); //set column field database for datatable orderable
+    var $column_sel = array('j.jobId','j.jobName','j.jobTypeId','j.driverId','c.fullName as customerName','jt.jobType','d.fullName as driverName','j.customerId','j.jobStatus','j.startDate','j.startTime','(case when (j.jobStatus = 0) 
+        THEN "Open" when (j.jobStatus = 1) 
+        THEN "In-progress" when (j.jobStatus = 2) 
+        THEN "Completed" ELSE
         "Unknown" 
         END) as statusShow'); //set column field database for datatable orderable
-    var $column_search = array('s.productName','s.vendor'); //set column field database for datatable searchable 
-    var $order = array('s.serviceId' => 'ASC');  // default order
+    var $column_search = array('j.jobName','d.fullName','c.fullName','jt.jobType'); //set column field database for datatable searchable 
+    var $order = array('j.jobId' => 'DESC');  // default order
     var $where = array();
-    var $group_by = 's.serviceId'; 
+    var $group_by = 'j.jobId'; 
 
     public function __construct(){
         parent::__construct();
@@ -29,7 +29,10 @@ class Service_model extends CI_Model {
     {
         $sel_fields = array_filter($this->column_sel); 
         $this->db->select($sel_fields);
-        $this->db->from('service as s');
+        $this->db->from('jobs as j');
+        $this->db->join('jobType as jt','j.jobTypeId=jt.jobTypeId');
+        $this->db->join('users as c','c.id=j.customerId','left');
+        $this->db->join('users as d','d.id=j.driverId','left');
         $i = 0;
         foreach ($this->column_search as $emp) // loop column 
         {
@@ -110,14 +113,6 @@ class Service_model extends CI_Model {
          if(!empty($this->where))
             $this->db->where($this->where); 
         return $this->db->count_all_results();
-    }
-
-    public function serviceDetails($data){
-    	$this->db->select('*');
-    	$this->db->from('service');
-    	$this->db->where(array('serviceId'=>$data['serviceId']));
-    	$query = $this->db->get();
-    	return $query->row();
     }
 
 }

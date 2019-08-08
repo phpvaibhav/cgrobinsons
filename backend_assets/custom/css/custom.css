@@ -1649,3 +1649,8 @@
 
 .info-box-4.hover-expand-effect:hover:after {
   width: 100%; }
+.select2-container .select2-choice, .select2-selection {
+    display: block;
+    height: 32px;
+    padding: 0 8px !important;
+  }

@@ -32,4 +32,8 @@ $(".alfaNumeric").on("keypress keyup blur",function (event) {
 $( "#purchaseDate" ).datepicker({  
   dateFormat: 'mm/dd/yyyy'
 });
-
+  /*
+         * TIMEPICKER
+         */
+      
+        $('#timepicker').timepicker();

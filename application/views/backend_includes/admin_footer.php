@@ -169,6 +169,7 @@
     <!-- SmartChat UI : plugin -->
     <script src="<?php echo $backend_assets ?>js/smart-chat-ui/smart.chat.ui.min.js"></script>
     <script src="<?php echo $backend_assets ?>js/smart-chat-ui/smart.chat.manager.min.js"></script>
+    <script src="<?php echo $backend_assets ?>js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
 
   
     <!-- PAGE RELATED PLUGIN(S) 

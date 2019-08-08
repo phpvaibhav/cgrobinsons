@@ -17,8 +17,8 @@
 				data-widget-sortable="false"
 				-->
 				<header>
-					<span class="widget-icon"> <i class="fa fa-users"></i> </span>
-					<h2>Customers</h2>
+					<span class="widget-icon"> <i class="fa fa-tasks"></i> </span>
+					<h2>Jobs</h2>
 				</header>
 				<!-- widget div-->
 				<div>
@@ -29,13 +29,15 @@
 					<!-- end widget edit box -->
 					<!-- widget content -->
 					<div class="widget-body padding">
-						<table id="customer_list" class="table table-striped table-bordered table-hover" width="100%">
+						<table id="job_list" class="table table-striped table-bordered table-hover" width="100%">
 							<thead>			                
 								<tr>
 									<th data-hide="phone">ID</th>
-									<th data-hide="phone">Customer Name</th>
-									<th data-hide="phone,tablet">Email</th>
-									<th data-hide="phone,tablet">Contact Number</th>
+									<th data-hide="phone">Job Name</th>
+									<th data-hide="phone,tablet">Job Type</th>
+									<th data-hide="phone,tablet">Customer</th>
+									<th data-hide="phone,tablet">Driver</th>
+									<th data-hide="phone,tablet">Start Date Time</th>
 									<th data-hide="phone,tablet">Status</th>
 									<th data-hide="phone,tablet">Action</th>
 								</tr>
@@ -57,7 +59,7 @@
 </section>
 <!-- end widget grid -->
 <!-- Modal -->
-<div class="modal fade" id="addCustomers" tabindex="-1" role="dialog">
+<div class="modal fade" id="addJob" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -65,7 +67,7 @@
 					&times;
 				</button>
 				<h4 class="modal-title">
-					New Customer
+					New Job
 				</h4>
 			</div>
 			<div class="modal-body">
@@ -73,7 +75,7 @@
 		<!-- widget content -->
 								<div class="widget-body no-padding">
 									
-									<form action="customers/addCustomer" id="customerAddUpdate" class="smart-form" novalidate="novalidate" autocomplete="off">
+									<form action="jobs/createJob" id="createJob" class="smart-form" novalidate="novalidate" autocomplete="off" enctype="multipart/form-data">
 										<header>
 											Basic Information
 										</header>
@@ -81,26 +83,52 @@
 										<fieldset>
 											<div class="row">
 												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-user"></i>
-														<input type="text" name="fullName" placeholder="Customer Name">
+													<label class="input"> <i class="icon-append fa fa-bookmark"></i>
+														<input type="text" name="jobName" placeholder="Job Name">
 													</label>
 												</section>
 												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
-														<input type="email" name="email" placeholder="E-mail">
-													</label>
+												    <label class="select">
+												        <select name="jobTypeId">
+												            <option value="" selected="" disabled="">Job Type</option>
+												            <?php foreach ($jobTypes as $jt => $type) {?>
+												            <option value="<?php echo $type->jobTypeId; ?>"><?php echo $type->jobType; ?></option>
+												        	<?php } ?>
+												           
+												        </select> <i></i> </label>
 												</section>
 											</div>
-
 											<div class="row">
 												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-lock"></i>
-														<input type="password" name="password" placeholder="Password">
+													<select style="width:100%;" class="select2" name="driverId">
+														<optgroup label="">
+														<option value="" selected="" disabled="">Driver Name</option>
+														<?php foreach ($drivers as $k => $driver) {?>
+														<option value="<?php echo $driver->id; ?>"><?php echo $driver->fullName; ?></option>
+														<?php }?>
+														</optgroup>
+													</select>
+												</section>
+												<section class="col col-6">
+													<select style="width:100%;" class="select2" name="customerId">
+														<optgroup label="">
+														<option value="" selected="" disabled="">Customer Name</option>
+														<?php foreach ($customers as $c => $customer) {?>
+														<option value="<?php echo $customer->id; ?>"><?php echo $customer->fullName; ?></option>
+														<?php }?>
+														</optgroup>
+													</select>
+												</section>
+											</div>
+											<div class="row">
+												<section class="col col-6">
+													<label class="input"> <i class="icon-append fa fa-calendar"></i>
+														<input type="text" name="startDate" placeholder="Start Date" class="datepicker" data-dateformat='dd-mm-yy' readonly="">
 													</label>
 												</section>
 												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-phone"></i>
-														<input type="text" name="contactNumber" placeholder="Contact Number" data-mask="(999) 999-9999">
+													<label class="input"> <i class="icon-append fa fa-clock-o"></i>
+														<input type="text" name="startTime" placeholder="Start Time" id="timepicker" class="" readonly="">
 													</label>
 												</section>
 											</div>
@@ -157,61 +185,10 @@
 											</div>
 
 										</fieldset>
-										<header>
-											Billing Address
-										</header>
-
-										<fieldset>
-											<div class="row">
-												<section class="col col-md-12">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="address1" placeholder="Address" id="autocomplete1" class="autocomplete" data-id="0">
-														<input type="hidden" class="latitudeautocomplete1" name="latitude1" placeholder="latitude">
-														<input type="hidden" class="longitudeautocomplete1" name="longitude1" placeholder="longitude">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-3">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="street1" placeholder="Street" class="street_numberautocomplete1">
-													</label>
-												</section>
-												<section class="col col-9">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="street21" placeholder="Street Second" class="routeautocomplete1">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="city1" placeholder="City" class="localityautocomplete1">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="state1" placeholder="State" class="administrative_area_level_1autocomplete1">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip1" placeholder="Zip Code" class="postal_codeautocomplete0">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="country1" placeholder="Country" class="countryautocomplete1">
-													</label>
-												</section>
-											</div>
-
-										</fieldset>
+										
 										<footer>
 											<button type="submit" id="submit" class="btn btn-primary">
-												Add Customer
+												Add Job
 											</button>
 										</footer>
 									</form>
