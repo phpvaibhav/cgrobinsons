@@ -36,6 +36,7 @@ class ResponseMessages{
         125 => "Logged out successfully",
         126 => "You are not authorised for this action",
         126 => "Invalid Email or Password",
+        127 => "Record found",
         
         200 => 'OK',
         201 => 'Created',

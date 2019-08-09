@@ -178,22 +178,5 @@ class Api extends Common_Service_Controller{
 
         $this->response($response);
     } //End function
-
-    // Session store value for frontEnd
-    function StoreSession($userData){
-        $session_data['id']             = $userData->userId;
-        $session_data['userId']             = $userData->userId;
-        $session_data['fullName']       = $userData->fullName;
-        $session_data['email']          = $userData->email;
-        $session_data['userType']       = $userData->userType;
-        $session_data['userRole']       = $userData->userRole;
-        $session_data['image']          = $userData->profileImage;
-        $session_data['isLogin']        = TRUE ;
-      //  pr( $session_data);
-        $_SESSION[ADMIN_USER_SESS_KEY]        = $session_data;   
-        return TRUE;
-    }// End Function   
-    // ENd Session store value for frontEnd
-
 }//End Class 
 
