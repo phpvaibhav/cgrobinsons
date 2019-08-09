@@ -84,7 +84,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-bookmark"></i>
-														<input type="text" name="jobName" placeholder="Job Name">
+														<input type="text" name="jobName" placeholder="Job Name" maxlength="100" size="100">
 													</label>
 												</section>
 												<section class="col col-6">

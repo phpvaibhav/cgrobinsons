@@ -148,13 +148,13 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-user"></i>
-														<input type="text" name="fullName" placeholder="Customer Name" value="<?php echo ucfirst($customer['fullName']); ?>">
+														<input type="text" name="fullName" placeholder="Customer Name" value="<?php echo ucfirst($customer['fullName']); ?>" maxlength="60" size="60">
 														<input type="hidden" name="cus" value="<?php echo encoding($customer['id']);?>">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
-														<input type="email" name="email" placeholder="E-mail" value="<?php echo $customer['email']; ?>">
+														<input type="email" name="email" placeholder="E-mail" value="<?php echo $customer['email']; ?>" maxlength="60" size="60">
 													</label>
 												</section>
 											</div>

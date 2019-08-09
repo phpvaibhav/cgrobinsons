@@ -248,7 +248,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-user"></i>
-														<input type="text" name="fullName" placeholder="Driver Name" value="<?php echo $driver['fullName'];?>">
+														<input type="text" name="fullName" placeholder="Driver Name" value="<?php echo $driver['fullName'];?>" maxlength="50" size="50">
 														<input type="hidden" name="cus" value="<?php echo encoding($driver['id']);?>">
 													</label>
 												</section>

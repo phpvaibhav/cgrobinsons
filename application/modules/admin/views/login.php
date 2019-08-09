@@ -18,7 +18,7 @@
                   <section>
                     <label class="label">E-mail<span class="error">*</span></label>
                     <label class="input"> <i class="icon-append fa fa-user"></i>
-                      <input type="email" id="username" name="email">
+                      <input type="email" id="username" name="email" maxlength="100" size="100">
                       <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter email address</b></label>
                   </section>
 
@@ -26,7 +26,7 @@
                     <label class="label">Password<span class="error">*</span></label>
                     <label class="input"> <i class="icon-append fa fa-lock"></i>
                       <input type="password" id="password" name="password">
-                      <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i>Please enter your password</b> </label>
+                      <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Please enter your password</b> </label>
                     <div class="note">
                       <a href="<?php echo base_url().'admin/forgot' ?>">Forgot password?</a>
                     </div>

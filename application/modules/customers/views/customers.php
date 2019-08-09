@@ -82,12 +82,12 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-user"></i>
-														<input type="text" name="fullName" placeholder="Customer Name" maxlength="30" size="30">
+														<input type="text" name="fullName" placeholder="Customer Name" maxlength="60" size="60">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
-														<input type="email" name="email" placeholder="E-mail" maxlength="30" size="30">
+														<input type="email" name="email" placeholder="E-mail" maxlength="60" size="60">
 													</label>
 												</section>
 											</div>
@@ -113,7 +113,7 @@
 											<div class="row">
 												<section class="col col-md-12">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" maxlength="50" size="50">
+														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" >
 														<input type="hidden" class="latitudeautocomplete0" name="latitude" placeholder="latitude">
 														<input type="hidden" class="longitudeautocomplete0" name="longitude" placeholder="longitude">
 													</label>

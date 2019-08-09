@@ -14,19 +14,19 @@
 			<fieldset>
 				<section>
 					<label class="input"> <i class="icon-append fa fa-lock"></i>
-						<input type="password" name="password" placeholder="Current Password" id="password">
-						<b class="tooltip tooltip-bottom-right">Please enter your current password</b> </label>
+						<input type="password" name="password" placeholder="Current Password" id="password" >
+						<b class="tooltip tooltip-bottom-right"> Please enter your current password</b> </label>
 				</section>
 				<section>
 				<label class="input"> <i class="icon-append fa fa-lock"></i>
 					<input type="password" name="npassword" id="npassword" placeholder="Password">
-					<b class="tooltip tooltip-bottom-right">Please enter your new password</b> </label>
+					<b class="tooltip tooltip-bottom-right"> Please enter your new password</b> </label>
 				</section>
 
 				<section>
 					<label class="input"> <i class="icon-append fa fa-lock"></i>
 						<input type="password" name="rnpassword" placeholder="Confirm password">
-						<b class="tooltip tooltip-bottom-right">Please re-enter your password</b> </label>
+						<b class="tooltip tooltip-bottom-right"> Please re-enter your password</b> </label>
 				</section>
 				
 				

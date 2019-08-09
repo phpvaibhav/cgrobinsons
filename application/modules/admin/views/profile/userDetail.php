@@ -243,20 +243,20 @@
 							<fieldset>
 								<section>
 									<label class="input"> <i class="icon-append fa fa-user"></i>
-									<input type="text" name="fullName" placeholder="Full name" value="<?php echo $userData['fullName']; ?>">
+									<input type="text" name="fullName" placeholder="Full name" value="<?php echo $userData['fullName']; ?>" maxlength="60" size="60">
 									<input type="hidden" name="userauth" value="<?php echo $this->uri->segment(2); ?>">
-									<b class="tooltip tooltip-bottom-right">Please enter your full name</b> </label>
+									<b class="tooltip tooltip-bottom-right"> Please enter your full name</b> </label>
 								</section>
 
 								<section>
 								<label class="input"> <i class="icon-append fa fa-envelope"></i>
-									<input type="email" name="email" placeholder="Email address" value="<?php echo $userData['email']; ?>">
-									<b class="tooltip tooltip-bottom-right">Please enter your registered email address</b> </label>
+									<input type="email" name="email" placeholder="Email address" value="<?php echo $userData['email']; ?>" maxlength="100" size="100">
+									<b class="tooltip tooltip-bottom-right"> Please enter your registered email address</b> </label>
 								</section>
 								<section>
 									<label class="input"> <i class="icon-append fa fa-phone"></i>
 									<input type="text" name="contact" maxlength="20" size="20" class="number-only" placeholder="Contact"  value="<?php echo $userData['contactNumber']; ?>" data-mask="(999) 999-9999">
-									<b class="tooltip tooltip-bottom-right">Please enter your contact number</b> </label>
+									<b class="tooltip tooltip-bottom-right"> Please enter your contact number</b> </label>
 								</section>
 							<!-- 	<section>
 									<label class="textarea">
