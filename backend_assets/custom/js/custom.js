@@ -37,3 +37,9 @@ $( "#purchaseDate" ).datepicker({
          */
       
         $('#timepicker').timepicker();
+$('.select2').select2({
+    minimumResultsForSearch: -1,
+    placeholder: function(){
+        $(this).data('placeholder');
+    }
+});

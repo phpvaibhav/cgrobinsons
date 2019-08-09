@@ -19,6 +19,7 @@
 				<header>
 					<span class="widget-icon"> <i class="fa fa-tasks"></i> </span>
 					<h2>Jobs</h2>
+				
 				</header>
 				<!-- widget div-->
 				<div>
@@ -59,7 +60,7 @@
 </section>
 <!-- end widget grid -->
 <!-- Modal -->
-<div class="modal fade" id="addJob" tabindex="-1" role="dialog">
+<div class="modal fade" id="addJob" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -100,9 +101,10 @@
 											</div>
 											<div class="row">
 												<section class="col col-6">
-													<select style="width:100%;" class="select2" name="driverId">
+												
+												<select style="width:100%;" class="select2" name="driverId" data-placeholder="Please select a driver">
 														<optgroup label="">
-														<option value="" selected="" disabled="">Driver Name</option>
+														<option></option>
 														<?php foreach ($drivers as $k => $driver) {?>
 														<option value="<?php echo $driver->id; ?>"><?php echo $driver->fullName; ?></option>
 														<?php }?>
@@ -110,9 +112,9 @@
 													</select>
 												</section>
 												<section class="col col-6">
-													<select style="width:100%;" class="select2" name="customerId">
+													<select style="width:100%;" class="select2" name="customerId" data-placeholder="Please select a customer">
 														<optgroup label="">
-														<option value="" selected="" disabled="">Customer Name</option>
+														<option></option>
 														<?php foreach ($customers as $c => $customer) {?>
 														<option value="<?php echo $customer->id; ?>"><?php echo $customer->fullName; ?></option>
 														<?php }?>
