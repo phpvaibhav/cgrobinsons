@@ -109,7 +109,11 @@ class Job_model extends CI_Model {
 
     public function count_all()
     {
-        $this->db->from($this->table);
+       // $this->db->from($this->table);
+          $this->db->from('jobs as j');
+        $this->db->join('jobType as jt','j.jobTypeId=jt.jobTypeId');
+        $this->db->join('users as c','c.id=j.customerId','left');
+        $this->db->join('users as d','d.id=j.driverId','left');
          if(!empty($this->where))
             $this->db->where($this->where); 
         return $this->db->count_all_results();

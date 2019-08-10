@@ -24,6 +24,10 @@ class Customers extends Common_Admin_Controller{
        
         $this->form_validation->set_rules('contactNumber', 'Contact Number', 'trim|required|min_length[10]|max_length[20]');
         $this->form_validation->set_rules('fullName', 'full Name', 'trim|required|min_length[2]');
+        $this->form_validation->set_rules('latitude', 'latitude', 'trim|required|min_length[2]|callback_validate_address');
+       
+        $this->form_validation->set_rules('latitude1', 'billing latitude', 'trim|required|min_length[2]|callback_validate_billaddress');
+       
     
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
@@ -191,6 +195,25 @@ class Customers extends Common_Admin_Controller{
         }
         $this->response($response);
     }//end function
+    function validate_address($str)
+    {
+        if(!empty($str)){
+            return true;
+        }else{
+          $this->form_validation->set_message('validate_address','Please enter valid google place address.');
+        return false;  
+        }
+        
+    }
+    function validate_billaddress($str)
+    {
+        if(!empty($str)){
+            return true;
+        }else{
+          $this->form_validation->set_message('validate_billaddress','Please enter valid google place billing address.');
+        return false;  
+        }
+    }
     
 
 }//End Class 

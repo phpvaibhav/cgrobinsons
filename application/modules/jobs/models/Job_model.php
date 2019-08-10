@@ -24,7 +24,21 @@ class Job_model extends CI_Model {
             return $sql->row_array();
         endif;
         return false;
-    }
+    }//
+    function  assignJobs($where=array()){
+        $sel_fields = array_filter($this->column_sel); 
+        $this->db->select($sel_fields);
+        $this->db->from('jobs as j');
+        $this->db->join('jobType as jt','j.jobTypeId=jt.jobTypeId');
+        $this->db->join('users as c','c.id=j.customerId','left');
+        $this->db->join('users as d','d.id=j.driverId','left');
+        !empty($where) ? $this->db->where($where) :"";
+        $sql = $this->db->get();
+        if($sql->num_rows()):
+            return $sql->result();
+        endif;
+        return false;
+    } 
 
 
 }//Function 

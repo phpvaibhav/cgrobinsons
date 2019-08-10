@@ -29,7 +29,8 @@ class Drivers extends Common_Admin_Controller{
         $this->form_validation->set_rules('expiryDate', 'license expiry date', 'trim|required');
         $this->form_validation->set_rules('emergencyPersonName', 'emergency person name', 'trim|required');
         $this->form_validation->set_rules('emergencyPersonNumber', 'emergency person number', 'trim|required');
-        
+        $this->form_validation->set_rules('latitude', 'latitude', 'trim|required|min_length[2]|callback_validate_address');
+      
     
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
@@ -224,6 +225,16 @@ class Drivers extends Common_Admin_Controller{
         }
         $this->response($response);
     }//end function
+    function validate_address($str)
+    {
+        if(!empty($str)){
+            return true;
+        }else{
+          $this->form_validation->set_message('validate_address','Please enter valid google place address.');
+        return false;  
+        }
+        
+    }
     
 
 }//End Class 

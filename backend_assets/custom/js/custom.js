@@ -32,11 +32,10 @@ $(".alfaNumeric").on("keypress keyup blur",function (event) {
 $( "#purchaseDate" ).datepicker({  
   dateFormat: 'mm/dd/yyyy'
 });
-  /*
-         * TIMEPICKER
-         */
-      
-        $('#timepicker').timepicker();
+/*
+  * TIMEPICKER
+*/ 
+$('#timepicker').timepicker();
 $('.select2').select2({
     minimumResultsForSearch: -1,
     placeholder: function(){
