@@ -233,7 +233,7 @@
 											<div class="row">
 												<section class="col col-md-12">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" value="<?php echo $job['address']; ?>">
+														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" value="<?php echo $job['address']; ?>" maxlength="300" size="300">
 														<input type="hidden" class="latitudeautocomplete0" name="latitude" placeholder="latitude" value="<?php echo $job['latitude']; ?>">
 														<input type="hidden" class="longitudeautocomplete0" name="longitude" placeholder="longitude" value="<?php echo $job['longitude']; ?>">
 													</label>
@@ -242,36 +242,36 @@
 											<div class="row">
 												<section class="col col-3">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="street" placeholder="Street" class="street_numberautocomplete0" value="<?php echo $job['street']; ?>">
+														<input type="text" name="street" placeholder="Street" class="street_numberautocomplete0" value="<?php echo $job['street']; ?>" maxlength="20" size="20">
 													</label>
 												</section>
 												<section class="col col-9">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" value="<?php echo $job['street2']; ?>">
+													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" value="<?php echo $job['street2']; ?>" maxlength="60" size="60">
 													</label>
 												</section>
 											</div>
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="city" placeholder="City" class="localityautocomplete0" value="<?php echo $job['city']; ?>">
+														<input type="text" name="city" placeholder="City" class="localityautocomplete0" value="<?php echo $job['city']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" value="<?php echo $job['state']; ?>">
+													<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" value="<?php echo $job['state']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 											</div>
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0" value="<?php echo $job['zip']; ?>">
+														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0" value="<?php echo $job['zip']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="country" placeholder="Country" class="countryautocomplete0" value="<?php echo $job['country']; ?>">
+													<input type="text" name="country" placeholder="Country" class="countryautocomplete0" value="<?php echo $job['country']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 											</div>

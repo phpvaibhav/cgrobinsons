@@ -242,7 +242,7 @@
 											<div class="row">
 												<section class="col col-md-12">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" value="<?php echo $customermeta['address']; ?>">
+														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" value="<?php echo $customermeta['address']; ?>" maxlength="300" size="300">
 														<input type="hidden" class="latitudeautocomplete0" name="latitude" value="<?php echo $customermeta['latitude']; ?>" placeholder="latitude">
 														<input type="hidden" class="longitudeautocomplete0" name="longitude" placeholder="longitude"  value="<?php echo $customermeta['longitude']; ?>">
 													</label>
@@ -251,36 +251,36 @@
 											<div class="row">
 												<section class="col col-3">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="street" placeholder="Street" class="street_numberautocomplete0" value="<?php echo $customermeta['street']; ?>">
+														<input type="text" name="street" placeholder="Street" class="street_numberautocomplete0" value="<?php echo $customermeta['street']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-9">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" value="<?php echo $customermeta['street2']; ?>">
+													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" value="<?php echo $customermeta['street2']; ?>" maxlength="60" size="60">
 													</label>
 												</section>
 											</div>
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="city" placeholder="City" class="localityautocomplete0" value="<?php echo $customermeta['city']; ?>">
+														<input type="text" name="city" placeholder="City" class="localityautocomplete0" value="<?php echo $customermeta['city']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" value="<?php echo $customermeta['state']; ?>">
+													<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" value="<?php echo $customermeta['state']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 											</div>
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0" value="<?php echo $customermeta['zip']; ?>">
+														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0" value="<?php echo $customermeta['zip']; ?>" maxlength="20" size="20">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="country" placeholder="Country" class="countryautocomplete0" value="<?php echo $customermeta['country']; ?>">
+													<input type="text" name="country" placeholder="Country" class="countryautocomplete0" value="<?php echo $customermeta['country']; ?>" maxlength="60" size="60">
 													</label>
 												</section>
 											</div>
@@ -294,7 +294,7 @@
 											<div class="row">
 												<section class="col col-md-12">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="address1" placeholder="Address" id="autocomplete1" class="autocomplete" data-id="0" value="<?php echo $customermeta['billAddress']; ?>">
+														<input type="text" name="address1" placeholder="Address" id="autocomplete1" class="autocomplete" data-id="0" value="<?php echo $customermeta['billAddress']; ?>" maxlength="300" size="300">
 														<input type="hidden" class="latitudeautocomplete1" name="latitude1" placeholder="latitude" value="<?php echo $customermeta['billLatitude']; ?>">
 														<input type="hidden" class="longitudeautocomplete1" name="longitude1" placeholder="longitude" value="<?php echo $customermeta['billLongitude']; ?>">
 													</label>
@@ -303,36 +303,36 @@
 											<div class="row">
 												<section class="col col-3">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="street1" placeholder="Street" class="street_numberautocomplete1" value="<?php echo $customermeta['billStreet']; ?>">
+														<input type="text" name="street1" placeholder="Street" class="street_numberautocomplete1" value="<?php echo $customermeta['billStreet']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-9">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="street21" placeholder="Street Second" class="routeautocomplete1" value="<?php echo $customermeta['billStreet2']; ?>">
+													<input type="text" name="street21" placeholder="Street Second" class="routeautocomplete1" value="<?php echo $customermeta['billStreet2']; ?>" maxlength="60" size="60">
 													</label>
 												</section>
 											</div>
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="city1" placeholder="City" class="localityautocomplete1" value="<?php echo $customermeta['billCity']; ?>">
+														<input type="text" name="city1" placeholder="City" class="localityautocomplete1" value="<?php echo $customermeta['billCity']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="state1" placeholder="State" class="administrative_area_level_1autocomplete1" value="<?php echo $customermeta['billState']; ?>">
+													<input type="text" name="state1" placeholder="State" class="administrative_area_level_1autocomplete1" value="<?php echo $customermeta['billState']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 											</div>
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip1" placeholder="Zip Code" class="postal_codeautocomplete0" value="<?php echo $customermeta['billZip']; ?>">
+														<input type="text" name="zip1" placeholder="Zip Code" class="postal_codeautocomplete0" value="<?php echo $customermeta['billZip']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="country1" placeholder="Country" class="countryautocomplete1" value="<?php echo $customermeta['billCountry']; ?>">
+													<input type="text" name="country1" placeholder="Country" class="countryautocomplete1" value="<?php echo $customermeta['billCountry']; ?>" maxlength="60" size="60">
 													</label>
 												</section>
 											</div>

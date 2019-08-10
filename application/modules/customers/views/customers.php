@@ -113,7 +113,7 @@
 											<div class="row">
 												<section class="col col-md-12">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" >
+														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" maxlength="300" size="300" >
 														<input type="hidden" class="latitudeautocomplete0" name="latitude" placeholder="latitude">
 														<input type="hidden" class="longitudeautocomplete0" name="longitude" placeholder="longitude">
 													</label>
@@ -165,7 +165,7 @@
 											<div class="row">
 												<section class="col col-md-12">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="address1" placeholder="Address" id="autocomplete1" class="autocomplete" data-id="0">
+														<input type="text" name="address1" placeholder="Address" id="autocomplete1" class="autocomplete" data-id="0" maxlength="300" size="300">
 														<input type="hidden" class="latitudeautocomplete1" name="latitude1" placeholder="latitude">
 														<input type="hidden" class="longitudeautocomplete1" name="longitude1" placeholder="longitude">
 													</label>
@@ -174,36 +174,36 @@
 											<div class="row">
 												<section class="col col-3">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="street1" placeholder="Street" class="street_numberautocomplete1">
+														<input type="text" name="street1" placeholder="Street" class="street_numberautocomplete1" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-9">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="street21" placeholder="Street Second" class="routeautocomplete1">
+													<input type="text" name="street21" placeholder="Street Second" class="routeautocomplete1" maxlength="60" size="60">
 													</label>
 												</section>
 											</div>
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="city1" placeholder="City" class="localityautocomplete1">
+														<input type="text" name="city1" placeholder="City" class="localityautocomplete1" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="state1" placeholder="State" class="administrative_area_level_1autocomplete1">
+													<input type="text" name="state1" placeholder="State" class="administrative_area_level_1autocomplete1" maxlength="30" size="30">
 													</label>
 												</section>
 											</div>
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip1" placeholder="Zip Code" class="postal_codeautocomplete0">
+														<input type="text" name="zip1" placeholder="Zip Code" class="postal_codeautocomplete0" maxlength="20" size="20">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="country1" placeholder="Country" class="countryautocomplete1">
+													<input type="text" name="country1" placeholder="Country" class="countryautocomplete1" maxlength="50" size="50">
 													</label>
 												</section>
 											</div>

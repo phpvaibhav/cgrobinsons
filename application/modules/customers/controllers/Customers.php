@@ -36,7 +36,7 @@ class Customers extends Common_Back_Controller {
 
     ob_start();
     // create new PDF document
-        $pdf = new Wpdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
       // set document information
       $pdf->SetCreator(PDF_CREATOR);
@@ -114,9 +114,9 @@ class Customers extends Common_Back_Controller {
 
        foreach ($users as $k => $user) {
         if($k++%2 == 1){
-             $colr = "background-color:#f1f1f1;";
+             $colr = "background-color:#f1f1f1!important;";
          }else{
-            $colr = "background-color:#fff;";
+            $colr = "background-color:#fff!important;;";
          }
                     
            $content .='<tr nobr="true" style="color:#000; '.$colr.'">';

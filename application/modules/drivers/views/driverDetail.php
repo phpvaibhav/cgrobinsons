@@ -362,7 +362,7 @@
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
-														<input type="email" name="email" placeholder="E-mail" autocomplete="off" value="<?php echo $driver['email'];?>">
+														<input type="email" name="email" placeholder="E-mail" autocomplete="off" value="<?php echo $driver['email'];?>"maxlength="100" size="100" >
 													</label>
 												</section>
 											</div>
@@ -391,7 +391,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-calendar"></i>
-														<input type="text" name="dob" placeholder="Date of Birth" class="datepicker" data-dateformat='dd-mm-yy' readonly="" value="<?php echo date('d-m-Y',strtotime($drivermeta['dob']));?>" >
+														<input type="text" name="dob" placeholder="Date of Birth" class="" id="dob" data-dateformat='dd-mm-yy' readonly="" value="<?php echo date('d-m-Y',strtotime($drivermeta['dob']));?>" >
 													</label>
 												</section>
 												<section class="col col-6">
@@ -403,7 +403,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-list-ol"></i>
-														<input type="text" name="licenseNumber" placeholder="Driver License Number" class="number-only" value="<?php echo $drivermeta['licenseNumber'];?>">
+														<input type="text" name="licenseNumber" placeholder="Driver License Number" class="number-only" value="<?php echo $drivermeta['licenseNumber'];?>" maxlength="50" size="50">
 													</label>
 												</section>
 												<section class="col col-6">
@@ -415,7 +415,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-user"></i>
-														<input type="text" name="emergencyPersonName" placeholder="Emergency Contact Person Name"value="<?php echo $drivermeta['emergencyPersonName'];?>">
+														<input type="text" name="emergencyPersonName" placeholder="Emergency Contact Person Name"value="<?php echo $drivermeta['emergencyPersonName'];?>" maxlength="100" size="100">
 													</label>
 												</section>
 												<section class="col col-6">
@@ -433,7 +433,7 @@
 											<div class="row">
 												<section class="col col-md-12">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" value="<?php echo $drivermeta['address'];?>">
+														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" value="<?php echo $drivermeta['address'];?>" maxlength="300" size="300">
 														<input type="hidden" class="latitudeautocomplete0" name="latitude" placeholder="latitude" value="<?php echo $drivermeta['latitude'];?>">
 														<input type="hidden" class="longitudeautocomplete0" name="longitude" placeholder="longitude" value="<?php echo $drivermeta['longitude'];?>">
 													</label>
@@ -442,36 +442,36 @@
 											<div class="row">
 												<section class="col col-3">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="street" placeholder="Street" class="street_numberautocomplete0" value="<?php echo $drivermeta['street'];?>">
+														<input type="text" name="street" placeholder="Street" class="street_numberautocomplete0" value="<?php echo $drivermeta['street'];?>" maxlength="20" size="20">
 													</label>
 												</section>
 												<section class="col col-9">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" value="<?php echo $drivermeta['street2'];?>">
+													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" value="<?php echo $drivermeta['street2'];?>" maxlength="60" size="60">
 													</label>
 												</section>
 											</div>
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="city" placeholder="City" class="localityautocomplete0" value="<?php echo $drivermeta['city'];?>">
+														<input type="text" name="city" placeholder="City" class="localityautocomplete0" value="<?php echo $drivermeta['city'];?>" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" value="<?php echo $drivermeta['state'];?>">
+													<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" value="<?php echo $drivermeta['state'];?>" maxlength="20" size="20">
 													</label>
 												</section>
 											</div>
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0" value="<?php echo $drivermeta['zip'];?>">
+														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0" value="<?php echo $drivermeta['zip'];?>" maxlength="20" size="20">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="country" placeholder="Country" class="countryautocomplete0" value="<?php echo $drivermeta['country'];?>">
+													<input type="text" name="country" placeholder="Country" class="countryautocomplete0" value="<?php echo $drivermeta['country'];?>" maxlength="20" size="20">
 													</label>
 												</section>
 											</div>

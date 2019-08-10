@@ -116,7 +116,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-calendar"></i>
-														<input type="text" name="dob" placeholder="Date of Birth" class="datepicker" data-dateformat='dd-mm-yy' readonly="">
+														<input type="text" name="dob" placeholder="Date of Birth" class="" id="dob" data-dateformat='dd-mm-yy' readonly="">
 													</label>
 												</section>
 												<section class="col col-6">
@@ -158,7 +158,7 @@
 											<div class="row">
 												<section class="col col-md-12">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0">
+														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" maxlength="300" size="300">
 														<input type="hidden" class="latitudeautocomplete0" name="latitude" placeholder="latitude">
 														<input type="hidden" class="longitudeautocomplete0" name="longitude" placeholder="longitude">
 													</label>
@@ -167,36 +167,36 @@
 											<div class="row">
 												<section class="col col-3">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="street" placeholder="Street" class="street_numberautocomplete0">
+														<input type="text" name="street" placeholder="Street" class="street_numberautocomplete0" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-9">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0">
+													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" maxlength="60" size="60">
 													</label>
 												</section>
 											</div>
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="city" placeholder="City" class="localityautocomplete0">
+														<input type="text" name="city" placeholder="City" class="localityautocomplete0" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0">
+													<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" maxlength="30" size="30">
 													</label>
 												</section>
 											</div>
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0">
+														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="country" placeholder="Country" class="countryautocomplete0">
+													<input type="text" name="country" placeholder="Country" class="countryautocomplete0" maxlength="30" size="30">
 													</label>
 												</section>
 											</div>
