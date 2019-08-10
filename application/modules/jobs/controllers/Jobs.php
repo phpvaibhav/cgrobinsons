@@ -27,7 +27,7 @@ class Jobs extends Common_Back_Controller {
       //pr('admin@admin.com');
         $jobId  = decoding($this->uri->segment(3));
 
-        $data['title'] = "job Detail";
+        $data['title'] = "Job Detail";
         $where = array('jobId'=>$jobId);
         $this->load->model('job_model');
         $data['job'] = $this->job_model->jobDetail($jobId);

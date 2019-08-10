@@ -7,7 +7,7 @@
 					<div class="well well-light well-sm margin padding">
 						<!-- button -->
 						<ul class="demo-btns text-center">
-							<li>
+							
 								<?php
 								$showbtn = false;
 								$labelShow ="";
@@ -50,15 +50,20 @@
 								if($showbtn):
 								
 								?>
-								<a href="javascript:void(0);" onclick="jobStatus(this);" data-message="<?php echo $msg; ?>" data-useid="<?php echo encoding($job['jobId']);?>"data-status="<?php echo $status;?>"  class="btn btn-labeled  <?php echo $btn; ?>"> <span class="btn-label"><i class="glyphicon glyphicon-tags"></i></span><?php echo $showtitle; ?></a>
-								<?php endif; ?>
-							</li>
+								
+						<!-- <li>		<a href="javascript:void(0);" onclick="jobStatus(this);" data-message="<?php echo $msg; ?>" data-useid="<?php echo encoding($job['jobId']);?>"data-status="<?php echo $status;?>"  class="btn btn-labeled  <?php echo $btn; ?>"> <span class="btn-label"><i class="glyphicon glyphicon-tags"></i></span><?php echo $showtitle; ?></a> 	</li> -->
+								
+						
+							<?php endif; if($job['jobStatus'] !=2): ?>
+							
 							<li>
 								<a href="javascript:void(0);" class="btn btn-labeled btn-info" data-toggle="modal" data-target="#editJob"> <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Edit </a>
 							</li>
+							
 							<li>
 								<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="jobDelete(this);" data-message="Are you sure want to delete this job." data-useid="<?php echo encoding($job['jobId']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
 							</li>
+							<?php endif; ?>
 						</ul>
 						<!-- button -->
 						<div class="timeline-seperator text-center"></div>
@@ -94,7 +99,7 @@
 									<span class="pull-right txt-color-darken"><?php echo $job['driverName']; ?></span>	<strong> Driver Name</strong>
 								</li>
 								<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo date("d F Y",strtotime($job['startDate']))." ".$job['startTime']; ?></span>	<strong>Start Date Time</strong>
+									<span class="pull-right txt-color-darken"><?php echo date("d F Y",strtotime($job['startDate']))." ".$job['startTime']; ?></span>	<strong>Create Date Time</strong>
 								</li>
 								
 							
