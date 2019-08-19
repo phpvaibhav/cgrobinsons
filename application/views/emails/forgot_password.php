@@ -14,7 +14,7 @@
                 <table width="100%" border="0" cellpadding="30" cellspacing="0">    
                     <tr>
                         <td>
-                            <img style="max-width: 125px; width: 100%;padding: 10px;"  src="<?php echo base_url(); ?>backend_assets/img/logo-o.png" >
+                            <img style="max-width: 125px; width: 100%;padding: 10px;"  src="<?php echo base_url(); ?>backend_assets/img/logo.png" >
                         </td>
                     </tr>
                 </table>

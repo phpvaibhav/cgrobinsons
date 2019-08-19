@@ -56,10 +56,27 @@ class Jobs extends Common_Service_Controller{
                 $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(127),'jobs'=>new stdClass());
             } 
         }
-       
-         
         $this->response($response);    
     } //End Function
+    function s3_post(){
+      $file = '';
+      if (!empty($_FILES['file']['name'])) {
+            $this->load->library('s3');
+
+           $this->load->model('s3_model');
+           $img = $this->s3_model->uploadImgS3('jobs');
+             if(is_string($img))
+            {
+            $file = $img;
+            }
+             $response = array('status' => SUCCESS, 'message' => ResponseMessages::getStatusCodeMessage(200), 'file' => $file);
+        }else{
+             $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(118));
+        }
+          $this->response($response);   
+    }//end function
+
+
    
 }//End Class 
 
