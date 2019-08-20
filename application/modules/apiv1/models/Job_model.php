@@ -26,6 +26,7 @@ class Job_model extends CI_Model {
         return false;
     } 
     function  jobDetail($jobId){
+        $this->column_sel[] = 'j.jobReport';
          $sel_fields = array_filter($this->column_sel); 
          $this->db->select($sel_fields);
         $this->db->from('jobs as j');
@@ -35,7 +36,26 @@ class Job_model extends CI_Model {
         $this->db->where('j.jobId',$jobId);
         $sql = $this->db->get();
         if($sql->num_rows()):
-            return $sql->row();
+           $row = $sql->row();
+           $report = !empty($row->jobReport) ? json_decode($row->jobReport,true): array();
+            if(!empty($report)):
+                $bimage = $aimage = array();
+                $report['beforeWork']['driverSignature'] = S3JOBS_URL.$report['beforeWork']['driverSignature'];
+                $beforeWorkImage = $report['beforeWork']['workImage'];
+                for ($i=0; $i <sizeof($beforeWorkImage) ; $i++) { 
+                  $bimage[] = S3JOBS_URL.$beforeWorkImage[$i];
+                }
+                $report['beforeWork']['workImage']          = $bimage;
+                $report['afterWork']['customerSignature']   = S3JOBS_URL.$report['afterWork']['customerSignature'];
+                $afterWorkImage = $report['afterWork']['workImage'];
+                for ($j=0; $j <sizeof($afterWorkImage) ; $j++) { 
+                  $aimage[] = S3JOBS_URL.$afterWorkImage[$j];
+                }
+                $report['afterWork']['workImage'] = $aimage;
+            endif;
+            $row->jobReport = $report;
+         
+            return $row;
         endif;
         return false;
     }
