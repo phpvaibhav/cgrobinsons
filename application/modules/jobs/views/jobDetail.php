@@ -99,7 +99,7 @@
 									<span class="pull-right txt-color-darken"><?php echo $job['driverName']; ?></span>	<strong> Driver Name</strong>
 								</li>
 								<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo date("d F Y",strtotime($job['startDate']))." ".$job['startTime']; ?></span>	<strong>Create Date Time</strong>
+									<span class="pull-right txt-color-darken"><?php echo date("d F Y",strtotime($job['startDate']))." ".$job['startTime']; ?></span>	<strong>Creation Date</strong>
 								</li>
 								
 							
@@ -166,7 +166,7 @@
 							<ul class="list-unstyled">
 							
 								<li class="list-group-item">
-									<span class="pull-right"><?php echo date("Y-m-d H:i A",strtotime($before['startDateTime'])); ?></span>	<strong>Start Date</strong>
+									<span class="pull-right"><?php echo date("Y-m-d H:i A",strtotime($before['startDateTime'])); ?></span>	<strong>Start Job</strong>
 								</li>
 								<li class="list-group-item">
 									<div class="row">
@@ -212,7 +212,7 @@
 							<ul class="list-unstyled">
 							
 								<li class="list-group-item">
-									<span class="pull-right"><?php echo date("Y-m-d H:i A",strtotime($after['endDateTime'])); ?></span>	<strong>End Date</strong>
+									<span class="pull-right"><?php echo date("Y-m-d H:i A",strtotime($after['endDateTime'])); ?></span>	<strong>End Job</strong>
 								</li>
 								<li class="list-group-item">
 									<div class="row">

@@ -262,18 +262,23 @@ class Jobs extends Common_Back_Controller {
           $before   = isset($reports['beforeWork']) ? $reports['beforeWork']:array();
           $after    = isset($reports['afterWork']) ? $reports['afterWork']:array();
           $content .= '<tr  bgcolor="#cccccc"><th align="left"><b>BEFORE WORK</b></th><th align="left"><b>AFTER WORK</b></th></tr>';
-          $content .= '<tr><td><p><strong>Job Start </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($before['startDateTime'])).'</span></p><p><strong>Work image</strong></p><div>';
+          $content .= '<tr>';
+          if(!empty($before)):
+          $content .='<td><p><strong>Job Start </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($before['startDateTime'])).'</span></p><p><strong>Work image</strong></p><div>';
             for ($i=0; $i <sizeof($before['workImage']) ; $i++) {
               $image1 = S3JOBS_URL.$before['workImage'][$i];
               $content .= '<img src="'.$image1.'" alt="" width="95" height="95" border="0" />&nbsp;';
             }
-          $content .='</div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$before['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$before['driverSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Driver Signature</p></td>
-           <td><p><strong>Job End </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($after['endDateTime'])).'</span></p><p><strong>Work image</strong></p><div>';
+          $content .='</div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$before['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$before['driverSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Driver Signature</p></td>';
+         endif;  if(!empty($after)):
+           $content .='<td><p><strong>Job End </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($after['endDateTime'])).'</span></p><p><strong>Work image</strong></p><div>';
             for ($j=0; $j <sizeof($after['workImage']) ; $j++) {
               $image = S3JOBS_URL.$after['workImage'][$j];
               $content .= '<img src="'.$image.'" alt="" width="95" height="95" border="0" />&nbsp;';
             }
-            $content .='</div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$after['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$after['customerSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Customer Signature</p></td></tr>'; 
+            $content .='</div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$after['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$after['customerSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Customer Signature</p></td>';
+            endif;
+            $content .='</tr>'; 
         endif;
         $content .='</table>';
   
