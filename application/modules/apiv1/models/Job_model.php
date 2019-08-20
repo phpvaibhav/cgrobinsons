@@ -54,6 +54,7 @@ class Job_model extends CI_Model {
                 $report['afterWork']['workImage'] = $aimage;
             endif;
             $row->jobReport = $report;
+            $row->generatePdf  = base_url().'pdfset/download/'.encoding($row->jobId);
          
             return $row;
         endif;

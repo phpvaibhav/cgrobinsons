@@ -283,6 +283,8 @@ class Jobs extends Common_Back_Controller {
         // reset pointer to the last page
         $pdf->lastPage();
         $fileName = "cg-".$job['jobName'].strtotime(date("Y-m-d H:i:s")).".pdf";
+       // $pdf->Output($fileName, 'I');
+        // $pdf->Output($fileName,'D');
         $pdf->Output($fileName, 'I');
         ob_end_flush();
       //Close and output PDF document
