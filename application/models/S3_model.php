@@ -11,7 +11,7 @@ class S3_model extends CI_Model{
         $this->load->helper('string');
     }
     // This function for upload files
-public function uploadImgS3($uploadFor='users')
+public function uploadImgS3($uploadFor='jobs')
 {
 $msg=0;
 if($_SERVER['REQUEST_METHOD'] == "POST")

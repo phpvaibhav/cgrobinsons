@@ -147,6 +147,108 @@
 					</div>
 				</div>
 			</div>
+			<!-- Report -->
+			<?php if(!empty($job['jobReport'])): $reports = json_decode($job['jobReport'],true);
+				$before = isset($reports['beforeWork']) ?$reports['beforeWork']:array();
+				$after = isset($reports['afterWork']) ?$reports['afterWork']:array();
+			  ?>
+			<div class="row">
+			<!-- before -->
+		<!-- 	<div class="col-sm-12 col-md-12 col-lg-6">
+				<div class="well well-light well-sm margin padding">
+					<div class="timeline-seperator text-center"></div>
+						<header>
+						<h5>Before Work</h5>
+						</header>
+					<div class="timeline-seperator text-center"></div>	
+					<?php if(!empty($before)): ?>
+						<fieldset>
+							<ul class="list-unstyled">
+							
+								<li class="list-group-item">
+									<span class="pull-right"><?php echo date("Y-m-d H:i A",strtotime($before['startDateTime'])); ?></span>	<strong>Start Date</strong>
+								</li>
+								<li class="list-group-item">
+									<div class="row">
+										<?php for ($i=0; $i <sizeof($before['workImage']) ; $i++) { ?>
+										<div class="col-sm-4 col-md-4 col-lg-4">
+											<img src="<?php echo S3JOBS_URL.$before['workImage'][$i];  ?>" class="img img-thumbnail" >
+										</div>
+										<?php } ?>
+										
+									</div>	
+								</li>
+								<li class="list-group-item">
+									<p><strong>Comments</strong></p>
+									<span class="txt-color-darken"><?php echo $before['comments']; ?></span>
+								</li>
+								<li class="list-group-item">
+									
+									<div class="row">
+										<p><strong>Signature</strong></p>
+										<p class="pull-right"><img src="<?php echo S3JOBS_URL.$before['driverSignature'];  ?>" width="100" height="100"  class="img img-thumbnail"  ></p>
+									</div>
+									
+								</li>
+							
+							</ul>
+					
+							
+						</fieldset>
+					<?php endif; ?>
+				</div>
+			</div> -->
+			<!-- before -->
+			<!-- after -->
+			<!-- 	<div class="col-sm-12 col-md-12 col-lg-6">
+					<div class="well well-light well-sm margin padding">
+						<div class="timeline-seperator text-center"></div>
+					<header>
+						<h5>After Work</h5>
+					</header>
+					<div class="timeline-seperator text-center"></div>	
+						<?php if(!empty($after)): ?>
+							<fieldset>
+							<ul class="list-unstyled">
+							
+								<li class="list-group-item">
+									<span class="pull-right"><?php echo date("Y-m-d H:i A",strtotime($after['endDateTime'])); ?></span>	<strong>End Date</strong>
+								</li>
+								<li class="list-group-item">
+									<div class="row">
+										<?php for ($i=0; $i <sizeof($after['workImage']) ; $i++) { ?>
+										<div class="col-sm-4 col-md-4 col-lg-4">
+											<img src="<?php echo S3JOBS_URL.$after['workImage'][$i];  ?>" class="img img-thumbnail" >
+										</div>
+										<?php } ?>
+										
+									</div>	
+								</li>
+								<li class="list-group-item">
+									<p><strong>Comments</strong></p>
+									<span class="txt-color-darken"><?php echo $after['comments']; ?></span>
+								</li>
+								<li class="list-group-item">
+									<div class="row">
+										<p><strong>Signature</strong></p>
+										<p class="pull-right"><img src="<?php echo S3JOBS_URL.$after['customerSignature'];  ?>" width="100" class="img img-thumbnail"  ></p>
+									</div>
+								
+								</li>
+							
+							</ul>
+					
+							
+						</fieldset>
+						<?php endif; ?>
+						
+					</div>
+				</div> -->
+				<!-- after -->
+
+			</div>
+		<?php endif; ?>
+		<!-- Report -->
 		</div>
 	</div>
 </div>
