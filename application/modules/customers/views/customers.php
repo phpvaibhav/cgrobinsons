@@ -87,7 +87,7 @@
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
-														<input type="email" name="email" placeholder="E-mail" maxlength="60" size="60">
+														<input type="email" name="email" placeholder="E-mail" maxlength="60" size="60" value="" autocomplete="off">
 													</label>
 												</section>
 											</div>
@@ -95,7 +95,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-lock"></i>
-														<input type="password" name="password" placeholder="Password">
+														<input type="password" name="password" placeholder="Password" value="" autocomplete="new-password">
 													</label>
 												</section>
 												<section class="col col-6">

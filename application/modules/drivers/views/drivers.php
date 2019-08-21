@@ -95,7 +95,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-lock"></i>
-														<input type="password" name="password" placeholder="Password" autocomplete="off">
+														<input type="password" name="password" placeholder="Password" autocomplete="new-password">
 													</label>
 												</section>
 												<section class="col col-6">
