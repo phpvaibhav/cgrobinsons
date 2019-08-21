@@ -216,7 +216,7 @@
         </li>
 
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "reports") ? "active" : "" ?>">
-          <a href="javascript:void(0);" title="Reports"><i class="fa fa-lg fa-fw fa-line-chart"></i> <span class="menu-item-parent">Reports</span></a>
+          <a href="<?php echo base_url('reports'); ?>" title="Reports"><i class="fa fa-lg fa-fw fa-line-chart"></i> <span class="menu-item-parent">Reports</span></a>
         </li>
 
 

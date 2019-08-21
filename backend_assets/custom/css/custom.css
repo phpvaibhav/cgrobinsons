@@ -1401,7 +1401,7 @@
 
 .info-box.hover-expand-effect:after {
   background-color: rgba(0, 0, 0, 0.05);
-  content: ".";
+  /*content: ".";*/
   position: absolute;
   left: 80px;
   top: 0;
