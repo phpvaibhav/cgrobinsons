@@ -96,9 +96,10 @@ class Jobs extends Common_Back_Controller {
      
 
       // Logged in username
-    /*  $userName = "Admin";
+     $userName = $_SESSION[ADMIN_USER_SESS_KEY]['fullName'];
 
-      $pdf->Write(0, 'By: '.$userName, '', 0, 'R', true, 0, false, false, 0);*/
+
+      $pdf->Write(0, 'By: '.$userName, '', 0, 'R', true, 0, false, false, 0);
         $pdf->Ln(5);
        
       $pdf->SetFont('helvetica', '', 9);
@@ -210,7 +211,7 @@ class Jobs extends Common_Back_Controller {
       // add a page
       $pdf->AddPage();
         // print a line
-        $pdf->Cell(0, 12, 'JOBS DETAIL',0, 0, 'C');
+        $pdf->Cell(0, 12, 'JOB DETAIL',0, 0, 'C');
 
         $pdf->Ln(5);
          $pdf->Ln(5);
@@ -218,9 +219,10 @@ class Jobs extends Common_Back_Controller {
      
 
       // Logged in username
-    /*  $userName = "Admin";
+     $userName = $_SESSION[ADMIN_USER_SESS_KEY]['fullName'];
 
-      $pdf->Write(0, 'By: '.$userName, '', 0, 'R', true, 0, false, false, 0);*/
+
+      $pdf->Write(0, 'By: '.$userName, '', 0, 'R', true, 0, false, false, 0);
         $pdf->Ln(5);
        
       $pdf->SetFont('helvetica', '', 9);

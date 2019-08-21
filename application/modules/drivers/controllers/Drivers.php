@@ -90,9 +90,10 @@ class Drivers extends Common_Back_Controller {
      
 
       // Logged in username
-    /*  $userName = "Admin";
+    ///*  $userName = "Admin";
+  $userName = $_SESSION[ADMIN_USER_SESS_KEY]['fullName'];
 
-      $pdf->Write(0, 'By: '.$userName, '', 0, 'R', true, 0, false, false, 0);*/
+      $pdf->Write(0, 'By: '.$userName, '', 0, 'R', true, 0, false, false, 0);
         $pdf->Ln(5);
        
       $pdf->SetFont('helvetica', '', 9);

@@ -25,7 +25,7 @@
 
 									</li>
 									<li>
-										<a href="<?php echo base_url().'jobs';?>" class="btn btn-labeled btn-info" target="_blank"> <span class="btn-label"><i class="fa fa-eye"></i></span> View</a>
+										<a href="<?php echo base_url().'jobs';?>" class="btn btn-labeled btn-info"> <span class="btn-label"><i class="fa fa-eye"></i></span> View</a>
 										
 									</li>
 								</ul>
@@ -56,7 +56,7 @@
 										<a href="<?php echo base_url().'customers/customersPdf';?>" class="btn btn-labeled btn-danger" target="_blank"> <span class="btn-label"><i class="fa fa-download"></i></span>Download </a>
 									</li>
 									<li>
-										<a href="<?php echo base_url().'customers';?>" class="btn btn-labeled btn-info" target="_blank"> <span class="btn-label"><i class="fa fa-eye"></i></span> View</a>
+										<a href="<?php echo base_url().'customers';?>" class="btn btn-labeled btn-info"> <span class="btn-label"><i class="fa fa-eye"></i></span> View</a>
 										
 									</li>
 								</ul>
@@ -85,7 +85,7 @@
 										<a href="<?php echo base_url().'drivers/driversPdf';?>" class="btn btn-labeled btn-danger" target="_blank"> <span class="btn-label"><i class="fa fa-download"></i></span>Download </a>
 									</li>
 										<li>
-										<a href="<?php echo base_url().'drivers';?>" class="btn btn-labeled btn-info" target="_blank"> <span class="btn-label"><i class="fa fa-eye"></i></span> View</a>
+										<a href="<?php echo base_url().'drivers';?>" class="btn btn-labeled btn-info"> <span class="btn-label"><i class="fa fa-eye"></i></span> View</a>
 										
 									</li>
 								</ul>
