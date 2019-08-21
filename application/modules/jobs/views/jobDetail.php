@@ -154,7 +154,7 @@
 			  ?>
 			<div class="row">
 			<!-- before -->
-		<!-- 	<div class="col-sm-12 col-md-12 col-lg-6">
+			<div class="col-sm-12 col-md-12 col-lg-6">
 				<div class="well well-light well-sm margin padding">
 					<div class="timeline-seperator text-center"></div>
 						<header>
@@ -185,8 +185,12 @@
 								<li class="list-group-item">
 									
 									<div class="row">
-										<p><strong>Signature</strong></p>
-										<p class="pull-right"><img src="<?php echo S3JOBS_URL.$before['driverSignature'];  ?>" width="100" height="100"  class="img img-thumbnail"  ></p>
+											<div class="col-sm-12 col-md-12 col-lg-12">
+												<p class="pull-right"><img src="<?php echo S3JOBS_URL.$before['driverSignature'];  ?>" width="100" height="100"  class="img img-thumbnail"  ></p>
+											</div>
+											<div class="col-sm-12 col-md-12 col-lg-12">
+												<p class="pull-right"><strong>Driver Signature</strong></p>
+											</div>
 									</div>
 									
 								</li>
@@ -197,10 +201,10 @@
 						</fieldset>
 					<?php endif; ?>
 				</div>
-			</div> -->
+			</div>
 			<!-- before -->
 			<!-- after -->
-			<!-- 	<div class="col-sm-12 col-md-12 col-lg-6">
+				<div class="col-sm-12 col-md-12 col-lg-6">
 					<div class="well well-light well-sm margin padding">
 						<div class="timeline-seperator text-center"></div>
 					<header>
@@ -230,8 +234,15 @@
 								</li>
 								<li class="list-group-item">
 									<div class="row">
-										<p><strong>Signature</strong></p>
-										<p class="pull-right"><img src="<?php echo S3JOBS_URL.$after['customerSignature'];  ?>" width="100" class="img img-thumbnail"  ></p>
+										
+										
+									
+										<div class="col-sm-12 col-md-12 col-lg-12">
+											<p class="pull-right"><img src="<?php echo S3JOBS_URL.$after['customerSignature'];  ?>" width="100" class="img img-thumbnail"  ></p>
+											</div>
+											<div class="col-sm-12 col-md-12 col-lg-12">
+												<p class="pull-right"><strong>Customer Signature</strong></p>
+											</div>
 									</div>
 								
 								</li>
@@ -243,7 +254,7 @@
 						<?php endif; ?>
 						
 					</div>
-				</div> -->
+				</div>
 				<!-- after -->
 
 			</div>

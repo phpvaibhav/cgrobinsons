@@ -146,7 +146,7 @@
 				<!-- widget content -->
 				<div class="widget-body padding">
 				<div class="table-responsive">
-					<table id="customnerjobList" data-id="<?php echo $driver['id']; ?>" class="table table-striped table-bordered table-hover" width="100%">
+					<table id="customnerjobList" data-id="<?php echo $customermeta['userId'];?>" class="table table-striped table-bordered table-hover" width="100%">
 						<thead>			                
 							<tr>
 								<th data-hide="phone">ID</th>
@@ -154,7 +154,7 @@
 								<th data-hide="phone,tablet">Job Type</th>
 								<th data-hide="phone,tablet">Customer</th>
 								<th data-hide="phone,tablet">Driver</th>
-								<th data-hide="phone,tablet">Start Date Time</th>
+								<th data-hide="phone,tablet">Creation Date</th>
 								<th data-hide="phone,tablet">Status</th>
 								<th data-hide="phone,tablet">Action</th>
 							</tr>

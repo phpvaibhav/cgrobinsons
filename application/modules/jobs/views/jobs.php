@@ -38,7 +38,7 @@
 									<th data-hide="phone,tablet">Job Type</th>
 									<th data-hide="phone,tablet">Customer</th>
 									<th data-hide="phone,tablet">Driver</th>
-									<th data-hide="phone,tablet">Start Date Time</th>
+									<th data-hide="phone,tablet">Creation Date</th>
 									<th data-hide="phone,tablet">Status</th>
 									<th data-hide="phone,tablet">Action</th>
 								</tr>

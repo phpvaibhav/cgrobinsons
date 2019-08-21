@@ -199,25 +199,26 @@
 							
 
 						<fieldset>
+						
 							<ul class="list-unstyled">
 							
 								<li class="list-group-item">
-									<span class="pull-right"><?php echo isset($vehilce['year'])? $vehilce['year']:"NA"; ?></span>	<strong>Year</strong>
+									<span class="pull-right"><?php echo isset($vehicle['year'])? $vehicle['year']:"NA"; ?></span>	<strong>Year</strong>
 								</li>
 							<li class="list-group-item">
-									<span class="pull-right"><?php echo isset($vehilce['manufacturer'])? $vehilce['manufacturer'] :"NA"; ?></span>	<strong>Manufacturer</strong>
+									<span class="pull-right"><?php echo isset($vehicle['manufacturer'])? $vehicle['manufacturer'] :"NA"; ?></span>	<strong>Manufacturer</strong>
 								</li>
 							<li class="list-group-item">
-									<span class="pull-right"><?php echo isset($vehilce['model'])?$vehilce['model']:"NA"; ?></span>	<strong>Model</strong>
+									<span class="pull-right"><?php echo isset($vehicle['model'])?$vehicle['model']:"NA"; ?></span>	<strong>Model</strong>
 								</li>
 							<li class="list-group-item">
-									<span class="pull-right"><?php echo isset($vehilce['vin']) ?$vehilce['vin']:"NA"; ?></span>	<strong>Vin</strong>
+									<span class="pull-right"><?php echo isset($vehicle['vin']) ?$vehicle['vin']:"NA"; ?></span>	<strong>Vin</strong>
 								</li>
 							<li class="list-group-item">
-									<span class="pull-right"><?php echo isset($vehilce['plate']) ?$vehilce['plate']:"NA"; ?></span>	<strong>Plate</strong>
+									<span class="pull-right"><?php echo isset($vehicle['plate']) ?$vehicle['plate']:"NA"; ?></span>	<strong>Plate</strong>
 								</li>
 							<li class="list-group-item">
-									<span class="pull-right"><?php echo isset($vehilce['color']) ?$vehilce['color']:"NA"; ?></span>	<strong>Color</strong>
+									<span class="pull-right"><?php echo isset($vehicle['color']) ?$vehicle['color']:"NA"; ?></span>	<strong>Color</strong>
 
 								</li>
 							
@@ -293,7 +294,7 @@
 				<!-- widget content -->
 				<div class="widget-body padding">
 				<div class="table-responsive">
-					<table id="driverjobList" data-id="<?php echo $customer['id']; ?>" class="table table-striped table-bordered table-hover" width="100%">
+					<table id="driverjobList" data-id="<?php echo $driver['id'];?>" class="table table-striped table-bordered table-hover" width="100%">
 						<thead>			                
 							<tr>
 								<th data-hide="phone">ID</th>

@@ -105,7 +105,10 @@ class Jobs extends Common_Admin_Controller{
        
         $userLink = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
        // $userLink = "javascript:void(0);";
-        $action .= '&nbsp;&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+        $action .= '&nbsp;&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;|';
+          $pdfLink = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
+        $action .= '&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+
             
 
         $row[] = $action;
@@ -163,7 +166,9 @@ class Jobs extends Common_Admin_Controller{
        
         $userLink = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
        // $userLink = "javascript:void(0);";
-        $action .= '&nbsp;&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+        $action .= '&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;';
+                 $pdfLink = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
+        $action .= '&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
             
 
         $row[] = $action;
@@ -186,7 +191,7 @@ class Jobs extends Common_Admin_Controller{
         $this->load->model('job_model');
         $this->job_model->set_data(array('j.driverId'=>$this->post('id')));
         $list = $this->job_model->get_list();
-        
+       
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $serData) { 
@@ -221,7 +226,9 @@ class Jobs extends Common_Admin_Controller{
        
         $userLink = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
        // $userLink = "javascript:void(0);";
-        $action .= '&nbsp;&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+        $action .= '<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;';
+                    $pdfLink = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
+        $action .= '&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
             
 
         $row[] = $action;

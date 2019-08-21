@@ -11,7 +11,7 @@
                             <i class="fa fa-file-pdf-o"></i>
                         </div>
 						<div class="content">
-							<div class="text"><h4>Jobs</h4></div>
+							<div class="text222"><h4>Jobs</h4></div>
 						<div class="number count-to">
 								<ul class="demo-btns text-right">
 									<!-- 		
@@ -21,7 +21,12 @@
 										<a href="javascript:void(0);" class="btn btn-labeled btn-info" data-toggle="modal" data-target="#editCustomers"> <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Edit </a>
 									</li> -->
 									<li>
-										<a href="<?php echo base_url().'jobs/jobPdf';?>" class="btn btn-labeled btn-danger" target="_blank"> <span class="btn-label"><i class="fa fa-download"></i></span>Download </a>
+										<a href="<?php echo base_url().'jobs/jobPdf';?>" class="btn btn-labeled btn-danger" target="_blank"> <span class="btn-label"><i class="fa fa-download"></i></span>Download </a>	
+
+									</li>
+									<li>
+										<a href="<?php echo base_url().'jobs';?>" class="btn btn-labeled btn-info" target="_blank"> <span class="btn-label"><i class="fa fa-eye"></i></span> View</a>
+										
 									</li>
 								</ul>
 							</div>
@@ -38,7 +43,7 @@
                             <i class="fa fa-file-pdf-o"></i>
                         </div>
 						<div class="content">
-							<div class="text"><h4>Customers</h4></div>
+							<div class="text222"><h4>Customers</h4></div>
 							<div class="number count-to">
 								<ul class="demo-btns text-right">
 									<!-- 		
@@ -49,6 +54,10 @@
 									</li> -->
 									<li>
 										<a href="<?php echo base_url().'customers/customersPdf';?>" class="btn btn-labeled btn-danger" target="_blank"> <span class="btn-label"><i class="fa fa-download"></i></span>Download </a>
+									</li>
+									<li>
+										<a href="<?php echo base_url().'customers';?>" class="btn btn-labeled btn-info" target="_blank"> <span class="btn-label"><i class="fa fa-eye"></i></span> View</a>
+										
 									</li>
 								</ul>
 							</div>
@@ -63,7 +72,7 @@
                             <i class="fa fa-file-pdf-o"></i>
                         </div>
 						<div class="content">
-							<div class="text"><h4>Drivers</h4></div>
+							<div class="text222"><h4>Drivers</h4></div>
 							<div class="number count-to">
 								<ul class="demo-btns text-right">
 									<!-- 		
@@ -74,6 +83,10 @@
 									</li> -->
 									<li>
 										<a href="<?php echo base_url().'drivers/driversPdf';?>" class="btn btn-labeled btn-danger" target="_blank"> <span class="btn-label"><i class="fa fa-download"></i></span>Download </a>
+									</li>
+										<li>
+										<a href="<?php echo base_url().'drivers';?>" class="btn btn-labeled btn-info" target="_blank"> <span class="btn-label"><i class="fa fa-eye"></i></span> View</a>
+										
 									</li>
 								</ul>
 							</div>
