@@ -357,13 +357,13 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-user"></i>
-														<input type="text" name="fullName" placeholder="Driver Name" value="<?php echo $driver['fullName'];?>" maxlength="50" size="50">
+														<input type="text" name="fullName" placeholder="Driver Name" value="<?php echo $driver['fullName'];?>" maxlength="30" size="30">
 														<input type="hidden" name="cus" value="<?php echo encoding($driver['id']);?>">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
-														<input type="email" name="email" placeholder="E-mail" autocomplete="off" value="<?php echo $driver['email'];?>"maxlength="100" size="100" >
+														<input type="email" name="email" placeholder="E-mail" autocomplete="off" value="<?php echo $driver['email'];?>"maxlength="30" size="30" >
 													</label>
 												</section>
 											</div>
@@ -404,7 +404,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-list-ol"></i>
-														<input type="text" name="licenseNumber" placeholder="Driver License Number" class="number-only" value="<?php echo $drivermeta['licenseNumber'];?>" maxlength="50" size="50">
+														<input type="text" name="licenseNumber" placeholder="Driver License Number" class="number-only" value="<?php echo $drivermeta['licenseNumber'];?>" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-6">
@@ -416,7 +416,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-user"></i>
-														<input type="text" name="emergencyPersonName" placeholder="Emergency Contact Person Name"value="<?php echo $drivermeta['emergencyPersonName'];?>" maxlength="100" size="100">
+														<input type="text" name="emergencyPersonName" placeholder="Emergency Contact Person Name"value="<?php echo $drivermeta['emergencyPersonName'];?>" maxlength="30" size="30">
 													</label>
 												</section>
 												<section class="col col-6">
@@ -448,7 +448,7 @@
 												</section>
 												<section class="col col-9">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" value="<?php echo $drivermeta['street2'];?>" maxlength="60" size="60">
+													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" value="<?php echo $drivermeta['street2'];?>" maxlength="30" size="30">
 													</label>
 												</section>
 											</div>
@@ -467,7 +467,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0" value="<?php echo $drivermeta['zip'];?>" maxlength="20" size="20">
+														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only" value="<?php echo $drivermeta['zip'];?>" maxlength="6" size="6">
 													</label>
 												</section>
 												<section class="col col-6">

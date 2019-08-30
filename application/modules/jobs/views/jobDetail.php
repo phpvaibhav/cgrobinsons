@@ -291,7 +291,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-bookmark"></i>
-														<input type="text" name="jobName" placeholder="Job Name" maxlength="100" size="100" value="<?php echo $job['jobName']; ?>">
+														<input type="text" name="jobName" placeholder="Job Name" maxlength="30" size="30" value="<?php echo $job['jobName']; ?>">
 														<input type="hidden" name="jobId" placeholder="Job Name" maxlength="100" size="100" value="<?php echo encoding($job['jobId']);?>">
 
 													</label>
@@ -365,7 +365,7 @@
 												</section>
 												<section class="col col-9">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" value="<?php echo $job['street2']; ?>" maxlength="60" size="60">
+													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" value="<?php echo $job['street2']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 											</div>
@@ -384,12 +384,12 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0" value="<?php echo $job['zip']; ?>" maxlength="30" size="30">
+														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only" value="<?php echo $job['zip']; ?>" maxlength="6" size="6">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="country" placeholder="Country" class="countryautocomplete0" value="<?php echo $job['country']; ?>" maxlength="30" size="30">
+													<input type="text" name="country" placeholder="Country" class="countryautocomplete0" value="<?php echo $job['country']; ?>" maxlength="15" size="15">
 													</label>
 												</section>
 											</div>

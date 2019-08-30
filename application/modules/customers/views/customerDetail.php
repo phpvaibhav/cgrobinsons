@@ -210,13 +210,13 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-user"></i>
-														<input type="text" name="fullName" placeholder="Customer Name" value="<?php echo ucfirst($customer['fullName']); ?>" maxlength="60" size="60">
+														<input type="text" name="fullName" placeholder="Customer Name" value="<?php echo ucfirst($customer['fullName']); ?>" maxlength="30" size="30">
 														<input type="hidden" name="cus" value="<?php echo encoding($customer['id']);?>">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
-														<input type="email" name="email" placeholder="E-mail" value="<?php echo $customer['email']; ?>" maxlength="60" size="60">
+														<input type="email" name="email" placeholder="E-mail" value="<?php echo $customer['email']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 											</div>
@@ -256,7 +256,7 @@
 												</section>
 												<section class="col col-9">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" value="<?php echo $customermeta['street2']; ?>" maxlength="60" size="60">
+													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" value="<?php echo $customermeta['street2']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 											</div>
@@ -275,12 +275,12 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0" value="<?php echo $customermeta['zip']; ?>" maxlength="20" size="20">
+														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only" value="<?php echo $customermeta['zip']; ?>" maxlength="6" size="6">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="country" placeholder="Country" class="countryautocomplete0" value="<?php echo $customermeta['country']; ?>" maxlength="60" size="60">
+													<input type="text" name="country" placeholder="Country" class="countryautocomplete0" value="<?php echo $customermeta['country']; ?>" maxlength="15" size="15">
 													</label>
 												</section>
 											</div>
@@ -308,7 +308,7 @@
 												</section>
 												<section class="col col-9">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="street21" placeholder="Street Second" class="routeautocomplete1" value="<?php echo $customermeta['billStreet2']; ?>" maxlength="60" size="60">
+													<input type="text" name="street21" placeholder="Street Second" class="routeautocomplete1" value="<?php echo $customermeta['billStreet2']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 											</div>
@@ -327,12 +327,12 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip1" placeholder="Zip Code" class="postal_codeautocomplete0" value="<?php echo $customermeta['billZip']; ?>" maxlength="30" size="30">
+														<input type="text" name="zip1" placeholder="Zip Code" class="postal_codeautocomplete0 number-only" value="<?php echo $customermeta['billZip']; ?>" maxlength="6" size="6">
 													</label>
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="country1" placeholder="Country" class="countryautocomplete1" value="<?php echo $customermeta['billCountry']; ?>" maxlength="60" size="60">
+													<input type="text" name="country1" placeholder="Country" class="countryautocomplete1" value="<?php echo $customermeta['billCountry']; ?>" maxlength="30" size="30">
 													</label>
 												</section>
 											</div>

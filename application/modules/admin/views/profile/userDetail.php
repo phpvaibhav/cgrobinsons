@@ -243,14 +243,14 @@
 							<fieldset>
 								<section>
 									<label class="input"> <i class="icon-append fa fa-user"></i>
-									<input type="text" name="fullName" placeholder="Full name" value="<?php echo $userData['fullName']; ?>" maxlength="60" size="60">
+									<input type="text" name="fullName" placeholder="Full name" value="<?php echo $userData['fullName']; ?>" maxlength="30" size="30">
 									<input type="hidden" name="userauth" value="<?php echo $this->uri->segment(2); ?>">
 									<b class="tooltip tooltip-bottom-right"> Please enter your full name</b> </label>
 								</section>
 
 								<section>
 								<label class="input"> <i class="icon-append fa fa-envelope"></i>
-									<input type="email" name="email" placeholder="Email address" value="<?php echo $userData['email']; ?>" maxlength="100" size="100">
+									<input type="email" name="email" placeholder="Email address" value="<?php echo $userData['email']; ?>" maxlength="30" size="30">
 									<b class="tooltip tooltip-bottom-right"> Please enter your registered email address</b> </label>
 								</section>
 								<section>
