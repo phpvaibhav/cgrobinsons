@@ -86,6 +86,8 @@ class Jobs extends Common_Service_Controller{
                 if($isExist->jobStatus==2){
                      $response = array('status' => FAIL, 'message' =>"job already completed.");
                 }else{
+                     log_event(json_encode($_POST), 'jobs_log.txt');  //create log of notifcation
+                     log_event(json_encode($_FILES), 'jobs_log.txt');  //create log of notifcation
                     $jobReport = $isExist->jobReport;
                     $report = !empty($jobReport) ? json_decode( $jobReport,true):array();
                     $jobStatus                  = $this->post('jobStatus');
