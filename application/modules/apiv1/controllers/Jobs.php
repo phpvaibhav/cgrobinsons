@@ -59,6 +59,8 @@ class Jobs extends Common_Service_Controller{
         $this->response($response);    
     } //End Function
     function jobActivity_post(){
+		//~ log_event(json_encode($_POST), 'jobs_log.txt');  //create log of notifcation
+		//~ log_event(json_encode($_FILES), 'jobs_log.txt');  //create log of notifcation
         $this->form_validation->set_rules('jobId', 'jobId', 'trim|required');
         $this->form_validation->set_rules('jobDateTime', 'jobDateTime', 'trim|required');
         $this->form_validation->set_rules('jobStatus', 'job status', 'trim|required');
@@ -72,6 +74,7 @@ class Jobs extends Common_Service_Controller{
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
        
         }else{
+			
             $filesCount = sizeof($_FILES['workImage']['name']);
           //   pr($_FILES['workImage']['name']);
               if($filesCount>3){
@@ -86,8 +89,8 @@ class Jobs extends Common_Service_Controller{
                 if($isExist->jobStatus==2){
                      $response = array('status' => FAIL, 'message' =>"job already completed.");
                 }else{
-                     log_event(json_encode($_POST), 'jobs_log.txt');  //create log of notifcation
-                     log_event(json_encode($_FILES), 'jobs_log.txt');  //create log of notifcation
+                     //~ log_event(json_encode($_POST), 'jobs_log.txt');  //create log of notifcation
+                     //~ log_event(json_encode($_FILES), 'jobs_log.txt');  //create log of notifcation
                     $jobReport = $isExist->jobReport;
                     $report = !empty($jobReport) ? json_decode( $jobReport,true):array();
                     $jobStatus                  = $this->post('jobStatus');
