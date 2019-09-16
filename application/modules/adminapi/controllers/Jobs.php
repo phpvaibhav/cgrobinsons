@@ -16,6 +16,11 @@ class Jobs extends Common_Admin_Controller{
         $this->form_validation->set_rules('startTime', 'startTime', 'trim|required');
         $this->form_validation->set_rules('address', 'address', 'trim|required');
           $this->form_validation->set_rules('latitude', 'latitude', 'trim|required|min_length[2]|callback_validate_address');
+          $geoFencing = $this->post('geoFencing');
+        if($geoFencing){
+          $this->form_validation->set_rules('boundary', 'geo fencing area', 'trim|required');   
+        }
+        
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
             
@@ -42,9 +47,39 @@ class Jobs extends Common_Admin_Controller{
                 $jobId  = decoding($this->post('jobId'));
 
                 $where = array('jobId'=>$jobId);
+                /*polygon*/
+                    $boundary               = $this->input->post('boundary');
+                    $color                  = $this->input->post('polygonColor');
+                    $geo_val['points']     = $boundary ;
+                    $geo_val['polygonColor']   = $color     ;
+                    $boundary1=array();
+                    if(!empty($boundary)):
+                    $pre = explode("|",$boundary);
+                    $p = array_values(array_filter($pre));
+                    for ($i=0; $i <sizeof($p) ; $i++) { 
+                    $test = explode(",",$p[$i]);
+                    if(isset($test[0]) && !empty($test[0]) && isset($test[1]) && !empty($test[1]))
+                    $boundary1[]  = $test[1]." ".$test[0];  
+                    }
+                    $t = explode(",",$p[0]);
+                    $be =$t[1]." ".$t[0];
+                    array_push($boundary1,$be);
+                    else:
+                   
+                    endif;
+                    $boundaryP = "";
+                    if(!empty($boundary1)){
+                    $hf = implode(',',$boundary1);
+                    $boundaryP = "PolygonFromText('POLYGON(($hf))')";
+
+                    }
+                    $geo_val['boundary']   = $boundaryP ;
+                    $geo_val['geoFencing']   = $geoFencing ;
+                /*polygon*/
                 $isExist=$this->common_model->is_data_exists('jobs',$where);
                 if($isExist){
                     $result = $this->common_model->updateFields('jobs',$data_val,$where);
+                    $result =  $isExist->jobId;
                     $msg = "Job record updated successfully.";
                 }else{
                     $result = $this->common_model->insertData('jobs',$data_val);
@@ -53,7 +88,8 @@ class Jobs extends Common_Admin_Controller{
                 }
                 //$jobId = $this->common_model->insertData('jobs',$data_val);
                 if($result){
-                 
+                $this->load->model('job_model');
+                $this->job_model->jobPolygonUdpate($geo_val,$result);
                      $response = array('status'=>SUCCESS,'message'=>$msg);
                 }else{
                      $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));

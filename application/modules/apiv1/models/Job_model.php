@@ -7,7 +7,7 @@ class Job_model extends CI_Model {
         THEN "In-progress" when (j.jobStatus = 2) 
         THEN "Completed" ELSE
         "Unknown" 
-        END) as statusShow');
+        END) as statusShow','j.jobStatus as JobStatus');
     public function __construct(){
         parent::__construct();
     }

@@ -96,8 +96,7 @@
     <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
     <script data-pace-options='{ "restartOnRequestAfter": true }' src="<?php echo $backend_assets ?>js/plugin/pace/pace.min.js"></script>
 
-    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   
     <script>
       if (!window.jQuery) {
         document.write('<script src="<?php echo $backend_assets ?>js/libs/jquery-3.2.1.min.js"><\/script>');
@@ -181,11 +180,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
 
  <script src="<?php echo $backend_assets; ?>custom/js/listing.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjhKBJtoevmCuR5iD1El6cuDHTMByw9Co&libraries=places" type="text/javascript"></script>
+ <!--    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjhKBJtoevmCuR5iD1El6cuDHTMByw9Co&libraries=places" type="text/javascript"></script> -->
+
+ <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js'></script>
+
  <script src="<?php echo $backend_assets; ?>admin/js/user.js"></script>
  <script src="<?php echo $backend_assets; ?>admin/js/location.js"></script>
  <script src="<?php echo $backend_assets; ?>custom/js/custom.js"></script>
  <script src="<?php echo $backend_assets; ?>custom/js/common.js"></script>
+ 
 
     <script>
 

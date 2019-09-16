@@ -118,5 +118,15 @@ class Job_model extends CI_Model {
             $this->db->where($this->where); 
         return $this->db->count_all_results();
     }
+     function jobPolygonUdpate($data_val,$id){
+        $points         = $data_val['points'];
+        $boundary       = $data_val['boundary'];
+        $polygonColor   = $data_val['polygonColor'];
+        $geoFencing     = $data_val['geoFencing'];
+   
+        $sql = "UPDATE jobs SET `points`='$points',`polygonColor`='$polygonColor',`boundary`=$boundary,`geoFencing`=$geoFencing WHERE jobId=$id";
+       $update =$this->db->query($sql);
+        return $update;
+    }//end function
 
 }

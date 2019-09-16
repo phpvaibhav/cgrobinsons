@@ -880,7 +880,11 @@ $("#vehicleAssignDriver").validate({// Rules for form validation
   }
 });
 /// Create job 
-
+function getMsgboundary(){
+   var msg= 'Please select geo fencing area';
+    toastr.error(msg, 'Alert!', {timeOut: 3000});
+  return msg;
+}
 $("#createJob").validate({// Rules for form validation
    errorClass    : errorClass,
    errorElement  : errorElement,
@@ -914,6 +918,9 @@ $("#createJob").validate({// Rules for form validation
    address : {
       required : true
     },
+     boundary: { 
+     required: '#geoFencing1[value="1"]:checked'
+    }
    
 
   },
@@ -945,6 +952,12 @@ $("#createJob").validate({// Rules for form validation
     ,address : {
       required : 'Please enter your address',
 
+    } ,boundary : {
+      
+      required: function () {
+          toastr.error('Please select geo fencing area', 'Alert!', {timeOut: 3000});
+                           
+                        },
     }
   },
   // Ajax form submition
@@ -966,7 +979,8 @@ $("#createJob").validate({// Rules for form validation
           setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
           if(res.status=='success'){
             toastr.success(res.message, 'Success', {timeOut: 3000});
-            setTimeout(function(){window.location.reload(); },4000);
+         //   setTimeout(function(){window.location.reload(); },4000);
+            setTimeout(function(){ window.location = base_url+'jobs';; },4000);
           }else{
             toastr.error(res.message, 'Alert!', {timeOut: 4000});
           }
@@ -977,6 +991,7 @@ $("#createJob").validate({// Rules for form validation
   // Do not change code below
   errorPlacement : function(error, element) {
     error.insertAfter(element.parent());
+
   }
 });
 /*listing job */

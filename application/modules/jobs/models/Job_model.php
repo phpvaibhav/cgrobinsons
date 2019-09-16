@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Job_model extends CI_Model {
-    var $column_sel = array('j.*','j.jobId','j.jobName','j.jobTypeId','j.driverId','c.fullName as customerName','jt.jobType','d.fullName as driverName','j.customerId','j.jobStatus','j.startDate','j.startTime','(case when (j.jobStatus = 0) 
+    var $column_sel = array('j.*','j.jobId','j.jobName','j.points','j.polygonColor','j.jobTypeId','j.driverId','c.fullName as customerName','jt.jobType','d.fullName as driverName','j.customerId','j.jobStatus','j.startDate','j.startTime','(case when (j.jobStatus = 0) 
         THEN "Open" when (j.jobStatus = 1) 
         THEN "In-progress" when (j.jobStatus = 2) 
         THEN "Completed" ELSE
@@ -39,6 +39,7 @@ class Job_model extends CI_Model {
         endif;
         return false;
     } 
+   
 
 
 }//Function 

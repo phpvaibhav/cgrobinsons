@@ -22,6 +22,15 @@ class Jobs extends Common_Back_Controller {
         $data['drivers']         =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
         $data['customers']       =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
         $this->load->admin_render('jobs', $data);
+    }     
+    public function addJob() { 
+        
+        $data['title'] = 'Add Job';
+      
+        $data['jobTypes']        =  $this->common_model->getAll('jobType');
+        $data['drivers']         =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
+        $data['customers']       =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
+        $this->load->admin_render('addJob', $data);
     } 
     public function jobDetail(){
       //pr('admin@admin.com');
@@ -38,6 +47,22 @@ class Jobs extends Common_Back_Controller {
        
         $this->load->admin_render('jobDetail', $data, '');
     } //end function
+     public function detail(){
+      //pr('admin@admin.com');
+        $jobId  = decoding($this->uri->segment(3));
+
+        $data['title'] = "Job Detail";
+         $data['recordSet'] = array('<li class="sparks-info"><h5>Job Report<span class="txt-color-blue"><a class="anchor-btn" href="'.base_url().'jobs/jobDetailPdf/'.$this->uri->segment(3).'" target="_blank" ><i class="fa fa-file-pdf-o"></i></a></span></h5></li>');
+        $where = array('jobId'=>$jobId);
+        $this->load->model('job_model');
+        $data['job'] = $this->job_model->jobDetail($jobId);
+        $data['jobTypes']        =  $this->common_model->getAll('jobType');
+        $data['drivers']         =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
+        $data['customers']       =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
+       
+        $this->load->admin_render('detail', $data, '');
+    } //end function
+    
     public function jobPdf()
    {
 
