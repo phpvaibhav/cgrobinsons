@@ -168,13 +168,23 @@
 													<!-- map -->
 												</div>
 												
-											<div class="row">
+											<div class="row" id="html-content-holder">
 												<div id="map-canvas"></div>
 												<div id="map"></div>
 											</div>
 											 <input type="hidden" name="polygonColor" id="polygonColor" value="#1E90FF">
 										  	<textarea  name="boundary" id="boundary" class="hide"></textarea>
 											</section>
+											<!-- fdf -->
+										<!-- 	<input id="btn-Preview-Image" type="button" value="Preview"/>
+    <a id="btn-Convert-Html2Image" href="#">Download</a>
+    <a onclick="saveMapToDataUrl();" href="#">Download1</a>
+    <br/>
+    <h3>Preview :</h3>
+    <div id="previewImage">
+    </div>
+ -->
+											<!-- fdf -->
 										</fieldset>
 										
 										<footer>
@@ -195,3 +205,46 @@
         <!-- end widget grid -->
  <script src="<?php echo $backend_assets; ?>custom/js/polygon.js"></script>
 
+<script src="https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script>
+<script>
+$(document).ready(function(){
+
+/*	
+var element = $("#html-content-holder"); // global variable
+var getCanvas; // global variable
+ 
+    $("#btn-Preview-Image").on('click', function () {
+    
+         html2canvas(element, {
+         onrendered: function (canvas) {
+                $("#previewImage").append(canvas);
+                getCanvas = canvas;
+             }
+         });
+    });
+
+	$("#btn-Convert-Html2Image").on('click', function () {
+
+    var imgageData = getCanvas.toDataURL("image/png");
+    // Now browser starts downloading it instead of just showing it
+    var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+    $("#btn-Convert-Html2Image").attr("download", "your_pic_name.png").attr("href", newData);
+	});
+
+});
+function saveMapToDataUrl() {
+
+  var element = $("#html-content-holder"); // global variable
+
+    html2canvas(element, {
+        useCORS: true,
+        onrendered: function(canvas) {
+            var dataUrl= canvas.toDataURL("image/png");
+
+            // DO SOMETHING WITH THE DATAURL
+            // Eg. write it to the page
+            document.write('<img src="' + dataUrl + '"/>');
+        }
+    });
+}*/
+</script>

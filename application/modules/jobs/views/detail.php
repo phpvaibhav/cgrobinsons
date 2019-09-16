@@ -111,7 +111,10 @@
 								
 								<li class="list-group-item">
 									<span class="pull-right txt-color-darken"><?php echo $job['jobName']; ?></span>	<strong> Job Name</strong>
-								</li>
+								</li>	
+								<!-- <li class="list-group-item">
+									<embed src="<?php echo $job['boundary'] ?>" width="100" height="400">
+								</li> -->
 								<li class="list-group-item">
 									<span class="pull-right txt-color-darken"><?php echo $job['jobType']; ?></span>	<strong> Job Type</strong>
 								</li>
@@ -174,6 +177,7 @@
 					
 				</div>
 			</div>
+			<?php if($job['geoFencing']==1): ?>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="well well-light well-sm margin padding">
@@ -188,6 +192,7 @@
 					</div>
 				</div>
 			</div>
+		<?php endif; ?>
 			<!-- Report -->
 			<?php if(!empty($job['jobReport'])): $reports = json_decode($job['jobReport'],true);
 				$before = isset($reports['beforeWork']) ?$reports['beforeWork']:array();
@@ -458,12 +463,14 @@ var geocoder;
 var map;
 var polygonArray = [];
 var polygonColor = "<?php echo $polygonColor; ?>";
-var pitLatitude = 22.719568;
-var pitLongitude = 75.857727;
+
+var address =  "<?php echo (isset($job['address']) && !empty($job['address'])) ?$job['address']:'NA'; ?>";
+var areaLatitude =  parseFloat("<?php echo (isset($job['latitude']) && !empty($job['latitude'])) ?$job['latitude']:22.719568; ?>");
+var areaLongitude = parseFloat("<?php echo (isset($job['longitude']) && !empty($job['longitude'])) ?$job['longitude']:75.857727; ?>");
 //var myPolygon;
 function initMap() {
   // Map Center
-  var myLatLng = new google.maps.LatLng(pitLatitude,pitLongitude);
+  var myLatLng = new google.maps.LatLng(areaLatitude,areaLongitude);
   // General Options
   var mapOptions = {
     zoom: 10,
@@ -503,8 +510,8 @@ function initMap() {
 
   myPolygon.setMap(map);
   var marker = new google.maps.Marker({
-    position: {lat: pitLatitude, lng: pitLongitude },
-    title: '#v',
+    position: {lat: areaLatitude, lng: areaLongitude },
+    title: address,
     map: map
   });
   //google.maps.event.addListener(myPolygon, "dragend", getPolygonCoords);
