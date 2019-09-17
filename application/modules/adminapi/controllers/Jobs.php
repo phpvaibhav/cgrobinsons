@@ -113,9 +113,10 @@ class Jobs extends Common_Admin_Controller{
         $action ='';
         $no++;
         $row = array();
+         $jobLink = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
         $row[] = $no;
         //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
-        $row[] = display_placeholder_text($serData->jobName); 
+        $row[] = '<a href="'.$jobLink.'"  class="on-default edit-row table_action">'.display_placeholder_text($serData->jobName).'</a>'; 
         $row[] = display_placeholder_text($serData->jobType); 
         $row[] = display_placeholder_text($serData->customerName); 
         $row[] = display_placeholder_text($serData->driverName); 
@@ -139,9 +140,9 @@ class Jobs extends Common_Admin_Controller{
             $link  ='javascript:void(0)';
             $action .= "";
        
-        $userLink = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
+       
        // $userLink = "javascript:void(0);";
-        $action .= '&nbsp;&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;|';
+        $action .= '&nbsp;&nbsp;<a href="'.$jobLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;|';
           $pdfLink = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
         $action .= '&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
 
@@ -176,7 +177,8 @@ class Jobs extends Common_Admin_Controller{
         $row = array();
         $row[] = $no;
         //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
-        $row[] = display_placeholder_text($serData->jobName); 
+         $jobLink = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
+          $row[] = '<a href="'.$jobLink.'"  class="on-default edit-row table_action">'.display_placeholder_text($serData->jobName).'</a>'; 
         $row[] = display_placeholder_text($serData->jobType); 
         $row[] = display_placeholder_text($serData->customerName); 
         $row[] = display_placeholder_text($serData->driverName); 
@@ -236,7 +238,8 @@ class Jobs extends Common_Admin_Controller{
         $row = array();
         $row[] = $no;
         //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
-        $row[] = display_placeholder_text($serData->jobName); 
+        $jobLink = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
+        $row[] = '<a href="'.$jobLink.'"  class="on-default edit-row table_action">'.display_placeholder_text($serData->jobName).'</a>'; 
         $row[] = display_placeholder_text($serData->jobType); 
         $row[] = display_placeholder_text($serData->customerName); 
         $row[] = display_placeholder_text($serData->driverName); 

@@ -32,7 +32,7 @@
 						<table id="customer_list" class="table table-striped table-bordered table-hover" width="100%">
 							<thead>			                
 								<tr>
-									<th data-hide="phone">ID</th>
+								<!-- 	<th data-hide="phone">ID</th> -->
 									<th data-hide="phone">Customer Name</th>
 									<th data-hide="phone,tablet">Email</th>
 									<th data-hide="phone,tablet">Contact Number</th>
@@ -100,7 +100,7 @@
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-phone"></i>
-														<input type="text" name="contactNumber" placeholder="Contact Number" data-mask="(999) 999-9999">
+														<input type="text" name="contactNumber" placeholder="Contact Number" data-mask="(99999) 999999">
 													</label>
 												</section>
 											</div>
@@ -146,7 +146,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only" maxlength="6" size="6">
+														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only1" maxlength="15" size="15">
 													</label>
 												</section>
 												<section class="col col-6">
@@ -198,7 +198,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip1" placeholder="Zip Code" class="postal_codeautocomplete0 number-only" maxlength="6" size="6">
+														<input type="text" name="zip1" placeholder="Zip Code" class="postal_codeautocomplete0 number-only1" maxlength="15" size="15">
 													</label>
 												</section>
 												<section class="col col-6">

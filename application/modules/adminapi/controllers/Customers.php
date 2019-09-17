@@ -105,7 +105,7 @@ class Customers extends Common_Admin_Controller{
         $action ='';
         $no++;
         $row = array();
-        $row[] = $no;
+      /*  $row[] = $no;*/
         //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
         $row[] = display_placeholder_text($serData->fullName); 
         $row[] = display_placeholder_text($serData->email); 

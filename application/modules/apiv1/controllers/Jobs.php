@@ -77,8 +77,8 @@ class Jobs extends Common_Service_Controller{
 			
             $filesCount = sizeof($_FILES['workImage']['name']);
           //   pr($_FILES['workImage']['name']);
-              if($filesCount>3){
-                $response = array('status' => FAIL, 'message' =>"work image max 3 image upload.");
+              if($filesCount>4){
+                $response = array('status' => FAIL, 'message' =>"work image max 4 image upload.");
                  $this->response($response);  
             }
             $data_val = array();
@@ -89,8 +89,8 @@ class Jobs extends Common_Service_Controller{
                 if($isExist->jobStatus==2){
                      $response = array('status' => FAIL, 'message' =>"job already completed.");
                 }else{
-                     //~ log_event(json_encode($_POST), 'jobs_log.txt');  //create log of notifcation
-                     //~ log_event(json_encode($_FILES), 'jobs_log.txt');  //create log of notifcation
+                     log_event(json_encode($_POST), 'jobs_log.txt');  //create log of notifcation
+                      log_event(json_encode($_FILES), 'jobs_log.txt');  //create log of notifcation
                     $jobReport = $isExist->jobReport;
                     $report = !empty($jobReport) ? json_decode( $jobReport,true):array();
                     $jobStatus                  = $this->post('jobStatus');
@@ -116,7 +116,7 @@ class Jobs extends Common_Service_Controller{
                         $this->load->library('s3');
                         $this->load->model('s3_model');
                         $uploadFor = "jobs";
-                      for ($i=0; $i <$filesCount ; $i++) { 
+                      for ($i=0; $i <$filesCount-1 ; $i++) { 
                             $name = $_FILES['workImage']['name'][$i];
                             $size = $_FILES['workImage']['size'][$i];
                             $tmp  = $_FILES['workImage']['tmp_name'][$i];

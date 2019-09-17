@@ -126,7 +126,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only" maxlength="6" size="6">
+														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only1" maxlength="15" size="15">
 													</label>
 												</section>
 												<section class="col col-6">

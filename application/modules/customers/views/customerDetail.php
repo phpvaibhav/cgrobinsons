@@ -9,7 +9,7 @@
 						<ul class="demo-btns text-center">
 											
 											<li>
-												<a href="javascript:void(0);" onclick="creditHoldStatus(this);" data-message="You want to credit hold <?php echo $customermeta['creditHoldStatus'] ?' NO' :'YES'; ?>" data-useid="<?php echo encoding($customermeta['userId']);?>"  class="btn btn-labeled btn-warning"> <span class="btn-label"><i class="glyphicon glyphicon-usd"></i></span>Credit Hold </a>
+												<a href="javascript:void(0);" onclick="creditHoldStatus(this);" data-message="You want to credit hold <?php echo $customermeta['creditHoldStatus'] ?' NO' :'YES'; ?>" data-useid="<?php echo encoding($customermeta['userId']);?>"  class="btn btn-labeled btn-warning"> <span class="btn-label"><i class="glyphicon glyphicon-gbp"></i></span>Credit Hold </a>
 											</li>
 										
 											
@@ -229,7 +229,7 @@
 												</section> -->
 												<section class="col col-md-12">
 													<label class="input"> <i class="icon-append fa fa-phone"></i>
-														<input type="text" name="contactNumber" placeholder="Contact Number" data-mask="(999) 999-9999" value="<?php echo $customer['contactNumber']; ?>">
+														<input type="text" name="contactNumber" placeholder="Contact Number" data-mask="(99999) 999999" value="<?php echo $customer['contactNumber']; ?>">
 													</label>
 												</section>
 											</div>
@@ -275,7 +275,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only" value="<?php echo $customermeta['zip']; ?>" maxlength="6" size="6">
+														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only1" value="<?php echo $customermeta['zip']; ?>" maxlength="15" size="15">
 													</label>
 												</section>
 												<section class="col col-6">
@@ -327,7 +327,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip1" placeholder="Zip Code" class="postal_codeautocomplete0 number-only" value="<?php echo $customermeta['billZip']; ?>" maxlength="6" size="6">
+														<input type="text" name="zip1" placeholder="Zip Code" class="postal_codeautocomplete0 number-only1" value="<?php echo $customermeta['billZip']; ?>" maxlength="15" size="15">
 													</label>
 												</section>
 												<section class="col col-6">

@@ -33,6 +33,20 @@ class Jobs extends Common_Back_Controller {
         $data['customers']       =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
         $this->load->admin_render('addJob', $data);
     } 
+    public function editJob() { 
+        $jobId  = decoding($this->uri->segment(3));
+        $data['title'] = 'Edit Job';
+
+      
+        $data['jobTypes']        =  $this->common_model->getAll('jobType');
+        $data['drivers']         =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
+        $data['customers']       =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
+         $this->load->model('job_model');
+        $data['job'] = $this->job_model->jobDetail($jobId);
+        
+        $this->load->admin_render('editJob', $data);
+    } 
+    
     public function jobDetail(){
       //pr('admin@admin.com');
         $jobId  = decoding($this->uri->segment(3));

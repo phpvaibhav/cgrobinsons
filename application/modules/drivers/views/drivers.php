@@ -100,7 +100,7 @@
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-phone"></i>
-														<input type="text" name="contactNumber" placeholder="Contact Number" data-mask="(999) 999-9999">
+														<input type="text" name="contactNumber" placeholder="Contact Number" data-mask="(99999) 999999">
 													</label>
 												</section>
 											</div>
@@ -145,7 +145,7 @@
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-phone"></i>
-														<input type="text" name="emergencyPersonNumber" placeholder="Emergency Contact Person Number" data-mask="(999) 999-9999">
+														<input type="text" name="emergencyPersonNumber" placeholder="Emergency Contact Person Number" data-mask="(99999) 999999">
 													</label>
 												</section>
 											</div>
@@ -191,7 +191,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only" maxlength="6" size="6">
+														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only1" maxlength="15" size="15">
 													</label>
 												</section>
 												<section class="col col-6">
