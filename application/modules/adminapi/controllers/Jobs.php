@@ -77,6 +77,7 @@ class Jobs extends Common_Admin_Controller{
                     $geo_val['geoFencing']   = $geoFencing ;
                 /*polygon*/
                 $isExist=$this->common_model->is_data_exists('jobs',$where);
+
                 if($isExist){
                     $result = $this->common_model->updateFields('jobs',$data_val,$where);
                     $result =  $isExist->jobId;
@@ -93,10 +94,7 @@ class Jobs extends Common_Admin_Controller{
                      $response = array('status'=>SUCCESS,'message'=>$msg);
                 }else{
                      $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
-                } 
-              
-               
-           
+                }  
         }
         $this->response($response);
     }//end function

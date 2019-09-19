@@ -1,11 +1,20 @@
-var latitude =  22.719568;
-var longitude =  75.857727;
+var latitude =  51.509865;
+var longitude =  -0.118092;
 var drawingManager;
+var marker;
 var all_overlays = [];
 var selectedShape;
 var colors = ['#1E90FF', '#FF1493', '#32CD32', '#FF8C00', '#4B0082', '#C0262C', '#7FFF00','#FF0000','#820041','#EB6001','#872B4C','#AC0000','#ECB400','#000000'];
 var selectedColor;
 var colorButtons = {};
+var componentForm = {
+      street_number: 'short_name',
+      route: 'long_name',
+      locality: 'long_name',
+      administrative_area_level_1: 'short_name',
+      country: 'long_name',
+      postal_code: 'short_name'
+    };
 function clearSelection() {
   if (selectedShape) {
     selectedShape.setEditable(false);
@@ -95,11 +104,11 @@ function initialize() {
       scrollwheel: false, 
       disableDoubleClickZoom: true
     });
- /* var marker = new google.maps.Marker({
+  var marker = new google.maps.Marker({
     position: {lat: latitude, lng: longitude },
     map: map,
-    title: 'Hello World!'
-  });*/
+   // title: ''
+  });
   var polyOptions = {
     strokeWeight: 0,
     fillOpacity: 0.45,
@@ -182,6 +191,52 @@ function initialize() {
   buildColorPalette();
 
   /*addres autofill*/
+  var acInputs = document.getElementsByClassName("mapautocomplete");
+for (var i = 0; i < acInputs.length; i++) {
+ 
+        var autocomplete = new google.maps.places.Autocomplete(acInputs[i]);
+
+        autocomplete.inputId = acInputs[i].id;
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+           var place   = this.getPlace();
+          var aId      = this.inputId
+           if (!place.geometry) {
+             
+              window.alert("No details available for input: '" + place.name + "'");
+              return;
+            }
+            var latitude  = place.geometry.location.lat();
+            var longitude = place.geometry.location.lng();
+            $('.latitude'+aId).val(latitude);
+            $('.longitude'+aId).val(longitude);
+       
+      var LatLng = new google.maps.LatLng(latitude,longitude);
+      map.setCenter(LatLng);
+      marker.setMap(null);
+      marker = new google.maps.Marker({
+        position: {lat: latitude, lng: longitude },
+        title: place.formatted_address,
+        //map: map
+      });
+      
+      marker.setMap(map);
+     
+
+
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+        for (var j = 0; j < place.address_components.length; j++) {
+          var addressType = place.address_components[j].types[0];
+          if (componentForm[addressType]) {
+            var val = place.address_components[j][componentForm[addressType]];
+                 $('.'+addressType+aId).val(val);
+          }
+        }
+        });
+    }
+  /*Address*/
+    /*Address*/
+  
 /*
         var autocomplete = new google.maps.places.Autocomplete('#autocomplete10');
 

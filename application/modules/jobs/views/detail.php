@@ -127,6 +127,10 @@
 								<li class="list-group-item">
 									<span class="pull-right txt-color-darken"><?php echo date("d F Y",strtotime($job['startDate']))." ".$job['startTime']; ?></span>	<strong>Creation Date</strong>
 								</li>
+								<li class="list-group-item">
+								<span class="pull-right txt-color-darken"><?php echo $job['timeDuration']; ?></span>	<strong>Job Work  Duration</strong>
+									
+								</li>
 								
 							
 							</ul>

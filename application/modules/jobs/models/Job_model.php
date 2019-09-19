@@ -21,7 +21,14 @@ class Job_model extends CI_Model {
         $this->db->where('j.jobId',$jobId);
         $sql = $this->db->get();
         if($sql->num_rows()):
-            return $sql->row_array();
+            $job =$sql->row_array();
+            $time = 0;
+            $timinig = $this->db->select('TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$job['jobId'],'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
+            if($timinig->num_rows()){
+                $time = $timinig->row()->timeDuration;
+            }
+            $job['timeDuration'] = $time;
+            return $job;
         endif;
         return false;
     }//

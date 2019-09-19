@@ -89,8 +89,8 @@ class Jobs extends Common_Service_Controller{
                 if($isExist->jobStatus==2){
                      $response = array('status' => FAIL, 'message' =>"job already completed.");
                 }else{
-                     log_event(json_encode($_POST), 'jobs_log.txt');  //create log of notifcation
-                      log_event(json_encode($_FILES), 'jobs_log.txt');  //create log of notifcation
+                    /* log_event(json_encode($_POST), 'jobs_log.txt');  //create log of notifcation
+                      log_event(json_encode($_FILES), 'jobs_log.txt');  //create log of notifcation*/
                     $jobReport = $isExist->jobReport;
                     $report = !empty($jobReport) ? json_decode( $jobReport,true):array();
                     $jobStatus                  = $this->post('jobStatus');
@@ -113,6 +113,7 @@ class Jobs extends Common_Service_Controller{
                     }
                     $data_val['comments']       = $this->post('comments');
                     if($res){
+                         $workImage =array();
                         $this->load->library('s3');
                         $this->load->model('s3_model');
                         $uploadFor = "jobs";
@@ -159,6 +160,7 @@ class Jobs extends Common_Service_Controller{
                             break;
                         }
                          $update=$this->common_model->updateFields('jobs',array('jobStatus'=>$jobActivity,'jobReport'=>json_encode($report)),$where);
+                         $this->job_model->jobTimingSet($jobId,$isExist->driverId,'complete');
                         $showmsg  =($jobActivity==2)? "Job has been completed successfully." : "Job has been started successfully.";
                         $response = array('status'=>SUCCESS,'message'=>$showmsg);
 
@@ -173,25 +175,33 @@ class Jobs extends Common_Service_Controller{
         }//end if
         $this->response($response);    
     }//end function
-    function s3_post(){
-      $file = '';
-      if (!empty($_FILES['file']['name'])) {
-            $this->load->library('s3');
-
-           $this->load->model('s3_model');
-           $img = $this->s3_model->uploadImgS3('jobs');
-             if(is_string($img))
-            {
-            $file = $img;
-            }
-             $response = array('status' => SUCCESS, 'message' => ResponseMessages::getStatusCodeMessage(200), 'file' => $file);
-        }else{
-             $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(118));
+    function jobTracking_post(){
+        $authCheck  = $this->check_service_auth();
+        $authToken  = $this->authData->authToken;
+        $driverId   = $this->authData->id;
+        $this->form_validation->set_rules('jobId', 'jobId', 'trim|required');
+        $this->form_validation->set_rules('latitude', 'latitude', 'trim|required');
+        $this->form_validation->set_rules('longitude', 'longitude', 'trim|required');
+        if($this->authData->userType==1){
+            $response = array('status' => FAIL, 'message' =>"job tracking use only Driver.");
         }
-          $this->response($response);   
+        if($this->form_validation->run() == FALSE){
+            $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
+        }else{
+            $driverId       = $this->authData->id;
+            $jobId          = $this->post('jobId');
+            $latitude       = $this->post('latitude');
+            $longitude      = $this->post('longitude');
+            $where          = array('jobId'=>$jobId);
+            $isJob = $this->common_model->is_data_exists('jobs',$where);
+            if($isJob){
+                $result = $this->job_model->jobTracking($jobId,$driverId,$latitude,$longitude);
+                $response = array('status' => SUCCESS, 'message' =>$result); 
+            }else{
+                $response = array('status' => FAIL, 'message' =>"Something going wrong.");  
+            }
+        } 
+        $this->response($response);    
     }//end function
-
-
-   
 }//End Class 
 

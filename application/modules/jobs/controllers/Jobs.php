@@ -60,7 +60,7 @@ class Jobs extends Common_Back_Controller {
         $data['drivers']         =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
         $data['customers']       =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
        
-        $this->load->admin_render('detail', $data, '');
+        $this->load->admin_render('detail1', $data, '');
     } //end function
      public function detail(){
       //pr('admin@admin.com');

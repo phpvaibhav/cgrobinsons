@@ -93,7 +93,7 @@
 											<div class="row">
 												<section class="col col-md-12">
 													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" maxlength="300" size="300">
+														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="mapautocomplete" data-id="0" maxlength="300" size="300">
 														<input type="hidden" class="latitudeautocomplete0" name="latitude" placeholder="latitude">
 														<input type="hidden" class="longitudeautocomplete0" name="longitude" placeholder="longitude">
 													</label>
@@ -206,45 +206,3 @@
  <script src="<?php echo $backend_assets; ?>custom/js/polygon.js"></script>
 
 <script src="https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script>
-<script>
-$(document).ready(function(){
-
-/*	
-var element = $("#html-content-holder"); // global variable
-var getCanvas; // global variable
- 
-    $("#btn-Preview-Image").on('click', function () {
-    
-         html2canvas(element, {
-         onrendered: function (canvas) {
-                $("#previewImage").append(canvas);
-                getCanvas = canvas;
-             }
-         });
-    });
-
-	$("#btn-Convert-Html2Image").on('click', function () {
-
-    var imgageData = getCanvas.toDataURL("image/png");
-    // Now browser starts downloading it instead of just showing it
-    var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
-    $("#btn-Convert-Html2Image").attr("download", "your_pic_name.png").attr("href", newData);
-	});
-
-});
-function saveMapToDataUrl() {
-
-  var element = $("#html-content-holder"); // global variable
-
-    html2canvas(element, {
-        useCORS: true,
-        onrendered: function(canvas) {
-            var dataUrl= canvas.toDataURL("image/png");
-
-            // DO SOMETHING WITH THE DATAURL
-            // Eg. write it to the page
-            document.write('<img src="' + dataUrl + '"/>');
-        }
-    });
-}*/
-</script>

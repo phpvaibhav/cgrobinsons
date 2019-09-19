@@ -21,7 +21,16 @@ class Job_model extends CI_Model {
         !empty($where) ? $this->db->where($where) :"";
         $sql = $this->db->get();
         if($sql->num_rows()):
-            return $sql->result();
+            $res = $sql->result();
+            foreach($res as $k =>$row){
+				$report = !empty($row->jobReport) ? json_decode($row->jobReport,true): array();
+				if(!empty($report)):
+					$report = $this->reportFormat($report);
+				endif;
+				$res[$k]->jobReport = $report;
+				$res[$k]->generatePdf  = base_url().'pdfset/download/'.encoding($row->jobId);
+			}
+			return $res;
         endif;
         return false;
     } 
@@ -39,6 +48,17 @@ class Job_model extends CI_Model {
            $row = $sql->row();
            $report = !empty($row->jobReport) ? json_decode($row->jobReport,true): array();
             if(!empty($report)):
+               $report = $this->reportFormat($report);
+            endif;
+            $row->jobReport = $report;
+            $row->generatePdf  = base_url().'pdfset/download/'.encoding($row->jobId);
+         
+            return $row;
+        endif;
+        return false;
+    }//end function
+    function reportFormat($report){
+		if(!empty($report)):
                 $bimage = $aimage = array();
                 if(isset($report['beforeWork'])){
                     if(isset($report['beforeWork']['driverSignature']) && !empty($report['beforeWork']['driverSignature'])){
@@ -68,14 +88,69 @@ class Job_model extends CI_Model {
                 }else{
                   $report['afterWork'] =array();  
                 }     
-            endif;
-            $row->jobReport = $report;
-            $row->generatePdf  = base_url().'pdfset/download/'.encoding($row->jobId);
-         
-            return $row;
-        endif;
-        return false;
-    }
+		endif;
+		
+		return $report;
+	}//end function 
+    function jobTracking($jobId,$driverId,$latitude,$longitude){
+        $jobMsg = new stdClass();
+       $sql = "SELECT jobId FROM jobs as j  WHERE ST_CONTAINS(j.boundary, Point($longitude,$latitude))
+            AND j.jobId = $jobId AND j.driverId = $driverId AND j.jobStatus = 1";
+        $area = $this->db->query($sql);
+       
+        if($area->num_rows()): //inside area
+            $job    =  $area->row();
+            $this->jobTimingSet($jobId,$driverId,'inside');
+            $jobMsg = "The driver is working on job place inside.";
+        else:
+            $this->jobTimingSet($jobId,$driverId,'outside');
+            $jobMsg = "The driver is job place area outside.";
+        endif;//End area
+        return  $jobMsg;
+    }//end function
+    function jobTimingSet($jobId,$driverId,$areaStatus){
+        $this->db->select("*")->from('jobTiming');
+        $this->db->where(array('jobId'=>$jobId,'driverId'=>$driverId));
+        $this->db->order_by('jobTimeId','desc');
+        $this->db->limit(1);
+        $sql =$this->db->get();
+        if($sql->num_rows()){
+            //exits
+            $jobtime = $sql->row();
+            $inDateTime     = $jobtime->inDateTime;
+            $outDateTime    = $jobtime->outDateTime;
+            if($areaStatus=='inside'){
+                if($inDateTime !='0000-00-00 00:00:00' && $outDateTime !='0000-00-00 00:00:00'){
+                    $date = date("Y-m-d H:i:s");
+                    $setData = array('jobId'=>$jobId,'driverId'=>$driverId,'inDateTime'=>$date);
+                    $set = ($areaStatus=='inside') ? $this->common_model->insertData('jobTiming',$setData) : false;  
+                    }
+            }else if($areaStatus=='outside'){
+                 if($inDateTime !='0000-00-00 00:00:00' && $outDateTime =='0000-00-00 00:00:00'){
+                    $date = date("Y-m-d H:i:s");
+                    $setData = array('outDateTime'=>$date);
+                     $update =$this->common_model->updateFields('jobTiming',$setData,array('jobId'=>$jobId,'driverId'=>$driverId));
+                 }
 
+            }else{
+               if($inDateTime !='0000-00-00 00:00:00' && $outDateTime =='0000-00-00 00:00:00'){
+                    $date = date("Y-m-d H:i:s");
+                    $setData = array('outDateTime'=>$date);
+                     $update =$this->common_model->updateFields('jobTiming',$setData,array('jobId'=>$jobId,'driverId'=>$driverId));
+                 }  
+            }
+         
+            //exits
+        }else{
+            //data not exist
+            if($areaStatus !='complete'){
+                $date = date("Y-m-d H:i:s");
+                $setData = array('jobId'=>$jobId,'driverId'=>$driverId,'inDateTime'=>$date);
+                $set = ($areaStatus=='inside') ? $this->common_model->insertData('jobTiming',$setData) : false;
+            }
+           
+        }//end if
+        return true;
+    }//end function
 
 }//Function 

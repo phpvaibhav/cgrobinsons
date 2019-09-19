@@ -325,6 +325,7 @@ class Common_model extends CI_Model {
         $ipaddress = 'UNKNOWN';
     return $ipaddress;
 }
+
 } //end of class
 /* Do not close php tags */
 /* IMP: Do not add any new method in this file */

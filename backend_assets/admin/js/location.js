@@ -37,11 +37,6 @@ for (var i = 0; i < acInputs.length; i++) {
                  $('.'+addressType+aId).val(val);
           }
         }
-
-            
-
-
-     
         });
     }
 });
