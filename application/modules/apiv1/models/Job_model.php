@@ -133,15 +133,31 @@ class Job_model extends CI_Model {
         $this->db->join('users as d','d.id=j.driverId','left');
         !empty($where) ? $this->db->where($where) :"";
         $sql = $this->db->get();
-        if($sql->num_rows()):
+            if($sql->num_rows()):
             $res = $sql->result();
             foreach($res as $k =>$row){
                 $report = !empty($row->jobReport) ? json_decode($row->jobReport,true): array();
                 if(!empty($report)):
                     $report = $this->reportFormat($report);
                 endif;
-                $res[$k]->jobReport = !empty($report) ? $report :new stdClass();
+                $res[$k]->jobReport = $report;
                 $res[$k]->generatePdf  = base_url().'pdfset/download/'.encoding($row->jobId);
+                 
+             
+                $timinig = $this->db->select('TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$row->jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
+                if($timinig->num_rows()){
+                    $time = isset($timinig->row()->timeDuration) ? $timinig->row()->timeDuration:"NA";
+                }else{
+                    $time = 'NA';
+                }
+                $res[$k]->timeDuration = $time;
+                if($res[$k]->geoFencing==1){
+                     $geopint = substr_replace($row->points,"",-1); 
+                            $geopint = trim($geopint);
+                $res[$k]->geoFencingUrl = "https://maps.googleapis.com/maps/api/staticmap?center=".$row->latitude.",".$row->longitude."&zoom=10&scale=1&size=640x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C".$row->latitude.",".$row->longitude."&path=fillcolor:0xAA000033%7Ccolor:0xFF0000|weight:1|".$geopint."&key=".GOOGLE_API_KEY;
+                }else{
+                    $res[$k]->geoFencingUrl = ""; 
+                }
             }
             return $res;
         endif;
@@ -163,7 +179,23 @@ class Job_model extends CI_Model {
             if(!empty($report)):
                $report = $this->reportFormat($report);
             endif;
-            $row->jobReport = !empty($report) ? $report :new stdClass();
+            $row->jobReport = $report;
+             
+             
+            $timinig = $this->db->select('TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$row->jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
+            if($timinig->num_rows()){
+                $time = isset($timinig->row()->timeDuration) ? $timinig->row()->timeDuration:"NA";
+            }else{
+                $time = 'NA';
+            }
+            $row->timeDuration = $time;
+            if($row->geoFencing==1){
+                 $geopint = substr_replace($row->points,"",-1); 
+                        $geopint = trim($geopint);
+            $row->geoFencingUrl = "https://maps.googleapis.com/maps/api/staticmap?center=".$row->latitude.",".$row->longitude."&zoom=10&scale=1&size=640x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C".$row->latitude.",".$row->longitude."&path=fillcolor:0xAA000033%7Ccolor:0xFF0000|weight:1|".$geopint."&key=".GOOGLE_API_KEY;
+            }else{
+                $row->geoFencingUrl = ""; 
+            }
             $row->generatePdf  = base_url().'pdfset/download/'.encoding($row->jobId);
          
             return $row;
