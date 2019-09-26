@@ -33,7 +33,7 @@ class Job_model extends CI_Model {
             if($job['geoFencing']==1){
                  $geopint = substr_replace($job['points'],"",-1); 
                         $geopint = trim($geopint);
-            $job['geoFencingUrl'] = "https://maps.googleapis.com/maps/api/staticmap?center=".$job['latitude'].",".$job['longitude']."&zoom=11&scale=1&size=640x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C".$job['latitude'].",".$job['longitude']."&path=fillcolor:0xAA000033%7Ccolor:0xFF0000|weight:1|".$geopint."&key=".GOOGLE_API_KEY;
+            $job['geoFencingUrl'] = "https://maps.googleapis.com/maps/api/staticmap?center=".$job['latitude'].",".$job['longitude']."&zoom=auto&scale=1&size=640x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C".$job['latitude'].",".$job['longitude']."&path=fillcolor:0xAA000033%7Ccolor:0xFF0000|weight:1|".$geopint."&key=".GOOGLE_API_KEY;
             }else{
                 $job['geoFencingUrl'] = ""; 
             }

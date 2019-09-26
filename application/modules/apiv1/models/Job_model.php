@@ -154,7 +154,7 @@ class Job_model extends CI_Model {
                 if($res[$k]->geoFencing==1){
                      $geopint = substr_replace($row->points,"",-1); 
                             $geopint = trim($geopint);
-                $res[$k]->geoFencingUrl = "https://maps.googleapis.com/maps/api/staticmap?center=".$row->latitude.",".$row->longitude."&zoom=10&scale=1&size=640x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C".$row->latitude.",".$row->longitude."&path=fillcolor:0xAA000033%7Ccolor:0xFF0000|weight:1|".$geopint."&key=".GOOGLE_API_KEY;
+                $res[$k]->geoFencingUrl = "https://maps.googleapis.com/maps/api/staticmap?center=".$row->latitude.",".$row->longitude."&zoom=auto&scale=1&size=640x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C".$row->latitude.",".$row->longitude."&path=fillcolor:0xAA000033%7Ccolor:0xFF0000|weight:1|".$geopint."&key=".GOOGLE_API_KEY;
                 }else{
                     $res[$k]->geoFencingUrl = ""; 
                 }
@@ -192,7 +192,7 @@ class Job_model extends CI_Model {
             if($row->geoFencing==1){
                  $geopint = substr_replace($row->points,"",-1); 
                         $geopint = trim($geopint);
-            $row->geoFencingUrl = "https://maps.googleapis.com/maps/api/staticmap?center=".$row->latitude.",".$row->longitude."&zoom=10&scale=1&size=640x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C".$row->latitude.",".$row->longitude."&path=fillcolor:0xAA000033%7Ccolor:0xFF0000|weight:1|".$geopint."&key=".GOOGLE_API_KEY;
+            $row->geoFencingUrl = "https://maps.googleapis.com/maps/api/staticmap?center=".$row->latitude.",".$row->longitude."&zoom=auto&scale=1&size=640x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C".$row->latitude.",".$row->longitude."&path=fillcolor:0xAA000033%7Ccolor:0xFF0000|weight:1|".$geopint."&key=".GOOGLE_API_KEY;
             }else{
                 $row->geoFencingUrl = ""; 
             }
