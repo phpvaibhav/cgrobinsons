@@ -78,7 +78,7 @@ class Pdfset extends Common_Front_Controller {
         $pdf->Ln(5);
        
       $pdf->SetFont('helvetica', '', 9);
-      // -----------------------------------------------------------------------------
+     // -----------------------------------------------------------------------------
       $content = '';
       $showbtn = false;
                 $labelShow ="";
@@ -99,42 +99,75 @@ class Pdfset extends Common_Front_Controller {
                 }
      
        // $content .= '<table bgcolor="#cccccc" border="0" cellspacing="1" cellpadding="4">';
-        $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
-        $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="2"><b>Basic Information</b></th></tr>';
-        $content .= '<tr><td>
-          <p><strong>Job Name</strong><span align="right" >&nbsp;&nbsp;'.$job['jobName'].'</span></p>
-          <p><strong>Job Type</strong><span align="right" >&nbsp;&nbsp;&nbsp;&nbsp;'.$job['jobType'].'</span></p>
-          <p><strong>Create Date Time</strong><span align="right" >&nbsp;&nbsp;'.date("d F Y",strtotime($job['startDate']))." ".$job['startTime'].'</span></p>
-          <p><strong>Job Status</strong><span align="right" style="font-size: medium;">&nbsp;&nbsp;<b>'.$labelShow.'</b></span></p>
-          </td><td>
-          <p><span>&nbsp;&nbsp;<a>'.$job['address'].'</a></span></p>
-          <p><strong>Customer Name</strong><span align="right" >&nbsp;&nbsp;'.$job['customerName'].'</span></p>
-          <p><strong>Driver Name</strong><span align="right" >&nbsp;&nbsp;'.$job['driverName'].'</span></p>
-          </td></tr>'; 
+        $content .= '<table  border="0" cellspacing="1" cellpadding="4" bgcolor="#EAECF0">';
+        $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>Basic Information</b></th></tr>';
+        $content .= '<tr bgcolor="#EAECF0">';
+        $content .= '<td><strong>Job Name</strong> :</td><td>'.$job['jobName'].'</td>';
+        $content .= '<td><strong>Job Type</strong> :</td><td>'.$job['jobType'].'</td>';
+        $content .= '</tr>';  
+        $content .= '<tr bgcolor="#EAECF0">';
+        $content .= '<td><strong>Job Status</strong> :</td><td><span style="font-size: medium;"><b>'.$labelShow.'</b></span></td>';
+        $content .= '<td><strong>Creation Date</strong> :</td><td>'.date("d F Y",strtotime($job['startDate']))." ".$job['startTime'].'</td>';
+        $content .= '</tr>';   
+        $content .= '<tr bgcolor="#EAECF0">';
+        $content .= '<td><strong>Customer Name</strong> :</td><td>'.$job['customerName'].'</td>';
+        $content .= '<td><strong>Driver Name</strong> :</td><td>'.$job['driverName'].'</td>'; 
+        $content .= '</tr>';
+        $content .= '<tr bgcolor="#EAECF0">';
+        $content .= '<td><strong>Address</strong> :</td><td colspan="3">'.$job['address'].'</td>';
+        $content .= '</tr>';
+         $content .= '</table>';
+        if($job['geoFencing']==1){
+          /*Geo fencing manage*/
+           $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
+          $content .= '<tr  bgcolor="#cccccc"><th align="left"><b>GEO FENCING</b></th></tr>';
+          $content .= '<tr align="center" bgcolor="#EAECF0">';
+          $content .='<td>';
+          $content .= '<img src="'.$job['geoFencingUrl'].'" alt="Map" border="0" />';
+          $content .='</td>';
+          $content .= '</tr>';
+          $content .= '</table>';
+          /*Geo fencing manage*/
+          }
+         $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
+        $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="2"><b>BEFORE WORK</b></th><th align="left" colspan="2"><b>AFTER WORK</b></th></tr>';
+         $content .= '<tr bgcolor="#EAECF0">';
+        $content .= '<td colspan="2"><strong>Job Work Time Duration </strong> :</td><td colspan="2" style="font-size: medium;">'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
+        $content .= '</tr>';
+        $content .= '<tr>';
         if(!empty($job['jobReport'])):
             $reports  = json_decode($job['jobReport'],true);
           $before   = isset($reports['beforeWork']) ? $reports['beforeWork']:array();
           $after    = isset($reports['afterWork']) ? $reports['afterWork']:array();
-          $content .= '<tr  bgcolor="#cccccc"><th align="left"><b>BEFORE WORK</b></th><th align="left"><b>AFTER WORK</b></th></tr>';
-          $content .= '<tr>';
+          
+          
           if(!empty($before)):
-          $content .='<td><p><strong>Job Start </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($before['startDateTime'])).'</span></p><p><strong>Work image</strong></p><div>';
+          $content .='<td colspan="2"><p><strong>Job Start </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($before['startDateTime'])).'</span></p><p><strong>Work image</strong></p><div>';
             for ($i=0; $i <sizeof($before['workImage']) ; $i++) {
               $image1 = S3JOBS_URL.$before['workImage'][$i];
               $content .= '<img src="'.$image1.'" alt="" width="95" height="95" border="0" />&nbsp;';
             }
           $content .='</div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$before['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$before['driverSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Driver Signature</p></td>';
+           else:
+             $content .='<td colspan="2" align="center"> No record found</td>';
          endif;  if(!empty($after)):
-           $content .='<td><p><strong>Job End </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($after['endDateTime'])).'</span></p><p><strong>Work image</strong></p><div>';
+           $content .='<td colspan="2"><p><strong>Job End </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($after['endDateTime'])).'</span></p><p><strong>Work image</strong></p><div>';
             for ($j=0; $j <sizeof($after['workImage']) ; $j++) {
               $image = S3JOBS_URL.$after['workImage'][$j];
               $content .= '<img src="'.$image.'" alt="" width="95" height="95" border="0" />&nbsp;';
             }
             $content .='</div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$after['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$after['customerSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Customer Signature</p></td>';
+             else:
+             $content .='<td colspan="2" align="center"> No record found</td>';
             endif;
-            $content .='</tr>'; 
+           
+        else:
+            $content .='<td colspan="4" align="center"> No record found</td>';
+           
         endif;
+         $content .='</tr>'; 
         $content .='</table>';
+  
   
 
        

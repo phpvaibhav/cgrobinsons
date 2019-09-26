@@ -28,13 +28,41 @@ class Jobs extends Common_Service_Controller{
         }
         $jobs = $this->job_model->assignJobs($where);
         if(is_array($jobs)){
-            $response = array('status' => SUCCESS, 'message' => ResponseMessages::getStatusCodeMessage(114), 'jobs' =>$jobs);
+            $response = array('status' => SUCCESS, 'message' => ResponseMessages::getStatusCodeMessage(127), 'jobs' =>$jobs);
                 
         }else{
-            $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(127),'jobs'=>array());
+            $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(114),'jobs'=>array());
         }   
         $this->response($response);    
-    } //End Function    
+    } //End Function  
+    function completeJobs_get(){
+        $authCheck  = $this->check_service_auth();
+        $authToken  = $this->authData->authToken;
+        $userId     = $this->authData->id;
+        $userType   = $this->authData->userType;
+        $authtoken  = $this->api_model->generate_token();
+        switch ($userType) {
+            case 1:
+             $where =  array('j.customerId'=> $userId,'j.jobStatus'=>2);
+                break;
+            case 2:
+              $where =  array('j.driverId'=> $userId,'j.jobStatus'=>2);
+                break;
+            
+            default:
+                $where =  array('j.jobStatus'=>2);
+                break;
+        }
+        $jobs = $this->job_model->assignJobs($where);
+        if(is_array($jobs)){
+            $response = array('status' => SUCCESS, 'message' => ResponseMessages::getStatusCodeMessage(127), 'jobs' =>$jobs);
+                
+        }else{
+            $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(114),'jobs'=>array());
+        }   
+        $this->response($response);    
+    } //End Function  
+      
     function jobDetail_post(){
         $authCheck  = $this->check_service_auth();
         $authToken  = $this->authData->authToken;
@@ -50,10 +78,10 @@ class Jobs extends Common_Service_Controller{
             $jobId = $this->post('jobId');
             $jobs = $this->job_model->jobDetail($jobId);
             if($jobs){
-                $response = array('status' => SUCCESS, 'message' => ResponseMessages::getStatusCodeMessage(114), 'jobs' =>$jobs);
+                $response = array('status' => SUCCESS, 'message' => ResponseMessages::getStatusCodeMessage(127), 'jobs' =>$jobs);
 
             }else{
-                $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(127),'jobs'=>new stdClass());
+                $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(114),'jobs'=>new stdClass());
             } 
         }
         $this->response($response);    

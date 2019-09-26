@@ -13,7 +13,7 @@ class Job_model extends CI_Model {
     }
     function  jobDetail($jobId){
          $sel_fields = array_filter($this->column_sel); 
-         $this->db->select($sel_fields);
+        $this->db->select($sel_fields);
         $this->db->from('jobs as j');
         $this->db->join('jobType as jt','j.jobTypeId=jt.jobTypeId');
         $this->db->join('users as c','c.id=j.customerId','left');
@@ -22,12 +22,23 @@ class Job_model extends CI_Model {
         $sql = $this->db->get();
         if($sql->num_rows()):
             $job =$sql->row_array();
-            $time = 0;
+           
             $timinig = $this->db->select('TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$job['jobId'],'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
             if($timinig->num_rows()){
-                $time = $timinig->row()->timeDuration;
+                $time = isset($timinig->row()->timeDuration) ? $timinig->row()->timeDuration:"NA";;
+            }else{
+                 $time = 'NA';
             }
             $job['timeDuration'] = $time;
+            if($job['geoFencing']==1){
+                 $geopint = substr_replace($job['points'],"",-1); 
+                        $geopint = trim($geopint);
+            $job['geoFencingUrl'] = "https://maps.googleapis.com/maps/api/staticmap?center=".$job['latitude'].",".$job['longitude']."&zoom=11&scale=1&size=640x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C".$job['latitude'].",".$job['longitude']."&path=fillcolor:0xAA000033%7Ccolor:0xFF0000|weight:1|".$geopint."&key=".GOOGLE_API_KEY;
+            }else{
+                $job['geoFencingUrl'] = ""; 
+            }
+           
+
             return $job;
         endif;
         return false;
@@ -45,7 +56,7 @@ class Job_model extends CI_Model {
             return $sql->result();
         endif;
         return false;
-    } 
+    } //end function 
    
 
 

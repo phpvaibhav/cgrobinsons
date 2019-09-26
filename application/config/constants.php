@@ -89,6 +89,8 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 //keys (session, third party API keys like google, stripe etc)  
 
 /* Firebase API key for notifications */
+define('GOOGLE_API_KEY','AIzaSyDjhKBJtoevmCuR5iD1El6cuDHTMByw9Co'); 
+/* Firebase API key for notifications */
 define('NOTIFICATION_KEY',''); 
 
 /* session keys */

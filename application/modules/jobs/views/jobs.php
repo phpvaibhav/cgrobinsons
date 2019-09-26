@@ -30,23 +30,25 @@
 					<!-- end widget edit box -->
 					<!-- widget content -->
 					<div class="widget-body padding">
-						<table id="job_list" class="table table-striped table-bordered table-hover" width="100%">
-							<thead>			                
-								<tr>
-									<th data-hide="phone">ID</th>
-									<th data-hide="phone">Job Name</th>
-									<th data-hide="phone,tablet">Job Type</th>
-									<th data-hide="phone,tablet">Customer</th>
-									<th data-hide="phone,tablet">Driver</th>
-									<th data-hide="phone,tablet">Creation Date</th>
-									<th data-hide="phone,tablet">Status</th>
-									<th data-hide="phone,tablet">Action</th>
-								</tr>
-							</thead>
-							<tbody>
-										
-							</tbody>
-						</table>
+						<div class="table-responsive">
+							<table id="job_list" class="table table-striped table-bordered table-hover" width="100%">
+								<thead>			                
+									<tr>
+										<th data-hide="phone">ID</th>
+										<th data-hide="phone">Job Name</th>
+										<th data-hide="phone,tablet">Job Type</th>
+										<th data-hide="phone,tablet">Customer</th>
+										<th data-hide="phone,tablet">Driver</th>
+										<th data-hide="phone,tablet">Creation Date</th>
+										<th data-hide="phone,tablet">Status</th>
+										<th data-hide="phone,tablet">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+											
+								</tbody>
+							</table>
+						</div>
 					</div>
 					<!-- end widget content -->
 				</div>

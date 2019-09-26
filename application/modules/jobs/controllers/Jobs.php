@@ -301,8 +301,23 @@ class Jobs extends Common_Back_Controller {
         $content .= '<td><strong>Address</strong> :</td><td colspan="3">'.$job['address'].'</td>';
         $content .= '</tr>';
          $content .= '</table>';
+          if($job['geoFencing']==1){
+          /*Geo fencing manage*/
+           $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
+          $content .= '<tr  bgcolor="#cccccc"><th align="left"><b>GEO FENCING</b></th></tr>';
+          $content .= '<tr align="center" bgcolor="#EAECF0">';
+          $content .='<td>';
+          $content .= '<img src="'.$job['geoFencingUrl'].'" alt="Map" border="0" />';
+          $content .='</td>';
+          $content .= '</tr>';
+          $content .= '</table>';
+          /*Geo fencing manage*/
+          }
          $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
         $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="2"><b>BEFORE WORK</b></th><th align="left" colspan="2"><b>AFTER WORK</b></th></tr>';
+         $content .= '<tr bgcolor="#EAECF0">';
+        $content .= '<td colspan="2"><strong>Job Work Time Duration </strong> :</td><td colspan="2" style="font-size: medium;">'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
+        $content .= '</tr>';
         $content .= '<tr>';
         if(!empty($job['jobReport'])):
             $reports  = json_decode($job['jobReport'],true);

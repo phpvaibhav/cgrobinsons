@@ -11,7 +11,7 @@ class Job_model extends CI_Model {
     public function __construct(){
         parent::__construct();
     }
-    function  assignJobs($where){
+/*    function  assignJobs($where){
         $sel_fields = array_filter($this->column_sel); 
         $this->db->select($sel_fields);
         $this->db->from('jobs as j');
@@ -29,6 +29,22 @@ class Job_model extends CI_Model {
 				endif;
 				$res[$k]->jobReport = $report;
 				$res[$k]->generatePdf  = base_url().'pdfset/download/'.encoding($row->jobId);
+                 
+             
+                $timinig = $this->db->select('TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$row->jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
+                if($timinig->num_rows()){
+                    $time = isset($timinig->row()->timeDuration) ? $timinig->row()->timeDuration:"NA";
+                }else{
+                    $time = 'NA';
+                }
+                $res[$k]->timeDuration = $time;
+                if($res[$k]->geoFencing==1){
+                     $geopint = substr_replace($row->points,"",-1); 
+                            $geopint = trim($geopint);
+                $res[$k]->geoFencingUrl = "https://maps.googleapis.com/maps/api/staticmap?center=".$row->latitude.",".$row->longitude."&zoom=10&scale=1&size=640x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C".$row->latitude.",".$row->longitude."&path=fillcolor:0xAA000033%7Ccolor:0xFF0000|weight:1|".$geopint."&key=".GOOGLE_API_KEY;
+                }else{
+                    $res[$k]->geoFencingUrl = ""; 
+                }
 			}
 			return $res;
         endif;
@@ -36,8 +52,8 @@ class Job_model extends CI_Model {
     } 
     function  jobDetail($jobId){
         $this->column_sel[] = 'j.jobReport';
-         $sel_fields = array_filter($this->column_sel); 
-         $this->db->select($sel_fields);
+        $sel_fields = array_filter($this->column_sel); 
+        $this->db->select($sel_fields);
         $this->db->from('jobs as j');
         $this->db->join('jobType as jt','j.jobTypeId=jt.jobTypeId');
         $this->db->join('users as c','c.id=j.customerId','left');
@@ -51,6 +67,22 @@ class Job_model extends CI_Model {
                $report = $this->reportFormat($report);
             endif;
             $row->jobReport = $report;
+             
+             
+            $timinig = $this->db->select('TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$row->jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
+            if($timinig->num_rows()){
+                $time = isset($timinig->row()->timeDuration) ? $timinig->row()->timeDuration:"NA";
+            }else{
+                $time = 'NA';
+            }
+            $row->timeDuration = $time;
+            if($row->geoFencing==1){
+                 $geopint = substr_replace($row->points,"",-1); 
+                        $geopint = trim($geopint);
+            $row->geoFencingUrl = "https://maps.googleapis.com/maps/api/staticmap?center=".$row->latitude.",".$row->longitude."&zoom=10&scale=1&size=640x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C".$row->latitude.",".$row->longitude."&path=fillcolor:0xAA000033%7Ccolor:0xFF0000|weight:1|".$geopint."&key=".GOOGLE_API_KEY;
+            }else{
+                $row->geoFencingUrl = ""; 
+            }
             $row->generatePdf  = base_url().'pdfset/download/'.encoding($row->jobId);
          
             return $row;
@@ -91,7 +123,90 @@ class Job_model extends CI_Model {
 		endif;
 		
 		return $report;
-	}//end function 
+	}//end function */
+        function  assignJobs($where){
+        $sel_fields = array_filter($this->column_sel); 
+        $this->db->select($sel_fields);
+        $this->db->from('jobs as j');
+        $this->db->join('jobType as jt','j.jobTypeId=jt.jobTypeId');
+        $this->db->join('users as c','c.id=j.customerId','left');
+        $this->db->join('users as d','d.id=j.driverId','left');
+        !empty($where) ? $this->db->where($where) :"";
+        $sql = $this->db->get();
+        if($sql->num_rows()):
+            $res = $sql->result();
+            foreach($res as $k =>$row){
+                $report = !empty($row->jobReport) ? json_decode($row->jobReport,true): array();
+                if(!empty($report)):
+                    $report = $this->reportFormat($report);
+                endif;
+                $res[$k]->jobReport = !empty($report) ? $report :new stdClass();
+                $res[$k]->generatePdf  = base_url().'pdfset/download/'.encoding($row->jobId);
+            }
+            return $res;
+        endif;
+        return false;
+    } 
+    function  jobDetail($jobId){
+        $this->column_sel[] = 'j.jobReport';
+         $sel_fields = array_filter($this->column_sel); 
+         $this->db->select($sel_fields);
+        $this->db->from('jobs as j');
+        $this->db->join('jobType as jt','j.jobTypeId=jt.jobTypeId');
+        $this->db->join('users as c','c.id=j.customerId','left');
+        $this->db->join('users as d','d.id=j.driverId','left');
+        $this->db->where('j.jobId',$jobId);
+        $sql = $this->db->get();
+        if($sql->num_rows()):
+           $row = $sql->row();
+           $report = !empty($row->jobReport) ? json_decode($row->jobReport,true): array();
+            if(!empty($report)):
+               $report = $this->reportFormat($report);
+            endif;
+            $row->jobReport = !empty($report) ? $report :new stdClass();
+            $row->generatePdf  = base_url().'pdfset/download/'.encoding($row->jobId);
+         
+            return $row;
+        endif;
+        return false;
+    }//end function
+    function reportFormat($report){
+        if(!empty($report)):
+                $bimage = $aimage = array();
+                if(isset($report['beforeWork'])){
+                    if(isset($report['beforeWork']['driverSignature']) && !empty($report['beforeWork']['driverSignature'])){
+                        $report['beforeWork']['driverSignature'] =  S3JOBS_URL.$report['beforeWork']['driverSignature'] ;
+                    }else{
+                        $report['beforeWork']['driverSignature'] = "";
+                    }
+                    $beforeWorkImage = isset($report['beforeWork']['workImage']) ? $report['beforeWork']['workImage']:array();
+                        for ($i=0; $i <sizeof($beforeWorkImage) ; $i++) { 
+                            $bimage[] = S3JOBS_URL.$beforeWorkImage[$i];
+                        }
+                        $report['beforeWork']['workImage']          = $bimage;
+                }else{
+                   $report['beforeWork'] = new stdClass();  
+                }
+                if(isset($report['afterWork'])){
+                    if(isset($report['afterWork']['customerSignature']) && !empty($report['afterWork']['customerSignature'])){
+                         $report['afterWork']['customerSignature']   = S3JOBS_URL.$report['afterWork']['customerSignature'];
+                    }else{
+                        $report['afterWork']['customerSignature'] ="";
+                    }
+                    $afterWorkImage = isset($report['afterWork']['workImage']) ? $report['afterWork']['workImage']:array();
+                    for ($j=0; $j <sizeof($afterWorkImage) ; $j++) { 
+                        $aimage[] = S3JOBS_URL.$afterWorkImage[$j];
+                    }
+                    $report['afterWork']['workImage'] = $aimage;
+                }else{
+                  $report['afterWork'] = new stdClass();   
+                }  
+                return $report;
+        endif;
+        $x = new stdClass();
+        return $x;
+    }
+
     function jobTracking($jobId,$driverId,$latitude,$longitude){
         $jobMsg = new stdClass();
        $sql = "SELECT jobId FROM jobs as j  WHERE ST_CONTAINS(j.boundary, Point($longitude,$latitude))
