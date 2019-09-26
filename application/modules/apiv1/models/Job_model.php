@@ -140,7 +140,7 @@ class Job_model extends CI_Model {
                 if(!empty($report)):
                     $report = $this->reportFormat($report);
                 endif;
-                $res[$k]->jobReport = $report;
+                $res[$k]->jobReport = !empty($report) ? $report : new stdClass();
                 $res[$k]->generatePdf  = base_url().'pdfset/download/'.encoding($row->jobId);
                  
              
@@ -179,7 +179,7 @@ class Job_model extends CI_Model {
             if(!empty($report)):
                $report = $this->reportFormat($report);
             endif;
-            $row->jobReport = $report;
+            $row->jobReport = !empty($report) ? $report : new stdClass();
              
              
             $timinig = $this->db->select('TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$row->jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
