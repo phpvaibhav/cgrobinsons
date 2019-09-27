@@ -1,4 +1,10 @@
-<?php $backend_assets=base_url().'backend_assets/'; ?>
+<?php $backend_assets=base_url().'backend_assets/';
+
+/*echo "<pre>";
+print_r($vehicle);
+echo "</pre>";*/
+
+ ?>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="well well-sm">
@@ -92,14 +98,9 @@
 				<br>
 				<ul class="demo-btns text-right">
 						<li>
-							<a href="javascript:void(0);" class="btn btn-labeled btn-info" data-toggle="modal" data-target="#editVehicle"> <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Edit </a>
+							<a href="javascript:void(0);" class="btn btn-labeled btn-info" data-toggle="modal" data-target="#addHistory"> <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Add history </a>
 						</li>	
-						<li>
-							<a href="javascript:void(0);" class="btn btn-labeled btn-warning" data-toggle="modal" data-target="#assignVehicleDriver"> <span class="btn-label"><i class="glyphicon glyphicon-bookmark"></i></span>Assign Driver</a>
-						</li>
-						<li>
-							<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="vehicleDelete(this);" data-message="Are you sure want to delete this vehicle." data-useid="<?php echo encoding($vehicle['vehicleId']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
-						</li>
+						
 
 					</ul>
 				<!-- widget div-->
@@ -112,19 +113,13 @@
 					<!-- widget content -->
 					<div class="widget-body padding">
 						<div class="table-responsive">
-							<table id="vehilce_list" class="table table-striped table-bordered table-hover" width="100%">
+							<table id="vehilceHistory_list" class="table table-striped table-bordered table-hover" width="100%">
 								<thead>			                
 									<tr>
 										<th data-hide="phone">ID</th>
-										<th data-hide="phone">Year</th>
-										<th data-hide="phone,tablet">Manufacturer</th>
-										<th data-hide="phone,tablet">Model</th>
-										<th data-hide="phone,tablet">Vin</th>
-										<th data-hide="phone,tablet">Plate</th>
-										<th data-hide="phone,tablet">Color</th>
-										<th data-hide="phone,tablet">State</th>
-										<th data-hide="phone,tablet">Assign Driver</th>
-										<th data-hide="phone,tablet">Status</th>
+										<th data-hide="phone">Type</th>
+										<th data-hide="phone,tablet">Date</th>
+										<th data-hide="phone,tablet">Attachment</th>
 										<th data-hide="phone,tablet">Action</th>
 									</tr>
 								</thead>
@@ -307,6 +302,76 @@
 										<footer>
 											<button type="submit" class="btn btn-primary">
 												Assign
+											</button>
+										</footer>
+									</form>
+
+								</div>
+								<!-- end widget content -->
+	           <!-- Add CUstomer -->
+	        </div>
+		</div>
+	</div>
+</div>
+<!-- End modal -->
+<!-- Modal -->
+<div class="modal fade" id="addHistory" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title">
+					Add History
+				</h4>
+			</div>
+			<div class="modal-body">
+	           <!-- Add CUstomer -->
+		<!-- widget content -->
+								<div class="widget-body no-padding">
+									
+									<form  method="post" action="vehicles/addHistory" id="addHistoryA" class="smart-form" novalidate="novalidate" autocomplete="off" enctype="multipart/form-data">
+									
+
+										<fieldset>
+
+											<div class="row">
+												
+												
+												<section class="col col-6">
+												    <label class="select">
+												        <select name="type">
+												            <option value="0" selected="" disabled="">Type</option>
+												            <?php foreach ($vehicleJobTypes as $d => $type) {?>
+												            <option value="<?php echo $type->vjobTypeId; ?>"><?php echo $type->type; ?></option>
+												        	<?php } ?>
+												           
+												        </select> <i></i> </label>
+												        <input type="hidden" name="vehicleId" value="<?php echo encoding($vehicle['vehicleId']);?>">
+												</section>
+												<section class="col col-6">
+													<label class="input"> <i class="icon-append fa fa-calendar"></i>
+														<input type="text" name="date" placeholder="Date" class="datepicker" data-dateformat='dd-mm-yy' readonly="" value="">
+													</label>
+												</section>
+												<section class="col col-md-12">
+													<label class="input">
+													<div class="input input-file">
+													<input type="text" placeholder="Attachment" readonly="" ><span class="button"><input type="file" name="attachment" id="file" onchange="filePreview(this);this.parentNode.nextSibling.value = this.value" accept="image/*,application/pdf, application/vnd.ms-excel,application/msword,text/plain, application/pdf"placeholder="Attachment">Browse</span>
+													</div></label>
+
+												</section>
+												
+													<section class="col-md-6 col-md-3" id="privew"></section>
+												</div>
+											</div>
+
+										</fieldset>
+										
+										<footer>
+											<button type="submit" id="submiH" class="btn btn-primary">
+												Save
 											</button>
 										</footer>
 									</form>

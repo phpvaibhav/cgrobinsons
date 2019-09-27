@@ -53,6 +53,68 @@ class Vehicles extends Common_Admin_Controller{
         }
         $this->response($response);
     }//end function 
+    public function addHistory_post(){
+       
+        $this->form_validation->set_rules('type', 'type', 'trim|required');
+        $this->form_validation->set_rules('date', 'date', 'trim|required');
+        $this->form_validation->set_rules('vehicleId', 'vehicle', 'trim|required');
+         if (empty($_FILES['attachment']['name'])) {
+            $this->form_validation->set_rules('attachment', 'attachment', 'trim|required');
+        }
+        if($this->form_validation->run() == FALSE){
+            $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
+            
+        }
+        else{
+            
+             $vehicleId  = decoding($this->post('vehicleId'));
+                
+                $historyId  = decoding($this->post('hid'));
+                $data_val['vjobTypeId']    = $this->post('type');
+                $data_val['date']          =  date('Y-m-d',strtotime($this->post('date')));
+                $data_val['vehicleId']     = $vehicleId;
+             //   pr($data_val);
+                if (!empty($_FILES['attachment']['name'])) {
+                     $this->load->library('s3');
+                    $this->load->model('s3_model');
+                    $attachmentname = $_FILES['attachment']['name'];
+                    $attachmentsize = $_FILES['attachment']['size'];
+                    $attachmenttmp  = $_FILES['attachment']['tmp_name'];
+                    $attachmentext  = $this->s3_model->getExtension($attachmentname);;
+
+                     $uploadFor = "vehicles";
+                    //Rename image name.
+                    $actual_image_attachment = time().".".$attachmentext;
+                    if($this->s3->putObjectFile($attachmenttmp, BUCKETNAME , $uploadFor.'/'.$actual_image_attachment, S3::ACL_PUBLIC_READ) )
+                    {
+                        $data_val['attachment']    = $actual_image_attachment;
+                    }
+                }
+
+                $where = array('historyId'=>$historyId);
+                $isExist=$this->common_model->is_data_exists('vehicleHistory',$where);
+                if($isExist){
+                    $result = $this->common_model->updateFields('vehicleHistory',$data_val,$where);
+                    $msg = "Vehicle history record updated successfully.";
+                }else{
+                    $result = $this->common_model->insertData('vehicleHistory',$data_val);
+                    
+                    $msg = "Vehicle history added successfully.";
+                }
+                
+                if($result){
+                  
+                     $response = array('status'=>SUCCESS,'message'=>$msg);
+                }else{
+                     $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
+                } 
+             
+               
+           
+        }
+        $this->response($response);
+    }//end function 
+    
     public function assignDriver_post(){
        
         $this->form_validation->set_rules('driverId', 'driverId', 'trim|required');
@@ -139,6 +201,47 @@ class Vehicles extends Common_Admin_Controller{
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->vehilce_model->count_all(),
             "recordsFiltered" => $this->vehilce_model->count_filtered(),
+            "data" => $data,
+        );
+        //output to json format
+       
+        $this->response($output);
+    }//end function     
+    public function vehilceHistoryList_post(){
+        $this->load->helper('text');
+        $this->load->model('vehilcehistory_model');
+        $this->vehilcehistory_model->set_data();
+        $list = $this->vehilcehistory_model->get_list();
+        
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $serData) { 
+        $action ='';
+        $no++;
+        $row = array();
+        $row[] = $no;
+        //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
+        $row[] = display_placeholder_text($serData->type); 
+        $row[] = display_placeholder_text(date('d F,Y',strtotime($serData->date)));
+
+        $row[] = display_placeholder_text('<embed src="'.S3VEHICLE_URL.$serData->attachment.'" width="100" height="100"  controls controlsList="nodownload">'); 
+    
+            $link  ='javascript:void(0)';
+            $action .= "";
+      
+        $link = 'javascript:void(0);';
+        $action .= '&nbsp;&nbsp;<a href="'.$link.'"  class="on-default edit-row table_action" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>';
+        
+
+        $row[] = $action;
+        $data[] = $row;
+
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->vehilcehistory_model->count_all(),
+            "recordsFiltered" => $this->vehilcehistory_model->count_filtered(),
             "data" => $data,
         );
         //output to json format

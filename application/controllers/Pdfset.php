@@ -117,22 +117,12 @@ class Pdfset extends Common_Front_Controller {
         $content .= '<td><strong>Address</strong> :</td><td colspan="3">'.$job['address'].'</td>';
         $content .= '</tr>';
          $content .= '</table>';
-        if($job['geoFencing']==1){
-          /*Geo fencing manage*/
-           $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
-          $content .= '<tr  bgcolor="#cccccc"><th align="left"><b>GEO FENCING</b></th></tr>';
-          $content .= '<tr align="center" bgcolor="#EAECF0">';
-          $content .='<td>';
-          $content .= '<img src="'.$job['geoFencingUrl'].'" alt="Map" border="0" />';
-          $content .='</td>';
-          $content .= '</tr>';
-          $content .= '</table>';
-          /*Geo fencing manage*/
-          }
+      
          $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
+
         $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="2"><b>BEFORE WORK</b></th><th align="left" colspan="2"><b>AFTER WORK</b></th></tr>';
          $content .= '<tr bgcolor="#EAECF0">';
-        $content .= '<td colspan="2"><strong>Job Work Time Duration </strong> :</td><td colspan="2" style="font-size: medium;">'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
+        $content .= '<td colspan="2"><strong>Job Work Time Duration </strong> :</td><td colspan="2">'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
         $content .= '</tr>';
         $content .= '<tr>';
         if(!empty($job['jobReport'])):
@@ -142,21 +132,21 @@ class Pdfset extends Common_Front_Controller {
           
           
           if(!empty($before)):
-          $content .='<td colspan="2"><p><strong>Job Start </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($before['startDateTime'])).'</span></p><p><strong>Work image</strong></p><div>';
+          $content .='<td colspan="2"><p><strong>Job Start </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($before['startDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
             for ($i=0; $i <sizeof($before['workImage']) ; $i++) {
               $image1 = S3JOBS_URL.$before['workImage'][$i];
               $content .= '<img src="'.$image1.'" alt="" width="95" height="95" border="0" />&nbsp;';
             }
-          $content .='</div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$before['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$before['driverSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Driver Signature</p></td>';
+          $content .='</p></div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$before['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$before['driverSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Driver Signature</p></td>';
            else:
              $content .='<td colspan="2" align="center"> No record found</td>';
          endif;  if(!empty($after)):
-           $content .='<td colspan="2"><p><strong>Job End </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($after['endDateTime'])).'</span></p><p><strong>Work image</strong></p><div>';
+           $content .='<td colspan="2"><p><strong>Job End </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($after['endDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
             for ($j=0; $j <sizeof($after['workImage']) ; $j++) {
               $image = S3JOBS_URL.$after['workImage'][$j];
               $content .= '<img src="'.$image.'" alt="" width="95" height="95" border="0" />&nbsp;';
             }
-            $content .='</div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$after['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$after['customerSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Customer Signature</p></td>';
+            $content .='</p></div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$after['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$after['customerSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Customer Signature</p></td>';
              else:
              $content .='<td colspan="2" align="center"> No record found</td>';
             endif;
@@ -167,15 +157,30 @@ class Pdfset extends Common_Front_Controller {
         endif;
          $content .='</tr>'; 
         $content .='</table>';
-  
-  
+      if($job['geoFencing']==1){
+          /*Geo fencing manage*/
+          $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
+          $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4" ><b>GEO FENCING</b></th></tr>';
+          $content .= '<tr>';
+          $content .='<td colspan="4"><strong>Geo image :</strong>';
+          $content .='</td>';
+          $content .= '</tr>';
+          $content .= '<tr>';
+          $content .='<td colspan="4">';
+          $content .= '<img src="'.$job['geoFencingUrl'].'" alt="Map" border="0" />';
+          $content .='</td>';
+          $content .= '</tr>';
 
+          $content .= '</table>';
+          /*Geo fencing manage*/
+          }
        
         $pdf->writeHTML($content, true, false, true, false, '');
         // reset pointer to the last page
         $pdf->lastPage();
         $fileName = "cg-".$job['jobName'].strtotime(date("Y-m-d H:i:s")).".pdf";
        // $pdf->Output($fileName, 'I');
+         $pdf->SetCompression(true);
          $pdf->Output($fileName,'D');
         //$pdf->Output($fileName, 'I');
         ob_end_flush();

@@ -135,4 +135,5 @@ define('APP_ADMIN_ASSETS_PLUGIN', 'backend_assets/plugins/');
 define('APP_ADMIN_ASSETS_IMG', 'backend_assets/img/');
 define('BUCKETNAME', 'cg-robinsons');
 define('S3JOBS_URL', 'https://cg-robinsons.s3.us-east-2.amazonaws.com/jobs/');
+define('S3VEHICLE_URL', 'https://cg-robinsons.s3.us-east-2.amazonaws.com/vehicles/');
 

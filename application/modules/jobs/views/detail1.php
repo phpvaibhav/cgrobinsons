@@ -488,9 +488,9 @@ function initMap() {
   var myLatLng = new google.maps.LatLng(areaLatitude,areaLongitude);
   // General Options
   var mapOptions = {
-    zoom: 10,
+    zoom: 19,
     center: myLatLng,
-    mapTypeId: google.maps.MapTypeId.RoadMap
+    mapTypeId: 'satellite',//google.maps.MapTypeId.RoadMap
   };
   var map = new google.maps.Map(document.getElementById('map-show'),mapOptions);
   // Polygon Coordinates

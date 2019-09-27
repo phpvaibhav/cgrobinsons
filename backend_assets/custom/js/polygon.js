@@ -96,8 +96,8 @@ function initialize() {
   //var latlng = new google.maps.LatLng(39.305, -76.617);
     var map = new google.maps.Map(document.getElementById('map'), {
       center: new google.maps.LatLng(latitude,longitude),
-      zoom: 10,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      zoom: 19,
+      mapTypeId: 'satellite', //google.maps.MapTypeId.ROADMAP,
       //   disableDefaultUI: true,
       draggable: false, 
       zoomControl: false,
