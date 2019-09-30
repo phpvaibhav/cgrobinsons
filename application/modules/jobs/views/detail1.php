@@ -490,7 +490,7 @@ function initMap() {
   var mapOptions = {
     zoom: 19,
     center: myLatLng,
-    mapTypeId: 'satellite',//google.maps.MapTypeId.RoadMap
+    mapTypeId: google.maps.MapTypeId.SATELLITE,//google.maps.MapTypeId.RoadMap
   };
   var map = new google.maps.Map(document.getElementById('map-show'),mapOptions);
   // Polygon Coordinates

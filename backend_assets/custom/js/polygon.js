@@ -97,7 +97,7 @@ function initialize() {
     var map = new google.maps.Map(document.getElementById('map'), {
       center: new google.maps.LatLng(latitude,longitude),
       zoom: 19,
-      mapTypeId: 'satellite', //google.maps.MapTypeId.ROADMAP,
+      mapTypeId: google.maps.MapTypeId.SATELLITE, //google.maps.MapTypeId.ROADMAP,
       disableDefaultUI: false,
       draggable: false, 
       zoomControl: true,

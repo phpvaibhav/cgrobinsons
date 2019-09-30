@@ -479,7 +479,7 @@ function initMap() {
   var mapOptions = {
     zoom: 10,
     center: myLatLng,
-    mapTypeId: google.maps.MapTypeId.RoadMap
+    mapTypeId: google.maps.MapTypeId.SATELLITE
   };
   var map = new google.maps.Map(document.getElementById('map-show'),mapOptions);
   // Polygon Coordinates
