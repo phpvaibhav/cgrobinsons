@@ -59,7 +59,7 @@ public function getExtension($str)
 // Delete The file form S3
 public function deleteImg($objectOf, $object)
 {
-return $this->s3->deleteObject(BUCKETNAME,"$objectOf/$object");
+    return $this->s3->deleteObject(BUCKETNAME,"$objectOf/$object");
 }
 
 

@@ -1,15 +1,9 @@
-<?php $backend_assets=base_url().'backend_assets/';
-
-/*echo "<pre>";
-print_r($vehicle);
-echo "</pre>";*/
-
- ?>
+<?php $backend_assets=base_url().'backend_assets/'; ?>
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-6 col-sm-offset-3">
 		<div class="well well-sm">
 			<div class="row">
-				<div class="col-sm-6 col-md-6 col-lg-6">
+				<div class="col-sm-12 col-md-12 col-lg-12">
 					<div class="well well-light well-sm margin padding">
 						<header>
 							<h5>Vehicle Information</h5>
@@ -71,73 +65,6 @@ echo "</pre>";*/
 
 							</ul>
 						</fieldset>							
-						
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-6 col-lg-6">
-					<div class="row">
-		<!-- NEW WIDGET START -->
-		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<!-- Widget ID (each widget will need unique ID)-->
-			<div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false">
-				<!-- widget options:
-				usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-				data-widget-colorbutton="false"
-				data-widget-editbutton="false"
-				data-widget-togglebutton="false"
-				data-widget-deletebutton="false"
-				data-widget-fullscreenbutton="false"
-				data-widget-custombutton="false"
-				data-widget-collapsed="true"
-				data-widget-sortable="false"
-				-->
-				<header>
-					<span class="widget-icon"> <i class="fa fa-taxi"></i> </span>
-					<h2>Vehicle History</h2>
-				</header>
-				<br>
-				<ul class="demo-btns text-right">
-						<li>
-							<a href="javascript:void(0);" class="btn btn-labeled btn-info" data-toggle="modal" data-target="#addHistory"> <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Add history </a>
-						</li>	
-						
-
-					</ul>
-				<!-- widget div-->
-				<div>
-					<!-- widget edit box -->
-					<div class="jarviswidget-editbox">
-						<!-- This area used as dropdown edit box -->
-					</div>
-					<!-- end widget edit box -->
-					<!-- widget content -->
-					<div class="widget-body padding">
-						<div class="table-responsive">
-							<table id="vehilceHistory_list" class="table table-striped table-bordered table-hover" width="100%">
-								<thead>			                
-									<tr>
-										<th data-hide="phone">ID</th>
-										<th data-hide="phone">Type</th>
-										<th data-hide="phone,tablet">Date</th>
-										<th data-hide="phone,tablet">Attachment</th>
-										<th data-hide="phone,tablet">Action</th>
-									</tr>
-								</thead>
-								<tbody>
-											
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<!-- end widget content -->
-				</div>
-				<!-- end widget div -->
-			</div>
-			<!-- end widget -->
-		</article>
-		<!-- WIDGET END -->
-	</div>
-	<!-- end row -->	
 						
 					</div>
 				</div>
@@ -302,76 +229,6 @@ echo "</pre>";*/
 										<footer>
 											<button type="submit" class="btn btn-primary">
 												Assign
-											</button>
-										</footer>
-									</form>
-
-								</div>
-								<!-- end widget content -->
-	           <!-- Add CUstomer -->
-	        </div>
-		</div>
-	</div>
-</div>
-<!-- End modal -->
-<!-- Modal -->
-<div class="modal fade" id="addHistory" tabindex="-1" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-				<h4 class="modal-title">
-					Add History
-				</h4>
-			</div>
-			<div class="modal-body">
-	           <!-- Add CUstomer -->
-		<!-- widget content -->
-								<div class="widget-body no-padding">
-									
-									<form  method="post" action="vehicles/addHistory" id="addHistoryA" class="smart-form" novalidate="novalidate" autocomplete="off" enctype="multipart/form-data">
-									
-
-										<fieldset>
-
-											<div class="row">
-												
-												
-												<section class="col col-6">
-												    <label class="select">
-												        <select name="type">
-												            <option value="0" selected="" disabled="">Type</option>
-												            <?php foreach ($vehicleJobTypes as $d => $type) {?>
-												            <option value="<?php echo $type->vjobTypeId; ?>"><?php echo $type->type; ?></option>
-												        	<?php } ?>
-												           
-												        </select> <i></i> </label>
-												        <input type="hidden" name="vehicleId" value="<?php echo encoding($vehicle['vehicleId']);?>">
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-calendar"></i>
-														<input type="text" name="date" placeholder="Date" class="datepicker" data-dateformat='dd-mm-yy' readonly="" value="">
-													</label>
-												</section>
-												<section class="col col-md-12">
-													<label class="input">
-													<div class="input input-file">
-													<input type="text" placeholder="Attachment" readonly="" ><span class="button"><input type="file" name="attachment" id="file" onchange="filePreview(this);this.parentNode.nextSibling.value = this.value" accept="image/*,application/pdf, application/vnd.ms-excel,application/msword,text/plain, application/pdf"placeholder="Attachment">Browse</span>
-													</div></label>
-
-												</section>
-												
-													<section class="col-md-6 col-md-3" id="privew"></section>
-												</div>
-											</div>
-
-										</fieldset>
-										
-										<footer>
-											<button type="submit" id="submiH" class="btn btn-primary">
-												Save
 											</button>
 										</footer>
 									</form>

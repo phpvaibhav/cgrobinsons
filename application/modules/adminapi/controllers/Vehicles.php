@@ -77,6 +77,8 @@ class Vehicles extends Common_Admin_Controller{
                 if (!empty($_FILES['attachment']['name'])) {
                      $this->load->library('s3');
                     $this->load->model('s3_model');
+                    $attachmentType = $_FILES['attachment']['type'];
+                     $imageType = explode("/",$attachmentType);
                     $attachmentname = $_FILES['attachment']['name'];
                     $attachmentsize = $_FILES['attachment']['size'];
                     $attachmenttmp  = $_FILES['attachment']['tmp_name'];
@@ -87,13 +89,17 @@ class Vehicles extends Common_Admin_Controller{
                     $actual_image_attachment = time().".".$attachmentext;
                     if($this->s3->putObjectFile($attachmenttmp, BUCKETNAME , $uploadFor.'/'.$actual_image_attachment, S3::ACL_PUBLIC_READ) )
                     {
-                        $data_val['attachment']    = $actual_image_attachment;
+                        $data_val['attachment']     = $actual_image_attachment;
+                        $data_val['fileType']           = isset($imageType[0]) ?$imageType[0]:'image';;
                     }
                 }
 
                 $where = array('historyId'=>$historyId);
                 $isExist=$this->common_model->is_data_exists('vehicleHistory',$where);
                 if($isExist){
+                    if(isset($data_val['attachment']) && !empty($data_val['attachment'])){
+                     $this->s3_model->deleteImg($uploadFor,$isExist->attachment);
+                    }
                     $result = $this->common_model->updateFields('vehicleHistory',$data_val,$where);
                     $msg = "Vehicle history record updated successfully.";
                 }else{
@@ -210,7 +216,8 @@ class Vehicles extends Common_Admin_Controller{
     public function vehilceHistoryList_post(){
         $this->load->helper('text');
         $this->load->model('vehilcehistory_model');
-        $this->vehilcehistory_model->set_data();
+        $vehicleId = decoding($this->post('vid'));
+        $this->vehilcehistory_model->set_data(array('v.vehicleId'=>$vehicleId));
         $list = $this->vehilcehistory_model->get_list();
         
         $data = array();
@@ -219,18 +226,27 @@ class Vehicles extends Common_Admin_Controller{
         $action ='';
         $no++;
         $row = array();
-        $row[] = $no;
+      /*  $row[] = $no;*/
         //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
+      $row[] = display_placeholder_text(date('d F,Y',strtotime($serData->date)));
         $row[] = display_placeholder_text($serData->type); 
-        $row[] = display_placeholder_text(date('d F,Y',strtotime($serData->date)));
-
-        $row[] = display_placeholder_text('<embed src="'.S3VEHICLE_URL.$serData->attachment.'" width="100" height="100"  controls controlsList="nodownload">'); 
+        
+         $attachmentUrl = S3VEHICLE_URL.$serData->attachment; 
+        if($serData->fileType=='image'){
+             $attachment = '<img src="'.S3VEHICLE_URL.$serData->attachment.'" width="100" height="100">'; 
+            
+         }else{
+             $attachment = '<img src="'.base_url().'backend_assets/img/attachment/attachment.jpeg" width="100" height="100">'; 
+         }
+         $row[] = display_placeholder_text('<a href="'.S3VEHICLE_URL.$serData->attachment.'" target="_blank" title="">'.$attachment.'</a>');
+       
     
             $link  ='javascript:void(0)';
             $action .= "";
       
         $link = 'javascript:void(0);';
-        $action .= '&nbsp;&nbsp;<a href="'.$link.'"  class="on-default edit-row table_action" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>';
+        $action .= '&nbsp;&nbsp;<a href="'.$link.'" onclick="editHistory(this)"  class="on-default edit-row table_action" data-typeid="'.$serData->vjobTypeId.'" data-hid="'.encoding($serData->historyId).'" data-filetypeid="'.$serData->fileType.'" data-attachmentid="'.$attachmentUrl.'" data-dateid="'.date('d-m-Y',strtotime($serData->date)).'" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>';
+        $action .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$link.'"  class="on-default edit-row table_action" title="delete" onclick="vehilceHistoryDelete(this);" data-message="Are you sure want to delete this vehicle history." data-vhid="'.encoding($serData->historyId).'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
         
 
         $row[] = $action;
@@ -272,7 +288,27 @@ class Vehicles extends Common_Admin_Controller{
         if($dataExist){
               
              $dataExist=$this->common_model->deleteData('vehicles',$where);
+                $this->deleteImg('deficiency',$img[0]['file']);
               $showmsg  ='Vehicle has been deleted successfully.';
+                $response = array('status'=>SUCCESS,'message'=>$showmsg);
+        }else{
+           $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
+        }
+        $this->response($response);
+    }//end function
+    function vehilceHistoryDelete_post(){
+        $historyId  = decoding($this->post('use'));
+   
+        $where = array('historyId'=>$historyId);
+         $dataExist=$this->common_model->is_data_exists('vehicleHistory',$where);
+        if($dataExist){
+              
+             $delete=$this->common_model->deleteData('vehicleHistory',$where);
+            $this->load->library('s3');
+            $this->load->model('s3_model');
+            $uploadFor = "vehicles";
+            $this->s3_model->deleteImg($uploadFor,$dataExist->attachment);
+              $showmsg  ='Vehicle history has been deleted successfully.';
                 $response = array('status'=>SUCCESS,'message'=>$showmsg);
         }else{
            $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  

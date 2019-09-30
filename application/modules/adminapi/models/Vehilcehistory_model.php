@@ -5,14 +5,14 @@ class Vehilcehistory_model extends CI_Model {
 
     //var $table , $column_order, $column_search , $order =  '';
     var $table = 'vehicleHistory';
-    var $column_order = array('v.historyId','v.vehicleId','v.vjobTypeId','v.date','v.attachment','v.status','vj.type'); //set column field database for datatable orderable
-    var $column_sel = array('v.historyId','v.vehicleId','v.vjobTypeId','v.date','v.attachment','v.status','(case when (v.status = 0) 
+    var $column_order = array('v.historyId','v.vehicleId','v.vjobTypeId','v.date','v.attachment','v.fileType','v.status','vj.type'); //set column field database for datatable orderable
+    var $column_sel = array('v.historyId','v.vehicleId','v.vjobTypeId','v.date','v.attachment','v.fileType','v.status','(case when (v.status = 0) 
         THEN "Inactive" when (v.status = 1) 
         THEN "Active" ELSE
         "Unknown" 
         END) as statusShow','vj.type'); //set column field database for datatable orderable
     var $column_search = array('v.vehicleId','v.historyId','v.vjobTypeId','v.date','v.attachment','v.status','vj.type'); //set column field database for datatable searchable 
-    var $order = array('v.historyId' => 'DESC');  // default order
+    var $order = array('DATE(v.crd)' => 'DESC');  // default order
     var $where = array();
     var $group_by = 'v.historyId'; 
 

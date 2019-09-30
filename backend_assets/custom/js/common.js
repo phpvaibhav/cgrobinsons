@@ -1309,6 +1309,8 @@ var vehilce_list = $('#vehilceHistory_list').DataTable({
                   "url": base_url+"adminapi/vehicles/vehilceHistoryList",
                   "type": "POST",
                   "dataType": "json",
+                  //"data" : {vid: $('#v_detail').data('vid')}.
+                   "data": { 'vid':$('#v_detail').data('vid')},
                   "headers": { 'authToken':authToken},
                   "dataSrc": function (jsonData) {
                      
@@ -1323,3 +1325,90 @@ var vehilce_list = $('#vehilceHistory_list').DataTable({
 
           });
 /*listing vehilceHistory_list*/
+//vehilceHistoryDelete Delete
+function vehilceHistoryDelete(e){
+  swal({
+  title: "Are you sure?",
+  text:  $(e).data('message'),
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonClass: "btn-danger",
+  confirmButtonText: "Yes",
+  cancelButtonText: "No",
+  closeOnConfirm: true,
+  closeOnCancel: true,
+ // showLoaderOnConfirm: true
+},
+function(isConfirm) {
+  if (isConfirm) {
+     $(e).prop('disabled', true);
+    /*ajax*/
+    $.ajax({
+                 type: "POST",
+                 url: base_url+'adminapi/vehicles/vehilceHistoryDelete',
+                 data: {use:$(e).data('vhid') },
+                 headers: { 'authToken':authToken},
+                  cache: false,
+           beforeSend: function() {
+          
+               preLoadshow(true);
+                  },     
+                 success: function (res) {
+                   preLoadshow(false);
+                     $(e).prop('disabled', false);
+                  if(res.status=='success'){
+                   
+                   toastr.success(res.message, 'Success', {timeOut: 3000});
+                 //  swal("Success", "Your process  has been successfully done.", "success");
+                 setTimeout(function(){window.location.reload(); },3000);
+
+                  }else{
+                    toastr.error(res.message, 'Alert!', {timeOut: 5000});
+                  }
+                  
+                     
+                 }
+             });
+    /*ajax*/
+   
+  } else {
+    //swal("Cancelled", "Your Process has been Cancelled", "error");
+  }
+});
+}
+/*histroy update*/
+function openHistory(){
+  $('#addHistoryA').trigger("reset");
+$('#addHistoryA select').trigger("change");
+ $('#privew + embed').remove();
+        $('#privew + img').remove();
+        $('#privew').after('');
+         $('#vhtype option[value=0]').attr('selected','selected');
+  $('#historyId').val(0);
+  $('#hvehicleId').val($('#v_detail').data('vid'));
+   $('#addHistory').modal('show');
+}
+function editHistory(e){
+    var historyId = $(e).data('hid');
+    var vjobTypeId = $(e).data('typeid');
+    var date = $(e).data('dateid');
+    var attachment = $(e).data('attachmentid');
+    var filetype = $(e).data('filetypeid');
+    //alert(historyId+' '+date+' '+filetype+' '+attachment);
+
+     $('#vhtype option[value='+vjobTypeId+']').attr('selected','selected');
+     $('#hdate').val(date);
+     $('#hAttachment').val(attachment);
+     $('#historyId').val(historyId);
+    $('#privew + embed').remove();
+    $('#privew + img').remove();
+    $('#privew').after('');
+    if(filetype=='image'){
+      $('#privew').after('<img src="'+attachment+'" width="400" height="300">');
+    }else{
+      $('#privew').after('<img src="'+base_url+'backend_assets/img/attachment/attachment.jpeg" width="400" height="300">');
+    }
+    
+    $('#addHistory').modal('show');
+   
+}//end function

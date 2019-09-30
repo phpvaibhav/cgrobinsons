@@ -59,6 +59,8 @@ function filePreview(input) {
          /*   $('#uploadForm + img').remove();
             $('#uploadForm').after('<img src="'+e.target.result+'" width="450" height="300"/>');*/
         $('#privew + embed').remove();
+        $('#privew + img').remove();
+        $('#privew').after('');
 $('#privew').after('<embed src="'+e.target.result+'" width="400" height="300">');
         }
         reader.readAsDataURL(input.files[0]);
