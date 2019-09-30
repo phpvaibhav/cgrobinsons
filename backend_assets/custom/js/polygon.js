@@ -98,9 +98,9 @@ function initialize() {
       center: new google.maps.LatLng(latitude,longitude),
       zoom: 19,
       mapTypeId: 'satellite', //google.maps.MapTypeId.ROADMAP,
-      //   disableDefaultUI: true,
+      disableDefaultUI: false,
       draggable: false, 
-      zoomControl: false,
+      zoomControl: true,
       scrollwheel: false, 
       disableDoubleClickZoom: true
     });
@@ -119,12 +119,14 @@ function initialize() {
       
   drawingManager = new google.maps.drawing.DrawingManager({
     drawingMode: google.maps.drawing.OverlayType.POLYGON,
+    drawingMode :null,
     markerOptions: {
       draggable: true
     },
     drawingControlOptions: {
       position: google.maps.ControlPosition.TOP_CENTER,
-      drawingModes: ['polygon']
+      drawingModes: ['polygon'],
+
     },
     polylineOptions: {
       editable: true,
