@@ -119,7 +119,7 @@ function initialize() {
       
   drawingManager = new google.maps.drawing.DrawingManager({
     drawingMode: google.maps.drawing.OverlayType.POLYGON,
-    drawingMode :null,
+  
     markerOptions: {
       draggable: true
     },
