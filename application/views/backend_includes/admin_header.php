@@ -40,6 +40,8 @@
     <!-- #GOOGLE FONT -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+        <?php if(!empty($front_styles)) { load_css($front_styles); } //load required page styles 
+     ?>
 <!-- custom -->
 <link rel="stylesheet" type="text/css" href="<?php echo $backend_assets; ?>custom/css/custom.css">
  <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
@@ -211,6 +213,9 @@
           <!-- <?php echo base_url('drivers'); ?> <?php echo base_url('jobs'); ?>-->
         <a href="<?php echo base_url('drivers'); ?>" title="Drivers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Drivers</span></a>
         </li>
+  <!--       <li class="<?php echo (strtolower($this->router->fetch_class()) == "jobtype") ? "active" : "" ?>">
+          <a href="<?php echo base_url('jobtype'); ?>" title="Jobtypes"><i class="fa fa-lg fa-fw fa-bars"></i> <span class="menu-item-parent">Job Types</span></a>
+        </li>   -->
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "jobs") ? "active" : "" ?>">
           <a href="<?php echo base_url('jobs'); ?>" title="jobs"><i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">Jobs</span></a>
         </li>

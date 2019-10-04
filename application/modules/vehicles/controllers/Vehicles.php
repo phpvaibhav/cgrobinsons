@@ -20,6 +20,7 @@ class Vehicles extends Common_Back_Controller {
         $data['manufacturers']  =  $this->common_model->getAll('carManufacturers');
         $data['vehicleColors']  =  $this->common_model->getAll('vehicleColors');
         $data['states']         =  $this->common_model->getAll('states');
+        $data['front_scripts'] = array('backend_assets/custom/js/vehicle.js');
         $this->load->admin_render('vehicles', $data);
     } 
     public function vehicleDetail(){
@@ -36,6 +37,7 @@ class Vehicles extends Common_Back_Controller {
         $data['drivers']         =  $this->common_model->getAll('users',array('userType' =>2,'status'=>1));
         $data['vehicleJobTypes']         =  $this->common_model->getAll('vehicleJobType',array('status'=>1));
         $data['assignVehicle']  = $this->common_model->getsingle('assignVehicle',$where);
+        $data['front_scripts'] = array('backend_assets/custom/js/vehicle.js');
    
         $this->load->admin_render('vehicleDetail', $data, '');
     } 

@@ -188,6 +188,7 @@
  <script src="<?php echo $backend_assets; ?>admin/js/location.js"></script>
  <script src="<?php echo $backend_assets; ?>custom/js/custom.js"></script>
  <script src="<?php echo $backend_assets; ?>custom/js/common.js"></script>
+  <?php if(!empty($front_scripts)) { load_js($front_scripts);} //load required page scripts ?>
  
 
     <script>

@@ -81,7 +81,7 @@
 												</section>
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-clock-o"></i>
-														<input type="text" name="startTime" placeholder="Creation Time" id="timepicker" class="" readonly="">
+														<input type="text" name="startTime" placeholder="Start Time" id="timepicker" class="" readonly="">
 													</label>
 												</section>
 											</div>

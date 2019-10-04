@@ -94,7 +94,7 @@
 							</section>
 							<section class="col col-6">
 								<label class="input"> <i class="icon-append fa fa-clock-o"></i>
-									<input type="text" name="startTime" placeholder="Start Time"  value="<?php echo$job['startTime']; ?>" id="timepicker" class="" readonly="">
+									<input type="text" name="startTime" placeholder="Creation Time"  value="<?php echo$job['startTime']; ?>" id="timepicker" class="" readonly="">
 								</label>
 							</section>
 						</div>

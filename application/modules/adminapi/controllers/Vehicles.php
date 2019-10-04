@@ -192,10 +192,10 @@ class Vehicles extends Common_Admin_Controller{
 
             $action .= '<a href="'.$link.'" onclick="vehilceStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->vehicleId).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-check" aria-hidden="true"></i></a>&nbsp;&nbsp;|';
         }else{
-             $action .= '&nbsp;&nbsp;<a href="'.$link.'" onclick="vehilceStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->vehicleId).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-times" aria-hidden="true"></i></a>&nbsp;&nbsp;|';
+             $action .= '<a href="'.$link.'" onclick="vehilceStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->vehicleId).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-times" aria-hidden="true"></i></a>';
         }
         $link = base_url().'vehicles/vehicleDetail/'.encoding($serData->vehicleId);
-        $action .= '&nbsp;&nbsp;<a href="'.$link.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+        $action .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$link.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
         
 
         $row[] = $action;

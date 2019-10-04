@@ -158,9 +158,9 @@ class Jobs extends Common_Admin_Controller{
        
        
        // $userLink = "javascript:void(0);";
-        $action .= '&nbsp;&nbsp;<a href="'.$jobLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;|';
+        $action .= '&nbsp;&nbsp;<a href="'.$jobLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
           $pdfLink = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
-        $action .= '&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+        $action .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
 
             
 
