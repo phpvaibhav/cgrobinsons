@@ -190,7 +190,7 @@ class Vehicles extends Common_Admin_Controller{
             $action .= "";
         if($serData->status){
 
-            $action .= '<a href="'.$link.'" onclick="vehilceStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->vehicleId).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-check" aria-hidden="true"></i></a>&nbsp;&nbsp;|';
+            $action .= '<a href="'.$link.'" onclick="vehilceStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->vehicleId).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-check" aria-hidden="true"></i></a>';
         }else{
              $action .= '<a href="'.$link.'" onclick="vehilceStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->vehicleId).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-times" aria-hidden="true"></i></a>';
         }
