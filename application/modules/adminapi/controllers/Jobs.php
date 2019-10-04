@@ -42,7 +42,12 @@ class Jobs extends Common_Admin_Controller{
                 $data_val['zip']                   = $this->post('zip');
                 $data_val['country']               = $this->post('country');
                 $data_val['latitude']              = $this->post('latitude');
-                $data_val['longitude']             = $this->post('longitude');
+                $data_val['longitude']             = $this->post('longitude');  
+                /*select address customer*/  
+          
+                $customer_val['latitude']              = $this->post('latitude');
+                $customer_val['longitude']             = $this->post('longitude');
+                $customer_val['customerId']             = $this->post('customerId');
                
                 $jobId  = decoding($this->post('jobId'));
 
@@ -91,6 +96,19 @@ class Jobs extends Common_Admin_Controller{
                 if($result){
                 $this->load->model('job_model');
                 $this->job_model->jobPolygonUdpate($geo_val,$result);
+                /*customer add address*/
+                    $address = $this->common_model->is_data_exists('customerAddress',$customer_val);
+                    if(!$address){
+                        $customer_val['address']               = $this->post('address');
+                        $customer_val['street']                = $this->post('street');
+                        $customer_val['street2']               = $this->post('street2');
+                        $customer_val['city']                  = $this->post('city');
+                        $customer_val['state']                 = $this->post('state');
+                        $customer_val['zip']                   = $this->post('zip');
+                        $customer_val['country']               = $this->post('country');
+                        $this->common_model->insertData('customerAddress',$customer_val);
+                    }
+                /*customer add address*/
                      $response = array('status'=>SUCCESS,'message'=>$msg);
                 }else{
                      $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));

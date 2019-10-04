@@ -109,6 +109,24 @@ class Customer_model extends CI_Model {
          if(!empty($this->where))
             $this->db->where($this->where); 
         return $this->db->count_all_results();
-    }
+    }//end function
+    function customerAddressManage($data){
+            $customer_val['latitude']              = $data['latitude'];
+            $customer_val['longitude']             = $data['longitude'];
+            $customer_val['customerId']             = $data['customerId'];
+        $address = $this->common_model->is_data_exists('customerAddress',$customer_val);
+        if(!$address){
+        $customer_val['address']               = $data['address'];
+        $customer_val['street']                = $data['street'];
+        $customer_val['street2']               = $data['street2'];
+        $customer_val['city']                  = $data['city'];
+        $customer_val['state']                 = $data['state'];
+        $customer_val['zip']                   = $data['zip'];
+        $customer_val['country']               = $data['country'];
+        $this->common_model->insertData('customerAddress',$customer_val);
+        }
+        return true;
+        /*customer add address*/
+    }//end function
 
 }

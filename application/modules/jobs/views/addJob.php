@@ -63,7 +63,7 @@
 													</select>
 												</section>
 												<section class="col col-6">
-													<select style="width:100%;" class="select2" name="customerId" data-placeholder="Please select a customer">
+													<select style="width:100%;" class="select2" name="customerId" data-placeholder="Please select a customer" onchange="getPrevious(this);">
 														<optgroup label="">
 														<option></option>
 														<?php foreach ($customers as $c => $customer) {?>
@@ -76,7 +76,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-calendar"></i>
-														<input type="text" name="startDate" placeholder="Start Date" class="datepicker" data-dateformat='dd-mm-yy' readonly="">
+														<input type="text" name="startDate" placeholder="Creation Date" class="datepicker" data-dateformat='dd-mm-yy' readonly="">
 													</label>
 												</section>
 												<section class="col col-6">
@@ -87,7 +87,7 @@
 											</div>
 										</fieldset>
 										<header>
-											Address
+											Address <span class="getAddressshow  pull-right"><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-toggle="modal" data-target="#setAddress">Previous Address</a></span>
 										</header>
 
 										<fieldset>
@@ -202,8 +202,43 @@
           <!-- end row -->
  
         
-        </section>
-        <!-- end widget grid -->
- <script src="<?php echo $backend_assets; ?>custom/js/polygon.js"></script>
+</section>
+<!-- end widget grid -->
+<!-- Modal -->
+<div class="modal fade" id="setAddress" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title">
+					Previous Addresses
+				</h4>
+			</div>
+			<div class="modal-body">
+	        
+				<!-- widget content -->
+				<div class="widget-body padding">
+					<fieldset>
+						<div class="row" >
+							<div class="col-sm-12 col-md-12" id="previousAddress" style="height: 400px;overflow: auto;"></div>
 
-<script src="https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script>
+						</div>
+						<footer>
+							<button type="button" class="btn btn-primary pull-right setGeoloc">
+								Apply
+							</button>
+						</footer>
+					</fieldset>
+
+				</div>
+				<!-- end widget content -->
+	         
+	        </div>
+		</div>
+	</div>
+</div>
+<!-- End modal -->
+<script src="<?php echo $backend_assets; ?>custom/js/polygon.js"></script>
+

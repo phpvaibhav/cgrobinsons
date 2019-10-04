@@ -7,6 +7,7 @@ var selectedShape;
 var colors = ['#1E90FF', '#FF1493', '#32CD32', '#FF8C00', '#4B0082', '#C0262C', '#7FFF00','#FF0000','#820041','#EB6001','#872B4C','#AC0000','#ECB400','#000000'];
 var selectedColor;
 var colorButtons = {};
+var map = '';
 var componentForm = {
       street_number: 'short_name',
       route: 'long_name',
@@ -93,8 +94,9 @@ function buildColorPalette() {
 
 
 function initialize() {
+  
   //var latlng = new google.maps.LatLng(39.305, -76.617);
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
       center: new google.maps.LatLng(latitude,longitude),
       zoom: 19,
       mapTypeId: google.maps.MapTypeId.SATELLITE, //google.maps.MapTypeId.ROADMAP,
@@ -192,6 +194,7 @@ function initialize() {
   google.maps.event.addDomListener(document.getElementById('delete-all-button'), 'click', deleteAllShape);
   buildColorPalette();
 
+
   /*addres autofill*/
   var acInputs = document.getElementsByClassName("mapautocomplete");
 for (var i = 0; i < acInputs.length; i++) {
@@ -274,21 +277,7 @@ for (var i = 0; i < acInputs.length; i++) {
         });*/
   /*addres autofill*/
 }
-function saveMapToDataUrl() {
 
-    var element = $("#map");
-
-    html2canvas(element, {
-        useCORS: true,
-        onrendered: function(canvas) {
-            var dataUrl= canvas.toDataURL("image/png");
-
-            // DO SOMETHING WITH THE DATAURL
-            // Eg. write it to the page
-            document.write('<img src="' + dataUrl + '"/>');
-        }
-    });
-}
 google.maps.event.addDomListener(window, 'load', initialize);
       
       
@@ -310,3 +299,48 @@ $(document).ready(function(){
        
     });
 });
+
+    $(document).ready(function(){
+        $(".setGeoloc").click(function(){
+            var radioValue = $("input[name='address_location']:checked").val();
+            if(radioValue){
+              var address   = radioValue;
+              var street    = $('input[name="address_location"]:checked').attr("street");
+              var street2   = $('input[name="address_location"]:checked').attr("street2");
+              var city      = $('input[name="address_location"]:checked').attr("city");
+              var state     = $('input[name="address_location"]:checked').attr("state");
+              var zip       = $('input[name="address_location"]:checked').attr("zip");
+              var country   = $('input[name="address_location"]:checked').attr("country");
+              var latitude  = parseFloat($('input[name="address_location"]:checked').attr("latitude"));
+              var longitude = parseFloat($('input[name="address_location"]:checked').attr("longitude"));
+              $('#autocomplete0').val(address);
+              $('.latitudeautocomplete0').val(latitude);
+              $('.longitudeautocomplete0').val(longitude);
+              $('.street_numberautocomplete0').val(street);
+              $('.routeautocomplete0').val(street2);
+              $('.localityautocomplete0').val(city);
+              $('.administrative_area_level_1autocomplete0').val(state);
+              $('.postal_codeautocomplete0').val(zip);
+              $('.countryautocomplete0').val(country);
+              $('#setAddress').modal('hide');
+               $('#delete-all-button').trigger('click');
+              $('#delete-button').trigger('click');
+              var LatLng = new google.maps.LatLng(latitude,longitude);
+              map.setCenter(LatLng);
+              if (typeof( marker) != "undefined"){
+                 marker.setMap(null);
+              }
+             
+              marker = new google.maps.Marker({
+              position: {lat: latitude, lng: longitude },
+              title: address,
+              //map: map
+              });
+      
+      marker.setMap(map);
+            }else{
+                toastr.error('Please select any one address.', 'Alert!', {timeOut: 4000});
+            }
+        });
+    });
+/*getPrevious address uin customer*/

@@ -76,7 +76,7 @@
 								</select>
 							</section>
 							<section class="col col-6">
-								<select style="width:100%;" class="select2" name="customerId" data-placeholder="Please select a customer">
+								<select style="width:100%;" class="select2" name="customerId" data-placeholder="Please select a customer" onchange="getPrevious(this);">
 									<optgroup label="">
 									<option></option>
 									<?php foreach ($customers as $c => $customer) {?>
@@ -89,7 +89,7 @@
 						<div class="row">
 							<section class="col col-6">
 								<label class="input"> <i class="icon-append fa fa-calendar"></i>
-									<input type="text" name="startDate" placeholder="Start Date" class="datepicker" data-dateformat='dd-mm-yy' value="<?php echo date('d-m-Y',strtotime($job['startDate'])); ?>" readonly="">
+									<input type="text" name="startDate" placeholder="Creation Date" class="datepicker" data-dateformat='dd-mm-yy' value="<?php echo date('d-m-Y',strtotime($job['startDate'])); ?>" readonly="">
 								</label>
 							</section>
 							<section class="col col-6">
@@ -101,6 +101,7 @@
 					</fieldset>
 					<header>
 						Address
+						<span class="getAddressshow  pull-right"><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-toggle="modal" data-target="#setAddress">Previous Address</a></span>
 					</header>
 
 					<fieldset>
@@ -194,7 +195,7 @@
 					
 					<footer>
 						<button type="submit" id="submit" class="btn btn-primary">
-							Edit Job
+							Update Job
 						</button>
 					</footer>
 				</form>
@@ -204,7 +205,42 @@
   	<!-- end row -->
 </section>
 <!-- end widget grid -->
+<!-- Modal -->
+<div class="modal fade" id="setAddress" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title">
+					Previous Addresses
+				</h4>
+			</div>
+			<div class="modal-body">
+	        
+				<!-- widget content -->
+				<div class="widget-body padding">
+					<fieldset>
+						<div class="row" >
+							<div class="col-sm-12 col-md-12" id="previousAddress" style="height: 400px;overflow: auto;"></div>
 
+						</div>
+						<footer>
+							<button type="button" class="btn btn-primary pull-right setGeoloc">
+								Apply
+							</button>
+						</footer>
+					</fieldset>
+
+				</div>
+				<!-- end widget content -->
+	         
+	        </div>
+		</div>
+	</div>
+</div>
+<!-- End modal -->
 <script type="text/javascript">
 	var geoFencing = "<?php echo $job['geoFencing']; ?>";
 	if(geoFencing==1){
@@ -236,11 +272,11 @@ function initMap() {
   var myLatLng = new google.maps.LatLng(latitude,longitude);
   // General Options
   var mapOptions = {
-    zoom: 10,
+    zoom: 19,
     center: myLatLng,
     mapTypeId: google.maps.MapTypeId.SATELLITE
   };
-  var map = new google.maps.Map(document.getElementById('map'),mapOptions);
+  map = new google.maps.Map(document.getElementById('map'),mapOptions);
 
   // Polygon Coordinates
 /* var triangleCoords = [
@@ -371,4 +407,47 @@ function copyToClipboard(text) {
         setMapOnAll(null);
       }
 google.maps.event.addDomListener(window, 'load', initMap);
+    $(document).ready(function(){
+        $(".setGeoloc").click(function(){
+            var radioValue = $("input[name='address_location']:checked").val();
+            if(radioValue){
+              var address   = radioValue;
+              var street    = $('input[name="address_location"]:checked').attr("street");
+              var street2   = $('input[name="address_location"]:checked').attr("street2");
+              var city      = $('input[name="address_location"]:checked').attr("city");
+              var state     = $('input[name="address_location"]:checked').attr("state");
+              var zip       = $('input[name="address_location"]:checked').attr("zip");
+              var country   = $('input[name="address_location"]:checked').attr("country");
+              var latitude  = parseFloat($('input[name="address_location"]:checked').attr("latitude"));
+              var longitude = parseFloat($('input[name="address_location"]:checked').attr("longitude"));
+              $('#autocomplete0').val(address);
+              $('.latitudeautocomplete0').val(latitude);
+              $('.longitudeautocomplete0').val(longitude);
+              $('.street_numberautocomplete0').val(street);
+              $('.routeautocomplete0').val(street2);
+              $('.localityautocomplete0').val(city);
+              $('.administrative_area_level_1autocomplete0').val(state);
+              $('.postal_codeautocomplete0').val(zip);
+              $('.countryautocomplete0').val(country);
+              $('#setAddress').modal('hide');
+                            var LatLng = new google.maps.LatLng(latitude,longitude);
+              map.setCenter(LatLng);
+              if (typeof( marker) != "undefined"){
+                 marker.setMap(null);
+              }
+             
+              marker = new google.maps.Marker({
+              position: {lat: latitude, lng: longitude },
+              title: address,
+              //map: map
+              });
+      
+      marker.setMap(map);
+      
+            }else{
+                toastr.error('Please select any one address.', 'Alert!', {timeOut: 4000});
+            }
+        });
+    });
+/*getPrevious address uin customer*/
 </script>

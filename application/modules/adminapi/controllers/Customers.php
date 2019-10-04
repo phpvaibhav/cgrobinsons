@@ -62,6 +62,26 @@ class Customers extends Common_Admin_Controller{
                 $userMeta['billCountry']    = $this->post('country1');
                 $userMeta['billLatitude']   = $this->post('latitude1');
                 $userMeta['billLongitude']  = $this->post('longitude1');
+                  //data_val
+                $data_val['address']        = $this->post('address');
+                $data_val['street']         = $this->post('street');
+                $data_val['street2']        = $this->post('street2');
+                $data_val['city']           = $this->post('city');
+                $data_val['state']          = $this->post('state');
+                $data_val['zip']            = $this->post('zip');
+                $data_val['country']        = $this->post('country');
+                $data_val['latitude']       = $this->post('latitude');
+                $data_val['longitude']      = $this->post('longitude');
+                $data_val1['address']     = $this->post('address1');
+                $data_val1['street']     = $this->post('street1');
+                $data_val1['street2']    = $this->post('street21');
+                $data_val1['city']       = $this->post('city1');
+                $data_val1['state']      = $this->post('state1');
+                $data_val1['zip']        = $this->post('zip1');
+                $data_val1['country']    = $this->post('country1');
+                $data_val1['latitude']   = $this->post('latitude1');
+                $data_val1['longitude']  = $this->post('longitude1');
+                
 
             if($dataExist){
                  $isemailExist=$this->common_model->is_data_exists('users',array('id !='=>$userId,'email'=> $userData['email']));
@@ -71,7 +91,14 @@ class Customers extends Common_Admin_Controller{
                     $update = $this->common_model->updateFields('users',$userData,$where);
                     if($update){
                     $userMeta['userId'] = $userId;
+                    $data_val['customerId'] = $userId;
+                    $data_val1['customerId'] = $userId;
                     $this->common_model->updateFields('customerMeta',$userMeta,array('userId'=>$userId));
+                    /*addres*/
+                        $this->load->model('customer_model');
+                        $this->customer_model->customerAddressManage($data_val);
+                        $this->customer_model->customerAddressManage($data_val1);
+                    /*addres*/
                     $response = array('status'=>SUCCESS,'message'=>"Customer record updated successfully.");
                     }else{
                     $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
@@ -82,7 +109,14 @@ class Customers extends Common_Admin_Controller{
                 $userId = $this->common_model->insertData('users',$userData);
                 if($userId){
                     $userMeta['userId'] = $userId;
+                     $data_val['customerId'] = $userId;
+                    $data_val1['customerId'] = $userId;
                     $this->common_model->insertData('customerMeta',$userMeta);
+                      /*addres*/
+                        $this->load->model('customer_model');
+                        $this->customer_model->customerAddressManage($data_val);
+                        $this->customer_model->customerAddressManage($data_val1);
+                    /*addres*/
                      $response = array('status'=>SUCCESS,'message'=>"Customer record added successfully.");
                 }else{
                      $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
@@ -180,7 +214,8 @@ class Customers extends Common_Admin_Controller{
         }
         $this->response($response);
     }//end function
-     function customerDelete_post(){
+     
+    function customerDelete_post(){
         $userId  = decoding($this->post('use'));
    
         $where = array('id'=>$userId,'userType'=>1);
@@ -198,6 +233,27 @@ class Customers extends Common_Admin_Controller{
         }
         $this->response($response);
     }//end function
+    function getPreviousAddress_post(){
+            $customerId  = $this->post('customerId');
+       
+            $where = array('customerId'=>$customerId);
+            $addresses= $this->common_model->getAll('customerAddress',$where,'addressId','desc');
+            if($addresses){
+                $data ="";
+                foreach ($addresses as $key => $address) {
+                  $data .= '<label class="radio setAddessLocation" onclick="radio_fun(this);" >';
+                  $data .='<i class="fa fa-map-marker" aria-hidden="true"></i> <input type="radio" class="hideradio" latitude="'.$address->latitude.'" longitude="'.$address->longitude.'" street="'.$address->street.'" street2="'.$address->street2.'" city="'.$address->city.'" state="'.$address->state.'" zip="'.$address->zip.'" country="'.$address->country.'"  name="address_location" value="'.$address->address.'"/> '.$address->address;
+                  $data .= '</label>';
+                }
+                
+                $showmsg  ='record found.';
+                $response = array('status'=>SUCCESS,'message'=>$showmsg,'address'=>$data);
+            }else{
+               $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
+            }
+            $this->response($response);
+    }//end function
+
     function validate_address($str)
     {
         if(!empty($str)){
