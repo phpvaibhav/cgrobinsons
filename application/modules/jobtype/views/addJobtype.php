@@ -1,244 +1,64 @@
-<!-- widget grid -->
-  <style type="text/css">
-  #map {
-  width: auto;
-  height:500px;
-}
- #color-palette {
-        clear: both;
-      }
-
-      .color-button {
-        width: 14px;
-        height: 14px;
-        font-size: 0;
-        margin: 2px;
-        float: left;
-        cursor: pointer;
-      }
-
-</style>
-  
-  <?php $backend_assets=base_url().'backend_assets/'; ?>
-        <section id="widget-grid" class="">
-        
-          <!-- row -->
-         <div class="row">
+<?php $backend_assets=base_url().'backend_assets/'; ?>
+<section id="widget-grid" class="">
+	<!-- row -->
+	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 			<div class="well no-padding">
-
-			<form action="jobs/createJob" id="createJob" class="smart-form" novalidate="novalidate" autocomplete="off" enctype="multipart/form-data">
-										<header>
-											Basic Information
-										</header>
-
-										<fieldset>
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-bookmark"></i>
-														<input type="text" name="jobName" placeholder="Job Name" maxlength="30" size="30">
-													</label>
-												</section>
-												<section class="col col-6">
-												    <label class="select">
-												        <select name="jobTypeId">
-												            <option value="" selected="" disabled="">Job Type</option>
-												            <?php foreach ($jobTypes as $jt => $type) {?>
-												            <option value="<?php echo $type->jobTypeId; ?>"><?php echo $type->jobType; ?></option>
-												        	<?php } ?>
-												           
-												        </select> <i></i> </label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-6">
-												
-												<select style="width:100%;" class="select2" name="driverId" data-placeholder="Please select a driver">
-														<optgroup label="">
-														<option></option>
-														<?php foreach ($drivers as $k => $driver) {?>
-														<option value="<?php echo $driver->id; ?>"><?php echo $driver->fullName; ?></option>
-														<?php }?>
-														</optgroup>
-													</select>
-												</section>
-												<section class="col col-6">
-													<select style="width:100%;" class="select2" name="customerId" data-placeholder="Please select a customer" onchange="getPrevious(this);">
-														<optgroup label="">
-														<option></option>
-														<?php foreach ($customers as $c => $customer) {?>
-														<option value="<?php echo $customer->id; ?>"><?php echo $customer->fullName; ?></option>
-														<?php }?>
-														</optgroup>
-													</select>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-calendar"></i>
-														<input type="text" name="startDate" placeholder="Creation Date" class="datepicker" data-dateformat='dd-mm-yy' readonly="">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-clock-o"></i>
-														<input type="text" name="startTime" placeholder="Start Time" id="timepicker" class="" readonly="">
-													</label>
-												</section>
-											</div>
-										</fieldset>
-										<header>
-											Address <span class="getAddressshow  pull-right"><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-toggle="modal" data-target="#setAddress">Previous Address</a></span>
-										</header>
-
-										<fieldset>
-											<div class="row">
-												<section class="col col-md-12">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="mapautocomplete" data-id="0" maxlength="300" size="300">
-														<input type="hidden" class="latitudeautocomplete0" name="latitude" placeholder="latitude">
-														<input type="hidden" class="longitudeautocomplete0" name="longitude" placeholder="longitude">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-3">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="street" placeholder="Street" class="street_numberautocomplete0" maxlength="20" size="20">
-													</label>
-												</section>
-												<section class="col col-9">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" maxlength="30" size="30">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="city" placeholder="City" class="localityautocomplete0" maxlength="30" size="30">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" maxlength="30" size="30">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only1" maxlength="15" size="15">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="country" placeholder="Country" class="countryautocomplete0" maxlength="15" size="15">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-md-12">
-													<label class="label">Geo Fencing</label>
-													<div class="inline-group">
-														<label class="radio">
-															<input type="radio" name="geoFencing" checked="checked" value="1" id="geoFencing1">
-														<i></i>YES</label>
-														<label class="radio">
-															<input type="radio" name="geoFencing" id="geoFencing0" value="0">
-														<i></i>NO</label>
-													</div>
-												</section>
-											</div>
-											<section class="col col-md-12 boxshow" >
-
-												<div class="row">
-													<div class="col-md-6">
-													<div class="form-group">
-													<p>Polygon Color</p>
-													<div id="color-palette"></div>
-													</div>
-													</div>
-													<div class="col-md-6 text-right">
-													<a href="javascript:void(0);" type="button" class="btn" id="delete-button">Reset</a>
-
-													<button type="button" class="btn btn-warnig hide" id="delete-all-button">Delete</button>
-
-
-													</div>
-													<!-- map -->
-													<!-- map -->
-												</div>
-												
-											<div class="row" id="html-content-holder">
-												<div id="map-canvas"></div>
-												<div id="map"></div>
-											</div>
-											 <input type="hidden" name="polygonColor" id="polygonColor" value="#1E90FF">
-										  	<textarea  name="boundary" id="boundary" class="hide"></textarea>
-											</section>
-											<!-- fdf -->
-										<!-- 	<input id="btn-Preview-Image" type="button" value="Preview"/>
-    <a id="btn-Convert-Html2Image" href="#">Download</a>
-    <a onclick="saveMapToDataUrl();" href="#">Download1</a>
-    <br/>
-    <h3>Preview :</h3>
-    <div id="previewImage">
-    </div>
- -->
-											<!-- fdf -->
-										</fieldset>
-										
-										<footer>
-											<button type="submit" id="submit" class="btn btn-primary">
-												Add Job
-											</button>
-										</footer>
-									</form>
-	</div>
-	
-</div>
-</div>
-        
-          <!-- end row -->
- 
-        
-</section>
-<!-- end widget grid -->
-<!-- Modal -->
-<div class="modal fade" id="setAddress" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-				<h4 class="modal-title">
-					Previous Addresses
-				</h4>
-			</div>
-			<div class="modal-body">
-	        
-				<!-- widget content -->
-				<div class="widget-body padding">
+				<form action="jobtype/createJobType" id="createJobType" class="smart-form" novalidate="novalidate" autocomplete="off" enctype="multipart/form-data" method="post">
 					<fieldset>
-						<div class="row" >
-							<div class="col-sm-12 col-md-12" id="previousAddress" style="height: 400px;overflow: auto;"></div>
+						<div class="row">
+							<section class="col col-md-12">
+								<label class="input"> <i class="icon-append fa fa-bookmark"></i>
+									<input type="text" name="jobType" placeholder="Job Type" maxlength="30" size="30"  >
+									<input type="hidden" name="total_element" id="total_element" value="0" >
+									
+								</label>
+							</section>				
+						</div>				
+					<!-- add  -->
+						<div class="row serviceContainer">
 
+							<div class="col-md-12 col-sm-12 col-lg-12 elementPro" id="divPro_1">
+								<section class="col col-md-12">
+									<label class="label"><strong>Question-1</strong><!-- 	<a href="javascript:void(0);" class="btn btn-default btn-circle pull-right removePro"><i class="fa fa-times" aria-hidden="true"></i></a> --></label>
+								</section>
+								<!-- add -->
+								<section class="col col-md-12">
+									<label class="label">Question<span class="error">*</span></label>
+									<label class="textarea">
+										<textarea name="question_1" placeholder="Question" maxlength="700" class="questionClass"></textarea>
+										<input type="hidden" name="questionId" value="0">
+										</label>
+								</section>
+							
+								<section class="col col-md-12">
+								    <label class="select">
+								        <select name="questionType_1" onchange="questionOpt(this);" class="questionType_1" id="que_1"  >
+								            <option value="text" selected="">Text/Comment</option>
+								            <option value="radio">Radio</option>
+								            <option value="checkbox">Checkbox</option>
+								    	</select><i></i>
+								 	</label>
+								</section>
+								<section class="col col-md-12" id="questionOptions_1">
+								</section>
+
+							</div>
 						</div>
-						<footer>
-							<button type="button" class="btn btn-primary pull-right setGeoloc">
-								Apply
-							</button>
-						</footer>
-					</fieldset>
-
-				</div>
-				<!-- end widget content -->
-	         
-	        </div>
+						<section>
+							<a href="javascript:void(0);" class="btn btn-default btn-circle pull-right addPro"><i class="fa fa-plus" aria-hidden="true"></i></a>
+						</section>
+						<!-- add  -->
+					</fieldset>						
+					<footer>
+						<button type="submit" id="submit" class="btn btn-primary">
+							Save
+						</button>
+					</footer>
+				</form>
+			</div>	
 		</div>
 	</div>
-</div>
-<!-- End modal -->
-<script src="<?php echo $backend_assets; ?>custom/js/polygon.js"></script>
-
+ 	<!-- end row -->        
+</section>
+<!-- end widget grid -->

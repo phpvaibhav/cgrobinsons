@@ -4,6 +4,7 @@
   height:500px;
 }
 </style>
+
 <?php $backend_assets=base_url().'backend_assets/'; ?>
 <div class="row">
 	<div class="col-sm-12">

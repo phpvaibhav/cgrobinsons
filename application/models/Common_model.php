@@ -40,6 +40,17 @@ class Common_model extends CI_Model {
             return false;
         }   
     }
+      /* Delete RECORD FROM TABLE */
+    function deleteDataJobType($table,$where,$where_in){
+        $this->db->where($where);
+        $this->db->where_not_in('questionId',$where_in);
+        $this->db->delete($table); 
+        if($this->db->affected_rows() > 0){
+            return true;
+        }else{
+            return false;
+        }   
+    }
     
     /* GET SINGLE RECORD 
      * Modified in ver 2.0

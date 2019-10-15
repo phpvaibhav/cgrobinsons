@@ -111,7 +111,7 @@ define('ADMIN_DEFAULT_AVATAR', 'backend_assets/img/avatars/1.png'); //user place
 
 //Title, Site name, Copyright etc
 define('SITE_NAME','CG ROBINSON`S'); //your project name
-define('COPYRIGHT','&copy; ' . date('Y'). ', CG ROBINSON`S. All rights reserved.');
+define('COPYRIGHT',' &copy; ' . date('Y'). ', CG ROBINSON`S. All rights reserved.');
 define('INFO_EMAIL','info@project.com'); //your project name
 
 
@@ -136,4 +136,3 @@ define('APP_ADMIN_ASSETS_IMG', 'backend_assets/img/');
 define('BUCKETNAME', 'cg-robinsons');
 define('S3JOBS_URL', 'https://cg-robinsons.s3.us-east-2.amazonaws.com/jobs/');
 define('S3VEHICLE_URL', 'https://cg-robinsons.s3.us-east-2.amazonaws.com/vehicles/');
-
