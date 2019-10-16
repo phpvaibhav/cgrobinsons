@@ -58,6 +58,7 @@ class Jobtype extends Common_Back_Controller {
          $data['front_scripts'] = array('backend_assets/custom/js/jobtype.js');
         $this->load->admin_render('edit', $data, '');
     } //end function
+
    
  
 }

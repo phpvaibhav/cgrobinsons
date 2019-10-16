@@ -57,6 +57,19 @@ class Job_model extends CI_Model {
         endif;
         return false;
     } //end function 
+    function jobTypeQuetions($jobId,$jobTypeId){
+        $array = array();
+        $this->db->select('q.questionId,q.question,q.type,q.options,ans.answerId,ans.answer');
+        $this->db->from('jobTypeQuestions as q');
+        $this->db->join('jobQuestionAnswer ans','ans.questionId=q.questionId','left');
+        $this->db->where(array('ans.jobId'=>$jobId,'q.jobTypeId'=>$jobTypeId));
+        $sql=$this->db->get();
+        if($sql->num_rows()){
+            $array = $sql->result();
+        }
+        return $array; 
+
+    }//end function
    
 
 

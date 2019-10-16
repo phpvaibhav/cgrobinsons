@@ -4,7 +4,6 @@
   height:500px;
 }
 </style>
-
 <?php $backend_assets=base_url().'backend_assets/'; ?>
 <div class="row">
 	<div class="col-sm-12">
@@ -35,6 +34,7 @@
 								<?php
 								$showbtn = false;
 								$labelShow ="";
+								$timeShow =false;
 								switch ($job['jobStatus']) {
 									case 0:
 
@@ -52,6 +52,7 @@
 										$showtitle = "Complete Job";	
 										$showbtn = true;  
 										$labelShow ='<label class="text-center center-block padding-10 label label-warning"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i>&nbsp;&nbsp;In Progress</label>';
+										$timeShow =true;
 										break;
 									case 2:
 										$msg = "";
@@ -60,6 +61,7 @@
 										$btn = "btn-warning";
 										$showtitle="";
 										$labelShow ='<label class="text-center center-block padding-10 label label-success"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Completed</label>';
+										$timeShow =true;
 										break;
 									
 									default:
@@ -81,7 +83,7 @@
 							<?php endif; if($job['jobStatus'] !=2): ?>
 							
 							<li>
-								<a href="javascript:void(0);" class="btn btn-labeled btn-info" data-toggle="modal" data-target="#editJob"> <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Edit </a>
+								<a href="<?php echo base_url().'jobs/editJob/'.encoding($job['jobId']); ?>" class="btn btn-labeled btn-info"> <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Edit </a>
 							</li>
 							
 							<li>
@@ -105,6 +107,14 @@
 									<strong>Job Status</strong>
 									<span class="pull-right"> <?php echo $labelShow; ?></span>
 								</div>
+								<?php if($timeShow): ?>
+								<br>
+								<div class="col-lg-12 col-md-12 col-sm-12" >
+									<strong>Job Work Time Duration </strong>
+									<span class="pull-right"> <label class="text-center center-block padding-10 label label-info"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<?php echo $job['timeDuration']; ?></label></span>
+
+								</div>
+							<?php endif; ?>
 							</div>
 					
 						<fieldset>
@@ -128,24 +138,13 @@
 								<li class="list-group-item">
 									<span class="pull-right txt-color-darken"><?php echo date("d F Y",strtotime($job['startDate']))." ".$job['startTime']; ?></span>	<strong>Creation Date</strong>
 								</li>
-								<li class="list-group-item">
-								<span class="pull-right txt-color-darken"><?php echo $job['timeDuration']; ?></span>	<strong>Job Work  Duration</strong>
-									
-								</li>
+								
+
 								
 							
 							</ul>
 						</fieldset>							
-						
-						<div class="timeline-seperator text-center"></div>
-						
-					</div>
-				</div>
-				<div class="col-sm-12 col-md-6 col-lg-6">
-					
-							 						<div class="well well-light well-sm margin padding">
-						<div class="timeline-seperator text-center"></div>
-					<header>
+						<header>
 						<h5>Address</h5>
 					</header>
 					<div class="timeline-seperator text-center"></div>
@@ -172,14 +171,39 @@
 								<li class="list-group-item">
 									<span class="pull-right"><?php echo $job['country']; ?></span>	<strong>Country</strong>
 								</li>
-								
 							</ul>
+						</fieldset>
+						<div class="timeline-seperator text-center"></div>
+						
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-6">
+					
+					<div class="well well-light well-sm margin padding">
+						
+					<header>
+						<h5>Job Type Questions (<b><?php echo $job['jobType']; ?></b>)</h5>
+					</header>
+					<div class="timeline-seperator text-center"></div>
 							
+
+						<fieldset>
+							<ul class="list-unstyled">
+								<?php if(!empty($questions)){ foreach ($questions as $key => $question) { ?>
+								<li class="list-group-item">
+									<p><strong>Question <?= $key+1;?>: <?= $question->question;?> </strong></p>
+									<p><strong>Answer :</strong> <?= !empty($question->answer) ? $question->answer :"NA";?></p>
+								</li>
+								<?php } }else{ ?>
+									<li class="list-group-item">
+									<p class="text-center"><strong>No questions found right now</strong></p>
+									
+								</li>
+								<?php } ?>
+							
+							</ul>
 						</fieldset>
 					</div>	
-						
-							
-					
 				</div>
 			</div>
 			<?php if($job['geoFencing']==1): ?>
@@ -193,7 +217,14 @@
 						<div class="timeline-seperator text-center"></div>		
 						<fieldset>
 								<div id="map-show"></div>
+						</fieldset>	
+						
+						<fieldset>
+								<!-- <img src="<?php echo $job['geoFencingUrl']; ?>">	 --> <!-- <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?php echo $job['latitude'] ?>,<?php echo $job['longitude'] ?>&zoom=10&scale=1&size=640x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C<?php echo $job['latitude'] ?>,<?php echo $job['longitude'] ?>&path=fillcolor:0xAA000033%7Ccolor:0xFF0000|weight:1|<?php echo $geopint; ?>&key=<?php echo GOOGLE_API_KEY; ?>"> -->	
+								<!-- <img src="https://maps.googleapis.com/maps/api/staticmap?center=22.719568,75.857727&zoom=10&scale=1&size=800x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C22.719568,75.857727&path=fillcolor:0xAA000033%7Ccolor:0xff0000ff|weight:2|22.938537,75.897552|22.836058,76.073334|22.630868,76.225769|22.464719,75.779449|22.728435,75.519897|22.763896,75.657227|22.900591,75.742371|22.9183,75.856354&key=AIzaSyDjhKBJtoevmCuR5iD1El6cuDHTMByw9Co"> -->
 						</fieldset>
+						<!-- path=color:0xff0000ff|weight:5|40.737102,-73.990318|40.749825,-73.987963|40.752946,-73.987384|40.755823,-73.986397 -->
+
 					</div>
 				</div>
 			</div>
@@ -478,9 +509,9 @@ function initMap() {
   var myLatLng = new google.maps.LatLng(areaLatitude,areaLongitude);
   // General Options
   var mapOptions = {
-    zoom: 10,
+    zoom: 19,
     center: myLatLng,
-    mapTypeId: google.maps.MapTypeId.SATELLITE
+    mapTypeId: google.maps.MapTypeId.SATELLITE,//google.maps.MapTypeId.RoadMap
   };
   var map = new google.maps.Map(document.getElementById('map-show'),mapOptions);
   // Polygon Coordinates

@@ -41,7 +41,7 @@
 												</section>
 												<section class="col col-6">
 												    <label class="select">
-												        <select name="jobTypeId">
+												        <select name="jobTypeId" onchange="getQuestions(this);">
 												            <option value="" selected="" disabled="">Job Type</option>
 												            <?php foreach ($jobTypes as $jt => $type) {?>
 												            <option value="<?php echo $type->jobTypeId; ?>"><?php echo $type->jobType; ?></option>
@@ -85,7 +85,26 @@
 													</label>
 												</section>
 											</div>
+											<div class="row queDataHideShow">
+
+												<section>
+													<div class="col col-md-12">
+													<label class="label"><strong>Job Type Questions</strong></label>
+												</div>	
+												</section>
+												<section id="showQue">
+													
+														<div class="col col-md-12">
+															<label class="checkbox state-error"><input type="checkbox" name="checkbox"><i></i> <strong> Alexandra</strong></label>
+														
+														</div>
+												</section>	
+													
+													
+												
+											</div>
 										</fieldset>
+									
 										<header>
 											Address <span class="getAddressshow  pull-right"><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-toggle="modal" data-target="#setAddress">Previous Address</a></span>
 										</header>

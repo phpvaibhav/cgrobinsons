@@ -16,10 +16,10 @@ class Jobs extends Common_Service_Controller{
         $authtoken  = $this->api_model->generate_token();
         switch ($userType) {
             case 1:
-             $where =  array('j.customerId'=> $userId);
+             $where =  array('j.customerId'=> $userId,'j.jobStatus !='=>2);
                 break;
             case 2:
-              $where =  array('j.driverId'=> $userId);
+              $where =  array('j.driverId'=> $userId,'j.jobStatus !='=>2);
                 break;
             
             default:
@@ -230,6 +230,35 @@ class Jobs extends Common_Service_Controller{
             }
         } 
         $this->response($response);    
+    }//end function
+    function jobQuestionAnwer_post(){
+        $authCheck  = $this->check_service_auth();
+        $authToken  = $this->authData->authToken;
+        $driverId   = $this->authData->id;
+        $this->form_validation->set_rules('jobId', 'jobId', 'trim|required');
+        $this->form_validation->set_rules('questionId', 'questionId', 'trim|required');
+        $this->form_validation->set_rules('answer', 'answer', 'trim|required');
+        if($this->form_validation->run() == FALSE){
+            $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
+        }else{
+            $jobId          = $this->post('jobId');
+            $questionId     = $this->post('questionId');
+            $answer         = $this->post('answer');
+            $where          = array('questionId'=>$questionId,'jobId'=>$jobId);
+            $isExist        = $this->common_model->is_data_exists('jobQuestionAnswer',$where);
+            if($isExist){
+                $update = $this->common_model->updateFields('jobQuestionAnswer',array('answer'=>$answer),$where);
+                if($update){
+                    $response = array('status' => SUCCESS, 'message' =>ResponseMessages::getStatusCodeMessage(122));
+                }else{
+                     $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(118));
+                }
+                 
+            }else{
+                $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(118));  
+            }
+        }
+        $this->response($response);
     }//end function
 }//End Class 
 

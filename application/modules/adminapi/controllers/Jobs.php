@@ -26,9 +26,10 @@ class Jobs extends Common_Admin_Controller{
             
         }
         else{
-      
+         
                 $data_val['jobName']       = $this->post('jobName');
                 $data_val['jobTypeId']     = $this->post('jobTypeId');
+                $jobTypeId                 = $this->post('jobTypeId');
                 $data_val['driverId']      = $this->post('driverId');
                 $data_val['customerId']    = $this->post('customerId');
                 $data_val['startDate']     = date("Y-m-d",strtotime($this->post('startDate')));
@@ -48,6 +49,7 @@ class Jobs extends Common_Admin_Controller{
                 $customer_val['latitude']              = $this->post('latitude');
                 $customer_val['longitude']             = $this->post('longitude');
                 $customer_val['customerId']             = $this->post('customerId');
+                $questionId                             = $this->post('questionId');
                
                 $jobId  = decoding($this->post('jobId'));
 
@@ -109,6 +111,22 @@ class Jobs extends Common_Admin_Controller{
                         $this->common_model->insertData('customerAddress',$customer_val);
                     }
                 /*customer add address*/
+                /*question*/
+                    if(isset($questionId) && !empty($questionId)){
+                        $x=0;
+                        $queData =array();
+                        foreach ($questionId as $key => $value) {
+                           
+                           $queData[$x]['jobId']        =  $result ; 
+                           $queData[$x]['jobTypeId']    =  $jobTypeId ;
+                           $queData[$x]['questionId']   =  $value ;
+                           $x++;
+                        }
+                        if(!empty($queData)){
+                            $this->common_model->insertBatch('jobQuestionAnswer', $queData);
+                        }
+                    }//endif
+                /*question*/
                      $response = array('status'=>SUCCESS,'message'=>$msg);
                 }else{
                      $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));

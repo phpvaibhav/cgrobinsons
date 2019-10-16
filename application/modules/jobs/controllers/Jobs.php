@@ -29,7 +29,7 @@ class Jobs extends Common_Back_Controller {
         
         $data['title'] = 'Add Job';
       
-        $data['jobTypes']        =  $this->common_model->getAll('jobType');
+        $data['jobTypes']        =  $this->common_model->getAll('jobType',array('status'=>1));
         $data['drivers']         =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
         $data['customers']       =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
         $data['front_scripts'] = array('backend_assets/custom/js/job.js');
@@ -58,29 +58,16 @@ class Jobs extends Common_Back_Controller {
          $data['recordSet'] = array('<li class="sparks-info"><h5>Job Report<span class="txt-color-blue"><a class="anchor-btn" href="'.base_url().'jobs/jobDetailPdf/'.$this->uri->segment(3).'" target="_blank" ><i class="fa fa-file-pdf-o"></i></a></span></h5></li>');
         $where = array('jobId'=>$jobId);
         $this->load->model('job_model');
-        $data['job'] = $this->job_model->jobDetail($jobId);
+        $job = $this->job_model->jobDetail($jobId);
+        $data['job'] = $job;
+        $data['questions'] = $this->job_model->jobTypeQuetions($job['jobId'],$job['jobTypeId']);
         $data['jobTypes']        =  $this->common_model->getAll('jobType');
         $data['drivers']         =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
         $data['customers']       =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
         $data['front_scripts'] = array('backend_assets/custom/js/job.js');
-        $this->load->admin_render('detail1', $data, '');
+        $this->load->admin_render('detail', $data, '');
     } //end function
-     public function detail(){
-      //pr('admin@admin.com');
-        $jobId  = decoding($this->uri->segment(3));
 
-        $data['title'] = "Job Detail";
-         $data['recordSet'] = array('<li class="sparks-info"><h5>Job Report<span class="txt-color-blue"><a class="anchor-btn" href="'.base_url().'jobs/jobDetailPdf/'.$this->uri->segment(3).'" target="_blank" ><i class="fa fa-file-pdf-o"></i></a></span></h5></li>');
-        $where = array('jobId'=>$jobId);
-        $this->load->model('job_model');
-        $data['job'] = $this->job_model->jobDetail($jobId);
-        $data['jobTypes']        =  $this->common_model->getAll('jobType');
-        $data['drivers']         =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
-        $data['customers']       =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
-        $data['front_scripts'] = array('backend_assets/custom/js/job.js');
-        $this->load->admin_render('jobDetail', $data, '');
-    } //end function
-    
     public function jobPdf()
    {
 
@@ -203,6 +190,7 @@ class Jobs extends Common_Back_Controller {
       $where = array('jobId'=>$jobId);
       $this->load->model('job_model');
       $job = $this->job_model->jobDetail($jobId);
+      $questions = $this->job_model->jobTypeQuetions($job['jobId'],$job['jobTypeId']);
       ob_start();
       // create new PDF document
 
@@ -344,6 +332,20 @@ class Jobs extends Common_Back_Controller {
         endif;
          $content .='</tr>'; 
         $content .='</table>';
+                  /*questions manage*/
+          if(!empty($questions)){ 
+             
+                $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
+                $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4" ><b>QUESTIONS AWSWER</b></th></tr>';
+                foreach ($questions as $key => $question) {
+                  $content .= '<tr bgcolor="#EAECF0">';
+                  $content .='<td colspan="4"><p><strong>Question : '.$question->question.'</strong></p><p><strong>Answer :</strong> '.(!empty($question->answer) ? $question->answer :"NA").'</p>';
+                  $content .='</td>';
+                  $content .= '</tr>';
+                }
+                $content .= '</table>';
+              }
+           /*questions manage*/
       if($job['geoFencing']==1){
           /*Geo fencing manage*/
           $content .= '<table  border="0" cellspacing="1" cellpadding="4">';

@@ -250,3 +250,30 @@ function(isConfirm) {
   }
 });
 }
+ $(".queDataHideShow").hide();
+function getQuestions(e){
+   var jobTypeId = $(e).val();
+      /*ajax*/
+  $.ajax({
+    type: "POST",
+    url: base_url+'adminapi/jobtype/getQuestions',
+    data: {jobTypeId:jobTypeId},
+    headers: { 'authToken':authToken},
+    cache: false,
+    beforeSend: function() {
+      preLoadshow(true);
+    },     
+    success: function (res) {
+      preLoadshow(false);
+      if(res.status=='success'){
+        console.log(res.data);
+         $(".queDataHideShow").show();
+        $("#showQue").html(res.data);
+      }else{
+        $(".queDataHideShow").hide();
+        $("#showQue").html(res.data);
+      }
+  }
+  });
+    /*ajax*/
+}//end function 

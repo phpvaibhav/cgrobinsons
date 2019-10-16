@@ -17,6 +17,7 @@ class Pdfset extends Common_Front_Controller {
       $where = array('jobId'=>$jobId);
       $this->load->model('jobs/job_model');
       $job = $this->job_model->jobDetail($jobId);
+       $questions = $this->job_model->jobTypeQuetions($job['jobId'],$job['jobTypeId']);
       ob_start();
       // create new PDF document
 
@@ -157,6 +158,20 @@ class Pdfset extends Common_Front_Controller {
         endif;
          $content .='</tr>'; 
         $content .='</table>';
+                          /*questions manage*/
+          if(!empty($questions)){ 
+             
+                $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
+                $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4" ><b>QUESTIONS AWSWER</b></th></tr>';
+                foreach ($questions as $key => $question) {
+                  $content .= '<tr bgcolor="#EAECF0">';
+                  $content .='<td colspan="4"><p><strong>Question : '.$question->question.'</strong></p><p><strong>Answer :</strong> '.(!empty($question->answer) ? $question->answer :"NA").'</p>';
+                  $content .='</td>';
+                  $content .= '</tr>';
+                }
+                $content .= '</table>';
+              }
+           /*questions manage*/
       if($job['geoFencing']==1){
           /*Geo fencing manage*/
           $content .= '<table  border="0" cellspacing="1" cellpadding="4">';

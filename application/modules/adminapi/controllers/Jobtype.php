@@ -5,6 +5,7 @@ class Jobtype extends Common_Admin_Controller{
     public function __construct(){
         parent::__construct();
         $this->check_admin_service_auth();
+
     }
     public function createJobType_post(){
        $jobTypeId  = decoding($this->post('jobTypeId'));
@@ -114,7 +115,7 @@ class Jobtype extends Common_Admin_Controller{
         $action ='';
         $no++;
         $row = array();
-         $jobLink = base_url().'jobtype/jobtypeDetail/'.encoding($serData->jobTypeId);
+        $jobLink = base_url().'jobtype/detail/'.encoding($serData->jobTypeId);
         $row[] = $no;
         //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
         $row[] = '<a href="'.$jobLink.'"  class="on-default edit-row table_action">'.display_placeholder_text($serData->jobType).'</a>'; 
@@ -199,6 +200,20 @@ class Jobtype extends Common_Admin_Controller{
         }
         $this->response($response);
     }//end function
+    function getQuestions_post(){
+        $jobTypeId          = $this->post('jobTypeId');
+        $questions          =  $this->common_model->getAll('jobTypeQuestions',array('jobTypeId'=>$jobTypeId));
+        if($questions){
+            $html ='';
+            foreach ($questions as $key => $question) {
+                $html .= '<div class="col col-md-12"><label class="checkbox"><input type="checkbox" name="questionId[]" value="'.$question->questionId.'" ><i></i><strong class="txt-color-blueDark">'.$question->question.'</strong></label></div>';
+            }
+            $response = array('status'=>SUCCESS,'message'=>ResponseMessages::getStatusCodeMessage(118),'data'=>$html);
+        }else{
+            $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118), 'data'=>'');  
+        }
+        $this->response($response);
+    }//end fucntion
 
 }//End Class 
 

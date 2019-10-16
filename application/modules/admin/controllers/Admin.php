@@ -47,6 +47,7 @@ class Admin extends Common_Back_Controller {
         $data['drivers'] = $this->common_model->get_total_count('users',array('userType' =>2));
         $data['jobs'] = $this->common_model->get_total_count('jobs');
         $data['vehicles'] = $this->common_model->get_total_count('vehicles');
+        $data['jobType'] = $this->common_model->get_total_count('jobType');
         
         $this->load->admin_render('dashboard', $data, '');
     }
