@@ -173,7 +173,8 @@ class Vehicles extends Common_Admin_Controller{
         $row = array();
         $row[] = $no;
         //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
-        $row[] = display_placeholder_text($serData->year); 
+          $link = base_url().'vehicles/vehicleDetail/'.encoding($serData->vehicleId);
+        $row[] = '<a href="'.$link.'"  class="on-default edit-row table_action">'.display_placeholder_text($serData->year).'</a>'; 
         $row[] = display_placeholder_text($serData->manufacturer); 
         $row[] = display_placeholder_text($serData->model); 
         $row[] = display_placeholder_text($serData->vin); 

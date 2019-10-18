@@ -137,7 +137,8 @@ class Drivers extends Common_Admin_Controller{
         $row = array();
         $row[] = $no;
         //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
-        $row[] = display_placeholder_text($serData->fullName); 
+        $userLink = base_url().'drivers/driverDetail/'.encoding($serData->id);
+        $row[] = '<a href="'.$userLink.'"  class="on-default edit-row table_action">'.display_placeholder_text($serData->fullName).'</a>'; 
         $row[] = display_placeholder_text($serData->email); 
         $row[] = display_placeholder_text($serData->contactNumber); 
         if($serData->status){

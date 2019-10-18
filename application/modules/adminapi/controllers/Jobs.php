@@ -98,6 +98,15 @@ class Jobs extends Common_Admin_Controller{
                     $this->common_model->deleteData('jobQuestionAnswer',array('jobId'=>$jobId,'questionId'=>$value));
                 }
             }
+        }else{
+            $questionId = array();
+            $array_diff = array_diff($que,$questionId);
+           if(!empty($array_diff)){
+                foreach ($array_diff as $key => $value) {
+                 
+                    $this->common_model->deleteData('jobQuestionAnswer',array('jobId'=>$jobId,'questionId'=>$value));
+                }
+            } 
         }
         //delete quetion
         

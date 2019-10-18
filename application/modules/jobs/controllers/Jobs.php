@@ -151,7 +151,7 @@ class Jobs extends Common_Back_Controller {
                     <th  width="15%">Status</th>
                 </tr>';
             //$content .= $this->fetch_employeePdf_info();
-          $content .= '</table>';
+         // $content .= '</table>';
        $this->load->model('job_model');
        $jobs = $this->job_model->assignJobs();
 

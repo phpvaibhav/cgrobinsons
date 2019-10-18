@@ -208,8 +208,10 @@ class Jobtype extends Common_Admin_Controller{
         $questions          =  $this->common_model->getAll('jobTypeQuestions',array('jobTypeId'=>$jobTypeId));
         if($questions){
             $html ='';
+            $colors = array('info', 'warning','success');
             foreach ($questions as $key => $question) {
-                $html .= '<div class="col col-md-12"><label class="checkbox"><input type="checkbox" name="questionId[]" value="'.$question->questionId.'" '.(in_array($question->questionId,$que) ? 'checked="checked"' :'').(($pendingJob!=0)?'onclick="return false;"':'').' ><i></i><strong class="txt-color-blueDark">'.$question->question.'</strong></label></div>';
+              $rand_color = $colors[array_rand($colors)];
+                $html .= '<div class="col col-md-12"><p class="alert alert-'.$rand_color.'"><label class="checkbox"><input type="checkbox" class="checkbox_question"  name="questionId[]" value="'.$question->questionId.'" '.(in_array($question->questionId,$que) ? 'checked="checked"' :'').(($pendingJob!=0)?'onclick="return false;"':'onclick="funcheck();"').' ><i></i><strong class="txt-color-blueDark">'.$question->question.'</strong></label></p></div>';
             }
             $response = array('status'=>SUCCESS,'message'=>ResponseMessages::getStatusCodeMessage(118),'data'=>$html);
         }else{

@@ -268,8 +268,9 @@ function getQuestions(e){
       preLoadshow(false);
       if(res.status=='success'){
         console.log(res.data);
-         $(".queDataHideShow").hide();
+        $(".queDataHideShow").hide();
         $("#showQue").html(res.data);
+       funcheck();
       }else{
         $(".queDataHideShow").hide();
         $("#showQue").html(res.data);
@@ -278,3 +279,36 @@ function getQuestions(e){
   });
     /*ajax*/
 }//end function 
+$(document).ready(function(){
+    $('#select_questionAll').on('click',function(){
+        if(this.checked){
+            $('.checkbox_question').each(function(){
+                this.checked = true;
+            });
+        }else{
+             $('.checkbox_question').each(function(){
+                this.checked = false;
+            });
+        }
+    });
+    
+/*    $('.checkbox_questionA').on('click',function(){
+      alert($('.checkbox_question:checked').length +"checl=="+ $('.checkbox_question').length);
+        if($('.checkbox_question:checked').length == $('.checkbox_question').length){
+          alert($('.checkbox_question:checked').length +"=="+ $('.checkbox_question').length);
+            $('#select_questionAll').prop('checked',true);
+        }else{
+         alert($('.checkbox_question:checked').length +"=="+ $('.checkbox_question').length);
+            $('#select_questionAll').prop('checked',false);
+        }
+    });*/
+});
+function funcheck(){
+    if($('.checkbox_question:checked').length == $('.checkbox_question').length){
+    
+      $('#select_questionAll').prop('checked',true);
+    }else{
+   
+      $('#select_questionAll').prop('checked',false);
+    }
+}

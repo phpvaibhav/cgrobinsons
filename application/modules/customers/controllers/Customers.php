@@ -112,7 +112,7 @@ class Customers extends Common_Back_Controller {
                 
                 </tr>';
             //$content .= $this->fetch_employeePdf_info();
-          $content .= '</table>';
+        
       
           $users =  $this->common_model->getAll('users',array('userType'=>1),'id','desc');
 

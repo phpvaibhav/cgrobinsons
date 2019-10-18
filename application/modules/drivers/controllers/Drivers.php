@@ -113,7 +113,7 @@ class Drivers extends Common_Back_Controller {
                 
                 </tr>';
             //$content .= $this->fetch_employeePdf_info();
-          $content .= '</table>';
+         // $content .= '</table>';
       
           $users =  $this->common_model->getAll('users',array('userType'=>2),'id','desc');
 

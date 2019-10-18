@@ -196,6 +196,7 @@ class Job_model extends CI_Model {
         $this->db->from('jobTypeQuestions as q');
         $this->db->join('jobQuestionAnswer ans','ans.questionId=q.questionId','left');
         $this->db->where(array('ans.jobId'=>$jobId,'q.jobTypeId'=>$jobTypeId));
+        $this->db->order_by('q.questionId','asc');
         $sql=$this->db->get();
         if($sql->num_rows()){
             $array = $sql->result();

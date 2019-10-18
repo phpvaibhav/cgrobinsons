@@ -1,22 +1,21 @@
 <!-- widget grid -->
-  <style type="text/css">
-  #map {
-  width: auto;
-  height:500px;
-}
- #color-palette {
-        clear: both;
-      }
+<style type="text/css">
+	#map {
+		width: auto;
+		height:500px;
+	}
+	#color-palette {
+		clear: both;
+	}
 
-      .color-button {
-        width: 14px;
-        height: 14px;
-        font-size: 0;
-        margin: 2px;
-        float: left;
-        cursor: pointer;
-      }
-
+	.color-button {
+		width: 14px;
+		height: 14px;
+		font-size: 0;
+		margin: 2px;
+		float: left;
+		cursor: pointer;
+	}
 </style>
 <?php $backend_assets=base_url().'backend_assets/';?>
 <?php 
@@ -38,12 +37,10 @@
     <div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 			<div class="well no-padding">
-
 				<form action="jobs/createJob" id="createJob" class="smart-form" novalidate="novalidate" autocomplete="off" enctype="multipart/form-data">
 					<header>
 						Basic Information
 					</header>
-
 					<fieldset>
 						<div class="row">
 							<section class="col col-6">
@@ -99,20 +96,12 @@
 								</label>
 							</section>
 						</div>
-					
-						<div class="row queDataHideShow">
-							<section>
-								<div class="col col-md-12">
-									<label class="label"><strong>Job Type Questions</strong></label>
-								</div>	
-								</section>
-							<section id="showQue">	
-								<div class="col col-md-12">
-									<label class="checkbox state-error"><input type="checkbox" name="checkbox"><i></i> <strong> Alexandra</strong></label>
-								
-								</div>
-							</section>	
-						</div>
+					</fieldset>
+					<header class="queDataHideShow">
+						<label class="checkbox state-error"><input type="checkbox" id="select_questionAll <?= ($job['jobStatus']!=0)?'_1':"";?>"  value="1" <?= ($job['jobStatus']!=0)?'onclick="return false;"':"";?> name="checkbox"><i></i> <strong> Job Type Questions</strong></label>
+					</header>
+					<fieldset class="queDataHideShow">	
+							<section id="showQue"></section>		
 					</fieldset>
 					<header>
 						Address
