@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                   <a href="<?php echo base_url('jobs'); ?>">
-                    <div class="info-box bg-light-green hover-expand-effect">
+                    <div class="info-box bg-purple hover-expand-effect">
                         <div class="icon">
                             <i class="fa fa-tasks"></i>
                         </div>
@@ -64,6 +64,19 @@
                         <div class="content">
                             <div class="text">Job Types</div>
                             <div class="number count-to"><?php echo $jobType; ?></div>
+                        </div>
+                    </div>
+                  </a>
+                </div>   
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                  <a href="<?php echo base_url('reports'); ?>">
+                    <div class="info-box bg-light-green hover-expand-effect">
+                        <div class="icon">
+                            <i class="fa fa-line-chart"></i>
+                        </div>
+                        <div class="content">
+                            <div class="text">Reports</div>
+                            <div class="number count-to">3</div>
                         </div>
                     </div>
                   </a>

@@ -202,11 +202,14 @@ class Jobtype extends Common_Admin_Controller{
     }//end function
     function getQuestions_post(){
         $jobTypeId          = $this->post('jobTypeId');
+        $question          = $this->post('question');
+        $pendingJob          = $this->post('pendingJob');
+        $que = !empty($question) ? explode(",",$question):array();
         $questions          =  $this->common_model->getAll('jobTypeQuestions',array('jobTypeId'=>$jobTypeId));
         if($questions){
             $html ='';
             foreach ($questions as $key => $question) {
-                $html .= '<div class="col col-md-12"><label class="checkbox"><input type="checkbox" name="questionId[]" value="'.$question->questionId.'" ><i></i><strong class="txt-color-blueDark">'.$question->question.'</strong></label></div>';
+                $html .= '<div class="col col-md-12"><label class="checkbox"><input type="checkbox" name="questionId[]" value="'.$question->questionId.'" '.(in_array($question->questionId,$que) ? 'checked="checked"' :'').(($pendingJob!=0)?'onclick="return false;"':'').' ><i></i><strong class="txt-color-blueDark">'.$question->question.'</strong></label></div>';
             }
             $response = array('status'=>SUCCESS,'message'=>ResponseMessages::getStatusCodeMessage(118),'data'=>$html);
         }else{

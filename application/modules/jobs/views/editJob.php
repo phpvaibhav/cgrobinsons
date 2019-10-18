@@ -54,7 +54,7 @@
 							</section>
 							<section class="col col-6">
 							    <label class="select">
-							        <select name="jobTypeId">
+							        <select name="jobTypeId" id="jobTypeId" onchange="getQuestions(this);">
 							            <option value="" selected="" disabled="">Job Type</option>
 							            <?php foreach ($jobTypes as $jt => $type) {?>
 							            <option value="<?php echo $type->jobTypeId; ?>" selected="<?= $job['jobName']==$type->jobTypeId ?'selected':'';  ?>"><?php echo $type->jobType; ?></option>
@@ -62,6 +62,7 @@
 							           
 							        </select> <i></i> </label>
 							</section>
+
 						</div>
 						<div class="row">
 							<section class="col col-6">
@@ -97,6 +98,20 @@
 									<input type="text" name="startTime" placeholder="Creation Time"  value="<?php echo$job['startTime']; ?>" id="timepicker" class="" readonly="">
 								</label>
 							</section>
+						</div>
+					
+						<div class="row queDataHideShow">
+							<section>
+								<div class="col col-md-12">
+									<label class="label"><strong>Job Type Questions</strong></label>
+								</div>	
+								</section>
+							<section id="showQue">	
+								<div class="col col-md-12">
+									<label class="checkbox state-error"><input type="checkbox" name="checkbox"><i></i> <strong> Alexandra</strong></label>
+								
+								</div>
+							</section>	
 						</div>
 					</fieldset>
 					<header>
@@ -242,6 +257,12 @@
 </div>
 <!-- End modal -->
 <script type="text/javascript">
+	var question ="<?php echo $que; ?>";
+	var pendingJob ="<?php echo $job['jobStatus']; ?>";
+	// A $( document ).ready() block.
+$( document ).ready(function() {
+      $('#jobTypeId').trigger('change');
+});
 	var geoFencing = "<?php echo $job['geoFencing']; ?>";
 	if(geoFencing==1){
 	  $(".boxshow").show();

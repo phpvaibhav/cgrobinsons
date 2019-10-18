@@ -17,7 +17,6 @@ class Jobs extends Common_Back_Controller {
         
         $data['title'] = 'Jobs';
         $count = $this->common_model->get_total_count('jobs');
-        /*<li class="sparks-info"><h5>Job<span class="txt-color-blue"><a class="anchor-btn" data-toggle="modal" data-target="#addJob"><i class="fa fa-plus-square"></i></a></span></h5></li>*/
         $data['recordSet'] = array('<li class="sparks-info"><h5>Job<span class="txt-color-blue"><a href="'.base_url().'jobs/addJob" class="anchor-btn"><i class="fa fa-plus-square"></i></a></span></h5></li>','<li class="sparks-info"><h5>Jobs PDF<span class="txt-color-blue"><a class="anchor-btn" href="'.base_url().'jobs/jobPdf" target="_blank" ><i class="fa fa-file-pdf-o"></i></a></span></h5></li>','<li class="sparks-info"><h5>Total Jobs <span class="txt-color-darken" id="totalCust"><i class="fa fa-lg fa-fw fa fa-tasks"></i>&nbsp;'.$count.'</span></h5></li>');
         $data['jobTypes']        =  $this->common_model->getAll('jobType');
         $data['drivers']         =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
@@ -45,6 +44,12 @@ class Jobs extends Common_Back_Controller {
         $data['customers']       =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
          $this->load->model('job_model');
         $data['job'] = $this->job_model->jobDetail($jobId);
+        $questions         =  $this->common_model->getAll('jobQuestionAnswer',array('jobId'=>$jobId));
+        $que =array();
+        foreach ($questions as $key => $question) {
+           $que[] = $question->questionId;
+        }
+        $data['que'] = !empty($que) ? implode(",",$que):"";
         $data['front_scripts'] = array('backend_assets/custom/js/job.js');
         
         $this->load->admin_render('editJob', $data);

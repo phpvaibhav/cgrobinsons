@@ -34,18 +34,19 @@ echo "</pre>";*/?>
 									<?php if(!empty($questions)){  foreach ($questions as $key => $question) { ?>
 									<li>
 										<div class="smart-timeline-icon">
-											<i class="fa fa-file-text"></i>
+											<i class="fa fa-question"></i>
 										</div>
 										
 										<div class="smart-timeline-content">
-											<p>
-												<strong><?= $question->question;?></strong>
-											</p>
 											
-											<div class="well well-sm display-inline">
-												<p>Type- <strong> <?=  ucfirst($question->type); ?></strong></p> 
+											
+											<div class="well well-sm">
+												<p>
+													Question <?= ($key+1);?>: <strong><?= $question->question;?></strong>
+												</p>
+												<p>Type : <strong> <?=  ucfirst($question->type); ?></strong></p> 
 												<?php if($question->type !='text'): ?>
-												<p>Option- <strong> <?php $question= !empty($question->options) ? json_decode($question->options,true):array(); echo implode(",", $question); ?></strong></p>
+												<p>Option : <strong> <?php $question= !empty($question->options) ? json_decode($question->options,true):array(); echo implode(",", $question); ?></strong></p>
 												<?php endif; ?>
 											</div>		
 														

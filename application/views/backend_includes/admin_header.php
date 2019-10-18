@@ -226,25 +226,6 @@
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "reports") ? "active" : "" ?>">
           <a href="<?php echo base_url('reports'); ?>" title="Reports"><i class="fa fa-lg fa-fw fa-line-chart"></i> <span class="menu-item-parent">Reports</span></a>
         </li>
-
-
-      <!--   <li class="<?php echo (strtolower($this->router->fetch_class()) == "customers") ? "active open" : "" ?>">
-          <a href="#" title="Customers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Customers</span></a>
-          <ul>
-            <li class="<?php echo (($this->uri->segment('2') == "" OR $this->uri->segment('2') == "customerDetail") && $this->uri->segment('1') == "customers") ? "active" : ""; ?>">
-              <a href="<?php echo base_url().'customers'; ?>" title="Customers"><span class="menu-item-parent">
-            Customers</span></a>
-            </li>
-
-            <li class="<?php echo ($this->uri->segment('2') == "add_customer" ) ? "active" : ""; ?>">
-              <a href="<?php echo base_url().'add_customer'; ?>" title="Add customer"><span class="menu-item-parent">Add Customer</span></a>
-            </li>
-          </ul>
-        </li>         -->
-      
-       
-        
-    
         </ul> 
       </nav>
       

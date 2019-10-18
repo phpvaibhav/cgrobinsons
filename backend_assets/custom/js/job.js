@@ -254,10 +254,11 @@ function(isConfirm) {
 function getQuestions(e){
    var jobTypeId = $(e).val();
       /*ajax*/
+     // alert(question);
   $.ajax({
     type: "POST",
     url: base_url+'adminapi/jobtype/getQuestions',
-    data: {jobTypeId:jobTypeId},
+    data: {jobTypeId:jobTypeId,question:question,pendingJob:pendingJob},
     headers: { 'authToken':authToken},
     cache: false,
     beforeSend: function() {
@@ -267,7 +268,7 @@ function getQuestions(e){
       preLoadshow(false);
       if(res.status=='success'){
         console.log(res.data);
-         $(".queDataHideShow").show();
+         $(".queDataHideShow").hide();
         $("#showQue").html(res.data);
       }else{
         $(".queDataHideShow").hide();

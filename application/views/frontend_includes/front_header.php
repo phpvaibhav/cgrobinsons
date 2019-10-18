@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Reservision | <?php if(!empty($page_title)){echo $page_title;}?></title>
+    <title>| <?php if(!empty($page_title)){echo $page_title;}?></title>
     <?php
         $frontend_assets =  base_url().'frontend_asset/';
     ?>

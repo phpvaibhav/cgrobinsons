@@ -99,10 +99,9 @@
 														
 														</div>
 												</section>	
-													
-													
-												
+	
 											</div>
+
 										</fieldset>
 									
 										<header>
@@ -259,5 +258,9 @@
 	</div>
 </div>
 <!-- End modal -->
+<script type="text/javascript">
+	var question ="";
+	var pendingJob ="0";
+</script>
 <script src="<?php echo $backend_assets; ?>custom/js/polygon.js"></script>
 

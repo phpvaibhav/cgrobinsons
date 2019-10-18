@@ -84,7 +84,23 @@ class Jobs extends Common_Admin_Controller{
                     $geo_val['geoFencing']   = $geoFencing ;
                 /*polygon*/
                 $isExist=$this->common_model->is_data_exists('jobs',$where);
-
+                 $questions         =  $this->common_model->getAll('jobQuestionAnswer',array('jobId'=>$jobId));
+        //delete quetion
+        $que =array();
+        foreach ($questions as $key => $question) {
+           $que[] = $question->questionId;
+        }
+        if(isset($questionId) && !empty($questionId)){
+        $array_diff = array_diff($que,$questionId);
+            if(!empty($array_diff)){
+                foreach ($array_diff as $key => $value) {
+                 
+                    $this->common_model->deleteData('jobQuestionAnswer',array('jobId'=>$jobId,'questionId'=>$value));
+                }
+            }
+        }
+        //delete quetion
+        
                 if($isExist){
                     $result = $this->common_model->updateFields('jobs',$data_val,$where);
                     $result =  $isExist->jobId;
@@ -113,14 +129,21 @@ class Jobs extends Common_Admin_Controller{
                 /*customer add address*/
                 /*question*/
                     if(isset($questionId) && !empty($questionId)){
+                        $array_diff = array_diff($que,$questionId);
+
+
                         $x=0;
                         $queData =array();
+
                         foreach ($questionId as $key => $value) {
-                           
-                           $queData[$x]['jobId']        =  $result ; 
-                           $queData[$x]['jobTypeId']    =  $jobTypeId ;
-                           $queData[$x]['questionId']   =  $value ;
-                           $x++;
+                           if(!in_array($value,$que)){
+
+                                $queData[$x]['jobId']        =  $result ; 
+                                $queData[$x]['jobTypeId']    =  $jobTypeId ;
+                                $queData[$x]['questionId']   =  $value ;
+                                $x++;
+                           }
+                         
                         }
                         if(!empty($queData)){
                             $this->common_model->insertBatch('jobQuestionAnswer', $queData);
@@ -249,10 +272,10 @@ class Jobs extends Common_Admin_Controller{
         }
 
         $output = array(
-            "draw" => $_POST['draw'],
-            "recordsTotal" => $this->job_model->count_all(),
-            "recordsFiltered" => $this->job_model->count_filtered(),
-            "data" => $data,
+            "draw"              => $_POST['draw'],
+            "recordsTotal"      => $this->job_model->count_all(),
+            "recordsFiltered"   => $this->job_model->count_filtered(),
+            "data"              => $data,
         );
         //output to json format
        
