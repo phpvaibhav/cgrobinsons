@@ -5,7 +5,7 @@ class Job_model extends CI_Model {
 
     //var $table , $column_order, $column_search , $order =  '';
     var $table = 'jobs';
-    var $column_order = array('j.jobId','j.jobName','j.jobTypeId','j.driverId','j.customerId','j.startDate','j.startTime','j.jobStatus','c.fullName','jt.jobType','d.fullName'); //set column field database for datatable orderable
+    var $column_order = array('j.jobId','j.jobName','jt.jobType','c.fullName','d.fullName','j.startDate','j.jobStatus'); //set column field database for datatable orderable
     var $column_sel = array('j.jobId','j.jobName','j.jobTypeId','j.driverId','c.fullName as customerName','jt.jobType','d.fullName as driverName','j.customerId','j.jobStatus','j.startDate','j.startTime','(case when (j.jobStatus = 0) 
         THEN "Open" when (j.jobStatus = 1) 
         THEN "In-progress" when (j.jobStatus = 2) 
