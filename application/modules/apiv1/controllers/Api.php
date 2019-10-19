@@ -42,7 +42,7 @@ class Api extends Common_Service_Controller{
                 $userData['authToken']          =   $authtoken;
                 $userData['password']           =   password_hash($this->post('password'), PASSWORD_DEFAULT);
                 $userData['authToken']          =   $authtoken;
-                $userData['passToken']     =   $passToken;
+                $userData['passToken']          =   $passToken;
 
             //user info
             // profile pic upload
@@ -76,9 +76,9 @@ class Api extends Common_Service_Controller{
                     //send mail
                         $maildata['title']    = $result['returnData']->fullName." been invited to join Interface service";
                         $maildata['message']  = "<table><tr><td>Name</td><td>".$result['returnData']->fullName."</td></tr><tr><td>Email</td><td>".$result['returnData']->email."</td></tr></table>";
-                        $subject = "Create customer";
-                        $message=$this->load->view('emails/email',$maildata,TRUE);
-                        $emails = $this->common_model->adminEmails();
+                        $subject    = "Create customer";
+                        $message    = $this->load->view('emails/email',$maildata,TRUE);
+                        $emails     = $this->common_model->adminEmails();
                         if(!empty($emails)){
                        // $this->load->library('smtp_email');
                        // $this->smtp_email->send_mail_multiple($emails,$subject,$message);
@@ -175,7 +175,6 @@ class Api extends Common_Service_Controller{
         }elseif($response['emailType'] == 'SL'){ //SL social login
             $response = array('status' => FAIL, 'message' => 'Social registered users are not allowed to access Forgot password'); 
         }
-
         $this->response($response);
     } //End function
 }//End Class 

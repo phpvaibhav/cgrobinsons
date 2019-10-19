@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 30, 2019 at 01:41 AM
+-- Generation Time: Oct 19, 2019 at 03:55 AM
 -- Server version: 5.6.44-cll-lve
 -- PHP Version: 7.2.7
 
@@ -48,7 +48,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `fullName`, `email`, `password`, `userType`, `profileImage`, `contactNumber`, `status`, `authToken`, `passToken`, `crd`, `upd`) VALUES
-(1, 'Admin', 'admin@admin.com', '$2y$10$RTG0LIJMlWZc0/0bGSvD..LO2SAIA9FAE7CwffXp9ztNA1Wlbcmey', 1, '', '(111) 111-1111', 1, '2ff99e734192dcade434189606aae9065e208c6d', 'e5309a9e62031ca2acfe429e2930c5a2a90dcf1d', '2019-08-01 13:15:47', '2019-09-30 06:41:28'),
+(1, 'Admin', 'admin@admin.com', '$2y$10$RTG0LIJMlWZc0/0bGSvD..LO2SAIA9FAE7CwffXp9ztNA1Wlbcmey', 1, '', '(111) 111-1111', 1, '87c61163b21cc0fec903a4bef4c1164abe402f39', 'e5309a9e62031ca2acfe429e2930c5a2a90dcf1d', '2019-08-01 13:15:47', '2019-10-19 09:44:22'),
 (2, 'Vaibhav', 'vaibhavsharma.otc@gmail.com', '$2y$10$94HB8LW1aF0Ak9Sm5L3PvOZMc4Vu9eVi4WodjHo8bd9sOIw3AI38C', 1, 'dG8hgf6oaIqcwRD5.jpg', '(121) 212-1212', 1, '969e6b412a8bf5f225511eb0343f64266229ee64', 'f039aff9f58a4ed5150ab364b410681f7f7d23db', '2019-08-01 14:03:16', '2019-08-22 05:25:20');
 
 -- --------------------------------------------------------
@@ -72,7 +72,7 @@ CREATE TABLE `assignVehicle` (
 
 INSERT INTO `assignVehicle` (`assignVehicleId`, `vehicleId`, `driverId`, `assignDate`, `crd`, `upd`) VALUES
 (4, 4, 4, '2019-08-08', '2019-08-08 09:29:12', '2019-08-08 09:29:12'),
-(5, 5, 4, '2019-08-08', '2019-08-08 13:00:50', '2019-08-08 13:00:50');
+(5, 5, 18, '2019-08-08', '2019-08-08 13:00:50', '2019-10-03 11:53:26');
 
 -- --------------------------------------------------------
 
@@ -178,7 +178,23 @@ INSERT INTO `customerAddress` (`addressId`, `customerId`, `address`, `street`, `
 (8, 10, 'Abu Dhabi - United Arab Emirates', '', '123456789012345678901234567890', 'Abu Dhabi', 'Abu Dhabi', '', 'United Arab Emirates', '24.45389938', '54.37730026'),
 (9, 11, 'Indore Railway Station, Nehru Park Road, Vallabh Nagar, Indore, Madhya Pradesh, India', '7', 'Nehru Park Road', 'Indore', 'MP', '452003', 'India', '22.71720695', '75.86840820'),
 (11, 13, 'Indore Railway Station, Nehru Park Road, Vallabh Nagar, Indore, Madhya Pradesh, India', '7', 'Nehru Park Road', 'Indore', 'MP', '452003', 'India', '22.71720695', '75.86840820'),
-(12, 14, '149 High St, Yarm, UK', '149', 'High Street', '', 'England', 'TS159A', 'United Kingdom', '54.51137924', '-1.35624695');
+(12, 14, '149 High St, Yarm, UK', '149', 'High Street', '', 'England', 'TS159A', 'United Kingdom', '54.51137924', '-1.35624695'),
+(13, 19, 'Indore Railway Station, Nehru Park Road, Vallabh Nagar, Indore, Madhya Pradesh, India', '7', 'Nehru Park Road', 'Indore', 'MP', '452003', 'India', '22.71720790', '75.86841130'),
+(14, 19, 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '809', 'Agra Bombay Road', 'Indore', 'MP', '452003', 'India', '22.72272700', '75.88707100'),
+(15, 5, 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100'),
+(16, 5, 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100'),
+(17, 7, 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100'),
+(18, 7, 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100'),
+(19, 2, 'The Gatehouse, 84 Billingham Road, Stockton-on-Tees, UK', '84', 'Billingham Road', 'Norton', 'England', 'TS20 2SA', 'United Kingdom', '54.59029030', '-1.30595410'),
+(20, 5, 'Shekhawat Marg, Banni Ki Dhani, Harnathapura, Jhotwara, Jaipur, Rajasthan, India', '', 'Shekhawat Marg', 'Jaipur', 'RJ', '302032', 'India', '26.95181710', '75.72730960'),
+(21, 5, 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100'),
+(22, 5, 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100'),
+(23, 3, 'Palasia Square, Indore, Madhya Pradesh, India', '', '', 'Indore', 'MP', '452001', 'India', '22.72408670', '75.88598180'),
+(24, 13, 'Palasia, Indore, Madhya Pradesh, India', '', '', 'Indore', 'MP', '452001', 'India', '22.72435500', '75.88389440'),
+(25, 7, 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100'),
+(26, 5, 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100'),
+(27, 13, 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100'),
+(28, 2, '7 Middleton Ave, Billingham, UK', '', 'Middleton Avenue', 'Stockton-on-Tees', 'England', '', 'United Kingdom', '54.61283050', '-1.30712640');
 
 -- --------------------------------------------------------
 
@@ -223,7 +239,8 @@ INSERT INTO `customerMeta` (`customerMetaId`, `userId`, `creditHoldStatus`, `add
 (8, 10, 0, 'Abu Dhabi - United Arab Emirates', '', '123456789012345678901234567890', 'Abu Dhabi', 'Abu Dhabi', '', 'United Arab Emirates', '24.45389938', '54.37730026', 'Afyonkarahisar, Afyonkarahisar Merkez/Afyonkarahisar, Turkey', '', '123456789012345678901234567890', 'Afyonkarahisar', 'Afyonkarahisar', '', 'Turkey', '38.75690079', '30.53870010'),
 (9, 11, 0, 'Indore Railway Station, Nehru Park Road, Vallabh Nagar, Indore, Madhya Pradesh, India', '7', 'Nehru Park Road', 'Indore', 'MP', '452003', 'India', '22.71720695', '75.86840820', 'Indiana Department of Education, West Washington Street, Indianapolis, IN, USA', '115', 'West Washington Street', 'Indianapolis', 'IN', '452003', 'United States', '39.76654053', '-86.16078186'),
 (11, 13, 0, 'Indore Railway Station, Nehru Park Road, Vallabh Nagar, Indore, Madhya Pradesh, India', '7', 'Nehru Park Road', 'Indore', 'MP', '452003', 'India', '22.71720695', '75.86840820', 'Indore Railway Station, Nehru Park Road, Vallabh Nagar, Indore, Madhya Pradesh, India', '7', 'Nehru Park Road', 'Indore', 'MP', '452003', 'India', '22.71720695', '75.86840820'),
-(12, 14, 0, '149 High St, Yarm, UK', '149', 'High Street', '', 'England', 'TS159A', 'United Kingdom', '54.51137924', '-1.35624695', '149 High St, Yarm, UK', '149', 'High Street', '', 'England', 'TS159A', 'United Kingdom', '54.51137924', '-1.35624695');
+(12, 14, 0, '149 High St, Yarm, UK', '149', 'High Street', '', 'England', 'TS159A', 'United Kingdom', '54.51137924', '-1.35624695', '149 High St, Yarm, UK', '149', 'High Street', '', 'England', 'TS159A', 'United Kingdom', '54.51137924', '-1.35624695'),
+(13, 19, 0, 'Indore Railway Station, Nehru Park Road, Vallabh Nagar, Indore, Madhya Pradesh, India', '7', 'Nehru Park Road', 'Indore', 'MP', '452003', 'India', '22.71720790', '75.86841130', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '809', 'Agra Bombay Road', 'Indore', 'MP', '452003', 'India', '22.72272700', '75.88707100');
 
 -- --------------------------------------------------------
 
@@ -259,7 +276,34 @@ INSERT INTO `driverMeta` (`driverMetaId`, `userId`, `emergencyPersonName`, `emer
 (1, 4, 'OR', '(534) 534-5354', '2019-08-27', '2019-08-11', '3454354', '2019-08-14', 'Indore Railway Station, Nehru Park Road, Vallabh Nagar, Indore, Madhya Pradesh, India', '7', 'Nehru Park Road', 'Indore', 'MP', '452003', 'India', '22.71719933', '75.86840057'),
 (2, 15, '1234567890', '(123) 456-7890', '1990-03-02', '2019-03-01', '1234567890', '2020-12-31', 'Outthinkcoders, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Shekhar Court', 'Indore', 'MP', '452018', 'India', '22.72272682', '75.88706970'),
 (3, 16, '1234567890', '(12345) 612345', '2019-09-04', '2019-09-02', '1234567890', '2020-02-21', 'Mumbai Domestic airport, Navpada, Vile Parle East, Vile Parle, Mumbai, Maharashtra, India', '', '', 'Mumbai', 'MH', '400099', 'India', '19.09355545', '72.85659027'),
-(4, 17, '1234567890', '(12345) 678900', '2019-09-16', '2019-09-03', '132312123123123123123123123', '2019-09-30', 'India Gate, New Delhi, Delhi, India', '', '', 'New Delhi', 'DL', '', 'India', '28.61108780', '77.23451996');
+(4, 17, '1234567890', '(12345) 678900', '2019-09-16', '2019-09-03', '132312123123123123123123123', '2019-09-30', 'India Gate, New Delhi, Delhi, India', '', '', 'New Delhi', 'DL', '', 'India', '28.61108780', '77.23451996'),
+(5, 18, 'Laneo', '(01642) 123456', '2019-02-02', '2019-10-01', '902024', '2021-01-14', '25 Ambleside Road, Middlesbrough, UK', '25', 'Ambleside Road', '', 'England', 'TS6 0ET', 'United Kingdom', '54.55839250', '-1.15857330');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobQuestionAnswer`
+--
+
+CREATE TABLE `jobQuestionAnswer` (
+  `answerId` bigint(20) NOT NULL,
+  `jobId` bigint(20) NOT NULL,
+  `jobTypeId` bigint(20) NOT NULL,
+  `questionId` bigint(20) NOT NULL,
+  `answer` text NOT NULL,
+  `crd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jobQuestionAnswer`
+--
+
+INSERT INTO `jobQuestionAnswer` (`answerId`, `jobId`, `jobTypeId`, `questionId`, `answer`, `crd`, `upd`) VALUES
+(1, 88, 4, 1, '', '2019-10-19 09:46:02', '2019-10-19 09:46:02'),
+(2, 88, 4, 2, '', '2019-10-19 09:46:02', '2019-10-19 09:46:02'),
+(3, 88, 4, 3, '', '2019-10-19 09:46:02', '2019-10-19 09:46:02'),
+(4, 88, 4, 4, '', '2019-10-19 09:46:02', '2019-10-19 09:46:02');
 
 -- --------------------------------------------------------
 
@@ -352,7 +396,38 @@ INSERT INTO `jobs` (`jobId`, `jobName`, `jobTypeId`, `customerId`, `driverId`, `
 (56, 'Clear snow from carpark 1', 3, 2, 4, '2019-09-30 00:00:00', '3:00 PM', 'The Gatehouse, 84 Billingham Rd, Stockton-on-Tees, UK', '84', 'Billingham Road', 'Norton', 'England', 'TS20 2SA', 'United Kingdom', '54.59029030', '-1.30595410', 0, 1, '54.590588,-1.305485|54.590568,-1.305439|54.59056,-1.305431|54.590559,-1.305394|54.590525,-1.305368|54.590486,-1.305359|54.590495,-1.305378|54.590508,-1.305397|54.590507,-1.305459|54.590435,-1.305578|54.590361,-1.305517|54.590349,-1.305583|54.590397,-1.305628|54.590455,-1.305713|54.590478,-1.305669|54.590493,-1.305687|54.590552,-1.30559|54.590564,-1.305595|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0l²F=Dãô¿|´8c˜KK@aÄ>ãô¿5s»—KK@ôÂãô¿³)Wx—KK@aP¦Ñäâô¿â­óo—KK@:ëSÉâô¿6<½R–KK@Ó hÀâô¿x_••KK@«¯®\nÔâô¿Ë¹W•KK@ƒ¾ôöçâô¿`\"Ä•KK@DMôù(ãô¿‡¾»•KK@ÆÁ¥ãô¿ö´Ã_“KK@Øó5Ëeãô¿¼êóKK@Æjóÿªãô¿øXKK@ÆŞ‹/Úãô¿	Tÿ ’KK@ŒdP3äô¿=a‰”KK@˜jf-äô¿õ€yÈ”KK@eÿ<\räô¿+ÂMF•KK@ÁÿV²ãô¿0K;5—KK@O#-•·ãô¿ôå™—KK@l²F=Dãô¿|´8c˜KK@', '', '2019-09-26 14:00:12', '2019-09-26 14:00:12'),
 (57, 'Test Job 100', 3, 2, 4, '2019-09-26 00:00:00', '4:15 PM', 'Darlington Mowden Park Rugby Club, The Northern Echo Arena, Neasham Road, Darlington, UK', '', 'Neasham Road', '', 'England', 'DL2 1DL', 'United Kingdom', '54.50798330', '-1.53497350', 0, 1, '54.510242,-1.537531|54.508647,-1.531458|54.507812,-1.532059|54.507987,-1.532896|54.507887,-1.533175|54.507688,-1.533025|54.507364,-1.533218|54.507239,-1.533454|54.507289,-1.534698|54.50765,-1.535471|54.508024,-1.53605|54.509208,-1.537144|54.510005,-1.537767|54.510155,-1.537788|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0ú`º™ø¿×…œOAK@=)“\ZÚ€ø¿±\ZKXAK@ï­HLPƒø¿BÎûÿ@K@µÂô½†ø¿†åÏ·AK@€·@‚â‡ø¿\"ˆópAK@×4ï8E‡ø¿,Iëû@K@i7ú˜ˆø¿y•µMñ@K@å¹¾‰ø¿¼ \"5í@K@%És}ø¿nOØî@K@{M\nJ‘ø¿>èÙ¬ú@K@2U0*©“ø¿£Ê0îAK@Êá“N$˜ø¿HnMº-AK@vãİ‘±šø¿óåØGAK@dæ—Çšø¿rPÂLAK@ú`º™ø¿×…œOAK@', '', '2019-09-26 14:04:02', '2019-09-26 14:04:02'),
 (58, 'New test And Job', 1, 3, 15, '2019-09-27 00:00:00', '12:15 PM', 'GEETA BHAVAN SQUARE, Gita Bhawan Road, South Tukoganj, Indore, Madhya Pradesh, India', '', 'Gita Bhawan Road', 'Indore', 'MP', '452001', 'India', '22.71843200', '75.88429860', 2, 1, '22.718724,75.877967|22.72102,75.882302|22.717299,75.888911|22.710253,75.886293|22.709263,75.878268|22.711638,75.876937|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0çıœ0øR@®ÙÊKş·6@ÌÎ¢wøR@\rÃGÄ”¸6@ƒöêãøR@tBè ·6@kF¹øR@Êâş#Óµ6@åGüŠ5øR@JCB’µ6@Àé]¼øR@B—pè-¶6@çıœ0øR@®ÙÊKş·6@', '{\"beforeWork\":{\"startDateTime\":\"2019-09-27 12:06:00 PM\",\"comments\":\"did\\ncubist\\nFujitsu\\ncoz\\ndiff BBC\\nDimitar\\nfifty\\ndj loc\",\"driverSignature\":\"1569566242.jpg\",\"workImage\":[\"1569566234.jpg\",\"1569566236.jpg\",\"1569566239.png\"]},\"afterWork\":{\"endDateTime\":\"2019-09-27 12:25:00 PM\",\"comments\":\"Arvid\\nfig\\nfig\\nFinn\\ngong\\nfiks\\nskudd\\nsinus\",\"customerSignature\":\"1569567406.jpg\",\"workImage\":[\"1569567397.jpg\",\"1569567400.jpg\",\"1569567402.jpg\"]}}', '2019-09-27 06:56:47', '2019-09-27 06:35:03'),
-(59, 'Job Image Size', 1, 5, 16, '2019-09-27 00:00:00', '5:30 PM', 'Indore Bypass Road, County Walk Township, Indore, Madhya Pradesh, India', '', 'Indore Bypass Road', '', 'MP', '', 'India', '22.71139850', '75.88320000', 2, 1, '22.75573,75.846808|22.782321,75.8729|22.759529,75.916846|22.715199,75.898993|22.702531,75.882513|22.713932,75.860541|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0o.\Z2öR@(›r…wÁ6@k+ö—İ÷R@Yùe0FÈ6@û]Øš­úR@]~pÂ6@O•ï‰ùR@Ä!H·6@ßRÎ{øR@\ZmUÙ³6@÷\Z÷R@`‘_?Ä¶6@o.\Z2öR@(›r…wÁ6@', '{\"beforeWork\":{\"startDateTime\":\"2019-09-27 06:37:00 PM\",\"comments\":\"did\\nFujifilm\\nFuji oh\\nFuji\\nfind\",\"driverSignature\":\"1569589678.jpg\",\"workImage\":[\"1569589671.png\",\"1569589673.jpg\",\"1569589675.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-09-27 06:44:00 PM\",\"comments\":\"did aug\\nXbox\\ndid\\n\",\"customerSignature\":\"1569590070.jpg\",\"workImage\":[\"1569590063.jpg\",\"1569590065.jpg\",\"1569590068.jpg\"]}}', '2019-09-27 13:14:33', '2019-09-27 11:58:49');
+(59, 'Job Image Size', 1, 5, 16, '2019-09-27 00:00:00', '5:30 PM', 'Indore Bypass Road, County Walk Township, Indore, Madhya Pradesh, India', '', 'Indore Bypass Road', '', 'MP', '', 'India', '22.71139850', '75.88320000', 2, 1, '22.75573,75.846808|22.782321,75.8729|22.759529,75.916846|22.715199,75.898993|22.702531,75.882513|22.713932,75.860541|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0o.\Z2öR@(›r…wÁ6@k+ö—İ÷R@Yùe0FÈ6@û]Øš­úR@]~pÂ6@O•ï‰ùR@Ä!H·6@ßRÎ{øR@\ZmUÙ³6@÷\Z÷R@`‘_?Ä¶6@o.\Z2öR@(›r…wÁ6@', '{\"beforeWork\":{\"startDateTime\":\"2019-09-27 06:37:00 PM\",\"comments\":\"did\\nFujifilm\\nFuji oh\\nFuji\\nfind\",\"driverSignature\":\"1569589678.jpg\",\"workImage\":[\"1569589671.png\",\"1569589673.jpg\",\"1569589675.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-09-27 06:44:00 PM\",\"comments\":\"did aug\\nXbox\\ndid\\n\",\"customerSignature\":\"1569590070.jpg\",\"workImage\":[\"1569590063.jpg\",\"1569590065.jpg\",\"1569590068.jpg\"]}}', '2019-09-27 13:14:33', '2019-09-27 11:58:49'),
+(60, 'Test Job 3', 3, 2, 4, '2019-09-30 00:00:00', '12:30 PM', 'The Gatehouse, 84 Billingham Road, Stockton-on-Tees, UK', '84', 'Billingham Road', '', 'England', 'TS20 2SA', 'United Kingdom', '54.59029030', '-1.30595410', 0, 1, '54.59065,-1.305599|54.590559,-1.305388|54.590478,-1.305361|54.590352,-1.305483|54.590393,-1.305645|54.590442,-1.305717|54.590475,-1.305672|54.590529,-1.305786|54.590651,-1.305597|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\n\0\0\0|ëÆ»ãô¿ò°PkšKK@t	‡Şâô¿â­óo—KK@ê”G7Ââô¿õ€yÈ”KK@U¾g$Bãô¿i‚§KK@‡ùòìãô¿Çdqÿ‘KK@ºLM‚7äô¿©|š“KK@ºØ´Räô¿„\rO¯”KK@Ê1YÜäô¿w+Kt–KK@e®¹ãô¿Ã,´sšKK@|ëÆ»ãô¿ò°PkšKK@', '', '2019-09-30 11:29:43', '2019-09-30 11:29:43'),
+(61, 'sas', 4, 14, 17, '2019-09-06 00:00:00', '5:15 PM', 'Indore Railway Station, Nehru Park Road, Vallabh Nagar, Indore, Madhya Pradesh, India', '7', '7', 'Indore', 'MP', '452003', 'India', '22.71720790', '75.86841130', 0, 1, '22.718281,75.867966|22.717818,75.867951|22.718051,75.867964|22.717939,75.868009|22.718034,75.868015|22.717826,75.867972|22.717776,75.868154|22.718281,75.868347|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0	\0\0\0DÁŒ÷R@“V|Cá·6@ôáY‚Œ÷R@êz¢ëÂ·6@¾†à¸Œ÷R@/Ü¹0Ò·6@èu÷R@à…­ÙÊ·6@ÿ[É÷R@ƒjƒÑ·6@ÿunÚŒ÷R@ï7ÚqÃ·6@yËÕ÷R@ŒÚı*À·6@\Z¥Kÿ’÷R@“V|Cá·6@DÁŒ÷R@“V|Cá·6@', '', '2019-09-30 11:42:51', '2019-09-30 11:40:50'),
+(62, 'Testing Job By Piyush', 4, 14, 15, '2019-10-22 00:00:00', '5:30 PM', 'Indore Railway Station, Nehru Park Road, Vallabh Nagar, Indore, Madhya Pradesh, India', '7', 'Nehru Park Road', 'Indore', 'MP', '452003', 'India', '22.71720790', '75.86841130', 2, 1, '22.719338,75.868229|22.716092,75.866244|22.715864,75.870804|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0^‘÷R@\"Å\0‰&¸6@Ì–¬Šp÷R@_í(ÎQ·6@wN³@»÷R@=bôÜB·6@^‘÷R@\"Å\0‰&¸6@', '{\"beforeWork\":{\"startDateTime\":\"2019-09-30 05:35:00 PM\",\"comments\":\"Piyush Created the job.\",\"driverSignature\":\"1569845143.jpg\",\"workImage\":[\"1569845135.jpg\",\"1569845138.jpg\",\"1569845141.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-09-30 05:37:00 PM\",\"comments\":\"Piyush completed the process.\",\"customerSignature\":\"1569845252.jpg\",\"workImage\":[\"1569845244.jpg\",\"1569845246.jpg\",\"1569845249.jpg\"]}}', '2019-09-30 12:07:34', '2019-09-30 12:01:03'),
+(63, 'New And FInish', 1, 3, 16, '2019-09-30 00:00:00', '7:00 PM', 'Indore, Madhya Pradesh, India', '', '', 'Indore', 'MP', '', 'India', '22.71956870', '75.85772580', 2, 1, '22.719905,75.857167|22.71995,75.858108|22.719606,75.857885|22.719767,75.857397|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0x\rúÒÛöR@:¯±K¸6@çÑ=ëöR@UÁ¨¤N¸6@§®|–çöR@`L8¸6@¬ª—ßöR@s½m¦B¸6@x\rúÒÛöR@:¯±K¸6@', '{\"beforeWork\":{\"startDateTime\":\"2019-09-30 06:59:00 PM\",\"comments\":\"synlig synlig\\nCox\\nfull\\nsynlig\",\"driverSignature\":\"1569850197.jpg\",\"workImage\":[\"1569850192.jpg\",\"1569850194.jpg\",\"1569850196.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-03 02:26:00 PM\",\"comments\":\"Finnskog g\",\"customerSignature\":\"1570092975.jpg\",\"workImage\":[\"1570092969.jpg\",\"1570092970.jpg\",\"1570092973.jpg\"]}}', '2019-10-03 08:56:16', '2019-09-30 13:28:47'),
+(64, 'Job And  Track 1', 1, 3, 16, '2019-10-03 00:00:00', '2:15 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.722738,75.887072|22.722678,75.887243|22.722743,75.887404|22.723114,75.887324|22.723173,75.886927|22.72297,75.886954|22.722767,75.886965|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0¡L£ÉÅøR@’“‰[¹6@·&İ–ÈøR@ç‰çl¹6@¼•%:ËøR@¶il¯¹6@.=šêÉøR@GÅÿ¹6@¼viÃøR@§Y İ!¹6@œÃµÚÃøR@7ıÙ¹6@–ìØÄøR@Ç B¹6@¡L£ÉÅøR@’“‰[¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-03 02:18:00 PM\",\"comments\":\"serviser Nick\",\"driverSignature\":\"1570092536.jpg\",\"workImage\":[\"1570092531.jpg\",\"1570092533.jpg\",\"1570092535.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-03 02:32:00 PM\",\"comments\":\"synliggj\\u00f8ring\",\"customerSignature\":\"1570093363.jpg\",\"workImage\":[\"1570093357.jpg\",\"1570093358.jpg\",\"1570093361.jpg\"]}}', '2019-10-03 09:02:45', '2019-10-03 08:43:05'),
+(65, 'Job And  Track 2', 3, 9, 16, '2019-10-03 00:00:00', '2:15 PM', 'Palasia, Indore, Madhya Pradesh, India', '', '', 'Indore', 'MP', '452001', 'India', '22.72435500', '75.88389440', 2, 1, '22.72291,75.886394|22.722237,75.886459|22.722198,75.887274|22.722692,75.887768|22.723425,75.887553|22.723326,75.88678|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0¸Wæ­ºøR@Œó7¡¹6@¬‡¾»øR@ö&†ä¸6@Õ%ãÉøR@’<×÷á¸6@Ü›ß0ÑøR@±ÉW¹6@Ş«ÍøR@Ú|a2¹6@Í¯æ\0ÁøR@´XŠä+¹6@¸Wæ­ºøR@Œó7¡¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-03 02:35:00 PM\",\"comments\":\"rustic hj\",\"driverSignature\":\"1570093538.jpg\",\"workImage\":[\"1570093532.jpg\",\"1570093534.jpg\",\"1570093536.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-03 02:53:00 PM\",\"comments\":\"disc vjk cumming\",\"customerSignature\":\"1570094615.jpg\",\"workImage\":[\"1570094610.jpg\",\"1570094612.jpg\",\"1570094613.jpg\"]}}', '2019-10-03 09:23:37', '2019-10-03 08:45:34'),
+(66, 'Job And  Track 3', 4, 7, 16, '2019-10-03 00:00:00', '2:15 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.7227,75.886759|22.72293,75.886911|22.723108,75.886978|22.722984,75.887343|22.72267,75.887231|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0ÁÒ¨ÀøR@·Ñ\0Ş¹6@œİZ&ÃøR@LÃğ¹6@`‘_?ÄøR@Ùy›¹6@iUK:ÊøR@ˆ»z¹6@Õ?ˆdÈøR@âÌ¯æ\0¹6@ÁÒ¨ÀøR@·Ñ\0Ş¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-03 03:15:00 PM\",\"comments\":\"Siggerud j\\u00f8diske sgkvxfb\",\"driverSignature\":\"1570095959.jpg\",\"workImage\":[\"1570095952.jpg\",\"1570095954.jpg\",\"1570095957.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-03 03:43:00 PM\",\"comments\":\"din Clooney\",\"customerSignature\":\"1570097606.jpg\",\"workImage\":[\"1570097599.jpg\",\"1570097601.jpg\",\"1570097603.jpg\"]}}', '2019-10-03 10:13:28', '2019-10-03 08:47:13'),
+(67, 'Job And 4', 2, 5, 16, '2019-10-03 00:00:00', '4:00 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.722791,75.886809|22.723054,75.886965|22.722957,75.887316|22.722875,75.887523|22.722643,75.887434|22.722611,75.8873|22.722685,75.886785|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0\Z3‰zÁøR@Ø×ºÔ¹6@–ìØÄøR@ó=#\Z¹6@ìMÉÉøR@j¿µ¹6@©ÜD-ÍøR@“V¹6@ñÖù·ËøR@ï®³!ÿ¸6@ioğ…ÉøR@ØºÔı¸6@VeßÁøR@LOXâ¹6@\Z3‰zÁøR@Ø×ºÔ¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-03 06:22:00 PM\",\"comments\":\"sudah Sukoco Synn\\u00f8ve\",\"driverSignature\":\"1570107146.jpg\",\"workImage\":[\"1570107140.jpg\",\"1570107142.jpg\",\"1570107144.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-03 06:46:00 PM\",\"comments\":\"skyv\",\"customerSignature\":\"1570108577.jpg\",\"workImage\":[\"1570108572.jpg\",\"1570108574.jpg\",\"1570108576.jpg\"]}}', '2019-10-03 13:16:20', '2019-10-03 10:31:01'),
+(68, 'Remove Snow in car park 1', 3, 2, 18, '2019-10-03 00:00:00', '1:30 PM', 'The Gatehouse, 84 Billingham Rd, Stockton-on-Tees, UK', '84', 'Billingham Road', 'Norton', 'England', 'TS20 2SA', 'United Kingdom', '54.59029030', '-1.30595410', 2, 1, '54.5905,-1.304989|54.590502,-1.304241|54.589905,-1.304209|54.589898,-1.305032|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0d<J%<áô¿İ$•KK@+£‘Ï+Şô¿~Í‘•KK@¿a¢A\nŞô¿š_Í‚KK@M¼<iáô¿çüÇKK@d<J%<áô¿İ$•KK@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-03 12:41:00 PM\",\"comments\":\"Deano deano\",\"driverSignature\":\"1570102878.jpg\",\"workImage\":[\"1570102872.jpg\",\"1570102874.jpg\",\"1570102876.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-03 12:47:00 PM\",\"comments\":\"Feel sick\",\"customerSignature\":\"1570103248.jpg\",\"workImage\":[\"1570103243.jpg\",\"1570103245.jpg\",\"1570103247.jpg\"]}}', '2019-10-03 11:47:30', '2019-10-03 11:31:11'),
+(69, 'Job And Track 5', 3, 5, 16, '2019-10-03 00:00:00', '5:30 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.722794,75.886828|22.723059,75.886995|22.722885,75.887536|22.722742,75.887719|22.722621,75.887587|22.722561,75.887563|22.722655,75.886823|22.722705,75.886772|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0	\0\0\0UK:ÊÁøR@º¾	¹6@Ë-­†ÄøR@e\Z¹6@sËcÍøR@ÛÄÉı¹6@lBZcĞøR@r¥¹6@´V´9ÎøR@gš°ı¸6@ğˆ\nÕÍøR@t]øÁù¸6@Í•AµÁøR@wJëÿ¸6@‹ÀXßÀøR@Û§ã1¹6@UK:ÊÁøR@º¾	¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-03 06:48:00 PM\",\"comments\":\"sac John xiv zero\",\"driverSignature\":\"1570108693.jpg\",\"workImage\":[\"1570108687.jpg\",\"1570108689.jpg\",\"1570108691.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-03 07:10:00 PM\",\"comments\":\"dj gag gh ju\",\"customerSignature\":\"1570110032.jpg\",\"workImage\":[\"1570110027.png\",\"1570110029.jpg\",\"1570110030.jpg\"]}}', '2019-10-03 13:40:33', '2019-10-03 11:51:34'),
+(70, 'Job And Track 6', 3, 3, 16, '2019-10-04 00:00:00', '5:30 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.722645,75.88715|22.72295,75.887182|22.722801,75.888167|22.722321,75.888086|22.722168,75.886901|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0_)ËÇøR@0ACÿ¸6@dæ—ÇøR@©¤N@¹6@»˜fº×øR@„€|	¹6@E‚©fÖøR@Ê6pê¸6@ŠriüÂøR@½7†\0à¸6@_)ËÇøR@0ACÿ¸6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-03 06:56:00 PM\",\"comments\":\"stova all del dl\",\"driverSignature\":\"1570109178.jpg\",\"workImage\":[\"1570109170.jpg\",\"1570109173.jpg\",\"1570109175.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-03 07:06:00 PM\",\"comments\":\"tuh hjj nih si di\",\"customerSignature\":\"1570109796.jpg\",\"workImage\":[\"1570109790.jpg\",\"1570109792.jpg\",\"1570109794.jpg\"]}}', '2019-10-03 13:36:37', '2019-10-03 11:52:32'),
+(71, 'Job Track 7', 2, 5, 16, '2019-10-04 00:00:00', '11:15 AM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.722833,75.887027|22.722712,75.887062|22.72271,75.887105|22.722621,75.887107|22.722675,75.886804|22.722878,75.886882|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0ÑêäÅøR@6x_•¹6@á±ŸÅøR@@mT§¹6@ÇTÆøR@ş}Æ…¹6@_Cp\\ÆøR@gš°ı¸6@‘}eÁøR@£’:¹6@OZ¸¬ÂøR@vÿXˆ¹6@ÑêäÅøR@6x_•¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-04 11:17:00 AM\",\"comments\":\"doi zoo xls XL\",\"driverSignature\":\"1570168058.jpg\",\"workImage\":[\"1570168051.jpg\",\"1570168054.jpg\",\"1570168056.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-04 11:29:00 AM\",\"comments\":\"Xbox si\",\"customerSignature\":\"1570168768.jpg\",\"workImage\":[\"1570168763.jpg\",\"1570168765.jpg\",\"1570168767.jpg\"]}}', '2019-10-04 05:59:30', '2019-10-04 05:46:23');
+INSERT INTO `jobs` (`jobId`, `jobName`, `jobTypeId`, `customerId`, `driverId`, `startDate`, `startTime`, `address`, `street`, `street2`, `city`, `state`, `zip`, `country`, `latitude`, `longitude`, `jobStatus`, `geoFencing`, `points`, `polygonColor`, `boundary`, `jobReport`, `crd`, `upd`) VALUES
+(72, 'Job And Track 8', 1, 5, 16, '2019-10-04 00:00:00', '11:45 AM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.722762,75.887043|22.7227,75.887051|22.722702,75.887126|22.722638,75.887335|22.722668,75.886826|22.722888,75.886885|22.722878,75.887051|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0TÉ\0PÅøR@£Ê0î¹6@•¸qÅøR@·Ñ\0Ş¹6@š[!¬ÆøR@ùÀÿ¹6@\'f½ÊøR@ËØĞÍş¸6@…ÏÖÁÁøR@ İ!Å\0¹6@”M¹ÂøR@½«0¹6@•¸qÅøR@vÿXˆ¹6@TÉ\0PÅøR@£Ê0î¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-04 11:33:00 AM\",\"comments\":\"serbisk Blix du XL\",\"driverSignature\":\"1570169024.jpg\",\"workImage\":[\"1570169017.jpg\",\"1570169020.jpg\",\"1570169022.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-04 12:00:00 PM\",\"comments\":\"c chic stk jl St grunn\",\"customerSignature\":\"1570170641.jpg\",\"workImage\":[\"1570170633.jpg\",\"1570170636.jpg\",\"1570170639.jpg\"]}}', '2019-10-04 06:30:43', '2019-10-04 06:02:47'),
+(73, 'Job And Track 9 ', 2, 5, 16, '2019-10-04 00:00:00', '12:15 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.722833,75.887032|22.722707,75.887037|22.722702,75.887107|22.72265,75.887137|22.722697,75.886882|22.722856,75.886946|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0Z İ!ÅøR@6x_•¹6@ãUÖ6ÅøR@—qS¹6@_Cp\\ÆøR@ùÀÿ¹6@”„DÚÆøR@Tt$—ÿ¸6@OZ¸¬ÂøR@Õê««¹6@ZÔ\'¹ÃøR@¦·?\r¹6@Z İ!ÅøR@6x_•¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-04 12:09:00 PM\",\"comments\":\"Saeed cm e eh jl ju GSM\",\"driverSignature\":\"1570171166.jpg\",\"workImage\":[\"1570171159.jpg\",\"1570171161.jpg\",\"1570171164.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-04 12:26:00 PM\",\"comments\":\"serupa chic dog\",\"customerSignature\":\"1570172222.jpg\",\"workImage\":[\"1570172216.jpg\",\"1570172218.jpg\",\"1570172219.jpg\"]}}', '2019-10-04 06:57:04', '2019-10-04 06:38:23'),
+(74, 'Job And Track 11', 3, 5, 16, '2019-10-04 00:00:00', '12:45 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.722997,75.887046|22.722764,75.887013|22.722742,75.887048|22.722685,75.887086|22.722685,75.887217|22.722606,75.887204|22.722685,75.886783|22.723004,75.886954|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0	\0\0\0–\\ÅøR@*ÖT¹6@ˆ,ÒÄøR@å¹¾¹6@Ü~ùdÅøR@r¥¹6@S¯[ÆøR@LOXâ¹6@#İÏ)ÈøR@LOXâ¹6@X8IóÇøR@´äñ´ü¸6@…é{\rÁøR@LOXâ¹6@œÃµÚÃøR@àFÊ¹6@–\\ÅøR@*ÖT¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-04 12:36:00 PM\",\"comments\":\"dkn K dykk og db\",\"driverSignature\":\"1570172816.jpg\",\"workImage\":[\"1570172809.jpg\",\"1570172811.jpg\",\"1570172815.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-04 12:54:00 PM\",\"comments\":\"dgn di dunk j Sumut dgn\",\"customerSignature\":\"1570173876.jpg\",\"workImage\":[\"1570173871.jpg\",\"1570173873.jpg\",\"1570173875.jpg\"]}}', '2019-10-04 07:24:38', '2019-10-04 07:05:52'),
+(75, 'Job Track 12', 3, 7, 16, '2019-10-04 00:00:00', '2:15 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.722846,75.887035|22.722631,75.887005|22.722697,75.886764|22.722885,75.886895|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0Úr.ÅøR@_zo¹6@İ˜°ÄøR@f`Xş¸6@JÑÊ½ÀøR@Õê««¹6@ÿ>ãÂøR@ÛÄÉı¹6@Úr.ÅøR@_zo¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-04 02:12:00 PM\",\"comments\":\"did all gone vi\",\"driverSignature\":\"1570178547.jpg\",\"workImage\":[\"1570178541.jpg\",\"1570178543.jpg\",\"1570178545.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-04 02:21:00 PM\",\"comments\":\"R\\u00f8rvik vel ckckck click\",\"customerSignature\":\"1570179101.jpg\",\"workImage\":[\"1570179095.jpg\",\"1570179097.jpg\",\"1570179099.jpg\"]}}', '2019-10-04 08:51:43', '2019-10-04 08:32:20'),
+(76, 'Job Track And 11', 3, 7, 16, '2019-10-04 00:00:00', '2:45 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.722853,75.887048|22.72271,75.887003|22.722759,75.886863|22.72289,75.886938|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0Ü~ùdÅøR@ÄĞêä¹6@\r;¨ÄøR@ş}Æ…¹6@B]ÂøR@ÁãÛ»¹6@å™—ÃøR@şš¬Q¹6@Ü~ùdÅøR@ÄĞêä¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-04 02:40:00 PM\",\"comments\":\"etnis sih\",\"driverSignature\":\"1570180235.jpg\",\"workImage\":[\"1570180230.jpg\",\"1570180231.jpg\",\"1570180233.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-04 04:10:00 PM\",\"comments\":\"suka week Dul STM \",\"customerSignature\":\"1570185628.jpg\",\"workImage\":[\"1570185620.jpg\",\"1570185623.jpg\",\"1570185626.jpg\"]}}', '2019-10-04 10:40:30', '2019-10-04 09:06:07'),
+(77, 'Test Job 101', 1, 2, 18, '2019-10-04 00:00:00', '12:00 PM', 'The Gatehouse, 84 Billingham Road, Stockton-on-Tees, UK', '84', 'Billingham Road', 'Norton', 'England', 'TS20 2SA', 'United Kingdom', '54.59029030', '-1.30595410', 1, 1, '54.590611,-1.305207|54.590385,-1.30495|54.590363,-1.304349|54.590227,-1.304268|54.590075,-1.304282|54.589991,-1.304365|54.589939,-1.304574|54.589932,-1.304748|54.589974,-1.304872|54.590046,-1.304955|54.590092,-1.304998|54.590161,-1.305489|54.590112,-1.305663|54.589983,-1.305894|54.59009,-1.306082|54.590172,-1.305878|54.590235,-1.305746|54.59031,-1.305505|54.590429,-1.305376|54.590541,-1.305349|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0*8¼ âô¿5Ô($™KK@©¤N@áô¿D†U¼‘KK@÷™Şô¿]âÈ‘KK@^‚SHŞô¿¬ïŒKK@ı.lÍVŞô¿ö—İ“‡KK@­ÀÕ­Şô¿˜÷8Ó„KK@õc“üˆßô¿FÑƒKK@°WXp?àô¿“nKä‚KK@2uWvÁàô¿Â¾D„KK@â|~áô¿\\‘˜ †KK@Ë†5•Eáô¿ÌĞx\"ˆKK@™šoHãô¿õ/IeŠKK@TÉâşãô¿}>ÊˆKK@—®`ñäô¿„KK@ğN>=¶åô¿+Ù±ˆKK@á\riTàäô¿éÁŠKK@ îêUäô¿/ú\nÒŒKK@O;ü5Yãô¿:@0GKK@•»ÏñÑâô¿În-“KK@bÜ\r¢µâô¿<ùôØ–KK@*8¼ âô¿5Ô($™KK@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-10 08:52:00 AM\",\"comments\":\"test\",\"driverSignature\":\"1570693951.jpg\",\"workImage\":[\"1570693943.jpg\",\"1570693945.jpg\",\"1570693948.jpg\"]}}', '2019-10-10 07:52:32', '2019-10-04 11:00:35'),
+(78, 'Job Track And 17', 1, 5, 15, '2019-10-07 00:00:00', '2:45 PM', 'Shekhawat Marg, Banni Ki Dhani, Harnathapura, Jhotwara, Jaipur, Rajasthan, India', '', 'Shekhawat Marg', 'Jaipur', 'RJ', '302032', 'India', '26.95181710', '75.72730960', 2, 1, '26.951936,75.727094|26.951707,75.727073|26.951738,75.727274|26.951936,75.727234|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0ŠÇEµˆîR@“âã²ó:@31]ˆîR@Ğ_è£ó:@ÊN?¨‹îR@F\\\0\Z¥ó:@ƒ¢y\0‹îR@“âã²ó:@ŠÇEµˆîR@“âã²ó:@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-10 04:30:00 PM\",\"comments\":\"see this till\",\"driverSignature\":\"1570705217.jpg\",\"workImage\":[\"1570705211.jpg\",\"1570705213.jpg\",\"1570705215.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-10 04:39:00 PM\",\"comments\":\"did kick\",\"customerSignature\":\"1570705796.jpg\",\"workImage\":[\"1570705790.jpg\",\"1570705792.jpg\",\"1570705794.jpg\"]}}', '2019-10-10 11:09:57', '2019-10-07 09:15:11'),
+(79, 'Test new And 21', 2, 5, 15, '2019-10-10 00:00:00', '5:30 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.722851,75.887024|22.722712,75.887035|22.722695,75.886809|22.722772,75.886378|22.723185,75.886504|22.723296,75.886641|22.723106,75.887046|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0±O\0ÅøR@‚á\\Ã¹6@Úr.ÅøR@@mT§¹6@\Z3‰zÁøR@”ûŠ¹6@5yÊjºøR@êvö•¹6@|ñE{¼øR@0õó¦\"¹6@¼’ä¹¾øR@ßS9í)¹6@–\\ÅøR@˜Šy¹6@±O\0ÅøR@‚á\\Ã¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-10 06:04:00 PM\",\"comments\":\"drum jus M dkk\",\"driverSignature\":\"1570783082.jpg\",\"workImage\":[\"1570783074.jpg\",\"1570783077.jpg\",\"1570783080.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-11 02:07:16 PM\",\"comments\":\"funny dj\",\"customerSignature\":\"1570783091.jpg\",\"workImage\":[\"1570783086.jpg\",\"1570783088.jpg\",\"1570783090.jpg\"]}}', '2019-10-11 08:38:13', '2019-10-10 12:01:26'),
+(80, 'Job local 1', 1, 5, 15, '2019-10-10 00:00:00', '6:15 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.722927,75.887109|22.72269,75.88703|22.722681,75.886801|22.722976,75.886638|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0/¿ÓdÆøR@8en¾¹6@‰$zÅøR@p%;6¹6@ÙCûXÁøR@Êp<Ÿ¹6@YO­¾øR@ûÊƒô¹6@/¿ÓdÆøR@8en¾¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-10 06:43:00 PM\",\"comments\":\"servis\",\"driverSignature\":\"1570776482.jpg\",\"workImage\":[\"1570776475.jpg\",\"1570776478.jpg\",\"1570776480.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-11 11:47:22 AM\",\"comments\":\"dll\",\"customerSignature\":\"1570776493.jpg\",\"workImage\":[\"1570776487.jpg\",\"1570776488.jpg\",\"1570776490.jpg\"]}}', '2019-10-11 06:48:14', '2019-10-10 12:41:30'),
+(81, 'Local Job 2', 3, 3, 15, '2019-10-11 00:00:00', '2:30 PM', 'Palasia Square, Indore, Madhya Pradesh, India', '', '', 'Indore', 'MP', '452001', 'India', '22.72408670', '75.88598180', 2, 1, '22.723933,75.88568|22.723535,75.885962|22.723963,75.886852|22.724069,75.885305|22.723562,75.885015|22.723513,75.885388|22.723488,75.885785|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0)®*û®øR@Ã~O¬S¹6@ìßõ™³øR@è‚ú–9¹6@\Zä.ÂøR@™ƒ £U¹6@MÖ¨øR@$–\\¹6@^ô¤øR@Ü ö[;¹6@Vn2ªøR@;á%8¹6@d’‘³°øR@gs‚6¹6@)®*û®øR@Ã~O¬S¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-11 02:22:19 PM\",\"comments\":\"all all all com dj\",\"driverSignature\":\"1570784421.jpg\",\"workImage\":[\"1570784415.jpg\",\"1570784417.jpg\",\"1570784419.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-11 02:25:03 PM\",\"comments\":\"dgn bill so\",\"customerSignature\":\"1570784430.jpg\",\"workImage\":[\"1570784425.jpg\",\"1570784427.jpg\",\"1570784428.jpg\"]}}', '2019-10-11 09:00:32', '2019-10-11 08:49:55'),
+(82, 'Local Job 3', 4, 13, 15, '2019-10-11 00:00:00', '4:15 PM', 'Palasia, Indore, Madhya Pradesh, India', '', '', 'Indore', 'MP', '452001', 'India', '22.72435500', '75.88389440', 2, 1, '22.724412,75.883818|22.724023,75.882614|22.724736,75.882598|22.724959,75.884837|22.724085,75.884928|22.724558,75.883949|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0og_yøR@xÔ˜s¹6@y?n¿|øR@CB’Y¹6@ö`R||øR@Ş;jLˆ¹6@œR^+¡øR@Üğ»é–¹6@$Ô©¢øR@/†r¢]¹6@>•Ó’øR@¢|¹6@og_yøR@xÔ˜s¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-11 04:15:48 PM\",\"comments\":\"so do\",\"driverSignature\":\"1570790844.jpg\",\"workImage\":[\"1570790838.jpg\",\"1570790840.jpg\",\"1570790842.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-11 04:16:33 PM\",\"comments\":\"so lmk\",\"customerSignature\":\"1570790853.jpg\",\"workImage\":[\"1570790848.jpg\",\"1570790849.jpg\",\"1570790851.jpg\"]}}', '2019-10-11 10:47:34', '2019-10-11 10:44:32'),
+(83, 'Grit Lucid Roundabout', 1, 2, 18, '2019-10-14 00:00:00', '11:00 AM', 'The Gatehouse, 84 Billingham Road, Stockton-on-Tees, UK', '84', 'Billingham Road', 'Norton', 'England', 'TS20 2SA', 'United Kingdom', '54.59029030', '-1.30595410', 1, 1, '54.590053,-1.306261|54.589906,-1.306031|54.590119,-1.305499|54.590103,-1.30517|54.590053,-1.305041|54.59,-1.304984|54.589952,-1.30492|54.589934,-1.304821|54.589914,-1.304657|54.58991,-1.304432|54.590016,-1.304201|54.590121,-1.304121|54.590244,-1.30407|54.590312,-1.304107|54.590398,-1.304207|54.590422,-1.304354|54.590464,-1.304561|54.590482,-1.304783|54.59042,-1.304917|54.590383,-1.305062|54.590402,-1.30525|54.590297,-1.30584|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0ã¤0ïqæô¿ôPÛ†KK@¬şÃ€åô¿jÛ0\n‚KK@__ëRãô¿Æßö‰KK@n†ğùáô¿À\"¿~ˆKK@³ï«ráô¿ôPÛ†KK@+Úç6áô¿ìQ¸…KK@TW>Ëóàô¿Ú\ZŒƒKK@î$\"ü‹àô¿4fõ‚KK@¥õ·àßô¿í¹LM‚KK@§±½ôŞô¿¬Ê¾+‚KK@d‘&ŞŞô¿ñğ¤…KK@×mPû­İô¿g×½‰KK@“xİô¿‚TŠKK@7Á7MŸİô¿Ú7÷WKK@¨mÃ(Şô¿ÙÏb)’KK@0‚ÆL¢Şô¿ak¶ò’KK@b1êZ{ßô¿»S”KK@>–#dàô¿7pê”KK@2éï¥ğàô¿Ásïá’KK@¢	±ˆáô¿¤«‘KK@ü©ñÒMâô¿\Z¿ğJ’KK@0ğÜ{¸äô¿¥ö\"ÚKK@ã¤0ïqæô¿ôPÛ†KK@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-14 11:03:00 AM\",\"comments\":\"test\\n\",\"driverSignature\":\"1571047407.jpg\",\"workImage\":[\"1571047393.jpg\",\"1571047397.jpg\",\"1571047404.jpg\"]}}', '2019-10-14 10:03:28', '2019-10-14 10:00:54'),
+(84, 'Job Local 4', 1, 7, 15, '2019-10-15 00:00:00', '11:45 AM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 2, 1, '22.722828,75.88726|22.722846,75.886992|22.72269,75.886992|22.722658,75.887381|22.722121,75.887279|22.722212,75.885678|22.722593,75.885804|22.723333,75.886453|22.723207,75.887078|22.723323,75.888312|22.722165,75.888202|22.722168,75.887394|22.722814,75.887523|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0\"Ã*ŞÈøR@¢|A¹6@ôzÄøR@_zo¹6@ôzÄøR@p%;6¹6@à…­ÙÊøR@Y1\\\0¹6@^ÛÛ-ÉøR@<ÁşëÜ¸6@Y2Çò®øR@\\Ç¸ââ¸6@ŸªB±øR@‹Q×Úû¸6@;]¥»øR@ûY,¹6@ÀÍâÅøR@ÿ<\r$¹6@=)“\ZÚøR@Òq5²+¹6@z3MØøR@ÛP1Îß¸6@ª*4ËøR@½7†\0à¸6@©ÜD-ÍøR@H›V\n¹6@\"Ã*ŞÈøR@¢|A¹6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-15 11:59:03 AM\",\"comments\":\"sh Jill so XL f gm\",\"driverSignature\":\"1571123251.jpg\",\"workImage\":[\"1571123246.jpg\",\"1571123248.jpg\",\"1571123250.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-15 12:10:02 PM\",\"comments\":\"Dyno if sh fun on gjj lo fun\",\"customerSignature\":\"1571123264.jpg\",\"workImage\":[\"1571123257.jpg\",\"1571123259.jpg\",\"1571123262.jpg\"]}}', '2019-10-15 07:07:46', '2019-10-15 06:04:52'),
+(85, 'Job Local 5', 1, 5, 15, '2019-10-15 00:00:00', '3:45 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 0, 1, '22.722653,75.886968|22.720847,75.886508|22.722153,75.882431|22.723628,75.882753|22.725062,75.88375|22.726824,75.882597|22.727418,75.884206|22.729219,75.884861|22.727715,75.889281|22.725498,75.887522|22.723321,75.886105|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0N&nÄøR@6[yÉÿ¸6@éŒ¼øR@rkÒm‰¸6@€~ß¿yøR@Rµİß¸6@‰\\pøR@KxB¯?¹6@Ãõ(\\øR@†’É©¹6@£ x|øR@ªò=#º6@T;ÃÔ–øR@…è8º6@` ¡øR@0Ÿ¬®º6@ıÚúéøR@Ï½‡Kº6@Á)ÍøR@<P§<º¹6@ô¾ñµøR@‚§+¹6@N&nÄøR@6[yÉÿ¸6@', '', '2019-10-15 10:13:05', '2019-10-15 10:13:05'),
+(86, 'And Local 6', 2, 13, 16, '2019-10-18 00:00:00', '12:30 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 0, 1, '22.723034,75.887126|22.722712,75.886995|22.722702,75.887271|22.722581,75.887641|22.722428,75.888269|22.719837,75.887339|22.721005,75.881353|22.727457,75.883927|22.728902,75.888122|22.726567,75.893315|22.723321,75.890783|22.725023,75.886706|22.722806,75.885891|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0š[!¬ÆøR@då—Á¹6@Ë-­†ÄøR@@mT§¹6@ìMÉøR@ùÀÿ¹6@®e2ÏøR@¶ƒû¸6@=C8fÙøR@ö¶™\nñ¸6@È]„)ÊøR@dsÕ<G¸6@ÑÎihøR@£@ŸÈ“¸6@JCB’øR@?8Ÿ:º6@ë6¨ıÖøR@/ıKR™º6@®­,ùR@SZK\0º6@L5³–ùR@‚§+¹6@°Ê…Ê¿øR@\nÙy›¹6@‡4*p²øR@BZcĞ	¹6@š[!¬ÆøR@då—Á¹6@', '', '2019-10-18 06:54:12', '2019-10-18 06:54:12'),
+(87, 'Man Guard visit', 5, 2, 18, '2019-10-18 00:00:00', '1:00 PM', '7 Middleton Ave, Billingham, UK', '', 'Middleton Avenue', 'Stockton-on-Tees', 'England', '', 'United Kingdom', '54.61283050', '-1.30712640', 1, 1, '54.612671,-1.307215|54.612675,-1.307037|54.612583,-1.307027|54.612587,-1.307223|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0CsFZêô¿“\ZÚ\0lNK@[—\Z¡Ÿéô¿Õ	h\"lNK@éÒ¿$•éô¿ôŠ§iNK@Cªbêô¿5z5@iNK@CsFZêô¿“\ZÚ\0lNK@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-18 01:55:00 PM\",\"comments\":\"etst\",\"driverSignature\":\"1571403351.jpg\",\"workImage\":[\"1571403342.jpg\",\"1571403346.jpg\",\"1571403349.jpg\"]}}', '2019-10-18 12:55:53', '2019-10-18 11:54:21'),
+(88, 'jobType question', 4, 5, 15, '2019-10-18 00:00:00', '3:15 PM', 'Shekhar central, Agra Bombay Road, Manorama Ganj, Indore, Madhya Pradesh, India', '', 'Agra Bombay Road', 'Indore', 'MP', '452018', 'India', '22.72272700', '75.88707100', 0, 1, '22.723159,75.886322|22.723055,75.887802|22.722474,75.887633|22.722326,75.886145|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0lîè¹øR@İÎ¾ò ¹6@²Ôz¿ÑøR@“5ê!\Z¹6@lv¤úÎøR@Ö5Zô¸6@ä „™¶øR@íS[ê¸6@lîè¹øR@İÎ¾ò ¹6@', '', '2019-10-19 09:46:02', '2019-10-19 09:46:02'),
+(89, 'Test job19', 3, 3, 16, '2019-10-19 00:00:00', '3:45 PM', 'Indore Railway Station, Nehru Park Road, Vallabh Nagar, Indore, Madhya Pradesh, India', '7', 'Nehru Park Road', 'Indore', 'MP', '452003', 'India', '22.71719933', '75.86840057', 2, 1, '22.717078,75.868515|22.716915,75.86904|22.717076,75.869193|22.717217,75.869107|', '#1E90FF', '\0\0\0\0\0\0\0\0\0\0\0\0\0xEğ¿•÷R@\\®~l’·6@ºòY÷R@Ï½‡·6@`:­Û ÷R@\Z¿ğJ’·6@an÷rŸ÷R@Ÿ\"‡ˆ›·6@xEğ¿•÷R@\\®~l’·6@', '{\"beforeWork\":{\"startDateTime\":\"2019-10-19 04:11:00 PM\",\"comments\":\"test\",\"driverSignature\":\"1571481721.jpg\",\"workImage\":[\"1571481717.jpg\",\"1571481718.jpg\",\"1571481720.jpg\"]},\"afterWork\":{\"endDateTime\":\"2019-10-19 04:13:00 PM\",\"comments\":\"test data\",\"customerSignature\":\"1571481814.jpg\",\"workImage\":[\"1571481809.png\",\"1571481811.jpg\",\"1571481812.jpg\"]}}', '2019-10-19 10:43:35', '2019-10-19 10:04:23');
 
 -- --------------------------------------------------------
 
@@ -376,7 +451,53 @@ CREATE TABLE `jobTiming` (
 
 INSERT INTO `jobTiming` (`jobTimeId`, `jobId`, `driverId`, `inDateTime`, `outDateTime`, `crd`, `upd`) VALUES
 (5, 54, 15, '2019-09-26 09:33:20', '2019-09-26 09:38:26', '2019-09-26 09:33:20', '2019-09-26 09:38:26'),
-(6, 54, 15, '2019-09-26 09:37:16', '2019-09-26 09:38:26', '2019-09-26 09:37:16', '2019-09-26 09:38:26');
+(6, 54, 15, '2019-09-26 09:37:16', '2019-09-26 09:38:26', '2019-09-26 09:37:16', '2019-09-26 09:38:26'),
+(7, 67, 16, '2019-10-03 12:52:28', '2019-10-03 13:16:20', '2019-10-03 12:52:28', '2019-10-03 13:16:20'),
+(8, 69, 16, '2019-10-03 13:18:16', '2019-10-03 13:40:33', '2019-10-03 13:18:16', '2019-10-03 13:40:33'),
+(9, 71, 16, '2019-10-04 05:47:40', '2019-10-04 05:52:47', '2019-10-04 05:47:40', '2019-10-04 05:52:47'),
+(10, 72, 16, '2019-10-04 06:03:46', '2019-10-04 06:06:01', '2019-10-04 06:03:46', '2019-10-04 06:06:01'),
+(11, 73, 16, '2019-10-04 06:39:29', '2019-10-04 06:39:29', '2019-10-04 06:39:29', '2019-10-04 06:39:29'),
+(12, 74, 16, '2019-10-04 07:08:28', '2019-10-04 07:20:49', '2019-10-04 07:08:28', '2019-10-04 07:20:49'),
+(13, 74, 16, '2019-10-04 07:09:23', '2019-10-04 07:20:49', '2019-10-04 07:09:23', '2019-10-04 07:20:49'),
+(14, 74, 16, '2019-10-04 07:10:05', '2019-10-04 07:20:49', '2019-10-04 07:10:05', '2019-10-04 07:20:49'),
+(15, 74, 16, '2019-10-04 07:13:54', '2019-10-04 07:20:49', '2019-10-04 07:13:54', '2019-10-04 07:20:49'),
+(16, 74, 16, '2019-10-04 07:19:56', '2019-10-04 07:20:49', '2019-10-04 07:19:56', '2019-10-04 07:20:49'),
+(17, 75, 16, '2019-10-04 08:42:45', '2019-10-04 08:44:37', '2019-10-04 08:42:45', '2019-10-04 08:44:37'),
+(18, 75, 16, '2019-10-04 08:44:24', '2019-10-04 08:44:37', '2019-10-04 08:44:24', '2019-10-04 08:44:37'),
+(19, 76, 16, '2019-10-04 09:12:21', '2019-10-04 10:29:32', '2019-10-04 09:12:21', '2019-10-04 10:29:32'),
+(20, 76, 16, '2019-10-04 09:19:53', '2019-10-04 10:29:32', '2019-10-04 09:19:53', '2019-10-04 10:29:32'),
+(21, 76, 16, '2019-10-04 09:20:55', '2019-10-04 10:29:32', '2019-10-04 09:20:55', '2019-10-04 10:29:32'),
+(22, 76, 16, '2019-10-04 09:22:45', '2019-10-04 10:29:32', '2019-10-04 09:22:45', '2019-10-04 10:29:32'),
+(23, 76, 16, '2019-10-04 09:23:48', '2019-10-04 10:29:32', '2019-10-04 09:23:48', '2019-10-04 10:29:32'),
+(24, 76, 16, '2019-10-04 09:24:39', '2019-10-04 10:29:32', '2019-10-04 09:24:39', '2019-10-04 10:29:32'),
+(25, 76, 16, '2019-10-04 09:25:20', '2019-10-04 10:29:32', '2019-10-04 09:25:20', '2019-10-04 10:29:32'),
+(26, 76, 16, '2019-10-04 09:26:10', '2019-10-04 10:29:32', '2019-10-04 09:26:10', '2019-10-04 10:29:32'),
+(27, 76, 16, '2019-10-04 09:27:22', '2019-10-04 10:29:32', '2019-10-04 09:27:22', '2019-10-04 10:29:32'),
+(28, 76, 16, '2019-10-04 09:28:55', '2019-10-04 10:29:32', '2019-10-04 09:28:55', '2019-10-04 10:29:32'),
+(29, 76, 16, '2019-10-04 09:29:39', '2019-10-04 10:29:32', '2019-10-04 09:29:39', '2019-10-04 10:29:32'),
+(30, 76, 16, '2019-10-04 09:30:28', '2019-10-04 10:29:32', '2019-10-04 09:30:28', '2019-10-04 10:29:32'),
+(31, 76, 16, '2019-10-04 09:31:41', '2019-10-04 10:29:32', '2019-10-04 09:31:41', '2019-10-04 10:29:32'),
+(32, 76, 16, '2019-10-04 09:32:43', '2019-10-04 10:29:32', '2019-10-04 09:32:43', '2019-10-04 10:29:32'),
+(33, 76, 16, '2019-10-04 09:34:47', '2019-10-04 10:29:32', '2019-10-04 09:34:47', '2019-10-04 10:29:32'),
+(34, 76, 16, '2019-10-04 09:38:30', '2019-10-04 10:29:32', '2019-10-04 09:38:30', '2019-10-04 10:29:32'),
+(35, 76, 16, '2019-10-04 09:43:29', '2019-10-04 10:29:32', '2019-10-04 09:43:29', '2019-10-04 10:29:32'),
+(36, 76, 16, '2019-10-04 10:01:42', '2019-10-04 10:29:32', '2019-10-04 10:01:42', '2019-10-04 10:29:32'),
+(37, 76, 16, '2019-10-04 10:03:07', '2019-10-04 10:29:32', '2019-10-04 10:03:07', '2019-10-04 10:29:32'),
+(38, 76, 16, '2019-10-04 10:03:53', '2019-10-04 10:29:32', '2019-10-04 10:03:53', '2019-10-04 10:29:32'),
+(39, 76, 16, '2019-10-04 10:05:03', '2019-10-04 10:29:32', '2019-10-04 10:05:03', '2019-10-04 10:29:32'),
+(40, 76, 16, '2019-10-04 10:05:23', '2019-10-04 10:29:32', '2019-10-04 10:05:23', '2019-10-04 10:29:32'),
+(41, 76, 16, '2019-10-04 10:06:27', '2019-10-04 10:29:32', '2019-10-04 10:06:27', '2019-10-04 10:29:32'),
+(42, 76, 16, '2019-10-04 10:07:28', '2019-10-04 10:29:32', '2019-10-04 10:07:28', '2019-10-04 10:29:32'),
+(43, 76, 16, '2019-10-04 10:08:21', '2019-10-04 10:29:32', '2019-10-04 10:08:21', '2019-10-04 10:29:32'),
+(44, 76, 16, '2019-10-04 10:18:11', '2019-10-04 10:29:32', '2019-10-04 10:18:11', '2019-10-04 10:29:32'),
+(45, 76, 16, '2019-10-04 10:21:01', '2019-10-04 10:29:32', '2019-10-04 10:21:01', '2019-10-04 10:29:32'),
+(46, 76, 16, '2019-10-04 10:21:55', '2019-10-04 10:29:32', '2019-10-04 10:21:55', '2019-10-04 10:29:32'),
+(47, 76, 16, '2019-10-04 10:23:00', '2019-10-04 10:29:32', '2019-10-04 10:23:00', '2019-10-04 10:29:32'),
+(48, 76, 16, '2019-10-04 10:24:01', '2019-10-04 10:29:32', '2019-10-04 10:24:01', '2019-10-04 10:29:32'),
+(49, 76, 16, '2019-10-04 10:29:21', '2019-10-04 10:29:32', '2019-10-04 10:29:21', '2019-10-04 10:29:32'),
+(50, 79, 15, '2019-10-10 12:40:03', '2019-10-11 08:38:04', '2019-10-10 12:40:03', '2019-10-11 08:38:04'),
+(51, 79, 15, '2019-10-11 08:32:39', '2019-10-11 08:38:04', '2019-10-11 08:32:39', '2019-10-11 08:38:04'),
+(52, 83, 18, '2019-10-15 09:28:45', '2019-10-15 09:28:50', '2019-10-15 09:28:45', '2019-10-15 09:28:50');
 
 -- --------------------------------------------------------
 
@@ -400,7 +521,37 @@ INSERT INTO `jobType` (`jobTypeId`, `jobType`, `status`, `crd`, `upd`) VALUES
 (1, 'Gritting', 1, '2019-08-08 13:05:27', '2019-08-08 13:05:27'),
 (2, 'Re-Gritting', 1, '2019-08-08 13:05:27', '2019-08-08 13:05:27'),
 (3, 'Snow Ploughing', 1, '2019-08-08 13:05:27', '2019-08-08 13:05:27'),
-(4, 'Hand Gritting', 1, '2019-08-08 13:05:27', '2019-08-08 13:05:27');
+(4, 'Hand Gritting', 1, '2019-08-08 13:05:27', '2019-08-08 13:05:27'),
+(5, 'Manguarding Visit', 1, '2019-10-18 11:52:36', '2019-10-18 11:52:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobTypeQuestions`
+--
+
+CREATE TABLE `jobTypeQuestions` (
+  `questionId` bigint(20) NOT NULL,
+  `jobTypeId` bigint(20) NOT NULL,
+  `question` text NOT NULL,
+  `type` enum('text','radio','checkbox') NOT NULL,
+  `options` text NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1:Active',
+  `crd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jobTypeQuestions`
+--
+
+INSERT INTO `jobTypeQuestions` (`questionId`, `jobTypeId`, `question`, `type`, `options`, `status`, `crd`, `upd`) VALUES
+(1, 4, 'test Question1', 'text', '', 1, '2019-10-15 13:23:25', '2019-10-15 13:23:25'),
+(2, 4, 'Question 2', 'radio', '[\"opt1\",\"opt2\"]', 1, '2019-10-15 13:23:25', '2019-10-15 13:23:25'),
+(3, 4, 'Question 3', 'checkbox', '[\"opt\",\"opt1\"]', 1, '2019-10-15 13:23:25', '2019-10-15 13:23:25'),
+(4, 4, 'Question 4', 'radio', '[\"r1\",\"r4\"]', 1, '2019-10-18 08:23:00', '2019-10-18 08:23:00'),
+(5, 5, 'Was building secure', 'radio', '[\"Yes\",\"No\"]', 1, '2019-10-18 11:52:36', '2019-10-18 11:52:36'),
+(6, 5, 'Any indicents', 'text', '', 1, '2019-10-18 11:52:36', '2019-10-18 11:52:36');
 
 -- --------------------------------------------------------
 
@@ -518,11 +669,13 @@ INSERT INTO `users` (`id`, `fullName`, `email`, `password`, `profileImage`, `con
 (9, 'customer', 'c@admin.com', '$2y$10$4xSYvqebNM6b79XXw3Dtr.XpXHXpXWGpY19ZLGA7svm1HTLakMxIW', '', '(242) 343-3344', 1, 1, 'cb9edb3da1c40fbdcedd85908474430c7abdbb46', 'c78169852517ba8704c355d398372381324f4141', 2, '', 0, '2019-08-10 08:20:57', '2019-09-11 06:13:23'),
 (10, '123456789012345678901234567890', 'a@yopmail.com', '$2y$10$amNW5UwcsHYVIs4NG0E29OYSc5gphEexW5IYt46gyneDVCFDvPd32', '', '(132) 313-2132', 1, 1, '427ec5f901b85edf06ebfdc1e5556de284cd827a', 'b00801714bb7710439fc11302b9f1d4a0b9a3049', 0, '', 0, '2019-08-10 10:26:47', '2019-08-22 12:26:27'),
 (11, 'Test', 'pg@gmail.com', '$2y$10$zWRXIdrrpc.BXomypS1NA..7OchyaWeGlOSbdd1bmoa2v6prbtPyS', '', '(121) 212-1111', 1, 1, '7bd20bcadf2fe4eedc4c3b0fdc6817393daf87b6', 'c75d3a26ebd766c57644aae11e1bc19d8d8b3628', 0, '', 0, '2019-08-21 13:32:57', '2019-08-21 13:32:57'),
-(13, 'Ved Sharma', 'ved@gmail.com', '$2y$10$4dvEJwNbe0cmwL8iYxrcpefUmIZ6EjYgxSeAn1EIGyw6khd/NHGIe', '', '(123) 456-7890', 1, 1, '51aebe6a88381d0d463dbb6c887eee20e0bdf326sas', '5d729aa707af9b4c51a199799a4bbdcd7ba17212', 2, '', 0, '2019-09-11 06:13:14', '2019-09-12 06:13:54'),
+(13, 'Ved Sharma', 'ved@gmail.com', '$2y$10$4dvEJwNbe0cmwL8iYxrcpefUmIZ6EjYgxSeAn1EIGyw6khd/NHGIe', '', '(123) 456-7890', 1, 1, '052bd1336e10b003b4e7a039dbb6d68d75579aba', '5d729aa707af9b4c51a199799a4bbdcd7ba17212', 1, '', 0, '2019-09-11 06:13:14', '2019-10-11 10:31:44'),
 (14, 'Yarm Computers Ltd', 'dean@yc.uk.com', '$2y$10$DxFpzfLJxbQkDGjVCTKrJ.CAR.IgWf144Tj5WBxcg.pA4VHP7cRG6', '', '(016) 427-8692', 1, 1, '05deb206af19ef93f0f49c4c76e7f4ce52df6ded', '179842a26a6eadc9ff417acb25a1a24b7d115136', 0, '', 0, '2019-09-17 08:16:32', '2019-09-17 08:16:32'),
-(15, 'New Driver', 'Newdriver@gmail.com', '$2y$10$2FNDQ/f8FUqEF3guLx.jUehmRVoaGbsmVGCiTDSTspHwbFsB0HkhG', 'KDuUgWPJ04vSVHks.png', '(123) 456-7890', 2, 1, '40eff63db7de747ffa9d494d986b65e379082f8d', '5009cf96bbf30938ec104429d082472b8ab31c3b', 1, '', 0, '2019-09-17 09:35:38', '2019-09-27 10:06:54'),
-(16, 'NKP', 'nkp.otc@gmail.com', '$2y$10$4DDaHnfCRIjrQMvRl6whkO2QwwXsXSdIXTAaTrv.Itx7TejX4mZHG', '', '(12345) 678900', 2, 1, '13a74edded2960b686e7e4f983cf62f9f485a58a', '51aae666ed61dedd7ec78fc526047eb656b4d85e', 1, '98765432456hcbcgfbccvbcbcbc', 0, '2019-09-19 08:32:25', '2019-09-30 06:59:33'),
-(17, 'Ved', 'otc.ved@gmail.com', '$2y$10$SzXO0oW0GfasB8ep.u9v/u0jyd0IuXwUjTED25dZFBqZh/4l1Axhu', '', '(12345) 678900', 2, 1, '84d31bb01bdee93422fb27112d5c5b782e35acc2', '4265825e6a9091e3883a8aac6c65daa3a78f9cfa', 2, '(null)', 0, '2019-09-23 12:47:28', '2019-09-27 09:25:33');
+(15, 'New Driver', 'Newdriver@gmail.com', '$2y$10$2FNDQ/f8FUqEF3guLx.jUehmRVoaGbsmVGCiTDSTspHwbFsB0HkhG', 'KDuUgWPJ04vSVHks.png', '(123) 456-7890', 2, 1, '198fa1df5d51846cb4873d5e1f0141bd4c0da907', '5009cf96bbf30938ec104429d082472b8ab31c3b', 1, '', 0, '2019-09-17 09:35:38', '2019-10-19 10:12:23'),
+(16, 'NKP', 'nkp.otc@gmail.com', '$2y$10$U.4lTVxGBvcJNVKcppkkvOVSQc5clbcyzd0ydkRTpClGeUPojSp62', '', '(12345) 678900', 2, 1, 'fb60edd15df2d413e47224b1ed5621f4c63465c5', '', 1, '98765432456hcbcgfbccvbcbcbc', 0, '2019-09-19 08:32:25', '2019-10-19 10:39:58'),
+(17, 'Ved', 'otc.ved@gmail.com', '$2y$10$SzXO0oW0GfasB8ep.u9v/u0jyd0IuXwUjTED25dZFBqZh/4l1Axhu', '', '(12345) 678900', 2, 1, '84d31bb01bdee93422fb27112d5c5b782e35acc2', '4265825e6a9091e3883a8aac6c65daa3a78f9cfa', 2, '(null)', 0, '2019-09-23 12:47:28', '2019-09-27 09:25:33'),
+(18, 'James Laville', 'james.laville@lucidgrp.co.uk', '$2y$10$1Xc.QO.q3dKjYrIiJcHaxeTRlulyizMyQJeoP5d5DfF8GHQMnwxF2', '', '(01642) 792567', 2, 1, 'bed7a1be645c02b6fab07ec20e3dcf6e37fd656f', '4510feb6f53fb108dbb093dd19b7b2a9bc220ce1', 1, '', 0, '2019-10-03 11:29:07', '2019-10-15 06:05:48'),
+(19, 'test otc', 'testotc@gmail.com', '$2y$10$tIhgepbqG.PVq8x9SI6MzeAi6KC3t7ZWQUBsAifj9n.wVbMJZnDGK', '', '(34535) 435345', 1, 1, '5a912c98ffdbead619331bc24227f07063077dde', '496b7972aed450184875a944864901dfe35effdf', 0, '', 0, '2019-10-04 06:31:26', '2019-10-04 06:31:26');
 
 -- --------------------------------------------------------
 
@@ -620,7 +773,8 @@ CREATE TABLE `vehicleHistory` (
 
 INSERT INTO `vehicleHistory` (`historyId`, `vehicleId`, `vjobTypeId`, `date`, `attachment`, `fileType`, `status`, `crd`, `upd`) VALUES
 (1, 5, 1, '2019-09-30', '1569832600.pdf', 'application', 1, '2019-09-30 08:36:42', '2019-09-30 08:36:42'),
-(2, 5, 3, '2019-09-18', '1569832675.png', 'image', 1, '2019-09-30 08:37:57', '2019-09-30 08:37:57');
+(2, 5, 3, '2019-09-18', '1569832675.png', 'image', 1, '2019-09-30 08:37:57', '2019-09-30 08:37:57'),
+(3, 5, 1, '2019-10-21', '1571399757.pdf', 'application', 1, '2019-10-18 11:56:00', '2019-10-18 11:56:00');
 
 -- --------------------------------------------------------
 
@@ -719,6 +873,15 @@ ALTER TABLE `driverMeta`
   ADD KEY `userId` (`userId`);
 
 --
+-- Indexes for table `jobQuestionAnswer`
+--
+ALTER TABLE `jobQuestionAnswer`
+  ADD PRIMARY KEY (`answerId`),
+  ADD KEY `jobId` (`jobId`),
+  ADD KEY `questionId` (`questionId`),
+  ADD KEY `jobTypeId` (`jobTypeId`);
+
+--
 -- Indexes for table `jobs`
 --
 ALTER TABLE `jobs`
@@ -740,6 +903,13 @@ ALTER TABLE `jobTiming`
 --
 ALTER TABLE `jobType`
   ADD PRIMARY KEY (`jobTypeId`);
+
+--
+-- Indexes for table `jobTypeQuestions`
+--
+ALTER TABLE `jobTypeQuestions`
+  ADD PRIMARY KEY (`questionId`),
+  ADD KEY `jobTypeId` (`jobTypeId`);
 
 --
 -- Indexes for table `states`
@@ -805,37 +975,49 @@ ALTER TABLE `carManufacturers`
 -- AUTO_INCREMENT for table `customerAddress`
 --
 ALTER TABLE `customerAddress`
-  MODIFY `addressId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `addressId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `customerMeta`
 --
 ALTER TABLE `customerMeta`
-  MODIFY `customerMetaId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `customerMetaId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `driverMeta`
 --
 ALTER TABLE `driverMeta`
-  MODIFY `driverMetaId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `driverMetaId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `jobQuestionAnswer`
+--
+ALTER TABLE `jobQuestionAnswer`
+  MODIFY `answerId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `jobId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `jobId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `jobTiming`
 --
 ALTER TABLE `jobTiming`
-  MODIFY `jobTimeId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `jobTimeId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `jobType`
 --
 ALTER TABLE `jobType`
-  MODIFY `jobTypeId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `jobTypeId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `jobTypeQuestions`
+--
+ALTER TABLE `jobTypeQuestions`
+  MODIFY `questionId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `states`
@@ -847,7 +1029,7 @@ ALTER TABLE `states`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `vehicleColors`
@@ -859,7 +1041,7 @@ ALTER TABLE `vehicleColors`
 -- AUTO_INCREMENT for table `vehicleHistory`
 --
 ALTER TABLE `vehicleHistory`
-  MODIFY `historyId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `historyId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `vehicleJobType`
@@ -896,12 +1078,26 @@ ALTER TABLE `driverMeta`
   ADD CONSTRAINT `driverMeta_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `jobQuestionAnswer`
+--
+ALTER TABLE `jobQuestionAnswer`
+  ADD CONSTRAINT `jobQuestionAnswer_ibfk_1` FOREIGN KEY (`jobId`) REFERENCES `jobs` (`jobId`) ON DELETE CASCADE,
+  ADD CONSTRAINT `jobQuestionAnswer_ibfk_2` FOREIGN KEY (`jobTypeId`) REFERENCES `jobType` (`jobTypeId`) ON DELETE CASCADE,
+  ADD CONSTRAINT `jobQuestionAnswer_ibfk_3` FOREIGN KEY (`questionId`) REFERENCES `jobTypeQuestions` (`questionId`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `jobs`
 --
 ALTER TABLE `jobs`
   ADD CONSTRAINT `jobs_ibfk_1` FOREIGN KEY (`jobTypeId`) REFERENCES `jobType` (`jobTypeId`) ON DELETE CASCADE,
   ADD CONSTRAINT `jobs_ibfk_2` FOREIGN KEY (`customerId`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `jobs_ibfk_3` FOREIGN KEY (`driverId`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `jobTypeQuestions`
+--
+ALTER TABLE `jobTypeQuestions`
+  ADD CONSTRAINT `jobTypeQuestions_ibfk_1` FOREIGN KEY (`jobTypeId`) REFERENCES `jobType` (`jobTypeId`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

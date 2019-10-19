@@ -16,10 +16,12 @@ class Jobs extends Common_Service_Controller{
         $authtoken  = $this->api_model->generate_token();
         switch ($userType) {
             case 1:
-             $where =  array('j.customerId'=> $userId,'j.jobStatus !='=>2);
+           //  $where =  array('j.customerId'=> $userId,'j.jobStatus !='=>2);
+             $where =  array('j.customerId'=> $userId);
                 break;
             case 2:
-              $where =  array('j.driverId'=> $userId,'j.jobStatus !='=>2);
+              //$where =  array('j.driverId'=> $userId,'j.jobStatus !='=>2);
+              $where =  array('j.driverId'=> $userId);
                 break;
             
             default:
@@ -87,8 +89,6 @@ class Jobs extends Common_Service_Controller{
         $this->response($response);    
     } //End Function
     function jobActivity_post(){
-		//~ log_event(json_encode($_POST), 'jobs_log.txt');  //create log of notifcation
-		//~ log_event(json_encode($_FILES), 'jobs_log.txt');  //create log of notifcation
         $this->form_validation->set_rules('jobId', 'jobId', 'trim|required');
         $this->form_validation->set_rules('jobDateTime', 'jobDateTime', 'trim|required');
         $this->form_validation->set_rules('jobStatus', 'job status', 'trim|required');
@@ -109,30 +109,49 @@ class Jobs extends Common_Service_Controller{
                 $response = array('status' => FAIL, 'message' =>"work image max 4 image upload.");
                  $this->response($response);  
             }
-            $data_val = array();
-            $jobId                  = $this->post('jobId');
-            $where   = array('jobId'=>$jobId);
-            $isExist = $this->common_model->is_data_exists('jobs',$where);
+            $data_val   = array();
+            $jobId      = $this->post('jobId');
+            $where      = array('jobId'=>$jobId);
+            $isExist    = $this->common_model->is_data_exists('jobs',$where);
             if($isExist){
                 if($isExist->jobStatus==2){
                      $response = array('status' => FAIL, 'message' =>"job already completed.");
                 }else{
+                    /*JonType Question answer*/
+                    $questionAnswer     = $this->post('questionAnswer');
+                    $questions          = !empty($questionAnswer) ? json_decode($questionAnswer,true):array();
+                    $updateQ = array() ;
+                    if(!empty($questions) && is_array($questions)){
+                        foreach ($questions as $k => $question) {
+                            $questionId         = $question['questionId'];
+                            $answer             = $question['answer'];
+                            $whereQ             = array('questionId'=>$questionId,'jobId'=>$jobId);
+                            $isExistQ           = $this->common_model->is_data_exists('jobQuestionAnswer',$whereQ);
+                            if($isExistQ){
+                                $up = $this->common_model->updateFields('jobQuestionAnswer',array('answer'=>$answer),$whereQ);
+                                $updateQ[] = $up? 1:0;
+                            }else{
+                                $updateQ[] = 0;
+                            }
+                        }
+                    }// Question answer
+                /*JonType Question answer*/
                     /* log_event(json_encode($_POST), 'jobs_log.txt');  //create log of notifcation
                       log_event(json_encode($_FILES), 'jobs_log.txt');  //create log of notifcation*/
-                    $jobReport = $isExist->jobReport;
-                    $report = !empty($jobReport) ? json_decode( $jobReport,true):array();
-                    $jobStatus                  = $this->post('jobStatus');
-                    $jobDateTime                  =  date("Y-m-d h:i:s A",strtotime($this->post('jobDateTime')));;
+                    $jobReport = isset($isExist->jobReport) ? $isExist->jobReport:"";
+                    $report = !empty($jobReport) ? json_decode($jobReport,true):array();
+                    $jobStatus                      = $this->post('jobStatus');
+                    $jobDateTime                    =  date("Y-m-d h:i:s A",strtotime($this->post('jobDateTime')));;
                     switch ($jobStatus) {
                         case 'start':
                             $res=1;
                             $jobActivity = 1;
-                            $data_val['startDateTime']    = $jobDateTime;
+                            $data_val['startDateTime']      = $jobDateTime;
                             break;
                         case 'end':
                             $res=1;
                             $jobActivity = 2;
-                            $data_val['endDateTime']    = $jobDateTime;
+                            $data_val['endDateTime']        = $jobDateTime;
                             break;
                         
                         default:
@@ -153,7 +172,7 @@ class Jobs extends Common_Service_Controller{
                             $actual_image_name = time().".".$ext;
                             if($this->s3->putObjectFile($tmp, BUCKETNAME , $uploadFor.'/'.$actual_image_name, S3::ACL_PUBLIC_READ) )
                             {
-                            $workImage[]   = $actual_image_name;
+                            $workImage[]   =  $actual_image_name;
                             }
                                          
                       }
@@ -171,16 +190,14 @@ class Jobs extends Common_Service_Controller{
                         }
                         switch ($jobStatus) {
                             case 'start':
-                         
-                            $data_val['driverSignature']    = $signature;
-                            $data_val['workImage']          = $workImage;
-                            $report['beforeWork']           =   $data_val;
+                                $data_val['driverSignature']        = $signature;
+                                $data_val['workImage']              = $workImage;
+                                $report['beforeWork']               = $data_val;
                             break;
                             case 'end':
-                          
-                            $data_val['customerSignature']   = $signature;
-                            $data_val['workImage']           = $workImage;
-                            $report['afterWork']            = $data_val;
+                                $data_val['customerSignature']      = $signature;
+                                $data_val['workImage']              = $workImage;
+                                $report['afterWork']                = $data_val;
                             break;
 
                             default:
@@ -223,6 +240,7 @@ class Jobs extends Common_Service_Controller{
             $where          = array('jobId'=>$jobId);
             $isJob = $this->common_model->is_data_exists('jobs',$where);
             if($isJob){
+
                 $result = $this->job_model->jobTracking($jobId,$driverId,$latitude,$longitude);
                 $response = array('status' => SUCCESS, 'message' =>$result); 
             }else{
@@ -231,7 +249,7 @@ class Jobs extends Common_Service_Controller{
         } 
         $this->response($response);    
     }//end function
-    function jobQuestionAnwer_post(){
+    function jobQuestionAnswer_post(){
         $authCheck  = $this->check_service_auth();
         $authToken  = $this->authData->authToken;
         $driverId   = $this->authData->id;
@@ -260,5 +278,41 @@ class Jobs extends Common_Service_Controller{
         }
         $this->response($response);
     }//end function
+    function allQuestionAnswer_post(){
+        $authCheck  = $this->check_service_auth();
+        $authToken  = $this->authData->authToken;
+        $driverId   = $this->authData->id;
+        $this->form_validation->set_rules('jobId', 'jobId', 'trim|required');
+        $this->form_validation->set_rules('questionAnswer', 'questionAnswer', 'trim|required');
+      
+        if($this->form_validation->run() == FALSE){
+            $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
+        }else{
+            $jobId              = $this->post('jobId');
+            $questionAnswer     = $this->post('questionAnswer');
+            $questions          = !empty($questionAnswer) ? json_decode($questionAnswer,true):array();
+            $update = array() ;
+            foreach ($questions as $k => $question) {
+                    $questionId         = $question['questionId'];
+                    $answer             = $question['answer'];
+                    $where              = array('questionId'=>$questionId,'jobId'=>$jobId);
+                    $isExist            = $this->common_model->is_data_exists('jobQuestionAnswer',$where);
+
+                     if($isExist){
+                         $up = $this->common_model->updateFields('jobQuestionAnswer',array('answer'=>$answer),$where);
+                         $update[] = $up? 1:0;
+                     }else{
+                        $update[] = 0;
+                     }
+            }
+            if(!in_array(0,$update)){
+                $response = array('status' => SUCCESS, 'message' =>ResponseMessages::getStatusCodeMessage(122));
+            }else{
+                $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(118));
+            }
+          
+        }
+        $this->response($response);
+    }//end function  
 }//End Class 
 
