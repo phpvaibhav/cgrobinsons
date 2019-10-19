@@ -98,7 +98,7 @@
 						</div>
 					</fieldset>
 					<header class="queDataHideShow">
-						<label class="checkbox state-error"><input type="checkbox" id="select_questionAll <?= ($job['jobStatus']!=0)?'_1':"";?>"  value="1" <?= ($job['jobStatus']!=0)?'onclick="return false;"':"";?> name="checkbox"><i></i> <strong> Job Type Questions</strong></label>
+						<label class="checkbox state-error"><input type="checkbox" id="select_questionAll<?= ($job['jobStatus']!=0)?'_1':'';?>"  value="1" <?= ($job['jobStatus']!=0)?'onclick="return false;"':"";?> name="checkbox"><i></i> <strong> Job Type Questions</strong></label>
 					</header>
 					<fieldset class="queDataHideShow">	
 							<section id="showQue"></section>		
