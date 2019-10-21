@@ -46,8 +46,8 @@ class Job_model extends CI_Model {
                 }else{
                     $res[$k]->geoFencingUrl = ""; 
                 }
-                $jobTypeQuetions = $this->jobTypeQuetions($row->jobId,$row->jobTypeId);
-                $res[$k]->jobTypeQuetions = !empty($jobTypeQuetions) ? $jobTypeQuetions :array();
+                $jobTypeQuestions = $this->jobTypeQuestions($row->jobId,$row->jobTypeId);
+                $res[$k]->jobTypeQuestions = !empty($jobTypeQuestions) ? $jobTypeQuestions :array();
             }
             return $res;
         endif;
@@ -87,8 +87,8 @@ class Job_model extends CI_Model {
                 $row->geoFencingUrl = ""; 
             }
             $row->generatePdf  = base_url().'pdfset/download/'.encoding($row->jobId);
-            $jobTypeQuetions = $this->jobTypeQuetions($row->jobId,$row->jobTypeId);
-                $row->jobTypeQuetions = !empty($jobTypeQuetions) ? $jobTypeQuetions :array();
+            $jobTypeQuestions = $this->jobTypeQuestions($row->jobId,$row->jobTypeId);
+                $row->jobTypeQuestions = !empty($jobTypeQuestions) ? $jobTypeQuestions :array();
             return $row;
         endif;
         return false;
@@ -190,7 +190,7 @@ class Job_model extends CI_Model {
         }//end if
         return true;
     }//end function
-    function jobTypeQuetions($jobId,$jobTypeId){
+    function jobTypeQuestions($jobId,$jobTypeId){
         $array = array();
         $this->db->select('q.questionId,q.question,q.type,q.options,ans.answerId,ans.answer');
         $this->db->from('jobTypeQuestions as q');

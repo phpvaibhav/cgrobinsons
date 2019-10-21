@@ -27,38 +27,38 @@ class Jobs extends Common_Admin_Controller{
         }
         else{
          
-                $data_val['jobName']       = $this->post('jobName');
-                $data_val['jobTypeId']     = $this->post('jobTypeId');
-                $jobTypeId                 = $this->post('jobTypeId');
-                $data_val['driverId']      = $this->post('driverId');
-                $data_val['customerId']    = $this->post('customerId');
-                $data_val['startDate']     = date("Y-m-d",strtotime($this->post('startDate')));
-                $data_val['startTime']      = $this->post('startTime');
+                $data_val['jobName']                = $this->post('jobName');
+                $data_val['jobTypeId']              = $this->post('jobTypeId');
+                $jobTypeId                          = $this->post('jobTypeId');
+                $data_val['driverId']               = $this->post('driverId');
+                $data_val['customerId']             = $this->post('customerId');
+                $data_val['startDate']              = date("Y-m-d",strtotime($this->post('startDate')));
+                $data_val['startTime']              = $this->post('startTime');
                
-                $data_val['address']               = $this->post('address');
-                $data_val['street']                = $this->post('street');
-                $data_val['street2']               = $this->post('street2');
-                $data_val['city']                  = $this->post('city');
-                $data_val['state']                 = $this->post('state');
-                $data_val['zip']                   = $this->post('zip');
-                $data_val['country']               = $this->post('country');
-                $data_val['latitude']              = $this->post('latitude');
-                $data_val['longitude']             = $this->post('longitude');  
+                $data_val['address']                = $this->post('address');
+                $data_val['street']                 = $this->post('street');
+                $data_val['street2']                = $this->post('street2');
+                $data_val['city']                   = $this->post('city');
+                $data_val['state']                  = $this->post('state');
+                $data_val['zip']                    = $this->post('zip');
+                $data_val['country']                = $this->post('country');
+                $data_val['latitude']               = $this->post('latitude');
+                $data_val['longitude']              = $this->post('longitude');  
                 /*select address customer*/  
           
-                $customer_val['latitude']              = $this->post('latitude');
-                $customer_val['longitude']             = $this->post('longitude');
-                $customer_val['customerId']             = $this->post('customerId');
-                $questionId                             = $this->post('questionId');
+                $customer_val['latitude']           = $this->post('latitude');
+                $customer_val['longitude']          = $this->post('longitude');
+                $customer_val['customerId']         = $this->post('customerId');
+                $questionId                         = $this->post('questionId');
                
                 $jobId  = decoding($this->post('jobId'));
 
                 $where = array('jobId'=>$jobId);
                 /*polygon*/
-                    $boundary               = $this->input->post('boundary');
-                    $color                  = $this->input->post('polygonColor');
-                    $geo_val['points']     = $boundary ;
-                    $geo_val['polygonColor']   = $color     ;
+                    $boundary                   = $this->input->post('boundary');
+                    $color                      = $this->input->post('polygonColor');
+                    $geo_val['points']          = $boundary ;
+                    $geo_val['polygonColor']    = $color     ;
                     $boundary1=array();
                     if(!empty($boundary)):
                     $pre = explode("|",$boundary);
@@ -80,8 +80,8 @@ class Jobs extends Common_Admin_Controller{
                     $boundaryP = "PolygonFromText('POLYGON(($hf))')";
 
                     }
-                    $geo_val['boundary']   = $boundaryP ;
-                    $geo_val['geoFencing']   = $geoFencing ;
+                    $geo_val['boundary']        = $boundaryP ;
+                    $geo_val['geoFencing']      = $geoFencing ;
                 /*polygon*/
                 $isExist=$this->common_model->is_data_exists('jobs',$where);
                  $questions         =  $this->common_model->getAll('jobQuestionAnswer',array('jobId'=>$jobId));

@@ -15,21 +15,21 @@ class Users extends Common_Back_Controller {
  
     public function userDetail(){
       //pr('admin@admin.com');
-        $userId  = decoding($this->uri->segment(2));
-        $data['title'] = "Profile";
-        $where = array('id'=>$userId);
-        $result = $this->common_model->getsingle('admin',$where);
-        $data['userData'] = $result;
+        $userId             = decoding($this->uri->segment(2));
+        $data['title']      = "Profile";
+        $where              = array('id'=>$userId);
+        $result             = $this->common_model->getsingle('admin',$where);
+        $data['userData']   = $result;
         $this->load->admin_render('profile/userDetail', $data, '');
     } 
     public function changePassword(){
         
-        $userId  = decoding($this->uri->segment(2));
+        $userId             = decoding($this->uri->segment(2));
 
-        $data['title'] = "Change Password";
-        $where = array('id'=>$userId);
-        $result = $this->common_model->getsingle('admin',$where);
-        $data['userData'] = $result;
+        $data['title']      = "Change Password";
+        $where              = array('id'=>$userId);
+        $result             = $this->common_model->getsingle('admin',$where);
+        $data['userData']   = $result;
         $this->load->admin_render('profile/changePassword', $data, '');
     }   
 }

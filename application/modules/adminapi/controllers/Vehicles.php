@@ -18,8 +18,7 @@ class Vehicles extends Common_Admin_Controller{
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
             
-        }
-        else{
+        }else{
           
 				$data_val['year']       	= $this->post('year');
 				$data_val['model']       	= $this->post('model');
@@ -28,17 +27,16 @@ class Vehicles extends Common_Admin_Controller{
 				$data_val['manufacturer']   = $this->post('manufacturer');
 				$data_val['state']      	= $this->post('state');
 				$data_val['color']       	= $this->post('color');
-				$vehicleId  = decoding($this->post('vid'));
+				$vehicleId                  = decoding($this->post('vid'));
 
 				$where = array('vehicleId'=>$vehicleId);
             	$isExist=$this->common_model->is_data_exists('vehicles',$where);
             	if($isExist){
-            		$result = $this->common_model->updateFields('vehicles',$data_val,$where);
-            		$msg = "Vehicle record updated successfully.";
+            		$result   = $this->common_model->updateFields('vehicles',$data_val,$where);
+            		$msg      = "Vehicle record updated successfully.";
             	}else{
-            		$result = $this->common_model->insertData('vehicles',$data_val);
-            		
-            		$msg = "Vehicle record added successfully.";
+            		$result   = $this->common_model->insertData('vehicles',$data_val);
+            		$msg      = "Vehicle record added successfully.";
             	}
                 
                 if($result){
@@ -64,48 +62,47 @@ class Vehicles extends Common_Admin_Controller{
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
             
-        }
-        else{
+        }else{
             
-             $vehicleId  = decoding($this->post('vehicleId'));
-                
-                $historyId  = decoding($this->post('hid'));
-                $data_val['vjobTypeId']    = $this->post('type');
-                $data_val['date']          =  date('Y-m-d',strtotime($this->post('date')));
-                $data_val['vehicleId']     = $vehicleId;
-             //   pr($data_val);
-                if (!empty($_FILES['attachment']['name'])) {
-                     $this->load->library('s3');
-                    $this->load->model('s3_model');
-                    $attachmentType = $_FILES['attachment']['type'];
-                     $imageType = explode("/",$attachmentType);
-                    $attachmentname = $_FILES['attachment']['name'];
-                    $attachmentsize = $_FILES['attachment']['size'];
-                    $attachmenttmp  = $_FILES['attachment']['tmp_name'];
-                    $attachmentext  = $this->s3_model->getExtension($attachmentname);;
+            $vehicleId                  = decoding($this->post('vehicleId'));
 
-                     $uploadFor = "vehicles";
-                    //Rename image name.
-                    $actual_image_attachment = time().".".$attachmentext;
+            $historyId                  = decoding($this->post('hid'));
+            $data_val['vjobTypeId']     = $this->post('type');
+            $data_val['date']           =  date('Y-m-d',strtotime($this->post('date')));
+            $data_val['vehicleId']      = $vehicleId;
+            //   pr($data_val);
+            if (!empty($_FILES['attachment']['name'])) {
+                $this->load->library('s3');
+                $this->load->model('s3_model');
+                $attachmentType = $_FILES['attachment']['type'];
+                $imageType      = explode("/",$attachmentType);
+                $attachmentname = $_FILES['attachment']['name'];
+                $attachmentsize = $_FILES['attachment']['size'];
+                $attachmenttmp  = $_FILES['attachment']['tmp_name'];
+                $attachmentext  = $this->s3_model->getExtension($attachmentname);;
+
+                $uploadFor      = "vehicles";
+                //Rename image name.
+                $actual_image_attachment    = time().".".$attachmentext;
                     if($this->s3->putObjectFile($attachmenttmp, BUCKETNAME , $uploadFor.'/'.$actual_image_attachment, S3::ACL_PUBLIC_READ) )
                     {
-                        $data_val['attachment']     = $actual_image_attachment;
+                        $data_val['attachment']         = $actual_image_attachment;
                         $data_val['fileType']           = isset($imageType[0]) ?$imageType[0]:'image';;
                     }
                 }
 
-                $where = array('historyId'=>$historyId);
-                $isExist=$this->common_model->is_data_exists('vehicleHistory',$where);
+                $where      = array('historyId'=>$historyId);
+                $isExist    = $this->common_model->is_data_exists('vehicleHistory',$where);
                 if($isExist){
                     if(isset($data_val['attachment']) && !empty($data_val['attachment'])){
                      $this->s3_model->deleteImg($uploadFor,$isExist->attachment);
                     }
-                    $result = $this->common_model->updateFields('vehicleHistory',$data_val,$where);
-                    $msg = "Vehicle history record updated successfully.";
+                    $result     = $this->common_model->updateFields('vehicleHistory',$data_val,$where);
+                    $msg        = "Vehicle history record updated successfully.";
                 }else{
-                    $result = $this->common_model->insertData('vehicleHistory',$data_val);
+                    $result     = $this->common_model->insertData('vehicleHistory',$data_val);
                     
-                    $msg = "Vehicle history added successfully.";
+                    $msg        = "Vehicle history added successfully.";
                 }
                 
                 if($result){
@@ -131,25 +128,24 @@ class Vehicles extends Common_Admin_Controller{
             
         }
         else{
-          		$vehicleId  = decoding($this->post('vid'));
+          		$vehicleId                  = decoding($this->post('vid'));
 				$data_val['driverId']       = $this->post('driverId');
 				$data_val['assignDate']     = date("Y-m-d",strtotime($this->post('assignDate')));
-				$where = array('vehicleId'=>$vehicleId);
-            	$isExist = $this->common_model->is_data_exists('vehicles',$where);
+				$where      = array('vehicleId'=>$vehicleId);
+            	$isExist    = $this->common_model->is_data_exists('vehicles',$where);
             	
                 
                 if($isExist){
                 	$assignExist = $this->common_model->is_data_exists('assignVehicle',$where);
                   if($assignExist){
-            		$result = $this->common_model->updateFields('assignVehicle',$data_val,$where);
-            		$msg = "Vehicle assign driver successfully.";
+            		$result   = $this->common_model->updateFields('assignVehicle',$data_val,$where);
+            		$msg      = "Vehicle assign driver successfully.";
             	}else{
-            		$data_val['vehicleId']       = $vehicleId;
-            		$result = $this->common_model->insertData('assignVehicle',$data_val);
-            		
-            		$msg = "Vehicle assign driver successfully.";
+            		$data_val['vehicleId']        = $vehicleId;
+            		$result                       = $this->common_model->insertData('assignVehicle',$data_val);
+            		$msg                          = "Vehicle assign driver successfully.";
             	}
-                   $response = array('status'=>SUCCESS,'message'=>$msg);
+                   $response    = array('status'=>SUCCESS,'message'=>$msg);
                 }else{
                      $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
                 } 
@@ -166,7 +162,7 @@ class Vehicles extends Common_Admin_Controller{
         $list = $this->vehilce_model->get_list();
         
         $data = array();
-        $no = $_POST['start'];
+        $no     = $_POST['start'];
         foreach ($list as $serData) { 
         $action ='';
         $no++;

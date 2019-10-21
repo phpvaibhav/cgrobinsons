@@ -41,13 +41,13 @@ class Admin extends Common_Back_Controller {
     
     public function dashboard() {
        
-        $data['parent'] = "Dashboard";
-        $data['title'] = '<i class="fa-fw fa fa-home"></i> Dashboard';
-        $data['customers'] = $this->common_model->get_total_count('users',array('userType' =>1));
-        $data['drivers'] = $this->common_model->get_total_count('users',array('userType' =>2));
-        $data['jobs'] = $this->common_model->get_total_count('jobs');
-        $data['vehicles'] = $this->common_model->get_total_count('vehicles');
-        $data['jobType'] = $this->common_model->get_total_count('jobType');
+        $data['parent']     = "Dashboard";
+        $data['title']      = '<i class="fa-fw fa fa-home"></i> Dashboard';
+        $data['customers']  = $this->common_model->get_total_count('users',array('userType' =>1));
+        $data['drivers']    = $this->common_model->get_total_count('users',array('userType' =>2));
+        $data['jobs']       = $this->common_model->get_total_count('jobs');
+        $data['vehicles']   = $this->common_model->get_total_count('vehicles');
+        $data['jobType']    = $this->common_model->get_total_count('jobType');
         
         $this->load->admin_render('dashboard', $data, '');
     }
@@ -55,10 +55,10 @@ class Admin extends Common_Back_Controller {
       //view admin profile
     public function admin_profile(){
 
-        $data['title'] = "Admin profile";
-        $where = array('id'=>$_SESSION[ADMIN_USER_SESS_KEY]['id']);
-        $result = $this->common_model->getsingle(ADMIN,$where);
-        $data['userData'] = $result;
+        $data['title']      = "Admin profile";
+        $where              = array('id'=>$_SESSION[ADMIN_USER_SESS_KEY]['id']);
+        $result             = $this->common_model->getsingle(ADMIN,$where);
+        $data['userData']   = $result;
         $this->load->admin_render('admin_profile', $data, '');
     }
     //update admin profile
@@ -70,15 +70,15 @@ class Admin extends Common_Back_Controller {
            $response = array('status' => 0, 'message' => $messages);
         }
         else{
-           $update_data = array();
-            $image = array(); 
-            $where_id = $this->input->post('admin_id');
-            $existing_img = $this->input->post('exit_image');
+           $update_data     = array();
+            $image          = array(); 
+            $where_id       = $this->input->post('admin_id');
+            $existing_img   = $this->input->post('exit_image');
 
             if (!empty($_FILES['image']['name'])) {
                 $this->load->model('Image_model');
                 $folder = 'user_avatar';
-                $image = $this->Image_model->upload_image('image',$folder); //upload media of 
+                $image  = $this->Image_model->upload_image('image',$folder); //upload media of 
             }
             if(array_key_exists("error",$image) && !empty($image['error'])){
                 $response = array('status' => 0, 'message' =>$image['error']); 
@@ -96,8 +96,8 @@ class Admin extends Common_Back_Controller {
 
             $set = array('fullName','email');
             foreach ($set as $key => $val) {
-                $post= $this->input->post($val);
-                $update_data[$val] = (isset($post) && !empty($post)) ? $post :''; 
+                $post                   = $this->input->post($val);
+                $update_data[$val]      = (isset($post) && !empty($post)) ? $post :''; 
             }
             $update_where = array('id'=>$where_id);
             $userId = $this->common_model->updateFields(ADMIN, $update_data, $update_where);
@@ -146,10 +146,8 @@ class Admin extends Common_Back_Controller {
                         $response = array('status' => 1, 'message' => 'Successfully Updated', 'url' => base_url('admin/admin_profile'));
                     }
                     else{
-                         $response = array('status' => 0, 'message' => 'Failed! Please try again', 'url' => base_url('admin/admin_profile'));
-                        
-                    }
-                    
+                        $response = array('status' => 0, 'message' => 'Failed! Please try again', 'url' => base_url('admin/admin_profile'));   
+                    }    
                 } 
             }else{
                  $response = array('status' => 0, 'message' => 'Your Current Password is Wrong !', 'url' => base_url('admin/admin_profile'));                 
@@ -157,6 +155,4 @@ class Admin extends Common_Back_Controller {
         }
         echo json_encode($response); die;  
     }//End Function
-   
-
 }

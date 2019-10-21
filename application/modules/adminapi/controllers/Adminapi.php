@@ -4,17 +4,13 @@ class Adminapi extends Common_Admin_Controller{
     
     public function __construct(){
         parent::__construct();
-  
         $this->load->model('adminapi_model'); //load image model
     }
-
     // For Registration 
     function registration_post(){
-        
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[admin.email]',
             array('is_unique' => 'Email already exist')
         );
-      
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]|max_length[20]');
         $this->form_validation->set_rules('contact', 'Contact Number', 'trim|required|min_length[10]|max_length[20]');
         $this->form_validation->set_rules('fullName', 'full Name', 'trim|required|min_length[2]');
@@ -42,7 +38,7 @@ class Adminapi extends Common_Admin_Controller{
                 $userData['authToken']          =   $authtoken;
                 $userData['password']           =   password_hash($this->post('password'), PASSWORD_DEFAULT);
                 $userData['authToken']          =   $authtoken;
-                $userData['passToken']     =   $passToken;
+                $userData['passToken']          =   $passToken;
 
             //user info
             // profile pic upload

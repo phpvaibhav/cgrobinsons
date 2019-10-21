@@ -9,9 +9,9 @@ class Users extends Common_Admin_Controller{
     public function changePassword_post()
     {
 
-        $authCheck = $this->check_admin_service_auth();
-        $authToken = $this->authData->authToken;
-        $userId = $this->authData->id;
+        $authCheck  = $this->check_admin_service_auth();
+        $authToken  = $this->authData->authToken;
+        $userId     = $this->authData->id;
         $this->load->library('form_validation');
         $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[6]');
         $this->form_validation->set_rules('npassword', 'new password', 'trim|required|matches[rnpassword]|min_length[6]');
@@ -24,11 +24,11 @@ class Users extends Common_Admin_Controller{
         }
         else 
         {
-            $password =$this->input->post('password');
-            $npassword =$this->input->post('npassword');
-            $select = "password";
-            $where = array('id' => $userId); 
-            $admin = $this->common_model->getsingle('admin', $where,'password');
+            $password   = $this->input->post('password');
+            $npassword  = $this->input->post('npassword');
+            $select     = "password";
+            $where      = array('id' => $userId); 
+            $admin      = $this->common_model->getsingle('admin', $where,'password');
             if(password_verify($password, $admin['password'])){
                 $set =array('password'=> password_hash($this->input->post('npassword') , PASSWORD_DEFAULT)); 
                 $update = $this->common_model->updateFields('admin', $set, $where);
@@ -39,7 +39,6 @@ class Users extends Common_Admin_Controller{
                     }
                     else{
                          $response = array('status' => FAIL, 'message' => 'Failed! Please try again', 'url' => base_url('users/userDetail'));
-                        
                     }
                     
                 } 
@@ -66,10 +65,10 @@ class Users extends Common_Admin_Controller{
         }
         else{
         
-            $userid          =  $this->post('userauth');
-            $userauth          =  decoding($userid);
-            $email          =  $this->post('email');
-            $fullName       =  $this->post('fullName');
+            $userid             =  $this->post('userauth');
+            $userauth           =  decoding($userid);
+            $email              =  $this->post('email');
+            $fullName           =  $this->post('fullName');
           
             $isExist = $this->common_model->is_data_exists('admin',array('id'=>$userauth));
             if($isExist){
@@ -107,15 +106,12 @@ class Users extends Common_Admin_Controller{
                         }
                         if(!empty($profileImage)){
                             $userData['profileImage']           =   $profileImage;
-                        }
-                        
+                        } 
                     //update
                     $result = $this->common_model->updateFields('admin',$userData,array('id'=>$userauth));
                    
                     if($result){
                         $response = array('status'=>SUCCESS,'message'=>ResponseMessages::getStatusCodeMessage(123),'url'=>$userid);
-
-
                     }else{
                     $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118),'userDetail'=>array());
                     }  
@@ -123,15 +119,11 @@ class Users extends Common_Admin_Controller{
                 }else{
                     $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(117),'userDetail'=>array());
                 }
-              
-
             }else{
                 $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(126),'userDetail'=>array()); 
             }
-           
-        
         }
-         $this->response($response);
+        $this->response($response);
     }//end function
    
 
