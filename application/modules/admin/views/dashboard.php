@@ -11,7 +11,7 @@
                         </div>
                         <div class="content">
                             <div class="text">Customers</div>
-                            <div class="number count-to"><?php echo $customers; ?></div>
+                            <div class="number count-to"><?php echo number_format_short($customers); ?></div>
                         </div>
                     </div>
                   </a>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="content">
                             <div class="text">Drivers</div>
-                            <div class="number count-to"><?php echo $drivers; ?></div>
+                            <div class="number count-to"><?php echo number_format_short($drivers); ?></div>
                         </div>
                     </div>
                   </a>
@@ -37,7 +37,7 @@
                         </div>
                         <div class="content">
                             <div class="text">Jobs</div>
-                            <div class="number count-to"><?php echo $jobs; ?></div>
+                            <div class="number count-to"><?php echo number_format_short($jobs); ?></div>
                         </div>
                     </div>
                   </a>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="content">
                             <div class="text">Vehicles</div>
-                            <div class="number count-to"><?php echo $vehicles; ?></div>
+                            <div class="number count-to"><?php echo number_format_short($vehicles); ?></div>
                         </div>
                     </div>
                   </a>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="content">
                             <div class="text">Job Types</div>
-                            <div class="number count-to"><?php echo $jobType; ?></div>
+                            <div class="number count-to"><?php echo number_format_short($jobType); ?></div>
                         </div>
                     </div>
                   </a>

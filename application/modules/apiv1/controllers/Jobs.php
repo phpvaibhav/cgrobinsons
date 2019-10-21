@@ -73,8 +73,7 @@ class Jobs extends Common_Service_Controller{
         $authtoken  = $this->api_model->generate_token();
        $this->form_validation->set_rules('jobId', 'jobId', 'trim|required');
         if($this->form_validation->run() == FALSE){
-            $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
-           
+            $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));   
         }
         else{
             $jobId = $this->post('jobId');
@@ -105,9 +104,9 @@ class Jobs extends Common_Service_Controller{
 			
             $filesCount = sizeof($_FILES['workImage']['name']);
           //   pr($_FILES['workImage']['name']);
-              if($filesCount>4){
+            if($filesCount>4){
                 $response = array('status' => FAIL, 'message' =>"work image max 4 image upload.");
-                 $this->response($response);  
+                $this->response($response);  
             }
             $data_val   = array();
             $jobId      = $this->post('jobId');
@@ -172,9 +171,8 @@ class Jobs extends Common_Service_Controller{
                             $actual_image_name = time().".".$ext;
                             if($this->s3->putObjectFile($tmp, BUCKETNAME , $uploadFor.'/'.$actual_image_name, S3::ACL_PUBLIC_READ) )
                             {
-                            $workImage[]   =  $actual_image_name;
-                            }
-                                         
+                                $workImage[]   =  $actual_image_name;
+                            }                   
                       }
                       //sinature
                         $signaturename = $_FILES['signature']['name'];
@@ -209,14 +207,11 @@ class Jobs extends Common_Service_Controller{
                         $showmsg  =($jobActivity==2)? "Job has been completed successfully." : "Job has been started successfully.";
                         $response = array('status'=>SUCCESS,'message'=>$showmsg);
 
-                    }//end if
-                    
-                }
-              
+                    }//end if   
+                }      
             }else{
                $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(118)); 
-            }
-           
+            }          
         }//end if
         $this->response($response);    
     }//end function
@@ -270,8 +265,7 @@ class Jobs extends Common_Service_Controller{
                     $response = array('status' => SUCCESS, 'message' =>ResponseMessages::getStatusCodeMessage(122));
                 }else{
                      $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(118));
-                }
-                 
+                }     
             }else{
                 $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(118));  
             }
@@ -284,7 +278,6 @@ class Jobs extends Common_Service_Controller{
         $driverId   = $this->authData->id;
         $this->form_validation->set_rules('jobId', 'jobId', 'trim|required');
         $this->form_validation->set_rules('questionAnswer', 'questionAnswer', 'trim|required');
-      
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
         }else{

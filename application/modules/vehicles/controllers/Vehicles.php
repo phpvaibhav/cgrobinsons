@@ -16,6 +16,7 @@ class Vehicles extends Common_Back_Controller {
         
         $data['title'] = 'Vehicles';
         $count = $this->common_model->get_total_count('vehicles');
+        $count = number_format_short($count);
         $data['recordSet'] = array('<li class="sparks-info"><h5>vehicle<span class="txt-color-blue"><a class="anchor-btn" data-toggle="modal" data-target="#addVehicle"><i class="fa fa-plus-square"></i></a></span></h5></li>','<li class="sparks-info"><h5>Total Vehicles <span class="txt-color-darken" id="totalCust"><i class="fa fa-lg fa-fw fa fa-taxi"></i>&nbsp;'.$count.'</span></h5></li>');
         $data['manufacturers']  =  $this->common_model->getAll('carManufacturers');
         $data['vehicleColors']  =  $this->common_model->getAll('vehicleColors');

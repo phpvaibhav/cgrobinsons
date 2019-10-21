@@ -17,6 +17,7 @@ class Jobs extends Common_Back_Controller {
         
         $data['title'] = 'Jobs';
         $count = $this->common_model->get_total_count('jobs');
+        $count = number_format_short($count);
         $data['recordSet'] = array('<li class="sparks-info"><h5>Job<span class="txt-color-blue"><a href="'.base_url().'jobs/addJob" class="anchor-btn"><i class="fa fa-plus-square"></i></a></span></h5></li>','<li class="sparks-info"><h5>Jobs PDF<span class="txt-color-blue"><a class="anchor-btn" href="'.base_url().'jobs/jobPdf" target="_blank" ><i class="fa fa-file-pdf-o"></i></a></span></h5></li>','<li class="sparks-info"><h5>Total Jobs <span class="txt-color-darken" id="totalCust"><i class="fa fa-lg fa-fw fa fa-tasks"></i>&nbsp;'.$count.'</span></h5></li>');
         $data['jobTypes']        =  $this->common_model->getAll('jobType');
         $data['drivers']         =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));

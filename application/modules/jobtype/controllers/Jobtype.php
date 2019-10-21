@@ -15,6 +15,7 @@ class Jobtype extends Common_Back_Controller {
         
         $data['title'] = 'Job Types';
         $count = $this->common_model->get_total_count('jobType');
+        $count = number_format_short($count);
         $link = base_url().'jobtype/addJobtype';
         $data['recordSet'] = array('<li class="sparks-info"><h5>Job Type<span class="txt-color-blue"><a href="'.$link.'" class="anchor-btn"><i class="fa fa-plus-square"></i></a></span></h5></li>','<li class="sparks-info"><h5>Total Job Types <span class="txt-color-darken" id="totalCust"><i class="fa fa-lg fa-fw fa fa-bars"></i>&nbsp;'.$count.'</span></h5></li>');
         $data['front_scripts'] = array('backend_assets/custom/js/jobtype.js');
