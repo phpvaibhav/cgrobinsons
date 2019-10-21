@@ -15,18 +15,18 @@ echo "</pre>";*/
 							<h5>Vehicle Information</h5>
 						</header>
 						<div class="timeline-seperator text-center"></div>
-					<ul class="demo-btns text-right">
-						<li>
-							<a href="javascript:void(0);" class="btn btn-labeled btn-info" data-toggle="modal" data-target="#editVehicle"> <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Edit </a>
-						</li>	
-						<li>
-							<a href="javascript:void(0);" class="btn btn-labeled btn-warning" data-toggle="modal" data-target="#assignVehicleDriver"> <span class="btn-label"><i class="glyphicon glyphicon-bookmark"></i></span>Assign Driver</a>
-						</li>
-						<li>
-							<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="vehicleDelete(this);" data-message="Are you sure want to delete this vehicle." data-useid="<?php echo encoding($vehicle['vehicleId']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
-						</li>
+						<ul class="demo-btns text-right">
+							<li>
+								<a href="javascript:void(0);" class="btn btn-labeled btn-info" data-toggle="modal" data-target="#editVehicle"> <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Edit </a>
+							</li>	
+							<li>
+								<a href="javascript:void(0);" class="btn btn-labeled btn-warning" data-toggle="modal" data-target="#assignVehicleDriver"> <span class="btn-label"><i class="glyphicon glyphicon-bookmark"></i></span>Assign Driver</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="vehicleDelete(this);" data-message="Are you sure want to delete this vehicle." data-useid="<?php echo encoding($vehicle['vehicleId']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
+							</li>
 
-					</ul>
+						</ul>
 						<div class="timeline-seperator text-center"></div>
 						
 						<br>
@@ -57,16 +57,16 @@ echo "</pre>";*/
 									<span class="pull-right txt-color-darken"><?php echo date("d M Y",strtotime($assignVehicle['assignDate'])); ?></span>	<strong>Driver Assign Date</strong>
 								</li>
 								<li class="list-group-item">
-								<span class="pull-right txt-color-darken">
-									<label class="select">
-												        <select disabled="">
-												            <option value="0" selected="" disabled="">No Driver</option>
-												            <?php foreach ($drivers as $d => $driver) {?>
-												            <option value="<?php echo $driver->id; ?>" <?php echo $assignVehicle['driverId']==$driver->id ?"selected='selected'":"" ?>><?php echo $driver->fullName; ?></option>
-												        	<?php } ?>
-												           
-												        </select> <i></i> </label>
-								</span><strong>Assign Driver</strong>
+									<span class="pull-right txt-color-darken">
+										<label class="select">
+									        <select disabled="">
+									            <option value="0" selected="" disabled="">No Driver</option>
+									            <?php foreach ($drivers as $d => $driver) {?>
+									            <option value="<?php echo $driver->id; ?>" <?php echo $assignVehicle['driverId']==$driver->id ?"selected='selected'":"" ?>><?php echo $driver->fullName; ?></option>
+									        	<?php } ?>
+									           
+									        </select> <i></i></label>
+									</span><strong>Assign Driver</strong>
 								</li>
 
 							</ul>
@@ -97,12 +97,10 @@ echo "</pre>";*/
 				</header>
 				<br>
 				<ul class="demo-btns text-right">
-						<li>
-							<a href="javascript:void(0);" class="btn btn-labeled btn-info" onclick="openHistory();" > <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Add history </a>
-						</li>	
-						
-
-					</ul>
+					<li>
+						<a href="javascript:void(0);" class="btn btn-labeled btn-info" onclick="openHistory();" > <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Add history </a>
+					</li>	
+				</ul>
 				<!-- widget div-->
 				<div>
 					<!-- widget edit box -->
@@ -119,7 +117,6 @@ echo "</pre>";*/
 										<!-- <th data-hide="phone">ID</th> -->
 										<th data-hide="phone,tablet">Date</th>
 										<th data-hide="phone">Type</th>
-										
 										<th data-hide="phone,tablet">Attachment</th>
 										<th data-hide="phone,tablet">Action</th>
 									</tr>

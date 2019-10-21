@@ -14,25 +14,24 @@ class Drivers extends Common_Back_Controller {
 
     public function index() { 
         
-        $data['title'] = 'Drivers';
-        $count = $this->common_model->get_total_count('users',array('userType' =>2));
-        $count = number_format_short($count);
-        $data['recordSet'] = array('<li class="sparks-info"><h5>Driver<span class="txt-color-blue"><a class="anchor-btn" data-toggle="modal" data-target="#addDriver"><i class="fa fa-plus-square"></i></a></span></h5></li>','<li class="sparks-info"><h5>Drivers PDF<span class="txt-color-blue"><a class="anchor-btn" href="'.base_url().'drivers/driversPdf" target="_blank" ><i class="fa fa-file-pdf-o"></i></a></span></h5></li>','<li class="sparks-info"><h5>Total Drivers <span class="txt-color-darken" id="totalCust"><i class="fa fa-lg fa-fw fa fa-users"></i>&nbsp;'.$count.'</span></h5></li>');
+        $data['title']      = 'Drivers';
+        $count              = $this->common_model->get_total_count('users',array('userType' =>2));
+        $count              = number_format_short($count);
+        $data['recordSet']  = array('<li class="sparks-info"><h5>Driver<span class="txt-color-blue"><a class="anchor-btn" data-toggle="modal" data-target="#addDriver"><i class="fa fa-plus-square"></i></a></span></h5></li>','<li class="sparks-info"><h5>Drivers PDF<span class="txt-color-blue"><a class="anchor-btn" href="'.base_url().'drivers/driversPdf" target="_blank" ><i class="fa fa-file-pdf-o"></i></a></span></h5></li>','<li class="sparks-info"><h5>Total Drivers <span class="txt-color-darken" id="totalCust"><i class="fa fa-lg fa-fw fa fa-users"></i>&nbsp;'.$count.'</span></h5></li>');
         $data['front_scripts'] = array('backend_assets/custom/js/driver.js');
         $this->load->admin_render('drivers', $data);
     } 
     public function driverDetail(){
       //pr('admin@admin.com');
-        $userId  = decoding($this->uri->segment(3));
-
-        $data['title'] = "Driver Detail";
-            $data['recordSet'] = array('<li class="sparks-info"><h5>Driver PDF<span class="txt-color-blue"><a class="anchor-btn" href="'.base_url().'drivers/driverDetailPdf/'.$this->uri->segment(3).'" target="_blank" ><i class="fa fa-file-pdf-o"></i></a></span></h5></li>');
-        $where = array('id'=>$userId);
-        $result = $this->common_model->getsingle('users',$where);
-        $data['driver'] = $result;
-        $data['drivermeta'] =$this->common_model->getsingle('driverMeta',array('userId' =>$result['id']));
-        $vehicleId =$this->common_model->getsingle('assignVehicle',array('driverId' =>$result['id']));
-        $data['vehicle'] =$this->common_model->getsingle('vehicles',array('vehicleId' =>$vehicleId['vehicleId']));
+        $userId             = decoding($this->uri->segment(3));
+        $data['title']      = "Driver Detail";
+        $data['recordSet']  = array('<li class="sparks-info"><h5>Driver PDF<span class="txt-color-blue"><a class="anchor-btn" href="'.base_url().'drivers/driverDetailPdf/'.$this->uri->segment(3).'" target="_blank" ><i class="fa fa-file-pdf-o"></i></a></span></h5></li>');
+        $where              = array('id'=>$userId);
+        $result             = $this->common_model->getsingle('users',$where);
+        $data['driver']     = $result;
+        $data['drivermeta'] = $this->common_model->getsingle('driverMeta',array('userId' =>$result['id']));
+        $vehicleId          = $this->common_model->getsingle('assignVehicle',array('driverId' =>$result['id']));
+        $data['vehicle']    = $this->common_model->getsingle('vehicles',array('vehicleId' =>$vehicleId['vehicleId']));
         $data['front_scripts'] = array('backend_assets/custom/js/driver.js');
         $this->load->admin_render('driverDetail', $data, '');
     } 

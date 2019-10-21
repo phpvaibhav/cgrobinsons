@@ -12,9 +12,8 @@ class Pdfset extends Common_Front_Controller {
      }
 	
 	function download(){
-		 $jobId  = decoding($this->uri->segment(3));
-
-      $where = array('jobId'=>$jobId);
+		  $jobId  = decoding($this->uri->segment(3));
+      $where  = array('jobId'=>$jobId);
       $this->load->model('jobs/job_model');
       $job = $this->job_model->jobDetail($jobId);
        $questions = $this->job_model->jobTypeQuetions($job['jobId'],$job['jobTypeId']);

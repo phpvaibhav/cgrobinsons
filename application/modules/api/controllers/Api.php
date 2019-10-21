@@ -42,7 +42,7 @@ class Api extends Common_Service_Controller{
                 $userData['authToken']          =   $authtoken;
                 $userData['password']           =   password_hash($this->post('password'), PASSWORD_DEFAULT);
                 $userData['authToken']          =   $authtoken;
-                $userData['passToken']     =   $passToken;
+                $userData['passToken']          =   $passToken;
 
             //user info
             // profile pic upload
@@ -182,7 +182,7 @@ class Api extends Common_Service_Controller{
     // Session store value for frontEnd
     function StoreSession($userData){
         $session_data['id']             = $userData->userId;
-        $session_data['userId']             = $userData->userId;
+        $session_data['userId']         = $userData->userId;
         $session_data['fullName']       = $userData->fullName;
         $session_data['email']          = $userData->email;
         $session_data['userType']       = $userData->userType;

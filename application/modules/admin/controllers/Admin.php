@@ -13,23 +13,21 @@ class Admin extends Common_Back_Controller {
     }
 
     public function index() { 
-        
+
         $data['title'] = "Login";
         $this->load->login_render('login', $data);
     }
     public function signup() { 
 
-    $data['title'] = "Sign up";
-    $this->load->login_render('signup', $data);
+        $data['title'] = "Sign up";
+        $this->load->login_render('signup', $data);
     }
     public function forgot() { 
 
-    $data['title'] = "Forgot";
-    $this->load->login_render('forgot', $data);
+        $data['title'] = "Forgot";
+        $this->load->login_render('forgot', $data);
     }
-
- 
-     public function logout() {
+    public function logout() {
 
         $this->admin_logout(FALSE);
         $this->session->set_flashdata('success', 'Sign out successfully done! ');
@@ -38,7 +36,6 @@ class Admin extends Common_Back_Controller {
         echo json_encode($response);
         die;
     }
-    
     public function dashboard() {
        
         $data['parent']     = "Dashboard";
@@ -47,14 +44,11 @@ class Admin extends Common_Back_Controller {
         $data['drivers']    = $this->common_model->get_total_count('users',array('userType' =>2));
         $data['jobs']       = $this->common_model->get_total_count('jobs');
         $data['vehicles']   = $this->common_model->get_total_count('vehicles');
-        $data['jobType']    = $this->common_model->get_total_count('jobType');
-        
+        $data['jobType']    = $this->common_model->get_total_count('jobType'); 
         $this->load->admin_render('dashboard', $data, '');
     }
-
-      //view admin profile
+    //view admin profile
     public function admin_profile(){
-
         $data['title']      = "Admin profile";
         $where              = array('id'=>$_SESSION[ADMIN_USER_SESS_KEY]['id']);
         $result             = $this->common_model->getsingle(ADMIN,$where);
@@ -111,8 +105,7 @@ class Admin extends Common_Back_Controller {
             $_SESSION[ADMIN_USER_SESS_KEY]['image']      = $user->image;
             $_SESSION[ADMIN_USER_SESS_KEY]['isLogin']    = TRUE ;
            
-            $response = array('status' => 1, 'message' => 'Successfully Updated', 'url' => base_url('admin/admin_profile'));
-           
+            $response = array('status' => 1, 'message' => 'Successfully Updated', 'url' => base_url('admin/admin_profile'));  
         }
         echo json_encode($response); die;
     }
@@ -132,11 +125,11 @@ class Admin extends Common_Back_Controller {
         }
         else 
         {
-            $password =$this->input->post('password');
-            $npassword =$this->input->post('npassword');
-            $select = "password";
-            $where = array('id' => $_SESSION[ADMIN_USER_SESS_KEY]['id']); 
-            $admin = $this->common_model->getsingle(ADMIN, $where,'password');
+            $password       = $this->input->post('password');
+            $npassword      = $this->input->post('npassword');
+            $select         = "password";
+            $where          = array('id' => $_SESSION[ADMIN_USER_SESS_KEY]['id']); 
+            $admin          = $this->common_model->getsingle(ADMIN, $where,'password');
             if(password_verify($password, $admin->password)){
                 $set =array('password'=> password_hash($this->input->post('npassword') , PASSWORD_DEFAULT)); 
                 $update = $this->common_model->updateFields(ADMIN, $set, $where);

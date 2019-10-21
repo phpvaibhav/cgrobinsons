@@ -159,22 +159,22 @@ class Job_model extends CI_Model {
             $outDateTime    = $jobtime->outDateTime;
             if($areaStatus=='inside'){
                 if($inDateTime !='0000-00-00 00:00:00' && $outDateTime !='0000-00-00 00:00:00'){
-                    $date = date("Y-m-d H:i:s");
-                    $setData = array('jobId'=>$jobId,'driverId'=>$driverId,'inDateTime'=>$date);
+                    $date       = date("Y-m-d H:i:s");
+                    $setData    = array('jobId'=>$jobId,'driverId'=>$driverId,'inDateTime'=>$date);
                     $set = ($areaStatus=='inside') ? $this->common_model->insertData('jobTiming',$setData) : false;  
                     }
             }else if($areaStatus=='outside'){
                  if($inDateTime !='0000-00-00 00:00:00' && $outDateTime =='0000-00-00 00:00:00'){
-                    $date = date("Y-m-d H:i:s");
-                    $setData = array('outDateTime'=>$date);
-                     $update =$this->common_model->updateFields('jobTiming',$setData,array('jobId'=>$jobId,'driverId'=>$driverId));
+                    $date       = date("Y-m-d H:i:s");
+                    $setData    = array('outDateTime'=>$date);
+                     $update    = $this->common_model->updateFields('jobTiming',$setData,array('jobId'=>$jobId,'driverId'=>$driverId));
                  }
 
             }else{
                if($inDateTime !='0000-00-00 00:00:00' && $outDateTime =='0000-00-00 00:00:00'){
-                    $date = date("Y-m-d H:i:s");
-                    $setData = array('outDateTime'=>$date);
-                     $update =$this->common_model->updateFields('jobTiming',$setData,array('jobId'=>$jobId,'driverId'=>$driverId));
+                    $date       = date("Y-m-d H:i:s");
+                    $setData    = array('outDateTime'=>$date);
+                     $update    = $this->common_model->updateFields('jobTiming',$setData,array('jobId'=>$jobId,'driverId'=>$driverId));
                  }  
             }
          
@@ -182,9 +182,9 @@ class Job_model extends CI_Model {
         }else{
             //data not exist
             if($areaStatus !='complete'){
-                $date = date("Y-m-d H:i:s");
-                $setData = array('jobId'=>$jobId,'driverId'=>$driverId,'inDateTime'=>$date);
-                $set = ($areaStatus=='inside') ? $this->common_model->insertData('jobTiming',$setData) : false;
+                $date       = date("Y-m-d H:i:s");
+                $setData    = array('jobId'=>$jobId,'driverId'=>$driverId,'inDateTime'=>$date);
+                $set        = ($areaStatus=='inside') ? $this->common_model->insertData('jobTiming',$setData) : false;
             }
            
         }//end if
@@ -202,7 +202,6 @@ class Job_model extends CI_Model {
             $array = $sql->result();
         }
         return $array; 
-
     }//end function
 
 }//Function 

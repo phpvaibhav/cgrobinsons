@@ -18,12 +18,12 @@ class ChangePassword extends Common_Back_Controller {
   
     public function change_password(){
        
-         $data['email']=decoding($this->uri->segment(4));
-         $data['passToken']=$this->uri->segment(5);
+         $data['email']         = decoding($this->uri->segment(4));
+         $data['passToken']     = $this->uri->segment(5);
        //  $data['check_send']=0;
-         $data1['changetype']="";
+         $data1['changetype']   = "";
         
-         $response= $this->common_model->is_data_exists('users',$data);// check user valid or Invalid
+         $response              = $this->common_model->is_data_exists('users',$data);// check user valid or Invalid
       
          if($response){
             $data1['encode_email']=$this->uri->segment(4);
@@ -39,18 +39,17 @@ class ChangePassword extends Common_Back_Controller {
         $this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|matches[password]',array('matches' => 'Confirm password does not match.'));
         
         if ($this->form_validation->run() == FALSE){
-            $messages = (validation_errors()) ? validation_errors() : '';
-            $response = array('status' => 0, 'message' => $messages);
+            $messages       = (validation_errors()) ? validation_errors() : '';
+            $response       = array('status' => 0, 'message' => $messages);
         }else{
-            $changetype= $this->input->post('changetype');
-            $update_data = array(
+            $changetype     = $this->input->post('changetype');
+            $update_data    = array(
                 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                 'passToken' => "",
             );
-           $table = USERS;
-            $where_email = array('email'=>decoding($this->input->post('e'))); // decode email id
-           
-            $response= $this->common_model->getsingle($table, $where_email);  
+           $table           = USERS;
+            $where_email    = array('email'=>decoding($this->input->post('e'))); // decode email id
+            $response       = $this->common_model->getsingle($table, $where_email);  
     
             
             if($response){
@@ -65,13 +64,8 @@ class ChangePassword extends Common_Back_Controller {
 
          echo json_encode($response);
     }
-
-
     // Change Password Success Template url
     public function change_password_suucess(){
        $this->load->login_render('success');      
     } 
-
-
-
 } //End class

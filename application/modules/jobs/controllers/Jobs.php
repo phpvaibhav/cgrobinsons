@@ -15,10 +15,10 @@ class Jobs extends Common_Back_Controller {
 
     public function index() { 
         
-        $data['title'] = 'Jobs';
-        $count = $this->common_model->get_total_count('jobs');
-        $count = number_format_short($count);
-        $data['recordSet'] = array('<li class="sparks-info"><h5>Job<span class="txt-color-blue"><a href="'.base_url().'jobs/addJob" class="anchor-btn"><i class="fa fa-plus-square"></i></a></span></h5></li>','<li class="sparks-info"><h5>Jobs PDF<span class="txt-color-blue"><a class="anchor-btn" href="'.base_url().'jobs/jobPdf" target="_blank" ><i class="fa fa-file-pdf-o"></i></a></span></h5></li>','<li class="sparks-info"><h5>Total Jobs <span class="txt-color-darken" id="totalCust"><i class="fa fa-lg fa-fw fa fa-tasks"></i>&nbsp;'.$count.'</span></h5></li>');
+        $data['title']      = 'Jobs';
+        $count              = $this->common_model->get_total_count('jobs');
+        $count              = number_format_short($count);
+        $data['recordSet']  = array('<li class="sparks-info"><h5>Job<span class="txt-color-blue"><a href="'.base_url().'jobs/addJob" class="anchor-btn"><i class="fa fa-plus-square"></i></a></span></h5></li>','<li class="sparks-info"><h5>Jobs PDF<span class="txt-color-blue"><a class="anchor-btn" href="'.base_url().'jobs/jobPdf" target="_blank" ><i class="fa fa-file-pdf-o"></i></a></span></h5></li>','<li class="sparks-info"><h5>Total Jobs <span class="txt-color-darken" id="totalCust"><i class="fa fa-lg fa-fw fa fa-tasks"></i>&nbsp;'.$count.'</span></h5></li>');
         $data['jobTypes']         =  $this->common_model->getAll('jobType');
         $data['drivers']          =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
         $data['customers']        =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
@@ -27,7 +27,7 @@ class Jobs extends Common_Back_Controller {
     }     
     public function addJob() { 
         
-        $data['title'] = 'Add Job';
+        $data['title']            = 'Add Job';
       
         $data['jobTypes']         =  $this->common_model->getAll('jobType',array('status'=>1));
         $data['drivers']          =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
@@ -36,22 +36,20 @@ class Jobs extends Common_Back_Controller {
         $this->load->admin_render('addJob', $data);
     } 
     public function editJob() { 
-        $jobId          = decoding($this->uri->segment(3));
-        $data['title']  = 'Edit Job';
-
-      
-        $data['jobTypes']        =  $this->common_model->getAll('jobType');
-        $data['drivers']         =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
-        $data['customers']       =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
+        $jobId                      = decoding($this->uri->segment(3));
+        $data['title']              = 'Edit Job';   
+        $data['jobTypes']           =  $this->common_model->getAll('jobType');
+        $data['drivers']            =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
+        $data['customers']          =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
          $this->load->model('job_model');
-        $data['job']            = $this->job_model->jobDetail($jobId);
-        $questions              =  $this->common_model->getAll('jobQuestionAnswer',array('jobId'=>$jobId));
+        $data['job']                = $this->job_model->jobDetail($jobId);
+        $questions                  =  $this->common_model->getAll('jobQuestionAnswer',array('jobId'=>$jobId));
         $que =array();
         foreach ($questions as $key => $question) {
            $que[] = $question->questionId;
         }
-        $data['que']            = !empty($que) ? implode(",",$que):"";
-        $data['front_scripts']  = array('backend_assets/custom/js/job.js');
+        $data['que']                = !empty($que) ? implode(",",$que):"";
+        $data['front_scripts']      = array('backend_assets/custom/js/job.js');
         
         $this->load->admin_render('editJob', $data);
     } 
@@ -61,9 +59,9 @@ class Jobs extends Common_Back_Controller {
         $jobId              = decoding($this->uri->segment(3));
         $data['title']      = "Job Detail";
         $data['recordSet']  = array('<li class="sparks-info"><h5>Job Report<span class="txt-color-blue"><a class="anchor-btn" href="'.base_url().'jobs/jobDetailPdf/'.$this->uri->segment(3).'" target="_blank" ><i class="fa fa-file-pdf-o"></i></a></span></h5></li>');
-        $where = array('jobId'=>$jobId);
+        $where              = array('jobId'=>$jobId);
         $this->load->model('job_model');
-        $job          = $this->job_model->jobDetail($jobId);
+        $job                = $this->job_model->jobDetail($jobId);
         $data['job']  = $job;
         $data['questions']        = $this->job_model->jobTypeQuetions($job['jobId'],$job['jobTypeId']);
         $data['jobTypes']         =  $this->common_model->getAll('jobType');

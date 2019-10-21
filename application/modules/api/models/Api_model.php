@@ -129,18 +129,15 @@ class Api_model extends CI_Model {
 
                     //verify password- It is good to use php's password hashing functions so we are using password_verify fn here
                     if(password_verify($data['password'], $result->password)){
-                        $deviceType = $data['deviceType'];
-                        $deviceToken = $data['deviceToken'];
-                      $updateData = $this->updateDeviceIdToken($result->id,$deviceType,$deviceToken,$authToken);
+                        $deviceType     = $data['deviceType'];
+                        $deviceToken    = $data['deviceToken'];
+                      $updateData       = $this->updateDeviceIdToken($result->id,$deviceType,$deviceToken,$authToken);
                         if($updateData){
                            return array('returnType'=>'SL','userInfo'=>$this->userInfo(array('id'=>$result->id)));
                         }
                         else{
                             return FALSE;
-                        }
-                           
-                        
-                      
+                        }     
                     }
                     else{
                         return array('returnType'=>'WP'); // Wrong Password
@@ -160,26 +157,17 @@ class Api_model extends CI_Model {
         $sql = $this->db->select('id,fullName,email,password,passToken')->where(array('email'=>$email))->get(USERS);
         if($sql->num_rows())
         {
-            $result = $sql->row();
-            $useremail= $result->email;
-            $passToken= $result->passToken;
-            $data['full_name'] = $result->fullName;
-            
-            // Check for social id
-          /*  if(!empty($result->socialId)){
-               return  array('emailType'=>'SL' ); //SL social login
-            }*/
-
-            $encoding_email = encoding($useremail);
-            $data['url']=base_url().'password/ChangePassword/change_password/'.$encoding_email.'/'.$passToken;
-      
-            $message=$this->load->view('emails/forgot_password',$data,TRUE);
-
-            $subject = "Forgot Password";
-
+            $result             = $sql->row();
+            $useremail          = $result->email;
+            $passToken          = $result->passToken;
+            $data['full_name']  = $result->fullName;
+          
+            $encoding_email     = encoding($useremail);
+            $data['url']        = base_url().'password/ChangePassword/change_password/'.$encoding_email.'/'.$passToken;
+            $message            = $this->load->view('emails/forgot_password',$data,TRUE);
+            $subject            = "Forgot Password";
             $this->load->library('smtp_email');
             $response=$this->smtp_email->send_mail($useremail,$subject,$message); // Send email For Forgot password
-
             if ($response)
             {  
 
@@ -189,15 +177,11 @@ class Api_model extends CI_Model {
             { 
                  return  array('emailType'=>'NS') ; //NS NotSend
             }
-
         }
         else
         {
             return  array('emailType'=>'NE') ; //NE Not exist
         }
-    } //End funtion
-  
-    
-        
+    } //End funtion       
 }//ENd Class
 ?>

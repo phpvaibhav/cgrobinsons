@@ -30,26 +30,26 @@ class Jobtype extends Common_Admin_Controller{
                 $total_element              = !empty($total_element) ? $total_element :0;
                 $queData                    = array();
                 $queNonDeleteId             = array();
-                $j=0;
+                $j = 0;
                 for ($i=0; $i < $total_element ; $i++) { 
                    $k = $i+1;
-                   $question  = $this->post('question_'.$k);
+                   $question    = $this->post('question_'.$k);
                    $questionId  = $this->post('questionId_'.$k);
                    if(!empty($questionId) && $questionId !=0){
                          $queNonDeleteId[] = $questionId;
                    }
                   
                    $questionType  = $this->post('questionType_'.$k);
-                   $option  = $this->post('option_'.$k);
-                   $option1  = $this->post('option_1_'.$k);
+                   $option        = $this->post('option_'.$k);
+                   $option1       = $this->post('option_1_'.$k);
                    if(isset($question) && !empty($question)){
                         $queData[$j]['questionId']      = $questionId;
                         $queData[$j]['question']        = $question;
                         $queData[$j]['questionType']    = $questionType;
                         if($questionType !='text'){
-                            $queData[$j]['option'] = json_encode(array($option,$option1));
+                            $queData[$j]['option']      = json_encode(array($option,$option1));
                         }else{
-                            $queData[$j]['option'] = "";
+                            $queData[$j]['option']      = "";
                         }
                         $j++;
                    } 
@@ -82,9 +82,8 @@ class Jobtype extends Common_Admin_Controller{
                        $questionData['question']    = $queData[$x]['question'];
                        $questionData['type']        = $queData[$x]['questionType'];
                        $questionData['options']     = $queData[$x]['option'];
-                       $isQue=$this->common_model->is_data_exists('jobTypeQuestions',array('questionId'=>$qId));
+                       $isQue                       = $this->common_model->is_data_exists('jobTypeQuestions',array('questionId'=>$qId));
                         if($isQue){
-
                             $this->common_model->updateFields('jobTypeQuestions',$questionData,array('questionId'=>$qId));
                         }else{
                              $questionData['jobTypeId']     = $jobTypeId;
@@ -94,10 +93,9 @@ class Jobtype extends Common_Admin_Controller{
                 }
                 //$jobId = $this->common_model->insertData('jobs',$data_val);
                 if($result){
-             
-                     $response = array('status'=>SUCCESS,'message'=>$msg);
+                    $response = array('status'=>SUCCESS,'message'=>$msg);
                 }else{
-                     $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
+                    $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
                 }  
         }
         $this->response($response);

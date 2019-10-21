@@ -157,7 +157,13 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12">
-					<div class="well well-light well-sm margin padding">	
+					<div class="well well-light well-sm margin padding">
+						<?php
+						/*	echo "<pre>";
+							print_r($questions);
+							echo "</pre>";*/
+
+						?>	
 						<header>
 							<h5><strong>Job Type Questions</strong> <label class="label label-info"><?php echo $job['jobType']; ?></label></h5>
 						</header>
@@ -170,8 +176,48 @@
 									
 									foreach ($questions as $key => $question) {  $rand_color = $colors[array_rand($colors)]; ?>
 								<li class="list-group-item">
-									<p class="alert alert-<?= $rand_color; ?>"><strong>Q. <?= $key+1;?>: <?= $question->question;?> </strong></p>
-									<p><strong>Answer :</strong> <?= !empty($question->answer) ? $question->answer :"NA";?></p>
+									<div class="row smart-form">
+									<div class="col col-md-12 col-sm-12 col-lg-12">
+										<p class="alert alert-<?= $rand_color; ?>"><strong>Q. <?= $key+1;?>: <?= $question->question;?> </strong></p>
+									</div>	
+									<div class="col col-md-1 col-sm-1 col-lg-1">
+										<strong>Answer:</strong>
+									</div>	<?php switch ($question->type) {
+											case 'radio':
+												$inputType = 'radio' ;
+												break;
+											case 'checkbox':
+												$inputType = 'checkbox' ;
+												break;
+											
+											default:
+												$inputType = 'text' ;
+												break;
+											}
+											
+											if($inputType=='text'){
+												?>
+												<div class="col col-md-11 col-sm-11 col-lg-11">
+												<?= !empty($question->answer) ? $question->answer :"NA";?></div>
+											<?php }else{ 
+												$answer  = !empty($question->answer) ? explode(",",$question->answer): array();
+												$options = (isset($question->options) && !empty($question->options)) ? json_decode($question->options,true):array();
+													for ($i=0; $i <sizeof($options) ; $i++) { 
+													?>
+													<div class="col col-md-4 col-sm-4 col-lg-4">
+													<label class="<?= $inputType; ?>">
+																<input type="<?= $inputType; ?>" name="<?= $inputType.$key; ?>" <?= in_array($options[$i],$answer)? 'checked="checked"':''; ?> onclick="return false;">
+																<i></i><?= $options[$i]; ?></label>	</div>	
+												
+													<?php }
+												?>
+												
+											<?php }
+										 ?>
+									
+									
+								
+									</div>
 								</li>
 								<?php } }else{
 									$rand_color = $colors[array_rand($colors)];

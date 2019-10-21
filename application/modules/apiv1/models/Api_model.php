@@ -152,24 +152,20 @@ class Api_model extends CI_Model {
                     //verify password- It is good to use php's password hashing functions so we are using password_verify fn here
                     if(password_verify($data['password'], $result->password)){
 
-                        $deviceType = $data['deviceType'];
-                        $deviceToken = $data['deviceToken'];
-                        $updateData = $this->updateDeviceIdToken($result->id,$deviceType,$deviceToken,$authToken);
+                        $deviceType     = $data['deviceType'];
+                        $deviceToken    = $data['deviceToken'];
+                        $updateData     = $this->updateDeviceIdToken($result->id,$deviceType,$deviceToken,$authToken);
                         if($updateData){
                            return array('returnType'=>'SL','userInfo'=>$this->userInfo(array('id'=>$result->id)));
                         }
                         else{
                             return FALSE;
-                        }
-                           
-                        
-                      
+                        }  
                     }
                     else{
                         return array('returnType'=>'WP'); // Wrong Password
                     }
                 }
-
                 return array('returnType'=>'WS');
                 // InActive
             }
@@ -184,10 +180,10 @@ class Api_model extends CI_Model {
      
         if($sql->num_rows())
         {
-            $result = $sql->row();
-            $useremail= $result->email;
-            $passToken= $result->passToken;
-            $data['full_name'] = $result->fullName;
+            $result             = $sql->row();
+            $useremail          = $result->email;
+            $passToken          = $result->passToken;
+            $data['full_name']  = $result->fullName;
             
             // Check for social id
           /*  if(!empty($result->socialId)){
