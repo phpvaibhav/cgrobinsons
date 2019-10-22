@@ -7,6 +7,15 @@ function preLoadshow(e){
      $('.pace').addClass('pace-inactive').removeClass('pace-active');
   }
 }//end function
+  function injectTrim(handler) {
+  return function (element, event) {
+    if (element.tagName === "TEXTAREA" || (element.tagName === "INPUT" 
+                                       && element.type !== "password")) {
+      element.value = $.trim(element.value);
+    }
+    return handler.call(this, element, event);
+  };
+ }
 //loader manage
 //number check 
 $('.number-only').keypress(function(e) {

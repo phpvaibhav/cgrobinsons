@@ -126,6 +126,7 @@ $("#driverAddUpdate").validate({// Rules for form validation
           required : 'Please enter your address'
         }  
   },
+   onfocusout: injectTrim($.validator.defaults.onfocusout),
   // Do not change code below
   errorPlacement : function(error, element) {
     error.insertAfter(element.parent());

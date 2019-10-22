@@ -94,6 +94,7 @@ $("#customerAddUpdate").validate({// Rules for form validation
     });
     return false; // required to block normal submit since you used ajax
   },
+   onfocusout: injectTrim($.validator.defaults.onfocusout),
   // Do not change code below
   errorPlacement : function(error, element) {
     error.insertAfter(element.parent());

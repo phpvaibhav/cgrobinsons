@@ -84,6 +84,7 @@ $("#vehicleAddUpdate").validate({// Rules for form validation
     });
     return false; // required to block normal submit since you used ajax
   },
+   onfocusout: injectTrim($.validator.defaults.onfocusout),
   // Do not change code below
   errorPlacement : function(error, element) {
     error.insertAfter(element.parent());
@@ -266,6 +267,7 @@ $("#vehicleAssignDriver").validate({// Rules for form validation
           });
     return false; // required to block normal submit since you used ajax
   },
+   onfocusout: injectTrim($.validator.defaults.onfocusout),
   // Do not change code below
   errorPlacement : function(error, element) {
     error.insertAfter(element.parent());
@@ -306,6 +308,7 @@ $("#addHistoryA").validate({// Rules for form validation
       required : 'Please enter your attachment'
     } 
   },
+   onfocusout: injectTrim($.validator.defaults.onfocusout),
   // Do not change code below
   errorPlacement : function(error, element) {
     error.insertAfter(element.parent());
