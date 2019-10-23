@@ -14,8 +14,8 @@ echo "</pre>";*/
 						<header>
 							<h5>Vehicle Information</h5>
 						</header>
-						<div class="timeline-seperator text-center"></div>
-						<ul class="demo-btns text-right">
+					
+						<ul class="demo-btns text-center">
 							<li>
 								<a href="javascript:void(0);" class="btn btn-labeled btn-info" data-toggle="modal" data-target="#editVehicle"> <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Edit </a>
 							</li>	

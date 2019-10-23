@@ -8,7 +8,7 @@
 
 			<form method="post" action="changePassword" id="smart-form-changepass" class="smart-form client-form" enctype="multipart/form-data" novalidate autocomplete="off">
 			<header>
-				Chnage Password
+				Change Password
 			</header>
 
 			<fieldset>

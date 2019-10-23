@@ -75,7 +75,7 @@
 								<a href="<?php echo base_url().'jobs/editJob/'.encoding($job['jobId']); ?>" class="btn btn-labeled btn-info"> <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Edit </a>
 							</li>
 							<li>
-								<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="jobDelete(this);" data-message="Are you sure want to delete this job." data-useid="<?php echo encoding($job['jobId']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
+								<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="jobDelete(this);" data-message="You want to delete this job." data-useid="<?php echo encoding($job['jobId']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
 							</li>
 							<?php endif; ?>
 						</ul>

@@ -185,15 +185,16 @@
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "customers") ? "active" : "" ?>">
           <a href="<?php echo base_url('customers'); ?>" title="Customers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Customers</span></a>
         </li>
-        <li class="<?php echo (strtolower($this->router->fetch_class()) == "drivers") ? "active" : "" ?>">
-          <!-- <?php echo base_url('drivers'); ?> <?php echo base_url('jobs'); ?>-->
-        <a href="<?php echo base_url('drivers'); ?>" title="Drivers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Drivers</span></a>
-        </li>
+      
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "jobtype") ? "active" : "" ?>">
-          <a href="<?php echo base_url('jobtype'); ?>" title="Jobtypes"><i class="fa fa-lg fa-fw fa-bars"></i> <span class="menu-item-parent">Job Types</span></a>
+          <a href="<?php echo base_url('jobtype'); ?>" title="Job Types"><i class="fa fa-lg fa-fw fa-bars"></i> <span class="menu-item-parent">Job Types</span></a>
         </li>
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "jobs") ? "active" : "" ?>">
           <a href="<?php echo base_url('jobs'); ?>" title="jobs"><i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">Jobs</span></a>
+        </li>
+          <li class="<?php echo (strtolower($this->router->fetch_class()) == "drivers") ? "active" : "" ?>">
+          <!-- <?php echo base_url('drivers'); ?> <?php echo base_url('jobs'); ?>-->
+        <a href="<?php echo base_url('drivers'); ?>" title="Drivers"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Drivers</span></a>
         </li>
         <li class="<?php echo (strtolower($this->router->fetch_class()) == "vehicles") ? "active" : "" ?>">
           <a href="<?php echo base_url('vehicles'); ?>" title="Vehicles"><i class="fa fa-lg fa-fw fa-taxi"></i> <span class="menu-item-parent">Vehicles</span></a>

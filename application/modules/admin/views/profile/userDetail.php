@@ -241,11 +241,13 @@
 								Update
 							</header>
 							<fieldset>
+								<input type="hidden" name="userauth" value="<?php echo $this->uri->segment(2); ?>">
 								<section>
 									<label class="input"> <i class="icon-append fa fa-user"></i>
 									<input type="text" name="fullName" placeholder="Full name" value="<?php echo $userData['fullName']; ?>" maxlength="30" size="30">
-									<input type="hidden" name="userauth" value="<?php echo $this->uri->segment(2); ?>">
+									
 									<b class="tooltip tooltip-bottom-right"> Please enter your full name</b> </label>
+
 								</section>
 
 								<section>
@@ -291,4 +293,4 @@
 
 </div>
 
-<!-- end row
+<!-- end row-->

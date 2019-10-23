@@ -118,21 +118,11 @@ class Jobtype extends Common_Admin_Controller{
         //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
         $row[] = '<a href="'.$jobLink.'"  class="on-default edit-row table_action">'.display_placeholder_text($serData->jobType).'</a>'; 
 
-        switch ($serData->status) {
-            case 2:
-               $row[] = '<label class="label label-success">'.$serData->statusShow.'</label>';
-                break;
-            case 1:
-               $row[] = '<label class="label label-danger">'.$serData->statusShow.'</label>';
-                break;
-            case 0:
-               $row[] = '<label class="label label-warning">'.$serData->statusShow.'</label>';
-                break;
-            
-            default:
-                  $row[] = '<label class="label label-warning">'.$serData->statusShow.'</label>';
-                break;
-        }
+        if($serData->status){
+        $row[]  = '<label class="label label-success">'.$serData->statusShow.'</label>';
+        }else{ 
+        $row[]  = '<label class="label label-danger">'.$serData->statusShow.'</label>'; 
+        } 
        
             $link  ='javascript:void(0)';
             $action .= "";
