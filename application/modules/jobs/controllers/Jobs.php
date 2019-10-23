@@ -262,7 +262,7 @@ class Jobs extends Common_Back_Controller {
         $content .= '</tr>';  
         $content .= '<tr bgcolor="#EAECF0">';
         $content .= '<td><strong>Job Status</strong> :</td><td><span style="font-size: medium;"><b>'.$labelShow.'</b></span></td>';
-        $content .= '<td><strong>Creation Date</strong> :</td><td>'.date("d F Y",strtotime($job['startDate']))." ".$job['startTime'].'</td>';
+        $content .= '<td><strong>Creation Date</strong> :</td><td>'.date("d/m/Y",strtotime($job['startDate']))." ".$job['startTime'].'</td>';
         $content .= '</tr>';   
         $content .= '<tr bgcolor="#EAECF0">';
         $content .= '<td><strong>Customer Name</strong> :</td><td>'.$job['customerName'].'</td>';
@@ -287,7 +287,7 @@ class Jobs extends Common_Back_Controller {
           
           
           if(!empty($before)):
-          $content .='<td colspan="2"><p><strong>Job Start </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($before['startDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
+          $content .='<td colspan="2"><p><strong>Job Start </strong><span align="right" >&nbsp;&nbsp;'.date("d/m/Y H:i A",strtotime($before['startDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
             for ($i=0; $i <sizeof($before['workImage']) ; $i++) {
               $image1 = S3JOBS_URL.$before['workImage'][$i];
               $content .= '<img src="'.$image1.'" alt="" width="95" height="95" border="0" />';
@@ -296,7 +296,7 @@ class Jobs extends Common_Back_Controller {
            else:
              $content .='<td colspan="2" align="center"> No record found</td>';
          endif;  if(!empty($after)):
-           $content .='<td colspan="2"><p><strong>Job End </strong><span align="right" >&nbsp;&nbsp;'.date("Y-m-d H:i A",strtotime($after['endDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
+           $content .='<td colspan="2"><p><strong>Job End </strong><span align="right" >&nbsp;&nbsp;'.date("d/m/Y H:i A",strtotime($after['endDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
             for ($j=0; $j <sizeof($after['workImage']) ; $j++) {
               $image = S3JOBS_URL.$after['workImage'][$j];
               $content .= '<img src="'.$image.'" alt="" width="95" height="95" border="0" />';
@@ -316,7 +316,7 @@ class Jobs extends Common_Back_Controller {
           if(!empty($questions)){ 
              
                 $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
-                $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4" ><b>QUESTIONS AWSWER</b></th></tr>';
+                $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4" ><b>JOB CHECKLIST</b></th></tr>';
                 foreach ($questions as $key => $question) {
                   $content .= '<tr bgcolor="#EAECF0">';
                   $content .='<td colspan="4"><p><strong>Question : '.$question->question.'</strong></p><p><strong>Answer :</strong> '.(!empty($question->answer) ? $question->answer :"NA").'</p>';

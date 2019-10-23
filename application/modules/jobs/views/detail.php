@@ -117,7 +117,7 @@
 									<span class="pull-right txt-color-darken"><?php echo $job['customerName']; ?></span>	<strong> Customer Name</strong>
 								</li>
 								<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo date("d F Y",strtotime($job['startDate']))." ".$job['startTime']; ?></span><strong>Creation Date</strong>
+									<span class="pull-right txt-color-darken"><?php echo date("d/m/Y",strtotime($job['startDate']))." ".$job['startTime']; ?></span><strong>Creation Date</strong>
 								</li>	
 											</ul>
 										</div>

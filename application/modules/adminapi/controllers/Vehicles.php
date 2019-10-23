@@ -225,7 +225,7 @@ class Vehicles extends Common_Admin_Controller{
         $row = array();
       /*  $row[] = $no;*/
         //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
-      $row[] = display_placeholder_text(date('d F,Y',strtotime($serData->date)));
+      $row[] = display_placeholder_text(date('d/m/Y',strtotime($serData->date)));
         $row[] = display_placeholder_text($serData->type); 
         
          $attachmentUrl = S3VEHICLE_URL.$serData->attachment; 
