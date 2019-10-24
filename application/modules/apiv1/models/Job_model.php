@@ -200,7 +200,7 @@ class Job_model extends CI_Model {
             $job        = $this->common_model->is_data_exists('jobs',array('jobId'=>$jobId,'driverId'=>$driverId));
             $driver     = $this->common_model->is_data_exists('users',array('id'=>$driverId));
             //email send
-
+            if($jobTime){
             //send mail
                 $maildata['title']    = "";
                 $message = "";
@@ -217,10 +217,12 @@ class Job_model extends CI_Model {
                 $message=$this->load->view('emails/email',$maildata,TRUE);
                 $emails = $this->common_model->adminEmails();
                 if(!empty($emails)){
+
                     $this->load->library('smtp_email');
                     $this->smtp_email->send_mail_multiple($emails,$subject,$message);
                 }
             //send mail
+                }
             //email send
         }
         return true;
