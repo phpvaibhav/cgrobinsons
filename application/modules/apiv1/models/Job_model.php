@@ -202,8 +202,8 @@ class Job_model extends CI_Model {
             //email send
 
             //send mail
-                $maildata['title']    = $job->jobName;
-                $maildata['message']  = $driver->fullName." arrived at ".date("d/m/Y H:i A",strtotime($jobTime->inDateTime));
+                $maildata['title']    = "";
+                $maildata['message']  = "Hello sir,<br>".$job->jobName."<br>".$driver->fullName." has arrived at ".date("d/m/Y H:i A",strtotime($jobTime->inDateTime));
                 $subject = $driver->fullName." has arrived at ".SITE_NAME." for Job Ref: ".$job->jobName;
                 $message=$this->load->view('emails/email',$maildata,TRUE);
                 $emails = $this->common_model->adminEmails();
