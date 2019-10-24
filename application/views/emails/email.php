@@ -23,7 +23,7 @@
                             <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;"><?php echo $message; ?></p>
    
 
-                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Thanks,<br><?php echo SITE_NAME; ?> team</p>  
+                           <!--  <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Thanks,<br><?php echo SITE_NAME; ?> team</p>   -->
                         </td>
                     </tr>
                 </table>
