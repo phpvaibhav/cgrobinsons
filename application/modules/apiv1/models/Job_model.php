@@ -149,6 +149,7 @@ class Job_model extends CI_Model {
     function jobTimingSet($jobId,$driverId,$areaStatus){
         $isExistTime = $this->common_model->is_data_exists('jobTiming',array('jobId'=>$jobId,'driverId'=>$driverId));
         $mailsent = false;
+        $setin = false;
         if(!$isExistTime){
             $mailsent = true;
         }
@@ -190,10 +191,11 @@ class Job_model extends CI_Model {
                 $date       = date("Y-m-d H:i:s");
                 $setData    = array('jobId'=>$jobId,'driverId'=>$driverId,'inDateTime'=>$date);
                 $set        = ($areaStatus=='inside') ? $this->common_model->insertData('jobTiming',$setData) : false;
+                $setin = true;
             }
            
         }//end if
-        if($mailsent){
+        if($mailsent && $setin){
             $jobTime    = $this->common_model->is_data_exists('jobTiming',array('jobId'=>$jobId,'driverId'=>$driverId));
             $job        = $this->common_model->is_data_exists('jobs',array('jobId'=>$jobId,'driverId'=>$driverId));
             $driver     = $this->common_model->is_data_exists('users',array('id'=>$driverId));
