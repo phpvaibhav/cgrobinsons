@@ -54,7 +54,7 @@
                             
                             <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">If you didn't generate this link, don't worry. You can login with your old password. This link is only for one time use.</p>  
 
-                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Thanks,<br><?php echo "CG ROBINSON`S"; ?> team</p>  
+                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Thanks,<br><?php echo SITE_NAME; ?> team</p>  
                         </td>
                     </tr>
                 </table>
