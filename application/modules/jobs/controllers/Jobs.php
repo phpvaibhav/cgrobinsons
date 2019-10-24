@@ -114,7 +114,7 @@ class Jobs extends Common_Back_Controller {
       $pdf->Cell(0, 12, 'JOBS',0, 0, 'C');
       $pdf->Ln(5);
       $pdf->Ln(5);
-      $pdf->Write(0, 'Date: '. date('m/d/Y') , '', 0, 'L', false, 0, true, false, 0);
+      $pdf->Write(0, 'Date: '. date('d/m/Y') , '', 0, 'L', false, 0, true, false, 0);
       // Logged in username
       $userName = $_SESSION[ADMIN_USER_SESS_KEY]['fullName'];
       $pdf->Write(0, 'By: '.$userName, '', 0, 'R', true, 0, false, false, 0);
@@ -222,7 +222,7 @@ class Jobs extends Common_Back_Controller {
 
         $pdf->Ln(5);
          $pdf->Ln(5);
-      $pdf->Write(0, 'Date: '. date('m/d/Y') , '', 0, 'L', false, 0, true, false, 0);
+      $pdf->Write(0, 'Date: '. date('d/m/Y') , '', 0, 'L', false, 0, true, false, 0);
      
 
       // Logged in username

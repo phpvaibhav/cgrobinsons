@@ -68,7 +68,7 @@ class Pdfset extends Common_Front_Controller {
 
         $pdf->Ln(5);
          $pdf->Ln(5);
-      $pdf->Write(0, 'Date: '. date('m/d/Y') , '', 0, 'L', false, 0, true, false, 0);
+      $pdf->Write(0, 'Date: '. date('d/m/Y') , '', 0, 'L', false, 0, true, false, 0);
      
 
       // Logged in username
