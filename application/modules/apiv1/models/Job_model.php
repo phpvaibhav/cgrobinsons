@@ -131,7 +131,7 @@ class Job_model extends CI_Model {
     }
 
     function jobTracking($jobId,$driverId,$latitude,$longitude){
-        $jobMsg = new stdClass();
+       $jobMsg = new stdClass();
        $sql = "SELECT jobId FROM jobs as j  WHERE ST_CONTAINS(j.boundary, Point($longitude,$latitude))
             AND j.jobId = $jobId AND j.driverId = $driverId AND j.jobStatus = 1";
         $area = $this->db->query($sql);
@@ -202,14 +202,14 @@ class Job_model extends CI_Model {
             //email send
 
             //send mail
-                $maildata['title']    = SITE_NAME." for Job Ref: ".$job->jobName;
-                $maildata['message']  = $driver->fullName." arrived at ".date("d/m/y H:i A",strtotime($jobTime->inDateTime));
+                $maildata['title']    = $job->jobName;
+                $maildata['message']  = $driver->fullName." arrived at ".date("d/m/Y H:i A",strtotime($jobTime->inDateTime));
                 $subject = $driver->fullName." has arrived at ".SITE_NAME." for Job Ref: ".$job->jobName;
                 $message=$this->load->view('emails/email',$maildata,TRUE);
                 $emails = $this->common_model->adminEmails();
                 if(!empty($emails)){
-                $this->load->library('smtp_email');
-                $this->smtp_email->send_mail_multiple($emails,$subject,$message);
+                    $this->load->library('smtp_email');
+                    $this->smtp_email->send_mail_multiple($emails,$subject,$message);
                 }
             //send mail
             //email send
