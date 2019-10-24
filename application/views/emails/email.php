@@ -2,7 +2,7 @@
 <html>
 <head>
      <?php $backend_assets =  base_url().'backend_assets/';?>
-    <title>Interface</title>
+    <title><?= SITE_NAME; ?></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,8 @@
             <tr>
                 <td style="padding: 10px 0px;box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;">
                     <div class="logo">
-                        <img src="<?php echo $backend_assets; ?>img/logo.png" style="width:100%;max-width: 80px;">
+
+                        <img src="<?php echo base_url(); ?>backend_assets/img/logo.png" style="width:100%;max-width: 80px;">
                     </div>
                 </td>
             </tr>
@@ -38,8 +39,6 @@
                     </td>
                 </tr>
             </table>
-            
-            
         </div>
         <div style="background: #222;">
             <table width="100%" border="0" align="center" cellspacing="0" cellpadding="0">

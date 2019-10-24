@@ -147,6 +147,11 @@ class Job_model extends CI_Model {
         return  $jobMsg;
     }//end function
     function jobTimingSet($jobId,$driverId,$areaStatus){
+        $isExistTime = $this->common_model->is_data_exists('jobTiming',array('jobId'=>$jobId,'driverId'=>$driverId));
+        $mailsent = false;
+        if(!$isExistTime){
+            $mailsent = true;
+        }
         $this->db->select("*")->from('jobTiming');
         $this->db->where(array('jobId'=>$jobId,'driverId'=>$driverId));
         $this->db->order_by('jobTimeId','desc');
@@ -177,7 +182,7 @@ class Job_model extends CI_Model {
                      $update    = $this->common_model->updateFields('jobTiming',$setData,array('jobId'=>$jobId,'driverId'=>$driverId));
                  }  
             }
-         
+
             //exits
         }else{
             //data not exist
@@ -188,6 +193,25 @@ class Job_model extends CI_Model {
             }
            
         }//end if
+        if($mailsent){
+            $jobTime    = $this->common_model->is_data_exists('jobTiming',array('jobId'=>$jobId,'driverId'=>$driverId));
+            $job        = $this->common_model->is_data_exists('jobs',array('jobId'=>$jobId,'driverId'=>$driverId));
+            $driver     = $this->common_model->is_data_exists('users',array('id'=>$driverId));
+            //email send
+
+            //send mail
+                $maildata['title']    = SITE_NAME." for Job Ref: ".$job->jobName;
+                $maildata['message']  = $driver->fullName." arrived at ".date("d/m/y H:i A",strtotime($jobTime));
+                $subject = $driver->fullName." has arrived at ".SITE_NAME." for Job Ref: ".$job->jobName;
+                $message=$this->load->view('emails/email',$maildata,TRUE);
+                $emails = $this->common_model->adminEmails();
+                if(!empty($emails)){
+                $this->load->library('smtp_email');
+                $this->smtp_email->send_mail_multiple($emails,$subject,$message);
+                }
+            //send mail
+            //email send
+        }
         return true;
     }//end function
     function jobTypeQuestions($jobId,$jobTypeId){
