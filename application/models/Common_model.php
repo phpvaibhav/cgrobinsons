@@ -336,6 +336,20 @@ class Common_model extends CI_Model {
         $ipaddress = 'UNKNOWN';
     return $ipaddress;
 }
+    function adminEmails(){
+        $email = array();
+        $this->db->select('email');
+        $this->db->from('admin');
+        
+        $sql= $this->db->get();
+
+        if($sql->num_rows()):
+            foreach ($sql->result() as $k => $v) {
+              $email[] = $v->email;
+            }
+        endif;
+        return $email;
+    } //End Function usersInfo 
 
 } //end of class
 /* Do not close php tags */
