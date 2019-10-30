@@ -51,6 +51,7 @@ class Job_model extends CI_Model {
         $this->db->join('users as c','c.id=j.customerId','left');
         $this->db->join('users as d','d.id=j.driverId','left');
         !empty($where) ? $this->db->where($where) :"";
+        $this->db->order_by('DATE(j.upd)','desc');
         $sql = $this->db->get();
         if($sql->num_rows()):
             return $sql->result();

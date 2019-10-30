@@ -20,6 +20,7 @@ class Job_model extends CI_Model {
         $this->db->join('users as c','c.id=j.customerId','left');
         $this->db->join('users as d','d.id=j.driverId','left');
         !empty($where) ? $this->db->where($where) :"";
+         $this->db->order_by('DATE(j.upd)','desc');
         $sql = $this->db->get();
             if($sql->num_rows()):
             $res = $sql->result();
@@ -199,6 +200,7 @@ class Job_model extends CI_Model {
             $jobTime    = $this->common_model->is_data_exists('jobTiming',array('jobId'=>$jobId,'driverId'=>$driverId));
             $job        = $this->common_model->is_data_exists('jobs',array('jobId'=>$jobId,'driverId'=>$driverId));
             $driver     = $this->common_model->is_data_exists('users',array('id'=>$driverId));
+            $customer     = $this->common_model->is_data_exists('users',array('id'=>$job->customerId));
             //email send
             if($jobTime){
             //send mail
@@ -216,6 +218,9 @@ class Job_model extends CI_Model {
                 $subject = $driver->fullName." has arrived at ".SITE_NAME." for Job Ref: ".$job->jobName;
                 $message=$this->load->view('emails/email',$maildata,TRUE);
                 $emails = $this->common_model->adminEmails();
+                if($customer){
+                    array_push($emails,$customer->email);
+                }
                 if(!empty($emails)){
 
                     $this->load->library('smtp_email');
