@@ -40,7 +40,7 @@ class Job_model extends CI_Model {
                     $time = 'NA';
                 }
                 $res[$k]->timeDuration = $time;
-                $$res[$k]->geoTimeDuration = $this->geoTimeDuration($row->jobId);
+                $res[$k]->geoTimeDuration = $this->geoTimeDuration($row->jobId);
                 if($res[$k]->geoFencing==1){
                      $geopint = substr_replace($row->points,"",-1); 
                             $geopint = trim($geopint);
