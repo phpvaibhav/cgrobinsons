@@ -329,7 +329,7 @@
 										<td><?= ($y+1); ?></td>
 										<td><?= date('d/m/Y H:i A',strtotime($v->startTime)); ?></td>
 										<td><?= ($v->endTime!='Progress') ?date('d/m/Y H:i A',strtotime($v->endTime)):$v->endTime; ?></td>
-										<td><?= !empty($v->timeDuration)? $v->timeDuration:"NA"; ?></td>
+										<td><?= (($v->endTime!='Progress') && !empty($v->timeDuration))? $v->timeDuration:"NA"; ?></td>
 									</tr>	
 									<?php }  ?>	
 								</tbody>

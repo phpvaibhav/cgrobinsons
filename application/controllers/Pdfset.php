@@ -185,7 +185,7 @@ class Pdfset extends Common_Front_Controller {
            // $content .= '<td>'.($y+1).'</td>';
             $content .= '<td>'.date('d/m/Y H:i A',strtotime($v->startTime)).'</td>';
             $content .= '<td>'.(($v->endTime!='Progress') ?date('d/m/Y H:i A',strtotime($v->endTime)):$v->endTime).'</td>';
-            $content .= '<td colspan="2" align="right">'.(!empty($v->timeDuration)? $v->timeDuration:"NA").'</td>';
+            $content .= '<td colspan="2" align="right">'.((($v->endTime!='Progress') && !empty($v->timeDuration))? $v->timeDuration:"NA").'</td>';
            // $content .= '<td ><strong>Job Work Time Duration </strong> :</td><td>'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
             $content .= '</tr>';
              
