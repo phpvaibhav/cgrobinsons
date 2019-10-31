@@ -12,9 +12,9 @@
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12">
 					<?php 
-						echo "<pre>";
+					/*	echo "<pre>";
 						print_r($job);
-						echo "</pre>";
+						echo "</pre>";*/
 
 					?>
 					<div class="well well-light well-sm margin padding">
