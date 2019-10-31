@@ -12,7 +12,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12">
 					<?php 
-					/*	echo "<pre>";
+						/*echo "<pre>";
 						print_r($job);
 						echo "</pre>";*/
 
@@ -298,6 +298,53 @@
 								</li> -->
 							</ul>
 						</fieldset>
+						<?php if(!empty($job['geoTimeDuration'])): $geoTimeDuration = $job['geoTimeDuration'];if(!empty($geoTimeDuration['timinig'])){ ?>
+							<header>
+							<h5>JOB WORK TIME (Geo Fencing Tracking) </h5>
+						</header>
+						<div class="timeline-seperator text-center"></div>		
+						<fieldset>
+							<div class="row">
+							<!-- before -->
+								<div class="col-sm-12 col-md-12 col-lg-12">
+									<?php 
+								/*	echo "<pre>";
+									print_r($geoTimeDuration['timinig']);
+									echo "</pre>";*/
+									?>
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover" width="100%">
+								<thead>			                
+									<tr>
+										<th data-hide="phone">ID</th>
+										<th data-hide="phone">In Time </th>
+										<th data-hide="phone,tablet">Out Time</th>
+										<th data-hide="phone,tablet">Total Time </th>
+									
+									</tr>
+								</thead>
+								<tbody>
+									<?php foreach ($geoTimeDuration['timinig'] as $y => $v) { ?>
+									<tr>
+										<td><?= ($y+1); ?></td>
+										<td><?= date('d/m/Y H:i A',strtotime($v->startTime)); ?></td>
+										<td><?= ($v->endTime!='Progress') ?date('d/m/Y H:i A',strtotime($v->endTime)):$v->endTime; ?></td>
+										<td><?= !empty($v->timeDuration)? $v->timeDuration:"NA"; ?></td>
+									</tr>	
+									<?php }  ?>	
+								</tbody>
+								<tfoot>
+									<tr>
+										<th colspan="3">Total Time Duration</th>
+										<th><?= $geoTimeDuration['total']; ?></th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+								</div>
+							</div>
+						</fieldset>	
+						<?php } endif; ?>
 						<?php if($job['geoFencing']==1): ?>
 						<div class="timeline-seperator text-center"></div>
 						<header>
@@ -349,7 +396,9 @@
 								</li>
 								<li class="list-group-item">
 									<div class="row">
-										<?php for ($i=0; $i <sizeof($before['workImage']) ; $i++) { ?>
+										<?php 
+										$bworkImage= (isset($before['workImage']) && !empty($before['workImage'])) ? $before['workImage'] :array();
+										for ($i=0; $i <sizeof($bworkImage) ; $i++) { ?>
 										<div class="col-sm-4 col-md-4 col-lg-4">
 											<img src="<?php echo S3JOBS_URL.$before['workImage'][$i];  ?>" class="img img-thumbnail" >
 										</div>
@@ -395,7 +444,7 @@
 								</li>
 								<li class="list-group-item">
 									<div class="row">
-										<?php for ($i=0; $i <sizeof($after['workImage']) ; $i++) { ?>
+										<?php $aworkImage= (isset($after['workImage']) && !empty($after['workImage'])) ? $after['workImage'] :array(); for ($i=0; $i <sizeof($aworkImage) ; $i++) { ?>
 										<div class="col-sm-4 col-md-4 col-lg-4">
 											<img src="<?php echo S3JOBS_URL.$after['workImage'][$i];  ?>" class="img img-thumbnail" >
 										</div>

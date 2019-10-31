@@ -37,7 +37,7 @@ class Jobs extends Common_Back_Controller {
     } 
     public function editJob() { 
         $jobId                      = decoding($this->uri->segment(3));
-       
+
         $data['title']              = 'Edit Job';   
         $data['jobTypes']           =  $this->common_model->getAll('jobType');
         $data['drivers']            =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
@@ -280,7 +280,7 @@ class Jobs extends Common_Back_Controller {
 /*         $content .= '<tr bgcolor="#EAECF0">';
         $content .= '<td colspan="2"><strong>Job Work Time Duration </strong> :</td><td colspan="2">'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
         $content .= '</tr>';*/
-        $content .= '<tr>';
+        $content .= '<tr bgcolor="#EAECF0">';
         if(!empty($job['jobReport'])):
             $reports  = json_decode($job['jobReport'],true);
           $before   = isset($reports['beforeWork']) ? $reports['beforeWork']:array();
@@ -289,18 +289,20 @@ class Jobs extends Common_Back_Controller {
           
           if(!empty($before)):
           $content .='<td colspan="2"><p><strong>Job Start </strong><span align="right" >&nbsp;&nbsp;'.date("d/m/Y H:i A",strtotime($before['startDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
-            for ($i=0; $i <sizeof($before['workImage']) ; $i++) {
+            $bworkImage = (isset($before['workImage'])&& !empty($before['workImage'])) ? $before['workImage']:array();
+            for ($i=0; $i <sizeof($bworkImage) ; $i++) {
               $image1 = S3JOBS_URL.$before['workImage'][$i];
-              $content .= '<img src="'.$image1.'" alt="" width="95" height="95" border="0" />';
+              $content .= '<img src="'.$image1.'" alt="" width="95" height="95" border="0" />&nbsp;';
             }
           $content .='</p></div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$before['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$before['driverSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Driver Signature</p></td>';
            else:
              $content .='<td colspan="2" align="center"> No record found</td>';
          endif;  if(!empty($after)):
            $content .='<td colspan="2"><p><strong>Job End </strong><span align="right" >&nbsp;&nbsp;'.date("d/m/Y H:i A",strtotime($after['endDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
-            for ($j=0; $j <sizeof($after['workImage']) ; $j++) {
+           $aworkImage = (isset($after['workImage'])&& !empty($after['workImage'])) ? $after['workImage']:array();
+            for ($j=0; $j <sizeof($aworkImage) ; $j++) {
               $image = S3JOBS_URL.$after['workImage'][$j];
-              $content .= '<img src="'.$image.'" alt="" width="95" height="95" border="0" />';
+              $content .= '<img src="'.$image.'" alt="" width="95" height="95" border="0" />&nbsp;';
             }
             $content .='</p></div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$after['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$after['customerSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Customer Signature</p></td>';
              else:
@@ -329,12 +331,25 @@ class Jobs extends Common_Back_Controller {
            /*questions manage*/
         /*questions manage*/
         /*tracking*/
-        $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
-        $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>JOB WORK TIME (Geo Fencing Tracking)</b></th></tr>';
-        $content .= '<tr bgcolor="#EAECF0">';
-        $content .= '<td colspan="2"><strong>Job Work Time Duration </strong> :</td><td colspan="2">'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
-        $content .= '</tr>';
-        $content .='</table>';
+        if(!empty($job['geoTimeDuration'])): $geoTimeDuration = $job['geoTimeDuration']; if(!empty($geoTimeDuration['timinig'])){
+          $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
+          $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>JOB WORK TIME (Geo Fencing Tracking)</b></th></tr>';
+            $content .= '<tr  bgcolor="#cccccc"><th align="left"><b>In Time</b></th><th align="left"><b>Out Time</b></th><th align="right" colspan="2"><b>Total Time</b></th></tr>';
+          foreach ($geoTimeDuration['timinig'] as $y => $v) {
+            
+            $content .= '<tr bgcolor="#EAECF0">';
+           // $content .= '<td>'.($y+1).'</td>';
+            $content .= '<td>'.date('d/m/Y H:i A',strtotime($v->startTime)).'</td>';
+            $content .= '<td>'.(($v->endTime!='Progress') ?date('d/m/Y H:i A',strtotime($v->endTime)):$v->endTime).'</td>';
+            $content .= '<td colspan="2" align="right">'.(!empty($v->timeDuration)? $v->timeDuration:"NA").'</td>';
+           // $content .= '<td ><strong>Job Work Time Duration </strong> :</td><td>'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
+            $content .= '</tr>';
+             
+          }
+          $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="2"><b>Total Time Duration</b></th><th align="right" colspan="2"><b>'.$geoTimeDuration['total'].'</b></th></tr>';
+          $content .='</table>';
+         }
+          endif;
         /*tracking*/
   
         if($job['geoFencing']==1){

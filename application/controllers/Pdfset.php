@@ -99,7 +99,7 @@ class Pdfset extends Common_Front_Controller {
                 }
      
        // $content .= '<table bgcolor="#cccccc" border="0" cellspacing="1" cellpadding="4">';
-        $content .= '<table  border="0" cellspacing="1" cellpadding="4" bgcolor="#EAECF0">';
+       $content .= '<table  border="0" cellspacing="1" cellpadding="4" bgcolor="#EAECF0">';
         $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>Basic Information</b></th></tr>';
         $content .= '<tr bgcolor="#EAECF0">';
         $content .= '<td><strong>Job Name</strong> :</td><td>'.$job['jobName'].'</td>';
@@ -121,10 +121,10 @@ class Pdfset extends Common_Front_Controller {
          $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
 
         $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="2"><b>BEFORE WORK</b></th><th align="left" colspan="2"><b>AFTER WORK</b></th></tr>';
-         $content .= '<tr bgcolor="#EAECF0">';
+/*         $content .= '<tr bgcolor="#EAECF0">';
         $content .= '<td colspan="2"><strong>Job Work Time Duration </strong> :</td><td colspan="2">'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
-        $content .= '</tr>';
-        $content .= '<tr>';
+        $content .= '</tr>';*/
+        $content .= '<tr bgcolor="#EAECF0">';
         if(!empty($job['jobReport'])):
             $reports  = json_decode($job['jobReport'],true);
           $before   = isset($reports['beforeWork']) ? $reports['beforeWork']:array();
@@ -133,7 +133,8 @@ class Pdfset extends Common_Front_Controller {
           
           if(!empty($before)):
           $content .='<td colspan="2"><p><strong>Job Start </strong><span align="right" >&nbsp;&nbsp;'.date("d/m/Y H:i A",strtotime($before['startDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
-            for ($i=0; $i <sizeof($before['workImage']) ; $i++) {
+            $bworkImage = (isset($before['workImage'])&& !empty($before['workImage'])) ? $before['workImage']:array();
+            for ($i=0; $i <sizeof($bworkImage) ; $i++) {
               $image1 = S3JOBS_URL.$before['workImage'][$i];
               $content .= '<img src="'.$image1.'" alt="" width="95" height="95" border="0" />&nbsp;';
             }
@@ -142,7 +143,8 @@ class Pdfset extends Common_Front_Controller {
              $content .='<td colspan="2" align="center"> No record found</td>';
          endif;  if(!empty($after)):
            $content .='<td colspan="2"><p><strong>Job End </strong><span align="right" >&nbsp;&nbsp;'.date("d/m/Y H:i A",strtotime($after['endDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
-            for ($j=0; $j <sizeof($after['workImage']) ; $j++) {
+           $aworkImage = (isset($after['workImage'])&& !empty($after['workImage'])) ? $after['workImage']:array();
+            for ($j=0; $j <sizeof($aworkImage) ; $j++) {
               $image = S3JOBS_URL.$after['workImage'][$j];
               $content .= '<img src="'.$image.'" alt="" width="95" height="95" border="0" />&nbsp;';
             }
@@ -157,7 +159,7 @@ class Pdfset extends Common_Front_Controller {
         endif;
          $content .='</tr>'; 
         $content .='</table>';
-                          /*questions manage*/
+                  /*questions manage*/     
           if(!empty($questions)){ 
              
                 $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
@@ -171,7 +173,30 @@ class Pdfset extends Common_Front_Controller {
                 $content .= '</table>';
               }
            /*questions manage*/
-      if($job['geoFencing']==1){
+        /*questions manage*/
+        /*tracking*/
+        if(!empty($job['geoTimeDuration'])): $geoTimeDuration = $job['geoTimeDuration']; if(!empty($geoTimeDuration['timinig'])){
+          $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
+          $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>JOB WORK TIME (Geo Fencing Tracking)</b></th></tr>';
+            $content .= '<tr  bgcolor="#cccccc"><th align="left"><b>In Time</b></th><th align="left"><b>Out Time</b></th><th align="right" colspan="2"><b>Total Time</b></th></tr>';
+          foreach ($geoTimeDuration['timinig'] as $y => $v) {
+            
+            $content .= '<tr bgcolor="#EAECF0">';
+           // $content .= '<td>'.($y+1).'</td>';
+            $content .= '<td>'.date('d/m/Y H:i A',strtotime($v->startTime)).'</td>';
+            $content .= '<td>'.(($v->endTime!='Progress') ?date('d/m/Y H:i A',strtotime($v->endTime)):$v->endTime).'</td>';
+            $content .= '<td colspan="2" align="right">'.(!empty($v->timeDuration)? $v->timeDuration:"NA").'</td>';
+           // $content .= '<td ><strong>Job Work Time Duration </strong> :</td><td>'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
+            $content .= '</tr>';
+             
+          }
+          $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="2"><b>Total Time Duration</b></th><th align="right" colspan="2"><b>'.$geoTimeDuration['total'].'</b></th></tr>';
+          $content .='</table>';
+         }
+          endif;
+        /*tracking*/
+  
+        if($job['geoFencing']==1){
           /*Geo fencing manage*/
           $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
           $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4" ><b>GEO FENCING</b></th></tr>';
@@ -187,7 +212,7 @@ class Pdfset extends Common_Front_Controller {
 
           $content .= '</table>';
           /*Geo fencing manage*/
-          }
+        }
        
         $pdf->writeHTML($content, true, false, true, false, '');
         // reset pointer to the last page

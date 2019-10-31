@@ -33,13 +33,14 @@ class Job_model extends CI_Model {
                 $res[$k]->generatePdf  = base_url().'pdfset/download/'.encoding($row->jobId);
                  
              
-                $timinig = $this->db->select('TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$row->jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
+                $timinig = $this->db->select('SEC_TO_TIME(SUM(TIME_TO_SEC(timediff(outDateTime, inDateTime)))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$row->jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->group_by('jobId')->get();
                 if($timinig->num_rows()){
                     $time = isset($timinig->row()->timeDuration) ? $timinig->row()->timeDuration:"NA";
                 }else{
                     $time = 'NA';
                 }
                 $res[$k]->timeDuration = $time;
+                $$res[$k]->geoTimeDuration = $this->geoTimeDuration($row->jobId);
                 if($res[$k]->geoFencing==1){
                      $geopint = substr_replace($row->points,"",-1); 
                             $geopint = trim($geopint);
@@ -73,13 +74,14 @@ class Job_model extends CI_Model {
             $row->jobReport = !empty($report) ? $report : new stdClass();
              
              
-            $timinig = $this->db->select('TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$row->jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
+              $timinig = $this->db->select('SEC_TO_TIME(SUM(TIME_TO_SEC(timediff(outDateTime, inDateTime)))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$row->jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->group_by('jobId')->get();
             if($timinig->num_rows()){
                 $time = isset($timinig->row()->timeDuration) ? $timinig->row()->timeDuration:"NA";
             }else{
                 $time = 'NA';
             }
             $row->timeDuration = $time;
+            $row->geoTimeDuration = $this->geoTimeDuration($row->jobId);
             if($row->geoFencing==1){
                  $geopint = substr_replace($row->points,"",-1); 
                         $geopint = trim($geopint);
@@ -174,14 +176,14 @@ class Job_model extends CI_Model {
                  if($inDateTime !='0000-00-00 00:00:00' && $outDateTime =='0000-00-00 00:00:00'){
                     $date       = date("Y-m-d H:i:s");
                     $setData    = array('outDateTime'=>$date);
-                     $update    = $this->common_model->updateFields('jobTiming',$setData,array('jobId'=>$jobId,'driverId'=>$driverId));
+                     $update    = $this->common_model->updateFields('jobTiming',$setData,array('jobTimeId'=>$jobtime->jobTimeId,'jobId'=>$jobId,'driverId'=>$driverId));
                  }
 
             }else{
                if($inDateTime !='0000-00-00 00:00:00' && $outDateTime =='0000-00-00 00:00:00'){
                     $date       = date("Y-m-d H:i:s");
                     $setData    = array('outDateTime'=>$date);
-                     $update    = $this->common_model->updateFields('jobTiming',$setData,array('jobId'=>$jobId,'driverId'=>$driverId));
+                     $update    = $this->common_model->updateFields('jobTiming',$setData,array('jobTimeId'=>$jobtime->jobTimeId,'jobId'=>$jobId,'driverId'=>$driverId));
                  }  
             }
 
@@ -223,8 +225,8 @@ class Job_model extends CI_Model {
                 }
                 if(!empty($emails)){
 
-                    $this->load->library('smtp_email');
-                    $this->smtp_email->send_mail_multiple($emails,$subject,$message);
+                    //$this->load->library('smtp_email');
+                   // $this->smtp_email->send_mail_multiple($emails,$subject,$message);
                 }
             //send mail
                 }
@@ -245,5 +247,27 @@ class Job_model extends CI_Model {
         }
         return $array; 
     }//end function
+    function geoTimeDuration($jobId){
+        $timeing =array();
+        $time = $this->db->select('jobId,inDateTime,outDateTime,SEC_TO_TIME(TIME_TO_SEC(timediff(outDateTime, inDateTime))) as timeDuration,(case when (inDateTime = "0000-00-00 00:00:00") 
+        THEN "-" ELSE
+        inDateTime 
+        END) as startTime,(case when (outDateTime = "0000-00-00 00:00:00") 
+        THEN "Progress" ELSE
+        outDateTime 
+        END) as endTime')->from('jobTiming')->where(array('jobId'=>$jobId))->order_by('jobTimeId','asc')->get();
+        if($time->num_rows()){
+            $timeing = $time->result();
+
+        }
+        $timinigT = $this->db->select('SEC_TO_TIME(SUM(TIME_TO_SEC(timediff(outDateTime, inDateTime)))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
+        $timeT = 'NA';
+        if($timinigT->num_rows()){
+            $timeT = isset($timinigT->row()->timeDuration) ? $timinigT->row()->timeDuration:"NA";;
+        }else{
+            $timeT = 'NA';
+        }
+        return array('timinig'=>$timeing,'total'=>$timeT);
+    }//end Function
 
 }//Function 

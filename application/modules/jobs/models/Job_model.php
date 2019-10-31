@@ -20,11 +20,12 @@ class Job_model extends CI_Model {
         $this->db->join('users as d','d.id=j.driverId','left');
         $this->db->where('j.jobId',$jobId);
         $sql = $this->db->get();
-      
+
         if($sql->num_rows()):
             $job =$sql->row_array();
            
-            $timinig = $this->db->select('TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$job['jobId'],'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
+            $timinig = $this->db->select('SEC_TO_TIME(SUM(TIME_TO_SEC(timediff(outDateTime, inDateTime)))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$job['jobId'],'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->group_by('jobId')->get();
+            //lq();
             if($timinig->num_rows()){
                 $time = isset($timinig->row()->timeDuration) ? $timinig->row()->timeDuration:"NA";;
             }else{
@@ -75,23 +76,24 @@ class Job_model extends CI_Model {
     }//end function
     function geoTimeDuration($jobId){
         $timeing =array();
-        $time = $this->db->select('inDateTime,outDateTime,TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration,(case when (inDateTime = "0000-00-00 00:00:00") 
+        $time = $this->db->select('jobId,inDateTime,outDateTime,SEC_TO_TIME(TIME_TO_SEC(timediff(outDateTime, inDateTime))) as timeDuration,(case when (inDateTime = "0000-00-00 00:00:00") 
         THEN "-" ELSE
         inDateTime 
         END) as startTime,(case when (outDateTime = "0000-00-00 00:00:00") 
-        THEN "-" ELSE
+        THEN "Progress" ELSE
         outDateTime 
         END) as endTime')->from('jobTiming')->where(array('jobId'=>$jobId))->order_by('jobTimeId','asc')->get();
         if($time->num_rows()){
             $timeing = $time->result();
 
         }
-        $timinigTotal = $this->db->select('TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
-        if($timinigTotal->num_rows()){
-            $time = isset($timinigTotal->row()->timeDuration) ? $timinigTotal->row()->timinigTotal:"NA";;
+        $timinigT = $this->db->select('SEC_TO_TIME(SUM(TIME_TO_SEC(timediff(outDateTime, inDateTime)))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
+        $timeT = 'NA';
+        if($timinigT->num_rows()){
+            $timeT = isset($timinigT->row()->timeDuration) ? $timinigT->row()->timeDuration:"NA";;
         }else{
-            $time = 'NA';
+            $timeT = 'NA';
         }
-        return array('timinig'=>$timeing,'total'=>$time);
+        return array('timinig'=>$timeing,'total'=>$timeT);
     }//end Function
 }//Function 
