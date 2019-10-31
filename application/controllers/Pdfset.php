@@ -114,7 +114,7 @@ class Pdfset extends Common_Front_Controller {
         $content .= '<td><strong>Driver Name</strong> :</td><td>'.$job['driverName'].'</td>'; 
         $content .= '</tr>';
         $content .= '<tr bgcolor="#EAECF0">';
-        $content .= '<td><strong>Address</strong> :</td><td colspan="3">'.$job['address'].'</td>';
+        $content .= '<td><strong>Address</strong> :</td><td colspan="3"><strong>'.$job['address'].'<strong></td>';
         $content .= '</tr>';
          $content .= '</table>';
       
