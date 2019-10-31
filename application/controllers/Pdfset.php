@@ -64,7 +64,7 @@ class Pdfset extends Common_Front_Controller {
       // add a page
       $pdf->AddPage();
         // print a line
-        $pdf->Cell(0, 12, 'JOBS DETAIL',0, 0, 'C');
+        $pdf->Cell(0, 12, 'JOB DETAILS',0, 0, 'C');
 
         $pdf->Ln(5);
          $pdf->Ln(5);
@@ -138,7 +138,7 @@ class Pdfset extends Common_Front_Controller {
               $image1 = S3JOBS_URL.$before['workImage'][$i];
               $content .= '<img src="'.$image1.'" alt="" width="95" height="95" border="0" />&nbsp;';
             }
-          $content .='</p></div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$before['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$before['driverSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Driver Signature</p></td>';
+          $content .='</p></div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$before['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$before['driverSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right"><b>Driver Signature</b></p></td>';
            else:
              $content .='<td colspan="2" align="center"> No record found</td>';
          endif;  if(!empty($after)):
@@ -148,7 +148,7 @@ class Pdfset extends Common_Front_Controller {
               $image = S3JOBS_URL.$after['workImage'][$j];
               $content .= '<img src="'.$image.'" alt="" width="95" height="95" border="0" />&nbsp;';
             }
-            $content .='</p></div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$after['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$after['customerSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right">Customer Signature</p></td>';
+            $content .='</p></div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$after['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$after['customerSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right"><b>Customer Signature</b></p></td>';
              else:
              $content .='<td colspan="2" align="center"> No record found</td>';
             endif;
