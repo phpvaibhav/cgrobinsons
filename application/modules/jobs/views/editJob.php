@@ -36,6 +36,12 @@
   	<!-- row -->
     <div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+				<?php 
+						/*echo "<pre>";
+						print_r($job);
+						echo "</pre>";*/
+
+					?>
 			<div class="well no-padding">
 				<form action="jobs/createJob" id="createJob" class="smart-form" novalidate="novalidate" autocomplete="off" enctype="multipart/form-data">
 					<header>
@@ -54,7 +60,7 @@
 							        <select name="jobTypeId" id="jobTypeId" onchange="getQuestions(this);">
 							            <option value="" selected="" disabled="">Job Type</option>
 							            <?php foreach ($jobTypes as $jt => $type) {?>
-							            <option value="<?php echo $type->jobTypeId; ?>" selected="<?= $job['jobName']==$type->jobTypeId ?'selected':'';  ?>"><?php echo $type->jobType; ?></option>
+							            <option value="<?php echo $type->jobTypeId; ?>" <?= $job['jobTypeId']==$type->jobTypeId ? "selected='selected'":'';  ?>><?php echo $type->jobType; ?></option>
 							        	<?php } ?>
 							           
 							        </select> <i></i> </label>
@@ -68,7 +74,7 @@
 									<optgroup label="">
 									<option></option>
 									<?php foreach ($drivers as $k => $driver) {?>
-									<option value="<?php echo $driver->id; ?>" selected="<?= $job['driverId']==$driver->id ?'selected':'';  ?>"><?php echo $driver->fullName; ?></option>
+									<option value="<?php echo $driver->id; ?>"  <?= $job['driverId']==$driver->id ? "selected='selected'":'';  ?>><?php echo $driver->fullName; ?></option>
 									<?php }?>
 									</optgroup>
 								</select>
@@ -78,7 +84,7 @@
 									<optgroup label="">
 									<option></option>
 									<?php foreach ($customers as $c => $customer) {?>
-									<option value="<?php echo $customer->id; ?>" selected="<?= $job['customerId']==$customer->id ?'selected':'';  ?>"><?php echo $customer->fullName; ?></option>
+									<option value="<?php echo $customer->id; ?>"  <?= $job['customerId']==$customer->id ? "selected='selected'":'';  ?>><?php echo $customer->fullName; ?></option>
 									<?php }?>
 									</optgroup>
 								</select>

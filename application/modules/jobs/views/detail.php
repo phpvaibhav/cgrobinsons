@@ -1,3 +1,4 @@
+ 
  <style type="text/css">
   #map-show {
   width: auto;
@@ -10,6 +11,12 @@
 		<div class="well well-sm">
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12">
+					<?php 
+						echo "<pre>";
+						print_r($job);
+						echo "</pre>";
+
+					?>
 					<div class="well well-light well-sm margin padding">
 						<!-- button -->
 						<ul class="demo-btns text-right">

@@ -37,6 +37,7 @@ class Jobs extends Common_Back_Controller {
     } 
     public function editJob() { 
         $jobId                      = decoding($this->uri->segment(3));
+       
         $data['title']              = 'Edit Job';   
         $data['jobTypes']           =  $this->common_model->getAll('jobType');
         $data['drivers']            =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
@@ -163,8 +164,8 @@ class Jobs extends Common_Back_Controller {
       //============================================================+
    }
    // End job PFD  
-    public function jobDetailPdf()
-   {
+  public function jobDetailPdf()
+  {
       $jobId  = decoding($this->uri->segment(3));
 
       $where = array('jobId'=>$jobId);
@@ -276,9 +277,9 @@ class Jobs extends Common_Back_Controller {
          $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
 
         $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="2"><b>BEFORE WORK</b></th><th align="left" colspan="2"><b>AFTER WORK</b></th></tr>';
-         $content .= '<tr bgcolor="#EAECF0">';
+/*         $content .= '<tr bgcolor="#EAECF0">';
         $content .= '<td colspan="2"><strong>Job Work Time Duration </strong> :</td><td colspan="2">'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
-        $content .= '</tr>';
+        $content .= '</tr>';*/
         $content .= '<tr>';
         if(!empty($job['jobReport'])):
             $reports  = json_decode($job['jobReport'],true);
@@ -312,7 +313,7 @@ class Jobs extends Common_Back_Controller {
         endif;
          $content .='</tr>'; 
         $content .='</table>';
-                  /*questions manage*/
+                  /*questions manage*/     
           if(!empty($questions)){ 
              
                 $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
@@ -326,7 +327,17 @@ class Jobs extends Common_Back_Controller {
                 $content .= '</table>';
               }
            /*questions manage*/
-      if($job['geoFencing']==1){
+        /*questions manage*/
+        /*tracking*/
+        $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
+        $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>JOB WORK TIME (Geo Fencing Tracking)</b></th></tr>';
+        $content .= '<tr bgcolor="#EAECF0">';
+        $content .= '<td colspan="2"><strong>Job Work Time Duration </strong> :</td><td colspan="2">'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
+        $content .= '</tr>';
+        $content .='</table>';
+        /*tracking*/
+  
+        if($job['geoFencing']==1){
           /*Geo fencing manage*/
           $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
           $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4" ><b>GEO FENCING</b></th></tr>';
@@ -342,24 +353,23 @@ class Jobs extends Common_Back_Controller {
 
           $content .= '</table>';
           /*Geo fencing manage*/
-          }
+        }
+
 
        
         $pdf->writeHTML($content, true, false, true, false, '');
         // reset pointer to the last page
         $pdf->lastPage();
         $fileName = "cg-".$job['jobName'].strtotime(date("Y-m-d H:i:s")).".pdf";
-       // $pdf->Output($fileName, 'I');
+        // $pdf->Output($fileName, 'I');
         // $pdf->Output($fileName,'D');
         $pdf->Output($fileName, 'I');
         ob_end_flush();
-      //Close and output PDF document
-
-
+        //Close and output PDF document
       //============================================================+
       // END OF FILE
       //============================================================+
-   }
-   // End job PFD 
+  }
+ // End job PFD 
  
 }

@@ -20,6 +20,7 @@ class Job_model extends CI_Model {
         $this->db->join('users as d','d.id=j.driverId','left');
         $this->db->where('j.jobId',$jobId);
         $sql = $this->db->get();
+      
         if($sql->num_rows()):
             $job =$sql->row_array();
            
@@ -30,6 +31,7 @@ class Job_model extends CI_Model {
                  $time = 'NA';
             }
             $job['timeDuration'] = $time;
+            $job['geoTimeDuration'] = $this->geoTimeDuration($job['jobId']);
             if($job['geoFencing']==1){
                  $geopint = substr_replace($job['points'],"",-1); 
                         $geopint = trim($geopint);
@@ -70,9 +72,26 @@ class Job_model extends CI_Model {
             $array = $sql->result();
         }
         return $array; 
-
     }//end function
-   
+    function geoTimeDuration($jobId){
+        $timeing =array();
+        $time = $this->db->select('inDateTime,outDateTime,TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration,(case when (inDateTime = "0000-00-00 00:00:00") 
+        THEN "-" ELSE
+        inDateTime 
+        END) as startTime,(case when (outDateTime = "0000-00-00 00:00:00") 
+        THEN "-" ELSE
+        outDateTime 
+        END) as endTime')->from('jobTiming')->where(array('jobId'=>$jobId))->order_by('jobTimeId','asc')->get();
+        if($time->num_rows()){
+            $timeing = $time->result();
 
-
+        }
+        $timinigTotal = $this->db->select('TIME(SUM(TIMEDIFF(outDateTime,inDateTime))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
+        if($timinigTotal->num_rows()){
+            $time = isset($timinigTotal->row()->timeDuration) ? $timinigTotal->row()->timinigTotal:"NA";;
+        }else{
+            $time = 'NA';
+        }
+        return array('timinig'=>$timeing,'total'=>$time);
+    }//end Function
 }//Function 
