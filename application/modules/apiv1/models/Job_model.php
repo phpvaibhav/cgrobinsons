@@ -58,7 +58,7 @@ class Job_model extends CI_Model {
     function  jobDetail($jobId){
         $this->column_sel[] = 'j.jobReport';
          $sel_fields = array_filter($this->column_sel); 
-         $this->db->select($sel_fields);
+        $this->db->select($sel_fields);
         $this->db->from('jobs as j');
         $this->db->join('jobType as jt','j.jobTypeId=jt.jobTypeId');
         $this->db->join('users as c','c.id=j.customerId','left');
@@ -74,7 +74,7 @@ class Job_model extends CI_Model {
             $row->jobReport = !empty($report) ? $report : new stdClass();
              
              
-              $timinig = $this->db->select('SEC_TO_TIME(SUM(TIME_TO_SEC(timediff(outDateTime, inDateTime)))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$row->jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->group_by('jobId')->get();
+            $timinig = $this->db->select('SEC_TO_TIME(SUM(TIME_TO_SEC(timediff(outDateTime, inDateTime)))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$row->jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->group_by('jobId')->get();
             if($timinig->num_rows()){
                 $time = isset($timinig->row()->timeDuration) ? $timinig->row()->timeDuration:"NA";
             }else{
@@ -225,8 +225,8 @@ class Job_model extends CI_Model {
                 }
                 if(!empty($emails)){
 
-                    //$this->load->library('smtp_email');
-                   // $this->smtp_email->send_mail_multiple($emails,$subject,$message);
+                    $this->load->library('smtp_email');
+                    $this->smtp_email->send_mail_multiple($emails,$subject,$message);
                 }
             //send mail
                 }

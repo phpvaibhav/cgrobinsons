@@ -24,10 +24,10 @@ class Pdfset extends Common_Front_Controller {
 
       // set document information
       $pdf->SetCreator(PDF_CREATOR);
-      $pdf->SetAuthor('Job Detail');
-      $pdf->SetTitle('Job Information');
-      $pdf->SetSubject('Job Services');
-      $pdf->SetKeywords('CGRobinsons');
+      $pdf->SetAuthor(SITE_NAME);
+      $pdf->SetTitle(SITE_NAME.'-'.$job['jobName']);
+      $pdf->SetSubject(SITE_NAME.'-'.$job['jobName']);
+      $pdf->SetKeywords(SITE_NAME.','.$job['jobName'].',Job Information');
 
       // set default header data
       //$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.'', PDF_HEADER_STRING);
@@ -217,7 +217,7 @@ class Pdfset extends Common_Front_Controller {
         $pdf->writeHTML($content, true, false, true, false, '');
         // reset pointer to the last page
         $pdf->lastPage();
-        $fileName = "cg-".$job['jobName'].strtotime(date("Y-m-d H:i:s")).".pdf";
+        $fileName = SITE_NAME."-".$job['jobName'].strtotime(date("Y-m-d H:i:s")).".pdf";
        // $pdf->Output($fileName, 'I');
          $pdf->SetCompression(true);
          $pdf->Output($fileName,'D');
