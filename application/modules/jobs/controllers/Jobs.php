@@ -167,15 +167,16 @@ class Jobs extends Common_Back_Controller {
   public function jobDetailPdf()
   {
       $jobId  = decoding($this->uri->segment(3));
-
-      $where = array('jobId'=>$jobId);
       $this->load->model('job_model');
+      $where = array('jobId'=>$jobId);
+      
       $job = $this->job_model->jobDetail($jobId);
       $questions = $this->job_model->jobTypeQuetions($job['jobId'],$job['jobTypeId']);
       ob_start();
       // create new PDF document
 
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
 
       // set document information
       $pdf->SetCreator(PDF_CREATOR);

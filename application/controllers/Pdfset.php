@@ -13,14 +13,16 @@ class Pdfset extends Common_Front_Controller {
 	
 	function download(){
 		  $jobId  = decoding($this->uri->segment(3));
-      $where  = array('jobId'=>$jobId);
       $this->load->model('jobs/job_model');
+      $where  = array('jobId'=>$jobId);
+      
       $job = $this->job_model->jobDetail($jobId);
-       $questions = $this->job_model->jobTypeQuetions($job['jobId'],$job['jobTypeId']);
+      $questions = $this->job_model->jobTypeQuetions($job['jobId'],$job['jobTypeId']);
       ob_start();
       // create new PDF document
 
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
 
       // set document information
       $pdf->SetCreator(PDF_CREATOR);
@@ -72,13 +74,14 @@ class Pdfset extends Common_Front_Controller {
      
 
       // Logged in username
-    /*  $userName = "Admin";
+     $userName = $_SESSION[ADMIN_USER_SESS_KEY]['fullName'];
 
-      $pdf->Write(0, 'By: '.$userName, '', 0, 'R', true, 0, false, false, 0);*/
+
+      $pdf->Write(0, 'By: '.$userName, '', 0, 'R', true, 0, false, false, 0);
         $pdf->Ln(5);
        
       $pdf->SetFont('helvetica', '', 9);
-     // -----------------------------------------------------------------------------
+      // -----------------------------------------------------------------------------
       $content = '';
       $showbtn = false;
                 $labelShow ="";
@@ -99,7 +102,7 @@ class Pdfset extends Common_Front_Controller {
                 }
      
        // $content .= '<table bgcolor="#cccccc" border="0" cellspacing="1" cellpadding="4">';
-       $content .= '<table  border="0" cellspacing="1" cellpadding="4" bgcolor="#EAECF0">';
+        $content .= '<table  border="0" cellspacing="1" cellpadding="4" bgcolor="#EAECF0">';
         $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>Basic Information</b></th></tr>';
         $content .= '<tr bgcolor="#EAECF0">';
         $content .= '<td><strong>Job Name</strong> :</td><td>'.$job['jobName'].'</td>';
@@ -114,7 +117,7 @@ class Pdfset extends Common_Front_Controller {
         $content .= '<td><strong>Driver Name</strong> :</td><td>'.$job['driverName'].'</td>'; 
         $content .= '</tr>';
         $content .= '<tr bgcolor="#EAECF0">';
-        $content .= '<td><strong>Address</strong> :</td><td colspan="3"><strong>'.$job['address'].'<strong></td>';
+        $content .= '<td><strong>Address</strong> :</td><td colspan="3"><strong>'.$job['address'].'</strong></td>';
         $content .= '</tr>';
          $content .= '</table>';
       
@@ -213,23 +216,22 @@ class Pdfset extends Common_Front_Controller {
           $content .= '</table>';
           /*Geo fencing manage*/
         }
+
+
        
         $pdf->writeHTML($content, true, false, true, false, '');
         // reset pointer to the last page
         $pdf->lastPage();
         $fileName = SITE_NAME."-".$job['jobName'].strtotime(date("Y-m-d H:i:s")).".pdf";
-       // $pdf->Output($fileName, 'I');
-         $pdf->SetCompression(true);
-         $pdf->Output($fileName,'D');
-        //$pdf->Output($fileName, 'I');
+        // $pdf->Output($fileName, 'I');
+        // $pdf->Output($fileName,'D');
+        $pdf->Output($fileName, 'D');
         ob_end_flush();
-      //Close and output PDF document
-
-
+        //Close and output PDF document
       //============================================================+
       // END OF FILE
       //============================================================+
-	
+     
 	}//ENd FUnction
 	
 }
