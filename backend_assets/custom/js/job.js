@@ -138,6 +138,7 @@ var job_list = $('#job_list').DataTable({
               });
 //job status      
 function jobStatus(e){
+   toastr.clear();
   swal({
     title: "Are you sure?",
     text:  $(e).data('message'),
@@ -181,6 +182,7 @@ function jobStatus(e){
 }
 //job status      
 function jobDelete(e){
+   toastr.clear();
   swal({
   title: "Are you sure?",
   text:  $(e).data('message'),

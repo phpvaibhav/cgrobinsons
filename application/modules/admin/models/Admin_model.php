@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -7,11 +6,11 @@ class Admin_model extends CI_Model {
     
     /* Check user login and set session */
     function isLogin($data, $table){
-        $email = $data["email"];
+        $email  = $data["email"];
         // check if e-mail address is well-formed
-        $where = array('email'=>$data['email']);
+        $where  = array('email'=>$data['email']);
         
-        $sql = $this->db->select('*')->where($where)->get($table);
+        $sql    = $this->db->select('*')->where($where)->get($table);
         if($sql->num_rows()){
             $user = $sql->row();
             //verify password- It is good to use php's password hashing functions so we are using password_verify fn here
@@ -29,9 +28,7 @@ class Admin_model extends CI_Model {
             else{
                 return FALSE; 
             }
-        }
-        
+        }  
        return FALSE;
-    }//End Function
-        
+    }//End Function       
 }

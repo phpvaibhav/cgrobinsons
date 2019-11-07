@@ -56,9 +56,12 @@ class Vehicles extends Common_Admin_Controller{
         $this->form_validation->set_rules('type', 'type', 'trim|required');
         $this->form_validation->set_rules('date', 'date', 'trim|required');
         $this->form_validation->set_rules('vehicleId', 'vehicle', 'trim|required');
+        $hid=decoding($this->post('hid'));
+        if($hid==0):
          if (empty($_FILES['attachment']['name'])) {
             $this->form_validation->set_rules('attachment', 'attachment', 'trim|required');
         }
+        endif;
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
             

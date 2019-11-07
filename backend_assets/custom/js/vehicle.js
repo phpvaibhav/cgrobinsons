@@ -124,6 +124,7 @@ var vehilce_list = $('#vehilce_list').DataTable({
                   });
 /*listing vehilce_list*/
 function vehilceStatus(e){
+   toastr.clear();
   swal({
     title: "Are you sure?",
     text:  $(e).data('message'),
@@ -167,6 +168,7 @@ function vehilceStatus(e){
 }//end status
 //vehicleDelete Delete
 function vehicleDelete(e){
+   toastr.clear();
   swal({
     title: "Are you sure?",
     text:  $(e).data('message'),
@@ -293,7 +295,13 @@ $("#addHistoryA").validate({// Rules for form validation
       required : true
     },
     attachment : {
-      required : true
+      //required : true
+        required: {
+                depends: function(element) {
+                  return (($('#historyId').val() == '' || 
+                $('#historyId').val() == '0'));
+                }
+              }
     }
   },
   // Messages for form validation
@@ -382,6 +390,7 @@ var vehilce_list = $('#vehilceHistory_list').DataTable({
 /*listing vehilceHistory_list*/
 //vehilceHistoryDelete Delete
 function vehilceHistoryDelete(e){
+   toastr.clear();
   swal({
     title: "Are you sure?",
     text:  $(e).data('message'),

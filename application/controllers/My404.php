@@ -13,7 +13,7 @@
   }
 
   function index(){
-    $data['title'] = "404";
+    $data['title']          = "404";
     $this->load->login_render('404', $data);
   } 
   

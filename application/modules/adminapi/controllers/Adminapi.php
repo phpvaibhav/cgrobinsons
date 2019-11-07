@@ -100,7 +100,7 @@ class Adminapi extends Common_Admin_Controller{
             $data['password']       = $this->post('password');
             $data['authToken']      = $authtoken;
 
-            $result = $this->adminapi_model->login($data,$authtoken);
+            $result                 = $this->adminapi_model->login($data,$authtoken);
 
 
             if(is_array($result)){

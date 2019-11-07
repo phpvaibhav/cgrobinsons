@@ -142,13 +142,30 @@ class Jobs extends Common_Back_Controller {
         }else{
           $colr = "background-color:#fff;";
         }
+
+           $labelShow ="";
+                switch ($job->jobStatus) {
+                  case 0:
+                    $labelShow ='<label color="orange" >Open</label>';
+                    break;
+                  case 1:
+                    $labelShow ='<label color="red">In Progress</label>';
+                    break;
+                  case 2:
+                  
+                    $labelShow ='<label color="green">Completed</label>';
+                    break;
+                  
+                  default:
+                    break;
+                }
           $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
           $content .='<td>'.$job->jobName.'</td>';
           $content .='<td>'.$job->jobType.'</td>';
           $content .='<td>'.$job->customerName.'</td>';
           $content .='<td>'.$job->driverName.'</td>';
           $content .='<td>'.date("d/m/Y",strtotime($job->startDate))." ".$job->startTime.'</td>';
-          $content .='<td>'.'<span style="color:green;">'.$job->statusShow.'</span>'.'</td>';
+          $content .='<td>'.$labelShow.'</td>';
           $content .='</tr>';
       }
       $content .='</table>';
@@ -241,10 +258,10 @@ class Jobs extends Common_Back_Controller {
                 $labelShow ="";
                 switch ($job['jobStatus']) {
                   case 0:
-                    $labelShow ='<label color="red">Open</label>';
+                    $labelShow ='<label color="orange" >Open</label>';
                     break;
                   case 1:
-                    $labelShow ='<label color="blue">In Progress</label>';
+                    $labelShow ='<label color="red">In Progress</label>';
                     break;
                   case 2:
                   
@@ -311,8 +328,7 @@ class Jobs extends Common_Back_Controller {
             endif;
            
         else:
-            $content .='<td colspan="4" align="center"> No record found</td>';
-           
+            $content .='<td colspan="4" align="center"> No record found</td>'; 
         endif;
          $content .='</tr>'; 
         $content .='</table>';
@@ -369,10 +385,7 @@ class Jobs extends Common_Back_Controller {
 
           $content .= '</table>';
           /*Geo fencing manage*/
-        }
-
-
-       
+        } 
         $pdf->writeHTML($content, true, false, true, false, '');
         // reset pointer to the last page
         $pdf->lastPage();

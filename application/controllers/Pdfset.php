@@ -84,22 +84,20 @@ class Pdfset extends Common_Front_Controller {
       // -----------------------------------------------------------------------------
       $content = '';
       $showbtn = false;
-                $labelShow ="";
-                switch ($job['jobStatus']) {
-                  case 0:
-                    $labelShow ='<label color="red">Open</label>';
-                    break;
-                  case 1:
-                    $labelShow ='<label color="blue">In Progress</label>';
-                    break;
-                  case 2:
-                  
-                    $labelShow ='<label color="green">Completed</label>';
-                    break;
-                  
-                  default:
-                    break;
-                }
+      $labelShow ="";
+      switch ($job['jobStatus']) {
+        case 0:
+          $labelShow ='<label color="red">Open</label>';
+          break;
+        case 1:
+          $labelShow ='<label color="blue">In Progress</label>';
+          break;
+        case 2:
+          $labelShow ='<label color="green">Completed</label>';
+          break;
+        default:
+          break;
+      }
      
        // $content .= '<table bgcolor="#cccccc" border="0" cellspacing="1" cellpadding="4">';
         $content .= '<table  border="0" cellspacing="1" cellpadding="4" bgcolor="#EAECF0">';

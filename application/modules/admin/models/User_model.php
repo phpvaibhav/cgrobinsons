@@ -4,18 +4,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Service_model extends CI_Model {
 
     //var $table , $column_order, $column_search , $order =  '';
-    var $table = 'service';
-    var $column_order = array('s.serviceId','s.productName','s.vendor','s.serialNumber','s.purchaseDate','s.contactNumber'); //set column field database for datatable orderable
-    var $column_sel = array('s.serviceId','s.productName','s.vendor','s.serialNumber','s.purchaseDate','s.contactNumber','s.comment','s.status','(case when (s.status = 0) 
+    var $table          = 'service';
+    var $column_order   = array('s.serviceId','s.productName','s.vendor','s.serialNumber','s.purchaseDate','s.contactNumber'); //set column field database for datatable orderable
+    var $column_sel     = array('s.serviceId','s.productName','s.vendor','s.serialNumber','s.purchaseDate','s.contactNumber','s.comment','s.status','(case when (s.status = 0) 
         THEN "Pending" when (s.status = 1) 
         THEN "In Progress" when (s.status = 2) 
         THEN "Complete" ELSE
         "Unknown" 
         END) as statusShow'); //set column field database for datatable orderable
-    var $column_search = array('s.productName','s.vendor'); //set column field database for datatable searchable 
-    var $order = array('s.serviceId' => 'ASC');  // default order
-    var $where = array();
-    var $group_by = 's.serviceId'; 
+    var $column_search  = array('s.productName','s.vendor'); //set column field database for datatable searchable 
+    var $order          = array('s.serviceId' => 'ASC');  // default order
+    var $where          = array();
+    var $group_by       = 's.serviceId'; 
 
     public function __construct(){
         parent::__construct();
@@ -23,7 +23,7 @@ class Service_model extends CI_Model {
     
     public function set_data($where=''){
         $this->where = $where; 
-    }
+    }//End function
 
     private function _get_query()
     {
@@ -74,7 +74,7 @@ class Service_model extends CI_Model {
             $this->db->order_by(key($order), $order[key($order)]);
         }
        
-    }
+    }//End function
 
     function get_list()
     {
@@ -94,14 +94,14 @@ class Service_model extends CI_Model {
         //print_r($_POST);die;
         $query = $this->db->get(); //lq();
         return $query->result();
-    }
+    }//End function
 
     function count_filtered()
     {
         $this->_get_query();
         $query = $this->db->get();
         return $query->num_rows();
-    }
+    }//End function
 
 
     public function count_all()
@@ -110,7 +110,7 @@ class Service_model extends CI_Model {
          if(!empty($this->where))
             $this->db->where($this->where); 
         return $this->db->count_all_results();
-    }
+    }//End function
 
     public function serviceDetails($data){
     	$this->db->select('*');
@@ -118,6 +118,5 @@ class Service_model extends CI_Model {
     	$this->db->where(array('serviceId'=>$data['serviceId']));
     	$query = $this->db->get();
     	return $query->row();
-    }
-
-}
+    }//End function
+}//End class

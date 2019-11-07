@@ -321,7 +321,7 @@ echo "</pre>";*/
 					&times;
 				</button>
 				<h4 class="modal-title">
-					Add History
+					Vehicle History
 				</h4>
 			</div>
 			<div class="modal-body">

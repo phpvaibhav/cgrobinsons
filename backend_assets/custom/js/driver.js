@@ -166,6 +166,7 @@ $(function() {
 });
 //customer status      
 function driverStatus(e){
+   toastr.clear();
   swal({
     title: "Are you sure?",
     text:  $(e).data('message'),
@@ -209,6 +210,7 @@ function driverStatus(e){
 }
 //driver Delete
 function driverDelete(e){
+   toastr.clear();
   swal({
     title: "Are you sure?",
     text:  $(e).data('message'),

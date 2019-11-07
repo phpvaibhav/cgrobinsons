@@ -135,6 +135,7 @@ var customer_list = $('#customer_list').DataTable({
 /*listing customer_list*/
 //customer status      
 function customerStatus(e){
+   toastr.clear();
   swal({
     title: "Are you sure?",
     text:  $(e).data('message'),
@@ -178,6 +179,7 @@ function customerStatus(e){
 }
 //customer Credit hold
 function creditHoldStatus(e){
+   toastr.clear();
   swal({
     title: "Are you sure?",
     text:  $(e).data('message'),
@@ -223,6 +225,7 @@ function creditHoldStatus(e){
 }
 //customer Delete
 function customerDelete(e){
+   toastr.clear();
   swal({
         title: "Are you sure?",
         text:  $(e).data('message'),

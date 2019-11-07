@@ -49,9 +49,9 @@
 										<h1>
 											<?php for ($i=0; $i <sizeof($name) ; $i++) { 
 												if($i==0){
-													echo $name[0];
+													echo $name[$i];
 												}else{
-													echo '<span class="semi-bold">'.$name[1].'</span>';
+													echo '<span class="semi-bold"> '.$name[$i].'</span> ';
 												}
 											} ?>
 											 <!-- <span class="semi-bold">Doe</span> -->

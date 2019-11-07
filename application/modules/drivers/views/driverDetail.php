@@ -48,6 +48,7 @@
 									</div>
 									<div class="col-sm-9 profile-pic">
 										<?php $fullName =$driver['fullName'];
+										$fullName= substr($fullName, 0,16);
 										$name = explode(" ",$fullName);
 										?>
 
@@ -357,7 +358,7 @@
 											<div class="row">
 												<section class="col col-6">
 													<label class="input"> <i class="icon-append fa fa-user"></i>
-														<input type="text" name="fullName" placeholder="Driver Name" value="<?php echo $driver['fullName'];?>" maxlength="30" size="30">
+														<input type="text" name="fullName" placeholder="Driver Name" value="<?php echo $driver['fullName'];?>" maxlength="20" size="20">
 														<input type="hidden" name="cus" value="<?php echo encoding($driver['id']);?>">
 													</label>
 												</section>

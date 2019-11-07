@@ -34,6 +34,7 @@ var jobtype_list = $('#jobtype_list').DataTable({
         /*listing customer_list*/
 //job status      
 function jobTypeStatus(e){
+   toastr.clear();
   swal({
     title: "Are you sure?",
     text:  $(e).data('message'),
@@ -191,6 +192,7 @@ jQuery.validator.addClassRules('questionOptionClass', {
 });   
 /*createJobType*/
 function jobTypeDelete(e){
+   toastr.clear();
   swal({
     title: "Are you sure?",
     text:  $(e).data('message'),

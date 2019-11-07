@@ -1,7 +1,5 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Users extends Common_Back_Controller {
 
     public $data = "";
