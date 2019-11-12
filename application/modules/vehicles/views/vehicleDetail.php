@@ -23,7 +23,7 @@ echo "</pre>";*/
 								<a href="javascript:void(0);" class="btn btn-labeled btn-warning" data-toggle="modal" data-target="#assignVehicleDriver"> <span class="btn-label"><i class="glyphicon glyphicon-bookmark"></i></span>Assign Driver</a>
 							</li>
 							<li>
-								<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="vehicleDelete(this);" data-message="Are you sure want to delete this vehicle." data-useid="<?php echo encoding($vehicle['vehicleId']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
+								<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="vehicleDelete(this);" data-message="You want to delete this vehicle." data-useid="<?php echo encoding($vehicle['vehicleId']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
 							</li>
 
 						</ul>

@@ -17,7 +17,7 @@
 												<a href="javascript:void(0);" class="btn btn-labeled btn-info" data-toggle="modal" data-target="#editCustomers"> <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Edit </a>
 											</li>
 											<li>
-												<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="customerDelete(this);" data-message="You delete this customer." data-useid="<?php echo encoding($customermeta['userId']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
+												<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="customerDelete(this);" data-message="You want to delete this customer." data-useid="<?php echo encoding($customermeta['userId']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
 											</li>
 										
 										</ul>

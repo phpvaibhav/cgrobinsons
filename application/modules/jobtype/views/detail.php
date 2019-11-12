@@ -18,7 +18,7 @@ echo "</pre>";*/?>
 							</li>
 							
 							<li>
-								<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="jobTypeDelete(this);" data-message="Are you sure want to delete this job type." data-useid="<?php echo encoding($jobType['jobTypeId']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
+								<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="jobTypeDelete(this);" data-message="You want to delete this job type." data-useid="<?php echo encoding($jobType['jobTypeId']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
 							</li>
 									</ul>
 									
