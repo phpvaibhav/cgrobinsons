@@ -136,6 +136,7 @@ class Jobs extends Common_Back_Controller {
          // $content .= '</table>';
       $this->load->model('job_model');
       $jobs = $this->job_model->assignJobs();
+      if(!empty($jobs)){
       foreach ($jobs as $k => $job) {
         if($k++%2 == 1){
           $colr = "background-color:#f1f1f1;";
@@ -167,6 +168,7 @@ class Jobs extends Common_Back_Controller {
           $content .='<td>'.date("d/m/Y",strtotime($job->startDate))." ".$job->startTime.'</td>';
           $content .='<td>'.$labelShow.'</td>';
           $content .='</tr>';
+      }
       }
       $content .='</table>';
       $pdf->writeHTML($content, true, false, true, false, '');
