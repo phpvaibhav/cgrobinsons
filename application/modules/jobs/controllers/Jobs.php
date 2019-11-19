@@ -169,6 +169,11 @@ class Jobs extends Common_Back_Controller {
           $content .='<td>'.$labelShow.'</td>';
           $content .='</tr>';
       }
+      }else{
+         $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
+          $content .='<td colspan="6" align="center">No job found.</td>';
+         
+          $content .='</tr>';
       }
       $content .='</table>';
       $pdf->writeHTML($content, true, false, true, false, '');
