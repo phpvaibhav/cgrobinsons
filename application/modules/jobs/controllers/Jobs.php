@@ -170,6 +170,7 @@ class Jobs extends Common_Back_Controller {
           $content .='</tr>';
       }
       }else{
+         $colr = "background-color:#f1f1f1;";
          $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
           $content .='<td colspan="6" align="center">No job found.</td>';
          
