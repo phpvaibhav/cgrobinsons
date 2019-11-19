@@ -116,7 +116,7 @@ class Drivers extends Common_Back_Controller {
          // $content .= '</table>';
       
           $users =  $this->common_model->getAll('users',array('userType'=>2),'id','desc');
-
+       if(!empty($users)){     
        foreach ($users as $k => $user) {
         if($k++%2 == 1){
              $colr = "background-color:#f1f1f1;";
@@ -132,7 +132,13 @@ class Drivers extends Common_Back_Controller {
           
            $content .='</tr>';
        }
-
+ }else{
+           $colr = "background-color:#f1f1f1;";
+         $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
+          $content .='<td colspan="3" align="center">No driver found.</td>';
+         
+          $content .='</tr>';
+        } 
         $content .='</table>';
         $pdf->writeHTML($content, true, false, true, false, '');
         // reset pointer to the last page
