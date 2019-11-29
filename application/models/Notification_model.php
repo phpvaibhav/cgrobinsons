@@ -18,7 +18,7 @@ class Notification_model extends CI_Model {
         $msg = $notificationMsg;
         $fields = array(
             'registration_ids' 	=> $registrationIds,  //firebase token array
-            'data'		=> $msg ,  //msg for andriod
+            'data'		        => $msg ,  //msg for andriod
             'notification'      => $msg   //msg for ios
         );
 
@@ -56,8 +56,7 @@ class Notification_model extends CI_Model {
             return false;
         }
         //prepare notification payload
-        $notif_msg = array('title'=>$title, 'body'=> $body, 'reference_id'=>$reference_id, 'type'=> $type, 'click_action'=>'ChatActivity', 'sound'=>'default');
-        
+        $notif_msg = array('title'=>$title,'body'=> $body, 'reference_id'=>$reference_id, 'type'=> $type,'click_action'=>'ChatActivity','sound'=>'default');
         $this->send_notification($token_arr, $notif_msg); //send andriod and ios push notification
         return $notif_msg; //return message array
     }

@@ -1,3 +1,9 @@
+<style>
+	#map-show {
+		width: auto;
+		height: 500px;
+	}
+</style>
 <section id="widget-grid" class="">
 	<!-- row -->
 	<div class="row">
@@ -45,10 +51,58 @@
 									<th data-hide="phone,tablet">Action</th>
 								</tr>
 							</thead>
-							<tbody>
-										
+							<tbody>			
 							</tbody>
 						</table>
+					</div>
+					<!-- end widget content -->
+				</div>
+				<!-- end widget div -->
+			</div>
+			<!-- end widget -->
+		</article>
+		<!-- WIDGET END -->
+	</div>
+	<!-- end row -->
+	<!-- row -->
+	<div class="row">
+		<!-- NEW WIDGET START -->
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false">
+				<!-- widget options:
+				usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				data-widget-togglebutton="false"
+				data-widget-deletebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-custombutton="false"
+				data-widget-collapsed="true"
+				data-widget-sortable="false"
+				-->
+				<header>
+					<span class="widget-icon"> <i class="fa fa-marker"></i> </span>
+					<h2>Route Map </h2>
+				</header>
+				<!-- widget div-->
+				<div>
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox">
+						<!-- This area used as dropdown edit box -->
+					</div>
+					<!-- end widget edit box -->
+					<!-- widget content -->
+					<div class="widget-body padding">
+						<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<div id="map-show"></div>
+							</div>
+							<div class="col-md-12 col-sm-12 hide">
+									<button id="add-markers">Add markers</button>
+									<button id="remove-markers">Remove markers</button>
+							</div>
+						</div>
 					</div>
 					<!-- end widget content -->
 				</div>
@@ -74,95 +128,172 @@
 				</h4>
 			</div>
 			<div class="modal-body">
-	           <!-- Add CUstomer -->
-		<!-- widget content -->
-								<div class="widget-body no-padding">
-									
-									<form action="vehicles/addVehicle" id="vehicleAddUpdate" class="smart-form" novalidate="novalidate" autocomplete="off" enctype="multipart/form-data">
-									
-
-										<fieldset>
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-list-alt"></i>
-														<input type="text"  name="year" placeholder="Year" data-mask="2099">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-list-alt"></i>
-														<input type="text"  name="model" placeholder="Model">
-													</label>
-												</section>
-												
-											</div>
-
-											<div class="row">
-												
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-list-alt"></i>
-														<input type="text"  name="plate" placeholder="Plate">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-list-alt"></i>
-														<input type="text"  name="vin" placeholder="Vin">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												
-												<section class="col col-md-12">
-												    <label class="select">
-												        <select name="manufacturer">
-												            <option value="0" selected="" disabled="">Manufacturer</option>
-												            <?php foreach ($manufacturers as $m => $manu) {?>
-												            <option value="<?php echo $manu->title; ?>"><?php echo $manu->title; ?></option>
-												        	<?php } ?>
+				<!-- Add CUstomer -->
+				<!-- widget content -->
+				<div class="widget-body no-padding">				
+					<form action="vehicles/addVehicle" id="vehicleAddUpdate" class="smart-form" novalidate="novalidate" autocomplete="off" enctype="multipart/form-data">
+						<fieldset>
+							<div class="row">
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-list-alt"></i>
+										<input type="text"  name="year" placeholder="Year" data-mask="2099">
+									</label>
+								</section>
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-list-alt"></i>
+										<input type="text"  name="model" placeholder="Model">
+									</label>
+								</section>
+							</div>
+							<div class="row">				
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-list-alt"></i>
+										<input type="text"  name="plate" placeholder="Plate">
+									</label>
+								</section>
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-list-alt"></i>
+										<input type="text"  name="vin" placeholder="Vin">
+									</label>
+								</section>
+							</div>
+							<div class="row">
+								<section class="col col-md-12">
+								    <label class="select">
+								        <select name="manufacturer">
+								            <option value="0" selected="" disabled="">Manufacturer</option>
+								            <?php foreach ($manufacturers as $m => $manu) {?>
+									            <option value="<?php echo $manu->title; ?>"><?php echo $manu->title; ?></option>
+								        	<?php } ?>
 												           
-												        </select> <i></i> </label>
-												</section>
-											
-											</div>
-											
-											<div class="row">
-												
-												
-												<section class="col col-6">
-												    <label class="select">
-												        <select name="color">
-												            <option value="0" selected="" disabled="">Colors</option>
-												            <?php foreach ($vehicleColors as $vc => $color) {?>
-												            <option value="<?php echo $color->color; ?>"><?php echo $color->color; ?></option>
-												        	<?php } ?>
-												           
-												        </select> <i></i> </label>
-												</section>
-												<section class="col col-6">
-												    <label class="select">
-												        <select name="state">
-												            <option value="0" selected="" disabled="">States</option>
-												            <?php foreach ($states as $s => $state) {?>
-												            <option value="<?php echo $state->stateName; ?>"><?php echo $state->stateName; ?></option>
-												        	<?php } ?>
-												           
-												        </select> <i></i> </label>
-												</section>
-											</div>
-
-										</fieldset>
-										
-										<footer>
-											<button type="submit" id="submit" class="btn btn-primary">
-												Add Vehicle
-											</button>
-										</footer>
-									</form>
-
-								</div>
-								<!-- end widget content -->
-	           <!-- Add CUstomer -->
+								        </select> <i></i> 
+								    </label>
+								</section>
+							</div>
+							<div class="row">
+								<section class="col col-6">
+							    	<label class="select">
+								        <select name="color">
+								            <option value="0" selected="" disabled="">Colors</option>
+								            <?php foreach ($vehicleColors as $vc => $color) {?>
+								            <option value="<?php echo $color->color; ?>"><?php echo $color->color; ?></option>
+								        	<?php } ?>	           
+								        </select> <i></i> 
+								    </label>
+								</section>
+								<section class="col col-6">
+							    	<label class="select">
+								        <select name="state">
+								            <option value="0" selected="" disabled="">States</option>
+								            <?php foreach ($states as $s => $state) {?>
+								            <option value="<?php echo $state->stateName; ?>"><?php echo $state->stateName; ?></option>
+								        	<?php } ?>	           
+								        </select> <i></i>	
+								    </label>
+								</section>
+							</div>
+						</fieldset>
+						<footer>
+							<button type="submit" id="submit" class="btn btn-primary">
+								Add Vehicle
+							</button>
+						</footer>
+					</form>
+				</div>
+				<!-- end widget content -->
+				<!-- Add CUstomer -->
 	        </div>
 		</div>
 	</div>
 </div>
 <!-- End modal -->
+ <script type="text/javascript">
+	var base_url 		= $('body').data('base-url'); // Base url
+	var authToken 		= $('body').data('auth-url'); // Base url
+	var map;
+	var markers 		= [];
+
+	var GREEN_MARKER 	= base_url+'backend_assets/img/output-onlinepngtools.png';
+	var areaLatitude 	= parseFloat('<?= isset($locations[0]->latitude) ? $locations[0]->latitude:22.71956800; ?>');
+	var areaLongitude 	= parseFloat('<?= isset($locations[0]->longitude) ? $locations[0]->longitude:75.857727; ?>') ;
+	
+	/*	var locations = eval('<?= !empty($locations) ? json_encode($locations): new object(); ?>');
+
+	var num_markers = locations.length;*/
+	
+	function initMap() {
+		// Map Center
+		var myLatLng 	= new google.maps.LatLng(areaLatitude,areaLongitude);
+		// General Options
+		var mapOptions 	= {
+				zoom 		: 15,
+				center 		: myLatLng,
+				mapTypeId 	: google.maps.MapTypeId.RoadMap
+			};
+		var map 		= new google.maps.Map(document.getElementById('map-show'),mapOptions);
+		/*num_markers*/
+		google.maps.event.addDomListener(document.getElementById('add-markers'), 'click', function(event) {
+			addMarkers(map);
+		});
+		google.maps.event.addDomListener(document.getElementById('remove-markers'), 'click', removeMarkers);
+	}
+	function addMarkers(map) {
+		$.ajax({
+			type: "POST",
+	              url: base_url+'adminapi/vehicles/vehilceLatlong',
+	              data: {use:1},
+	              headers: { 'authToken':authToken},
+	              cache: false,
+	              beforeSend: function() {
+	               
+	              }, 
+	              success: function (res) {
+	              	if(res.status=='success'){
+	              	$( "#remove-markers" ).trigger( "click" ); 
+	                	console.log(res.data);
+	                	var locations = res.data;
+	                	var num_markers = res.data.length;
+	                	//alert(num_markers);
+	                	/*map marker*/
+	                	 var bounds = new google.maps.LatLngBounds();
+	                	  for (var i = 0; i < num_markers; i++) {  
+				markers[i] = new google.maps.Marker({
+					position 	: {lat:parseFloat(locations[i].latitude), lng:parseFloat(locations[i].longitude)},
+					map 		: map,
+					html 		: parseFloat(locations[i].latitude),
+					title 		: 'Driver :'+locations[i].fullName,
+					icon 		: GREEN_MARKER,
+					id 			: i,
+					animation: google.maps.Animation.DROP,
+				});
+				  bounds.extend(markers[i].getPosition());
+				// process multiple info windows
+				markers[i].info = new google.maps.InfoWindow({
+					content 	: '<b>Vehicle :</b> '+locations[i].manufacturer+'<br>'+'<b>Driver : '+locations[i].fullName+'</b>'
+				});
+				google.maps.event.addListener(markers[i], 'click', function() {  
+					// this = marker
+					var marker_map = this.getMap();
+					this.info.open(marker_map, this);
+				});
+			}
+	              map.fitBounds(bounds);  	
+	                	/*map marker*/
+	                }
+	              }    
+		});
+	}
+
+	function removeMarkers() {
+	    for (var i = 0; i < markers.length; i++) {
+	        markers[i].setMap(null);
+	    }
+	}
+	$(document).ready(function() {
+		google.maps.event.addDomListener(window, 'load', initMap);
+		//$( "#add-markers" ).trigger( "click" );
+		setTimeout(function(){ $( "#add-markers" ).trigger( "click" ); }, 1000);
+		setInterval(function(){$( "#add-markers" ).trigger( "click" ); }, 60000);
+	});
+	//$( "#remove-markers" ).trigger( "click" ); 
+</script>

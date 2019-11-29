@@ -11,24 +11,23 @@ class Common_model extends CI_Model {
     function insertData($table, $dataInsert) {
         $this->db->insert($table, $dataInsert);
         return $this->db->insert_id();
-    }
-/* INSERT RECORD FROM batch TABLE */
+    }//end function
+    /* INSERT RECORD FROM batch TABLE */
     function insertBatch($table, $dataInsert) {
-        $insert=$this->db->insert_batch($table, $dataInsert);
-       
+        $insert = $this->db->insert_batch($table, $dataInsert);
         return $insert;
-    }
+    }//end function
 
     /* UPDATE RECORD FROM SINGLE TABLE */
     function updateFields($table, $data, $where){
-        $update= $this->db->update($table, $data, $where);
+        $update = $this->db->update($table, $data, $where);
     //    if($this->db->affected_rows() > 0){
         if($update){
             return true;
         }else{
             return false;
         }
-    }
+    }//end function
     
     /* UPDATE RECORD FROM TABLE */
     function deleteData($table,$where){
@@ -39,7 +38,7 @@ class Common_model extends CI_Model {
         }else{
             return false;
         }   
-    }
+    }//end function
     /* Delete RECORD FROM TABLE */
     function deleteDataJobType($table,$where,$where_in){
         $this->db->where($where);
@@ -50,7 +49,7 @@ class Common_model extends CI_Model {
         }else{
             return false;
         }   
-    }
+    }//end function
     
     /* GET SINGLE RECORD 
      * Modified in ver 2.0
@@ -70,7 +69,7 @@ class Common_model extends CI_Model {
 
         $q = $this->db->get($table);
         return $q->row_array();
-    }
+    }//end function
     
     /* GET MULTIPLE RECORD 
      * Modified in ver 2.0
@@ -86,7 +85,7 @@ class Common_model extends CI_Model {
             $this->db->group_by($group_by);
         }
         $this->db->from($table);
- if ($where != '') {
+        if ($where != '') {
             $this->db->where($where);
         }
         if ($limit != '' && $offset != '') {
@@ -99,7 +98,7 @@ class Common_model extends CI_Model {
         }
         $q = $this->db->get();
         return $q->result(); //return multiple records
-    }
+    }//end function
     
     /* get single record using join 
      * Modified in ver 2.0
@@ -118,7 +117,7 @@ class Common_model extends CI_Model {
         }
         $q = $this->db->get();
         return $q->row();  //return only single record
-    }
+    }//end function
 
     /* Get mutiple records using join 
      * Modified in ver 2.0
@@ -149,7 +148,7 @@ class Common_model extends CI_Model {
         }
         $q = $this->db->get();
         return $q->result();
-    }
+    }//end function
     
     /* Get records joining 3 tables 
      * Modified in ver 2.0
@@ -183,7 +182,7 @@ class Common_model extends CI_Model {
         }
         $q = $this->db->get();
         return $q->result();
-    }
+    }//end function
     
     /* Exceute a custom build query by query binding- Useful when we are not able to build queries using CI DB methods
      * Prefreably to be used in SELECT queries
@@ -194,7 +193,7 @@ class Common_model extends CI_Model {
     public function custom_query($myquery, $bind_data=array()){
         $query = $this->db->query($myquery, $bind_data);
         return $query->result();
-    }
+    }//end function
 
     /* check if any value exists in and return row if found */
     public function is_id_exist($table,$key,$value){
@@ -207,7 +206,7 @@ class Common_model extends CI_Model {
         }
         else
             return FALSE;
-    }
+    }//end function
     
     /* Get single value based on table field */
     public function get_field_value($table, $where, $key){ 
@@ -220,7 +219,7 @@ class Common_model extends CI_Model {
         }
         else
             return FALSE;
-    }
+    }//end function
     
     /* Get total records of any table */
     function get_total_count($table, $where=''){
@@ -230,7 +229,7 @@ class Common_model extends CI_Model {
         
         $query = $this->db->get();
         return $query->num_rows(); //total records
-    }
+    }//end function
     
     /* Check if given data exists in table and return record if exist- Very useful fn
      * Modified in ver 2.0
@@ -238,15 +237,15 @@ class Common_model extends CI_Model {
     function is_data_exists($table, $where){
         $this->db->from($table);
         $this->db->where($where);
-        $query = $this->db->get();
-        $rowcount = $query->num_rows();
+        $query      = $this->db->get();
+        $rowcount   = $query->num_rows();
         if($rowcount==0){
             return FALSE; //record not found
         }
         else {
             return $query->row(); //return record if found (In preveious versions, this use to return TRUE(bool) only)
         }
-    } //nd function
+    } //end function
     function userInfo($where){
         $userPath    = base_url().USER_AVATAR_PATH.'thumb/';
         $userDefault = base_url().USER_DEFAULT_AVATAR;
@@ -268,7 +267,7 @@ class Common_model extends CI_Model {
         END) as userRole');
         $this->db->from(USERS);
         $this->db->where($where);
-        $sql= $this->db->get();
+        $sql = $this->db->get();
 
         if($sql->num_rows()):
             return $sql->row_array();
@@ -313,29 +312,29 @@ class Common_model extends CI_Model {
         $new_key = substr($res,0,config_item('rest_key_length'));
         return $new_key;
 
-    }
+    }//end function
     /**
     *
     *
     ****/
     function get_client_ip() {
-    $ipaddress = '';
-    if (getenv('HTTP_CLIENT_IP'))
-        $ipaddress = getenv('HTTP_CLIENT_IP');
-    else if(getenv('HTTP_X_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-    else if(getenv('HTTP_X_FORWARDED'))
-        $ipaddress = getenv('HTTP_X_FORWARDED');
-    else if(getenv('HTTP_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_FORWARDED_FOR');
-    else if(getenv('HTTP_FORWARDED'))
-       $ipaddress = getenv('HTTP_FORWARDED');
-    else if(getenv('REMOTE_ADDR'))
-        $ipaddress = getenv('REMOTE_ADDR');
-    else
-        $ipaddress = 'UNKNOWN';
-    return $ipaddress;
-}
+        $ipaddress = '';
+        if (getenv('HTTP_CLIENT_IP'))
+            $ipaddress = getenv('HTTP_CLIENT_IP');
+        else if(getenv('HTTP_X_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+        else if(getenv('HTTP_X_FORWARDED'))
+            $ipaddress = getenv('HTTP_X_FORWARDED');
+        else if(getenv('HTTP_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_FORWARDED_FOR');
+        else if(getenv('HTTP_FORWARDED'))
+           $ipaddress = getenv('HTTP_FORWARDED');
+        else if(getenv('REMOTE_ADDR'))
+            $ipaddress = getenv('REMOTE_ADDR');
+        else
+            $ipaddress = 'UNKNOWN';
+        return $ipaddress;
+    }//end function
     function adminEmails(){
         $email = array();
         $this->db->select('email');
@@ -350,7 +349,35 @@ class Common_model extends CI_Model {
         endif;
         return $email;
     } //End Function usersInfo 
+    function roadRouteDistance($lat1,$long1,$lat2,$long2){
+        $origins = $lat1.','.$long1;
+        $destinations =  $lat2.','.$long2;
+       // echo $origins." ".$destinations;
+        $mile   =  0;
+        $url    = "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyDjhKBJtoevmCuR5iD1El6cuDHTMByw9Co&origins=".$origins."&destinations=".$destinations."&mode=driving&mode=driving&language=pl-PL";
 
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $response_a = json_decode($response, true);
+        pr( $response_a);
+        $distance = (isset($response_a['rows'][0]['elements'][0]['distance']['text']) && !empty($response_a['rows'][0]['elements'][0]['distance']['text'])) ?$response_a['rows'][0]['elements'][0]['distance']['text'] :0;
+        if(!empty($distance)){
+            //$dis =  trim(str_replace(array(",","km"),array(".",""),$distance));
+
+            $dis = round($response_a['rows'][0]['elements'][0]['distance']['value'] / 1000);
+
+            //$mile = ceil($dis* 0.62137);
+            $mile= $dis*0.62137;
+            $mile = round($mile,2);
+        }
+        return $mile; 
+    }//ENd FUnction
 } //end of class
 /* Do not close php tags */
 /* IMP: Do not add any new method in this file */

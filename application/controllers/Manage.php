@@ -21,6 +21,5 @@ class Manage extends Common_Front_Controller {
 		$response 	= $this->smtp_email->send_mail($email,$subject,$message);
 		log_event($response,'background_log.txt');  //create log of notifcation
 	}//ENd FUnction
-	
-}
+}//End Class
 ?>

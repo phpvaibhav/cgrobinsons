@@ -77,7 +77,7 @@ class Api extends Common_Service_Controller{
                         $maildata['title']    = $result['returnData']->fullName." been invited to join Interface service";
                         $maildata['message']  = "<table><tr><td>Name</td><td>".$result['returnData']->fullName."</td></tr><tr><td>Email</td><td>".$result['returnData']->email."</td></tr></table>";
                         $subject = "Create customer";
-                        $message=$this->load->view('emails/email',$maildata,TRUE);
+                        $message = $this->load->view('emails/email',$maildata,TRUE);
                         $emails = $this->common_model->adminEmails();
                         if(!empty($emails)){
                        // $this->load->library('smtp_email');
@@ -110,9 +110,9 @@ class Api extends Common_Service_Controller{
         }
         else
         {
-            $authtoken = $this->api_model->generate_token();
+            $authtoken              = $this->api_model->generate_token();
            
-            $data = array();
+            $data                   = array();
             $data['email']          = $this->post('email');
             $data['password']       = $this->post('password');
             $data['deviceType']     = $this->post('deviceType');

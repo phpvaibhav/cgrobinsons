@@ -15,7 +15,7 @@ class MY_Loader extends MX_Loader {
         if (!empty($page_script)):
             $this->view($page_script, $vars);
         endif;
-    }
+    }//End function
 
     function front_render_minimal($template_name, $vars = array(), $page_script = ''){
         //$this->view('frontend_includes/front_header', $vars);
@@ -27,7 +27,7 @@ class MY_Loader extends MX_Loader {
         if (!empty($page_script)):
             $this->view($page_script, $vars);
         endif;
-    }
+    }//End function
 
     function login_render($template_name, $vars = array(), $page_script = '') {
         
@@ -41,7 +41,7 @@ class MY_Loader extends MX_Loader {
         if (!empty($page_script)):
             $this->view($page_script, $vars);
         endif;
-    } 
+    } //End function
     function admin_render($template_name, $vars = array(), $page_script = '') {
  
         $user_sess_data = $_SESSION[ADMIN_USER_SESS_KEY]; 
@@ -59,5 +59,5 @@ class MY_Loader extends MX_Loader {
         if (!empty($page_script)):
             $this->view($page_script, $vars);
         endif;
-    }
-}
+    }//End function
+}//End Class

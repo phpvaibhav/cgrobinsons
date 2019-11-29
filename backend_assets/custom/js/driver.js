@@ -18,12 +18,11 @@ var driver_list = $('#driver_list').DataTable({
                   },   
                   // Load data for the table's content from an Ajax source
                   "ajax": {
-                      "url": base_url+"adminapi/drivers/driverList",
-                      "type": "POST",
-                      "dataType": "json",
-                      "headers": { 'authToken':authToken},
-                      "dataSrc": function (jsonData) {
-                         
+                      "url"       : base_url+"adminapi/drivers/driverList",
+                      "type"      : "POST",
+                      "dataType"  : "json",
+                      "headers"   : { 'authToken':authToken},
+                      "dataSrc"   : function (jsonData) {
                           return jsonData.data;
                       }
                   },
@@ -139,18 +138,18 @@ $(function() {
     event.preventDefault();
     var formData = new FormData(this);
     $.ajax({
-        type: "POST",
-        url: base_url+'adminapi/'+$(this).attr('action'),
-        headers: { 'authToken': authToken },
-        data: formData, //only input
-        processData: false,
-        contentType: false,
-        cache: false,
-        beforeSend: function () {
+        type            : "POST",
+        url             : base_url+'adminapi/'+$(this).attr('action'),
+        headers         : { 'authToken': authToken },
+        data            : formData, //only input
+        processData     : false,
+        contentType     : false,
+        cache           : false,
+        beforeSend      : function () {
           preLoadshow(true);
           $('#submit').prop('disabled', true);
         },
-        success: function (res) {
+        success         : function (res) {
           preLoadshow(false);
           setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
           if(res.status=='success'){
@@ -168,30 +167,30 @@ $(function() {
 function driverStatus(e){
    toastr.clear();
   swal({
-    title: "Are you sure?",
-    text:  $(e).data('message'),
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonClass: "btn-danger",
-    confirmButtonText: "Yes",
-    cancelButtonText: "No",
-    closeOnConfirm: true,
-    closeOnCancel: true,
+    title               : "Are you sure?",
+    text                : $(e).data('message'),
+    type                : "warning",
+    showCancelButton    : true,
+    confirmButtonClass  : "btn-danger",
+    confirmButtonText   : "Yes",
+    cancelButtonText    : "No",
+    closeOnConfirm      : true,
+    closeOnCancel       : true,
     // showLoaderOnConfirm: true
   },
   function(isConfirm) {
     if (isConfirm) {
       /*ajax*/
       $.ajax({
-              type: "POST",
-              url: base_url+'adminapi/drivers/driverStatus',
-              data: {use:$(e).data('useid') },
-              headers: { 'authToken':authToken},
-              cache: false,
-              beforeSend: function() {
+              type        : "POST",
+              url         : base_url+'adminapi/drivers/driverStatus',
+              data        : {use:$(e).data('useid') },
+              headers     : { 'authToken':authToken},
+              cache       : false,
+              beforeSend  : function() {
                 preLoadshow(true);
               },     
-              success: function (res) {
+              success     : function (res) {
                 preLoadshow(false);
                 if(res.status=='success'){
                   toastr.success(res.message, 'Success', {timeOut: 3000});
@@ -212,15 +211,15 @@ function driverStatus(e){
 function driverDelete(e){
    toastr.clear();
   swal({
-    title: "Are you sure?",
-    text:  $(e).data('message'),
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonClass: "btn-danger",
-    confirmButtonText: "Yes",
-    cancelButtonText: "No",
-    closeOnConfirm: true,
-    closeOnCancel: true,
+    title               : "Are you sure?",
+    text                : $(e).data('message'),
+    type                : "warning",
+    showCancelButton    : true,
+    confirmButtonClass  : "btn-danger",
+    confirmButtonText   : "Yes",
+    cancelButtonText    : "No",
+    closeOnConfirm      : true,
+    closeOnCancel       : true,
    // showLoaderOnConfirm: true
   },
   function(isConfirm) {
@@ -228,15 +227,15 @@ function driverDelete(e){
       $(e).prop('disabled', true);
       /*ajax*/
       $.ajax({
-              type: "POST",
-              url: base_url+'adminapi/drivers/driverDelete',
-              data: {use:$(e).data('useid') },
-              headers: { 'authToken':authToken},
-              cache: false,
-              beforeSend: function() {
+              type        : "POST",
+              url         : base_url+'adminapi/drivers/driverDelete',
+              data        : {use:$(e).data('useid') },
+              headers     : { 'authToken':authToken},
+              cache       : false,
+              beforeSend  : function() {
                 preLoadshow(true);
               },     
-              success: function (res) {
+              success     : function (res) {
                 preLoadshow(false);
                 $(e).prop('disabled', false);
                 if(res.status=='success'){
@@ -272,12 +271,12 @@ var driverjobList = $('#driverjobList').DataTable({
                     },
                     // Load data for the table's content from an Ajax source
                     "ajax": {
-                      "url": base_url+"adminapi/jobs/driverjobList",
-                      "type": "POST",
-                      "dataType": "json",
-                      "headers": { 'authToken':authToken},
-                      "data": { 'id':$('#driverjobList').data('id')},
-                      "dataSrc": function (jsonData) {
+                      "url"         : base_url+"adminapi/jobs/driverjobList",
+                      "type"        : "POST",
+                      "dataType"    : "json",
+                      "headers"     : { 'authToken':authToken},
+                      "data"        : { 'id':$('#driverjobList').data('id')},
+                      "dataSrc"     : function (jsonData) {
                         return jsonData.data;
                       }
                     },

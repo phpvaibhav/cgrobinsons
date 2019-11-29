@@ -3,37 +3,35 @@
 $("#smart-form-changepass").validate({
   // Rules for form validation
   rules : {
-          
             password : {
-              required : true,
+              required  : true,
               minlength : 3,
               maxlength : 20
             }, 
             npassword : {
-              required : true,
+              required  : true,
               minlength : 3,
               maxlength : 20
             },
             rnpassword : {
-              required : true,
+              required  : true,
               minlength : 3,
               maxlength : 20,
-              equalTo : '#npassword'
+              equalTo   : '#npassword'
             }, 
           },
-
           // Messages for form validation
           messages : {
             
             password : {
-              required : 'Please enter your current password'
+              required  : 'Please enter your current password'
             },
             npassword : {
-              required : 'Please enter your new password'
+              required  : 'Please enter your new password'
             },
-            rnpassword : {
-              required : 'Please re-enter your password',
-              equalTo : 'Please enter the same password as above'
+            rnpassword  : {
+              required  : 'Please re-enter your password',
+              equalTo   : 'Please enter the same password as above'
             }
          
           },
@@ -43,16 +41,16 @@ $("#smart-form-changepass").validate({
                 toastr.clear();
                $('#submit').prop('disabled', true);
             $.ajax({
-                 type: "POST",
-                 url: base_url+'adminapi/users/'+$(form).attr('action'),
-                  "headers": { 'authToken':authToken},
-                 data: $(form).serialize(),
-                  cache: false,
-           beforeSend: function() {
-                     preLoadshow(true);
-                    $('#submit').prop('disabled', true);  
-                  },     
-                 success: function (res) {
+              type        : "POST",
+              url         : base_url+'adminapi/users/'+$(form).attr('action'),
+              headers     : { 'authToken':authToken},
+              data        : $(form).serialize(),
+              cache       : false,
+              beforeSend     : function() {
+                preLoadshow(true);
+                $('#submit').prop('disabled', true);  
+              },     
+               success: function (res) {
                    preLoadshow(false);
                     setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
                   if(res.status=='success'){
@@ -129,41 +127,36 @@ $("#smart-form-changepass").validate({
         // update profile
 
                           
-      // Validation
-      $(function() {
-    
-$(document).on('submit', "#smart-form-updateuser", function (event) {
+// Validation
+$(function() {
+      
+  $(document).on('submit', "#smart-form-updateuser", function (event) {
     toastr.clear();
     event.preventDefault();
     var formData = new FormData(this);
     $.ajax({
-        type: "POST",
-        url: base_url+'adminapi/users/'+$(this).attr('action'),
-        headers: { 'authToken': authToken },
-        data: formData, //only input
-        processData: false,
-        contentType: false,
+        type            : "POST",
+        url             : base_url+'adminapi/users/'+$(this).attr('action'),
+        headers         : { 'authToken': authToken },
+        data            : formData, //only input
+        processData     : false,
+        contentType     : false,
         cache: false,
-            beforeSend: function () {
-               preLoadshow(true);
+        beforeSend: function () {
+            preLoadshow(true);
             $('#submit').prop('disabled', true);
-            },
-          success: function (res) {
-             preLoadshow(false);
-                   setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
-                  if(res.status=='success'){
-                   toastr.success(res.message, 'Success', {timeOut: 3000});
-                   setTimeout(function(){ window.location = base_url+'profile/'+res.url; },4000);
-                   
-                  }else{
-                    toastr.error(res.message, 'Alert!', {timeOut: 4000});
-                  }
-                  
-                    
-                 }
+        },
+        success: function (res) {
+          preLoadshow(false);
+          setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
+          if(res.status=='success'){
+            toastr.success(res.message, 'Success', {timeOut: 3000});
+            setTimeout(function(){ window.location = base_url+'profile/'+res.url; },4000);
+             
+          }else{
+            toastr.error(res.message, 'Alert!', {timeOut: 4000});
+          }         
+        }
     });
-
+  });        //fromsubmit
 });
-        //fromsubmit
-
-      });

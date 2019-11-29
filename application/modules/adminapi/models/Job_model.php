@@ -4,18 +4,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Job_model extends CI_Model {
 
     //var $table , $column_order, $column_search , $order =  '';
-    var $table = 'jobs';
-    var $column_order = array('j.jobId','j.jobName','jt.jobType','c.fullName','d.fullName','j.startDate','j.jobStatus'); //set column field database for datatable orderable
-    var $column_sel = array('j.jobId','j.jobName','j.jobTypeId','j.driverId','c.fullName as customerName','jt.jobType','d.fullName as driverName','j.customerId','j.jobStatus','j.startDate','j.startTime','(case when (j.jobStatus = 0) 
+    var $table          = 'jobs';
+    var $column_order   = array('j.jobId','j.jobName','jt.jobType','c.fullName','d.fullName','j.startDate','j.workPriority','j.jobStatus'); //set column field database for datatable orderable
+    var $column_sel     = array('j.jobId','j.jobName','j.jobTypeId','j.driverId','c.fullName as customerName','jt.jobType','d.fullName as driverName','j.customerId','j.jobStatus','j.startDate','j.startTime','(case when (j.jobStatus = 0) 
         THEN "Open" when (j.jobStatus = 1) 
         THEN "In-progress" when (j.jobStatus = 2) 
         THEN "Completed" ELSE
         "Unknown" 
-        END) as statusShow'); //set column field database for datatable orderable
-    var $column_search = array('j.jobName','d.fullName','c.fullName','jt.jobType'); //set column field database for datatable searchable 
-    var $order = array('j.jobId' => 'DESC');  // default order
-    var $where = array();
-    var $group_by = 'j.jobId'; 
+        END) as statusShow','(case when (j.workPriority = 0) 
+        THEN "Low" when (j.workPriority = 1) 
+        THEN "Medium" when (j.workPriority = 2) 
+        THEN "High" ELSE
+        "Unknown" 
+        END) as priority','j.workPriority'); //set column field database for datatable orderable
+    var $column_search  = array('j.jobName','d.fullName','c.fullName','jt.jobType'); //set column field database for datatable searchable 
+    var $order          = array('j.jobId' => 'DESC');  // default order
+    var $where          = array();
+    var $group_by       = 'j.jobId'; 
 
     public function __construct(){
         parent::__construct();
@@ -23,7 +28,7 @@ class Job_model extends CI_Model {
     
     public function set_data($where=''){
         $this->where = $where; 
-    }
+    }//End function
 
     private function _get_query()
     {
@@ -77,7 +82,7 @@ class Job_model extends CI_Model {
             $this->db->order_by(key($order), $order[key($order)]);
         }
        
-    }
+    }//End function
 
     function get_list()
     {
@@ -97,36 +102,31 @@ class Job_model extends CI_Model {
         //print_r($_POST);die;
         $query = $this->db->get(); //lq();
         return $query->result();
-    }
-
+    }//End function
     function count_filtered()
     {
         $this->_get_query();
         $query = $this->db->get();
         return $query->num_rows();
-    }
-
-
+    }//End function
     public function count_all()
     {
-       // $this->db->from($this->table);
-          $this->db->from('jobs as j');
+        // $this->db->from($this->table);
+        $this->db->from('jobs as j');
         $this->db->join('jobType as jt','j.jobTypeId=jt.jobTypeId');
         $this->db->join('users as c','c.id=j.customerId','left');
         $this->db->join('users as d','d.id=j.driverId','left');
          if(!empty($this->where))
             $this->db->where($this->where); 
         return $this->db->count_all_results();
-    }
-     function jobPolygonUdpate($data_val,$id){
+    }//End function
+    function jobPolygonUdpate($data_val,$id){
         $points         = $data_val['points'];
         $boundary       = $data_val['boundary'];
         $polygonColor   = $data_val['polygonColor'];
         $geoFencing     = $data_val['geoFencing'];
-   
-        $sql = "UPDATE jobs SET `points`='$points',`polygonColor`='$polygonColor',`boundary`=$boundary,`geoFencing`=$geoFencing WHERE jobId=$id";
-       $update =$this->db->query($sql);
+        $sql            = "UPDATE jobs SET `points`='$points',`polygonColor`='$polygonColor',`boundary`=$boundary,`geoFencing`= $geoFencing WHERE jobId=$id";
+        $update          = $this->db->query($sql);
         return $update;
     }//end function
-
-}
+}//End Class

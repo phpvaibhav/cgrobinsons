@@ -7,7 +7,13 @@ class Job_model extends CI_Model {
         THEN "In-progress" when (j.jobStatus = 2) 
         THEN "Completed" ELSE
         "Unknown" 
-        END) as statusShow');
+        END) as statusShow','(case when (j.workPriority = 0) 
+        THEN "Low" when (j.workPriority = 1) 
+        THEN "Medium" when (j.workPriority = 2) 
+        THEN "High" ELSE
+        "Unknown" 
+        END) as priority','j.workPriority');
+    
     public function __construct(){
         parent::__construct();
     }

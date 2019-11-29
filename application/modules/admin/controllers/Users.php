@@ -16,7 +16,7 @@ class Users extends Common_Back_Controller {
         $result             = $this->common_model->getsingle('admin',$where);
         $data['userData']   = $result;
         $this->load->admin_render('profile/userDetail', $data, '');
-    } 
+    } //End function
     public function changePassword(){
         
         $userId             = decoding($this->uri->segment(2));
@@ -25,5 +25,5 @@ class Users extends Common_Back_Controller {
         $result             = $this->common_model->getsingle('admin',$where);
         $data['userData']   = $result;
         $this->load->admin_render('profile/changePassword', $data, '');
-    }   
-}
+    }//End function   
+}//End Class

@@ -22,6 +22,6 @@ class MY_Model extends CI_Model {
                 'error_detail'=>$this->db->error()
             );
         echo get_json_output($response); exit;
-    }
+    }//End function
     
-}
+}//End Class

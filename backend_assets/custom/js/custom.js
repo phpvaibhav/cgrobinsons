@@ -37,7 +37,7 @@ $(".alfaNumeric").on("keypress keyup blur",function (event) {
 });
 //date  picker manange
 $( "#purchaseDate" ).datepicker({  
-  dateFormat: 'mm/dd/yyyy'
+  dateFormat  : 'mm/dd/yyyy'
 });
 /*
   * TIMEPICKER
@@ -45,7 +45,7 @@ $( "#purchaseDate" ).datepicker({
 $('#timepicker').timepicker();
 $('.select2').select2({
     minimumResultsForSearch: -1,
-    placeholder: function(){
+    placeholder : function(){
         $(this).data('placeholder');
     }
 });
@@ -56,11 +56,11 @@ $("#dob").datepicker({
   changeYear  : true,
   yearRange   : "-100:+0",
   prevText    : '<i class="fa fa-chevron-left"></i>',
-  nextText  : '<i class="fa fa-chevron-right"></i>',
+  nextText    : '<i class="fa fa-chevron-right"></i>',
 });
 function filePreview(input) {
   if (input.files && input.files[0]) {
-    var reader = new FileReader();
+    var reader    = new FileReader();
     reader.onload = function (e) {
     /*   $('#uploadForm + img').remove();
     $('#uploadForm').after('<img src="'+e.target.result+'" width="450" height="300"/>');*/

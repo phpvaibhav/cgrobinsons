@@ -11,7 +11,6 @@ class Vehicles extends Common_Back_Controller {
         $this->check_admin_user_session();
      
     }
-
     public function index() { 
         
         $data['title']          = 'Vehicles';
@@ -22,12 +21,15 @@ class Vehicles extends Common_Back_Controller {
         $data['vehicleColors']  =  $this->common_model->getAll('vehicleColors');
         $data['states']         =  $this->common_model->getAll('states');
         $data['front_scripts']  = array('backend_assets/custom/js/vehicle.js');
+        $this->load->model('adminapi/vehicle_model');
+        $latlong =$this->vehicle_model->vehilceLatlong();
+        
+        $data['locations']  = $latlong;
         $this->load->admin_render('vehicles', $data);
-    } 
+    } //End Function
     public function vehicleDetail(){
       //pr('admin@admin.com');
         $vehicleId                  = decoding($this->uri->segment(3));
-
         $data['title']              = "Vehicle Detail";
         $where                      = array('vehicleId'=>$vehicleId);
         $result                     = $this->common_model->getsingle('vehicles',$where);
@@ -39,8 +41,6 @@ class Vehicles extends Common_Back_Controller {
         $data['vehicleJobTypes']    =  $this->common_model->getAll('vehicleJobType',array('status'=>1));
         $data['assignVehicle']      = $this->common_model->getsingle('assignVehicle',$where);
         $data['front_scripts']      = array('backend_assets/custom/js/vehicle.js');
-   
         $this->load->admin_render('vehicleDetail', $data, '');
-    } 
- 
-}
+    }//End Function 
+}//End Class

@@ -19,11 +19,11 @@ var service_list = $('#service_list').DataTable({
                     },
                     // Load data for the table's content from an Ajax source
                     "ajax": {
-                        "url": base_url+"api/service/addServiceList",
-                        "type": "POST",
-                        "dataType": "json",
-                        "headers": { 'authToken':authToken},
-                        "dataSrc": function (jsonData) {
+                        "url"       : base_url+"api/service/addServiceList",
+                        "type"      : "POST",
+                        "dataType"  : "json",
+                        "headers"   : { 'authToken':authToken},
+                        "dataSrc"   : function (jsonData) {
                           return jsonData.data;
                         }
                     },
@@ -52,11 +52,11 @@ var user_list = $('#user_list').DataTable({
                   },
                   // Load data for the table's content from an Ajax source
                   "ajax": {
-                    "url": base_url+"api/users/userList",
-                    "type": "POST",
-                    "dataType": "json",
-                    "headers": { 'authToken':authToken},
-                    "dataSrc": function (jsonData) {
+                    "url"       : base_url+"api/users/userList",
+                    "type"      : "POST",
+                    "dataType"  : "json",
+                    "headers"   : { 'authToken':authToken},
+                    "dataSrc"   : function (jsonData) {
                       return jsonData.data;
                     }
                   },
@@ -68,29 +68,29 @@ var user_list = $('#user_list').DataTable({
 /*listing user*/    
 function statusChange(e){
   swal({
-    title: "Are you sure?",
-    text:  $(e).data('message'),
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonClass: "btn-danger",
-    confirmButtonText: "Yes",
-    cancelButtonText: "No",
-    closeOnConfirm: true,
-    closeOnCancel: true,
+    title               : "Are you sure?",
+    text                :  $(e).data('message'),
+    type                : "warning",
+    showCancelButton    : true,
+    confirmButtonClass  : "btn-danger",
+    confirmButtonText   : "Yes",
+    cancelButtonText    : "No",
+    closeOnConfirm      : true,
+    closeOnCancel       : true,
    // showLoaderOnConfirm: true
   },
   function(isConfirm) {
     if (isConfirm) {
       /*ajax*/
       $.ajax({
-              type: "POST",
-              url: base_url+'api/service/changeStatus',
-              data: {srv:$(e).data('serid'),srs:$(e).data('sid')},
-              cache: false,
-              beforeSend: function() {
+              type        : "POST",
+              url         : base_url+'api/service/changeStatus',
+              data        : {srv:$(e).data('serid'),srs:$(e).data('sid')},
+              cache       : false,
+              beforeSend  : function() {
                 preLoadshow(true);
               },     
-              success: function (res) {
+              success     : function (res) {
                   preLoadshow(false);
                   if(res.status=='success'){
                     toastr.success(res.message, 'Success', {timeOut: 3000});
@@ -108,29 +108,29 @@ function statusChange(e){
 }     
 function statusChangeDetail(e){
   swal({
-    title: "Are you sure?",
-    text:  $(e).data('message'),
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonClass: "btn-danger",
-    confirmButtonText: "Yes",
-    cancelButtonText: "No",
-    closeOnConfirm: true,
-    closeOnCancel: true,
+    title               : "Are you sure?",
+    text                :  $(e).data('message'),
+    type                : "warning",
+    showCancelButton    : true,
+    confirmButtonClass  : "btn-danger",
+    confirmButtonText   : "Yes",
+    cancelButtonText    : "No",
+    closeOnConfirm      : true,
+    closeOnCancel       : true,
    // showLoaderOnConfirm: true
   },
   function(isConfirm) {
     if (isConfirm) {
       /*ajax*/
       $.ajax({
-              type: "POST",
-              url: base_url+'api/service/changeStatus',
-              data: {srv:$(e).data('serid'),srs:$(e).data('sid')},
-              cache: false,
-              beforeSend: function() {
+              type          : "POST",
+              url           : base_url+'api/service/changeStatus',
+              data          : {srv:$(e).data('serid'),srs:$(e).data('sid')},
+              cache         : false,
+              beforeSend    : function() {
                 preLoadshow(true);
               },     
-              success: function (res) {
+              success       : function (res) {
                 preLoadshow(true);
                 if(res.status=='success'){
                   toastr.success(res.message, 'Success', {timeOut: 3000});
@@ -148,29 +148,29 @@ function statusChangeDetail(e){
 }
 function statusChangeuser(e){
   swal({
-    title: "Are you sure?",
-    text:  $(e).data('message'),
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonClass: "btn-danger",
-    confirmButtonText: "Yes",
-    cancelButtonText: "No",
-    closeOnConfirm: true,
-    closeOnCancel: true,
+    title               : "Are you sure?",
+    text                :  $(e).data('message'),
+    type                : "warning",
+    showCancelButton    : true,
+    confirmButtonClass  : "btn-danger",
+    confirmButtonText   : "Yes",
+    cancelButtonText    : "No",
+    closeOnConfirm      : true,
+    closeOnCancel       : true,
     // showLoaderOnConfirm: true
   },
   function(isConfirm) {
     if (isConfirm) {
       /*ajax*/
       $.ajax({
-              type: "POST",
-              url: base_url+'api/users/changeStatus',
-              data: {use:$(e).data('useid') },
-              cache: false,
+              type      : "POST",
+              url       : base_url+'api/users/changeStatus',
+              data      : {use:$(e).data('useid') },
+              cache     : false,
               beforeSend: function() {
                 preLoadshow(true);
               },     
-              success: function (res) {
+              success   : function (res) {
                 preLoadshow(false);
                 if(res.status=='success'){
                   toastr.success(res.message, 'Success', {timeOut: 3000});
@@ -189,29 +189,29 @@ function statusChangeuser(e){
 }
 function statusChangeuserDtails(e){
   swal({
-    title: "Are you sure?",
-    text:  $(e).data('message'),
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonClass: "btn-danger",
-    confirmButtonText: "Yes",
-    cancelButtonText: "No",
-    closeOnConfirm: true,
-    closeOnCancel: true,
+    title               : "Are you sure?",
+    text                :  $(e).data('message'),
+    type                : "warning",
+    showCancelButton    : true,
+    confirmButtonClass  : "btn-danger",
+    confirmButtonText   : "Yes",
+    cancelButtonText    : "No",
+    closeOnConfirm      : true,
+    closeOnCancel       : true,
     // showLoaderOnConfirm: true
   },
   function(isConfirm) {
     if (isConfirm) {
       /*ajax*/
       $.ajax({
-              type: "POST",
-              url: base_url+'api/users/changeStatus',
-              data: {use:$(e).data('useid') },
-              cache: false,
-              beforeSend: function() {
+              type          : "POST",
+              url           : base_url+'api/users/changeStatus',
+              data          : {use:$(e).data('useid') },
+              cache         : false,
+              beforeSend    : function() {
                 preLoadshow(true);
               },     
-              success: function (res) {
+              success       : function (res) {
                  preLoadshow(false);
                 if(res.status=='success'){
                   toastr.success(res.message, 'Success', {timeOut: 3000});

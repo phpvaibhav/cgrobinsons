@@ -19,7 +19,6 @@
 				<header>
 					<span class="widget-icon"> <i class="fa fa-tasks"></i> </span>
 					<h2>Jobs</h2>
-				
 				</header>
 				<!-- widget div-->
 				<div>
@@ -40,12 +39,12 @@
 										<th data-hide="phone,tablet">Customer</th>
 										<th data-hide="phone,tablet">Driver</th>
 										<th data-hide="phone,tablet">Creation Date</th>
+										<th data-hide="phone,tablet">Priority</th>
 										<th data-hide="phone,tablet">Status</th>
 										<th data-hide="phone,tablet">Action</th>
 									</tr>
 								</thead>
-								<tbody>
-											
+								<tbody>			
 								</tbody>
 							</table>
 						</div>

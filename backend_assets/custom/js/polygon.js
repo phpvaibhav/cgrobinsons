@@ -9,12 +9,12 @@ var colors        = ['#1E90FF', '#FF1493', '#32CD32', '#FF8C00', '#4B0082', '#C0
 var colorButtons  = {};
 var map           = '';
 var componentForm = {
-                    street_number: 'short_name',
-                    route: 'long_name',
-                    locality: 'long_name',
+                    street_number     : 'short_name',
+                    route             : 'long_name',
+                    locality          : 'long_name',
                     administrative_area_level_1: 'short_name',
-                    country: 'long_name',
-                    postal_code: 'short_name'
+                    country           : 'long_name',
+                    postal_code       : 'short_name'
                   };
 function clearSelection() {
     if (selectedShape) {
@@ -51,13 +51,13 @@ function deleteAllShape() {
 function selectColor(color) {
   selectedColor = color;
   for (var i = 0; i < colors.length; ++i) {
-    var currColor = colors[i];
-    colorButtons[currColor].style.border = currColor == color ? '2px solid #789' : '2px solid #fff';
+    var currColor                         = colors[i];
+    colorButtons[currColor].style.border  = currColor == color ? '2px solid #789' : '2px solid #fff';
   }
   // Retrieves the current options from the drawing manager and replaces the
   // stroke or fill color as appropriate.
-  var polygonOptions = drawingManager.get('polygonOptions');
-  polygonOptions.fillColor = color;
+  var polygonOptions        = drawingManager.get('polygonOptions');
+  polygonOptions.fillColor  = color;
   drawingManager.set('polygonOptions', polygonOptions);
 }// end select color
 function setSelectedShapeColor(color) {
@@ -71,9 +71,9 @@ function setSelectedShapeColor(color) {
   }
 }//end  set selection shape
 function makeColorButton(color) {
-  var button = document.createElement('span');
-  button.className = 'color-button';
-  button.style.backgroundColor = color;
+  var button                    = document.createElement('span');
+  button.className              = 'color-button';
+  button.style.backgroundColor  = color;
   google.maps.event.addDomListener(button, 'click', function() {
     selectColor(color);
     setSelectedShapeColor(color);
@@ -83,8 +83,8 @@ function makeColorButton(color) {
 function buildColorPalette() {
   var colorPalette = document.getElementById('color-palette');
   for (var i = 0; i < colors.length; ++i) {
-     var currColor = colors[i];
-     var colorButton = makeColorButton(currColor);
+     var currColor    = colors[i];
+     var colorButton  = makeColorButton(currColor);
      colorPalette.appendChild(colorButton);
      colorButtons[currColor] = colorButton;
   }
@@ -92,26 +92,26 @@ function buildColorPalette() {
 }//end build color
 function initialize() {
   //var latlng = new google.maps.LatLng(39.305, -76.617);
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: new google.maps.LatLng(latitude,longitude),
-    zoom: 19,
-    mapTypeId: google.maps.MapTypeId.SATELLITE, //google.maps.MapTypeId.ROADMAP,
+    map = new google.maps.Map(document.getElementById('map'), {
+    center        : new google.maps.LatLng(latitude,longitude),
+    zoom          : 19,
+    mapTypeId     : google.maps.MapTypeId.SATELLITE, //google.maps.MapTypeId.ROADMAP,
     disableDefaultUI: false,
-    draggable: false, 
-    zoomControl: true,
-    scrollwheel: false, 
+    draggable     : false, 
+    zoomControl   : true,
+    scrollwheel   : false, 
     disableDoubleClickZoom: true
-  });
+    });
   var marker = new google.maps.Marker({
     position: {lat: latitude, lng: longitude },
     map: map,
     // title: ''
   });
   var polyOptions = {
-    strokeWeight: 0,
-    fillOpacity: 0.45,
-    editable: true,
-    draggable: true,   
+      strokeWeight    : 0,
+      fillOpacity     : 0.45,
+      editable        : true,
+      draggable       : true,   
   };    
   drawingManager = new google.maps.drawing.DrawingManager({
     drawingMode: google.maps.drawing.OverlayType.POLYGON,
@@ -120,17 +120,17 @@ function initialize() {
       draggable: true
     },
     drawingControlOptions: {
-      position: google.maps.ControlPosition.TOP_CENTER,
+      position    : google.maps.ControlPosition.TOP_CENTER,
       drawingModes: ['polygon'],
     },
     polylineOptions: {
-      editable: true,
-      draggable: true, zoomControl: true, scrollwheel: true, disableDoubleClickZoom: true
+      editable  : true,
+      draggable   : true, zoomControl: true, scrollwheel: true, disableDoubleClickZoom: true
     },
-    rectangleOptions: polyOptions,
-    circleOptions: polyOptions,
-    polygonOptions: polyOptions,
-    map: map
+    rectangleOptions  : polyOptions,
+    circleOptions     : polyOptions,
+    polygonOptions    : polyOptions,
+    map               : map
   });//en draw manager
   google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
     all_overlays.push(e);

@@ -17,7 +17,7 @@ if ( ! function_exists('pr')) {
     echo '</pre>';
     die;
   }
-}
+}//End function
 
 /**
  * [To print last query]
@@ -29,7 +29,7 @@ if ( ! function_exists('lq')) {
     echo $CI->db->last_query();
     die;
   }
-}
+}//End function
 
 /**
  * [To get database error message]
@@ -45,7 +45,7 @@ if ( ! function_exists('db_err_msg')) {
       return FALSE;
     }
   }
-}
+}//End function
 
 /**
  * [To get current datetime]
@@ -56,9 +56,7 @@ if ( ! function_exists('datetime')) {
     $datetime = date($default_format);
     return $datetime;
   }
-}
-
-
+}//End function
 /**
  * [To encode string]
  * @param string $str
@@ -72,7 +70,7 @@ if ( ! function_exists('encoding')) {
       $five = strtr($four, '+/=', '-_.');
       return $five;
   }
-}
+}//End function
 
 /**
  * [To decode string]
@@ -91,7 +89,7 @@ if ( ! function_exists('decoding')) {
           return $five;
       }
   }
-}
+}//End function
 
 /**
  * [To check number is digit or not]
@@ -101,7 +99,7 @@ if ( ! function_exists('is_digits')) {
   function is_digits($element){ // for check numeric no without decimal
       return !preg_match ("/[^0-9]/", $element);
   }
-}
+}//End function
 
 /**
  * [To get all months list]
@@ -111,7 +109,7 @@ if ( ! function_exists('getMonths')) {
     $monthArr = array('January','February','March','April','May','June','July','August','September','October','November','December');
     return $monthArr ;
   }
-}
+}//End function
 
 /**
  * Load styles for frontend or admin on specific pages
@@ -138,7 +136,7 @@ if (!function_exists('load_css')) {
         }
         echo $style_tag; //print style tags
     }
-}
+}//End function
 
 /**
  * Load scripts for frontend or admin on specific pages
@@ -166,7 +164,7 @@ if (!function_exists('load_js')) {
 
         echo $script_tag; //print script tags
     }
-}
+}//End function
 
 /**
  * For making alias of title or any string
@@ -174,12 +172,12 @@ if (!function_exists('load_js')) {
  */
 if (!function_exists('make_alias')) {
 
-    function make_alias($string){
-        $string = strtolower(str_replace(' ', '_', $string)); // replace space with underscore
-        $alias = preg_replace('/[^A-Za-z0-9]/', '', $string); // remove specail characters
-        return $alias;
-    }
-}
+  function make_alias($string){
+    $string = strtolower(str_replace(' ', '_', $string)); // replace space with underscore
+    $alias = preg_replace('/[^A-Za-z0-9]/', '', $string); // remove specail characters
+    return $alias;
+  }
+}//End function
 
 /**
  * Check is string contains any special characters
@@ -194,7 +192,7 @@ if (!function_exists('alpha_spaces')) {
             return FALSE; //match failed(string contains characters other than aplhabets and spaces)
         }
     }
-}
+}//End function
 
 /**
  * Display placeholder text when string is empty
@@ -209,7 +207,7 @@ if (!function_exists('display_placeholder_text')) {
             return $string;  //return string as it is
         }
     }
-}
+}//End function
 
 /**
  * Display elapsed time as user friendly string from timestamp
@@ -243,7 +241,7 @@ if (!function_exists('time_elapsed_string')) {
         if (!$full) $string = array_slice($string, 0, 1);
         return $string ? implode(', ', $string) . ' ago' : 'just now';
      }//End Function
-}
+}//End function
 
 /**
  * Make user profile image url from name or check if string already has url
@@ -265,7 +263,7 @@ if (!function_exists('make_img_url')) {
         
         return $img_src;
     }
-}
+}//End function
 
 /**
  * Make log of any event/action in destination file
@@ -286,7 +284,7 @@ if (!function_exists('log_event')) {
         $msg = $perfix.$msg."\r\n"; //create new line
         error_log($msg, 3, $file_path); //log message in file
     }
-}
+}//End function
 
 /**
  *  To force browser load new file from server (Prevent caching of file)
@@ -305,9 +303,7 @@ function auto_version($file_path){
         return $file_path;
     
     return preg_replace('{\\.([^./]+)$}', ".$mtime.\$1", $file_path);
-}
-
-
+}//End function
 /* CSRF and XSS protection helper methods start */
 
 /**
@@ -317,7 +313,7 @@ function auto_version($file_path){
 function sanitize_input_text($str){
     $CI = & get_instance();  // get instance, access the CI superobject
     return $CI->security->xss_clean($str);  //security library must be autoloaded
-}
+}//End function
 
 /**
  * Cross Site Scripting prevention filter while output data
@@ -326,7 +322,7 @@ function sanitize_input_text($str){
  */
 function sanitize_output_text($str){
     return htmlspecialchars($str);
-}
+}//End function
 
 /**
  * Get CSRF (Cross-site request forgery) token key-value array
@@ -339,7 +335,7 @@ function get_csrf_token(){
         'hash' => $CI->security->get_csrf_hash()  //csrf token value
     );
     return $csrf;
-}
+}//End function
 /* CSRF and XSS protection helper methods end */
 
 /* User Session management methods start */
@@ -349,7 +345,7 @@ function get_csrf_token(){
  */
 function app_logout_url(){
     return base_url('home/logout'); //can be changed depending upon application url
-}
+}//End function
 
 /**
  * Check if user is logged in
@@ -365,7 +361,7 @@ function is_user_logged_in(){
        return TRUE;
     }
     return FALSE;  
-}
+}//End function
 
 /**
  * Check if admin user is logged in
@@ -382,7 +378,7 @@ function is_admin_logged_in(){
        return TRUE;
     }
     return FALSE;  
-}
+}//End function
 
 /**
  * Get logged in user data
@@ -394,7 +390,7 @@ function get_user_session_data(){
         $user_data = $_SESSION[USER_SESS_KEY]; //user session array
     }
     return $user_data;
-}
+}//End function
 
 /**
  * Get logged in admin user data
@@ -406,7 +402,7 @@ function get_admin_session_data(){
         $admin_user_data = $_SESSION[ADMIN_USER_SESS_KEY]; //admin user session array
     }
     return $admin_user_data;
-}
+}//End function
 
 /* User Session management methods end */
 
@@ -417,7 +413,7 @@ function get_admin_session_data(){
 function remove_extra_space($str){
     $str = preg_replace( '/\s+/', ' ', $str );
     return $str;
-}
+}//End function
 
 /**
  * Returns json data
@@ -426,7 +422,7 @@ function remove_extra_space($str){
 function get_json_output($data){
     header('Content-type:application/json;charset=utf-8');
     return json_encode($data);
-}
+}//End function
 
 /**
  * Output json data and exit
@@ -435,7 +431,7 @@ function get_json_output($data){
 function json_output($data){
     header('Content-type:application/json;charset=utf-8');
     return json_encode($data); exit;
-}
+}//End function
 function number_format_short( $n ) {
   $n = is_numeric($n) ? $n : 0;
   if ($n >= 0 && $n < 1000) {
@@ -461,5 +457,5 @@ function number_format_short( $n ) {
   }
 
   return !empty($n_format . $suffix) ? $n_format . $suffix : 0;
-}
+}//End function
 /***********  Any new project specific helper method can be added below  ***********/

@@ -13,9 +13,7 @@ class ChangePassword extends Common_Back_Controller {
         $this->validation_rules = array();
         //$this->load->model('common_model');
     }
-    
     // Change Password  From email Template url
-  
     public function change_password(){
        
          $data['email']         = decoding($this->uri->segment(4));
@@ -31,7 +29,7 @@ class ChangePassword extends Common_Back_Controller {
          }else{
             $this->load->login_render('link_expired');
          }       
-    } 
+    }//End Function 
     // Update Password 
     public function update_password(){
 
@@ -47,11 +45,9 @@ class ChangePassword extends Common_Back_Controller {
                 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                 'passToken' => "",
             );
-           $table           = USERS;
+            $table           = USERS;
             $where_email    = array('email'=>decoding($this->input->post('e'))); // decode email id
-            $response       = $this->common_model->getsingle($table, $where_email);  
-    
-            
+            $response       = $this->common_model->getsingle($table, $where_email);    
             if($response){
               $rurl=base_url().'password/ChangePassword/success';  // For Redirect after change password
               $this->common_model->updateFields($table, $update_data, $where_email);  //update Password
@@ -61,11 +57,10 @@ class ChangePassword extends Common_Back_Controller {
             }
             //print_r($response); die();
         }
-
-         echo json_encode($response);
-    }
+        echo json_encode($response);
+    }//End Function
     // Change Password Success Template url
     public function change_password_suucess(){
        $this->load->login_render('success');      
-    } 
+    } //End Function
 } //End class

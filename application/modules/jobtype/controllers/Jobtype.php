@@ -20,7 +20,7 @@ class Jobtype extends Common_Back_Controller {
         $data['recordSet']  = array('<li class="sparks-info"><h5>Job Type<span class="txt-color-blue"><a href="'.$link.'" class="anchor-btn"><i class="fa fa-plus-square"></i></a></span></h5></li>','<li class="sparks-info"><h5>Total Job Types <span class="txt-color-darken" id="totalCust"><i class="fa fa-lg fa-fw fa fa-bars"></i>&nbsp;'.$count.'</span></h5></li>');
         $data['front_scripts'] = array('backend_assets/custom/js/jobtype.js');
         $this->load->admin_render('jobtypes', $data);
-    }     
+    } //End Function    
     public function addJobtype() { 
         
         $data['title']              = 'Add Job Type';
@@ -30,9 +30,8 @@ class Jobtype extends Common_Back_Controller {
         $data['customers']          =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
         $data['front_scripts']      = array('backend_assets/custom/js/jobtype.js');
         $this->load->admin_render('addJobtype', $data);
-    } 
-
-     public function detail(){
+    } //End Function
+    public function detail(){
       //pr('admin@admin.com');
         $jobTypeId      = decoding($this->uri->segment(3));
 
@@ -45,8 +44,7 @@ class Jobtype extends Common_Back_Controller {
         $data['front_scripts'] = array('backend_assets/custom/js/jobtype.js');
         $this->load->admin_render('detail', $data, '');
     } //end function
-   
-     public function edit(){
+    public function edit(){
       //pr('admin@admin.com');
         $jobTypeId          = decoding($this->uri->segment(3));
 
@@ -59,7 +57,4 @@ class Jobtype extends Common_Back_Controller {
          $data['front_scripts'] = array('backend_assets/custom/js/jobtype.js');
         $this->load->admin_render('edit', $data, '');
     } //end function
-
-   
- 
-}
+}//End Class

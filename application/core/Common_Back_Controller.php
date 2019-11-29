@@ -62,7 +62,7 @@ class Common_Back_Controller extends MX_Controller {
             }
             
         } 
-    }
+    }//End function
     
     /**
      * Admin user logout
@@ -74,7 +74,7 @@ class Common_Back_Controller extends MX_Controller {
         unset($_SESSION[$this->admin_user_session_key]); 
         if($is_redirect)
             redirect('admin');  //redirect only when $is_redirect is set to TRUE
-    }
+    }//End function
     
     /**
      * Admin authentication for ajax
@@ -104,5 +104,5 @@ class Common_Back_Controller extends MX_Controller {
         }
 
         return TRUE; //all good
-    }
-}
+    }//End function
+}//End Class

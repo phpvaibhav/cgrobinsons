@@ -16,13 +16,12 @@
 	cursor: pointer;
 }
 </style>
- <?php $backend_assets=base_url().'backend_assets/'; ?>
+<?php $backend_assets = base_url().'backend_assets/'; ?>
 <section id="widget-grid" class="">
     <!-- row -->
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 			<div class="well no-padding">
-
 				<form action="jobs/createJob" id="createJob" class="smart-form" novalidate="novalidate" autocomplete="off" enctype="multipart/form-data">
 					<header>
 						Basic Information
@@ -80,9 +79,17 @@
 								</label>
 							</section>
 						</div>
-						
-						
-					
+						<div class="row">
+							<section class="col col-6">
+								<label class="select">
+								<select name="workPriority">
+								<!-- <option value="" selected="" disabled="">Job Priority</option> -->
+									<option value="0"  selected="">Low Priority</option>
+									<option value="1">Medium Priority</option>
+									<option value="2">High Priority</option>
+								</select> <i></i> </label>
+							</section>
+						</div>
 					</fieldset>
 					<header class="queDataHideShow">
 						<label class="checkbox state-error"><input type="checkbox" id="select_questionAll"  value="1" name="checkbox"><i></i> <strong> Job Type Questions</strong></label>
@@ -175,8 +182,7 @@
 							 <input type="hidden" name="polygonColor" id="polygonColor" value="#1E90FF">
 						  	<textarea  name="boundary" id="boundary" class="hide"></textarea>
 						</section>
-					</fieldset>
-										
+					</fieldset>						
 					<footer>
 						<button type="submit" id="submit" class="btn btn-primary">
 							Add Job
@@ -202,13 +208,11 @@
 				</h4>
 			</div>
 			<div class="modal-body">
-	        
 				<!-- widget content -->
 				<div class="widget-body padding">
 					<fieldset>
 						<div class="row" >
 							<div class="col-sm-12 col-md-12" id="previousAddress" style="height: 400px;overflow: auto;"></div>
-
 						</div>
 						<footer>
 							<button type="button" class="btn btn-primary pull-right setGeoloc">
@@ -216,18 +220,15 @@
 							</button>
 						</footer>
 					</fieldset>
-
 				</div>
 				<!-- end widget content -->
-	         
 	        </div>
 		</div>
 	</div>
 </div>
 <!-- End modal -->
 <script type="text/javascript">
-	var question ="";
-	var pendingJob ="0";
+	var question 	= "";
+	var pendingJob 	= "0";
 </script>
 <script src="<?php echo $backend_assets; ?>custom/js/polygon.js"></script>
-

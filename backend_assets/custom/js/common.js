@@ -1,20 +1,20 @@
-var errorClass = 'invalid';
-var errorElement = 'em';
+var errorClass    = 'invalid';
+var errorElement  = 'em';
 /*getPrevious address uin customer*/
 $(".getAddressshow").hide();
 function getPrevious(e){
   var customerId = $(e).val();
   /*ajax*/
   $.ajax({
-    type: "POST",
-    url: base_url+'adminapi/customers/getPreviousAddress',
-    data: {customerId:customerId},
-    headers: { 'authToken':authToken},
-    cache: false,
+    type      : "POST",
+    url       : base_url+'adminapi/customers/getPreviousAddress',
+    data      : {customerId:customerId},
+    headers   : { 'authToken':authToken},
+    cache     : false,
     beforeSend: function() {
       preLoadshow(true);
     },     
-    success: function (res) {
+    success   : function (res) {
       preLoadshow(false);
     if(res.status=='success'){
       $(".getAddressshow").show();

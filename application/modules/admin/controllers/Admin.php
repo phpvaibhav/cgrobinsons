@@ -10,23 +10,23 @@ class Admin extends Common_Back_Controller {
         parent::__construct();
         $this->check_admin_user_session();
       //  $this->load->model('admin_model');
-    }
+    }//End Function
 
     public function index() { 
 
         $data['title'] = "Login";
         $this->load->login_render('login', $data);
-    }
+    }//End Function
     public function signup() { 
 
         $data['title'] = "Sign up";
         $this->load->login_render('signup', $data);
-    }
+    }//End Function
     public function forgot() { 
 
         $data['title'] = "Forgot";
         $this->load->login_render('forgot', $data);
-    }
+    }//End Function
     public function logout() {
 
         $this->admin_logout(FALSE);
@@ -35,7 +35,7 @@ class Admin extends Common_Back_Controller {
         redirect(base_url());
         echo json_encode($response);
         die;
-    }
+    }//End Function
     public function dashboard() {
        
         $data['parent']     = "Dashboard";
@@ -46,7 +46,7 @@ class Admin extends Common_Back_Controller {
         $data['vehicles']   = $this->common_model->get_total_count('vehicles');
         $data['jobType']    = $this->common_model->get_total_count('jobType'); 
         $this->load->admin_render('dashboard', $data, '');
-    }
+    }//End Function
     //view admin profile
     public function admin_profile(){
         $data['title']      = "Admin profile";
@@ -54,7 +54,7 @@ class Admin extends Common_Back_Controller {
         $result             = $this->common_model->getsingle(ADMIN,$where);
         $data['userData']   = $result;
         $this->load->admin_render('admin_profile', $data, '');
-    }
+    }//End Function
     //update admin profile
     public function admin_update(){
         $this->form_validation->set_rules('fullName','name','trim|required');
@@ -64,10 +64,10 @@ class Admin extends Common_Back_Controller {
            $response = array('status' => 0, 'message' => $messages);
         }
         else{
-           $update_data     = array();
-            $image          = array(); 
-            $where_id       = $this->input->post('admin_id');
-            $existing_img   = $this->input->post('exit_image');
+            $update_data        = array();
+            $image              = array(); 
+            $where_id           = $this->input->post('admin_id');
+            $existing_img       = $this->input->post('exit_image');
 
             if (!empty($_FILES['image']['name'])) {
                 $this->load->model('Image_model');
@@ -93,8 +93,8 @@ class Admin extends Common_Back_Controller {
                 $post                   = $this->input->post($val);
                 $update_data[$val]      = (isset($post) && !empty($post)) ? $post :''; 
             }
-            $update_where = array('id'=>$where_id);
-            $userId = $this->common_model->updateFields(ADMIN, $update_data, $update_where);
+            $update_where   = array('id'=>$where_id);
+            $userId         = $this->common_model->updateFields(ADMIN, $update_data, $update_where);
 
            
             $u_id = $_SESSION[ADMIN_USER_SESS_KEY]['id'];
@@ -108,8 +108,7 @@ class Admin extends Common_Back_Controller {
             $response = array('status' => 1, 'message' => 'Successfully Updated', 'url' => base_url('admin/admin_profile'));  
         }
         echo json_encode($response); die;
-    }
-
+    }//End Function
     public function changePassword()
     {
 
@@ -148,4 +147,4 @@ class Admin extends Common_Back_Controller {
         }
         echo json_encode($response); die;  
     }//End Function
-}
+}//End Class

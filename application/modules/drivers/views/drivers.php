@@ -41,8 +41,7 @@
 										<th data-hide="phone,tablet">Action</th>
 									</tr>
 								</thead>
-								<tbody>
-											
+								<tbody>	
 								</tbody>
 							</table>
 						</div>
@@ -71,150 +70,139 @@
 				</h4>
 			</div>
 			<div class="modal-body">
-	           <!-- Add CUstomer -->
-		<!-- widget content -->
-								<div class="widget-body no-padding">
-									
-									<form action="drivers/addDriver" id="driverAddUpdate" class="smart-form" novalidate="novalidate" autocomplete="off" enctype="multipart/form-data">
-										<header>
-											Driver Information
-										</header>
-
-										<fieldset>
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-user"></i>
-														<input type="text" name="fullName" placeholder="Driver Name" maxlength="30" size="30">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
-														<input type="email" name="email" placeholder="E-mail" autocomplete="off" maxlength="30" size="30" >
-													</label>
-												</section>
-											</div>
-
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-lock"></i>
-														<input type="password" name="password" placeholder="Password" autocomplete="new-password">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-phone"></i>
-														<input type="text" name="contactNumber" placeholder="Contact Number" data-mask="(99999) 999999">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-md-12">
-													<div class="input input-file">
-													<span class="button"><input type="file" name="profileImage" id="file" onchange="this.parentNode.nextSibling.value = this.value" accept="image/*" placeholder="Driver image">Browse</span><input type="text" placeholder="Driver image" readonly="">
-													</div>
-
-												</section>
-												
-											</div>
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-calendar"></i>
-														<input type="text" name="dob" placeholder="Date of Birth" class="" id="dob" data-dateformat='dd-mm-yy' readonly="">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-calendar"></i>
-														<input type="text" name="doh" placeholder="Date of Hire" class="datepicker" data-dateformat='dd-mm-yy' readonly="">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-list-ol"></i>
-														<input type="text" name="licenseNumber" placeholder="Driver License Number" class="number-only" maxlength="30" size="30">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-calendar"></i>
-														<input type="text" name="expiryDate" placeholder="DLN Expiration Date" class="datepicker" data-dateformat='dd-mm-yy' readonly="">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-user"></i>
-														<input type="text" name="emergencyPersonName" placeholder="Emergency Contact Person Name"maxlength="30" size="30">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-phone"></i>
-														<input type="text" name="emergencyPersonNumber" placeholder="Emergency Contact Person Number" data-mask="(99999) 999999">
-													</label>
-												</section>
-											</div>
-										</fieldset>
-										<header>
-											Address
-										</header>
-
-										<fieldset>
-											<div class="row">
-												<section class="col col-md-12">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" maxlength="300" size="300">
-														<input type="hidden" class="latitudeautocomplete0" name="latitude" placeholder="latitude">
-														<input type="hidden" class="longitudeautocomplete0" name="longitude" placeholder="longitude">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-3">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="street" placeholder="Street" class="street_numberautocomplete0" maxlength="30" size="30">
-													</label>
-												</section>
-												<section class="col col-9">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" maxlength="30" size="30">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="city" placeholder="City" class="localityautocomplete0" maxlength="30" size="30">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" maxlength="30" size="30">
-													</label>
-												</section>
-											</div>
-											<div class="row">
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-														<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only1" maxlength="15" size="15">
-													</label>
-												</section>
-												<section class="col col-6">
-													<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-													<input type="text" name="country" placeholder="Country" class="countryautocomplete0" maxlength="15" size="15">
-													</label>
-												</section>
-											</div>
-
-										</fieldset>
-										
-										<footer>
-											<button type="submit" id="submit" class="btn btn-primary">
-												Add Driver
-											</button>
-										</footer>
-									</form>
-
-								</div>
-								<!-- end widget content -->
-	           <!-- Add CUstomer -->
+				<!-- Add CUstomer -->
+				<!-- widget content -->
+				<div class="widget-body no-padding">
+					<form action="drivers/addDriver" id="driverAddUpdate" class="smart-form" novalidate="novalidate" autocomplete="off" enctype="multipart/form-data">
+						<header>
+							Driver Information
+						</header>
+						<fieldset>
+							<div class="row">
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-user"></i>
+										<input type="text" name="fullName" placeholder="Driver Name" maxlength="30" size="30">
+									</label>
+								</section>
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
+										<input type="email" name="email" placeholder="E-mail" autocomplete="off" maxlength="30" size="30" >
+									</label>
+								</section>
+							</div>
+							<div class="row">
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-lock"></i>
+										<input type="password" name="password" placeholder="Password" autocomplete="new-password">
+									</label>
+								</section>
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-phone"></i>
+										<input type="text" name="contactNumber" placeholder="Contact Number" data-mask="(99999) 999999">
+									</label>
+								</section>
+							</div>
+							<div class="row">
+								<section class="col col-md-12">
+									<div class="input input-file">
+										<span class="button"><input type="file" name="profileImage" id="file" onchange="this.parentNode.nextSibling.value = this.value" accept="image/*" placeholder="Driver image">Browse</span><input type="text" placeholder="Driver image" readonly="">
+									</div>
+								</section>
+							</div>
+							<div class="row">
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-calendar"></i>
+										<input type="text" name="dob" placeholder="Date of Birth" class="" id="dob" data-dateformat='dd-mm-yy' readonly="">
+									</label>
+								</section>
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-calendar"></i>
+										<input type="text" name="doh" placeholder="Date of Hire" class="datepicker" data-dateformat='dd-mm-yy' readonly="">
+									</label>
+								</section>
+							</div>
+							<div class="row">
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-list-ol"></i>
+										<input type="text" name="licenseNumber" placeholder="Driver License Number" class="number-only" maxlength="30" size="30">
+									</label>
+								</section>
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-calendar"></i>
+										<input type="text" name="expiryDate" placeholder="DLN Expiration Date" class="datepicker" data-dateformat='dd-mm-yy' readonly="">
+									</label>
+								</section>
+							</div>
+							<div class="row">
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-user"></i>
+										<input type="text" name="emergencyPersonName" placeholder="Emergency Contact Person Name"maxlength="30" size="30">
+									</label>
+								</section>
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-phone"></i>
+										<input type="text" name="emergencyPersonNumber" placeholder="Emergency Contact Person Number" data-mask="(99999) 999999">
+									</label>
+								</section>
+							</div>
+						</fieldset>
+						<header>
+							Address
+						</header>
+						<fieldset>
+							<div class="row">
+								<section class="col col-md-12">
+									<label class="input"> <i class="icon-append fa fa-map-marker"></i>
+										<input type="text" name="address" placeholder="Address" id="autocomplete0" class="autocomplete" data-id="0" maxlength="300" size="300">
+										<input type="hidden" class="latitudeautocomplete0" name="latitude" placeholder="latitude">
+										<input type="hidden" class="longitudeautocomplete0" name="longitude" placeholder="longitude">
+									</label>
+								</section>
+							</div>
+							<div class="row">
+								<section class="col col-3">
+									<label class="input"> <i class="icon-append fa fa-map-marker"></i>
+										<input type="text" name="street" placeholder="Street" class="street_numberautocomplete0" maxlength="30" size="30">
+									</label>
+								</section>
+								<section class="col col-9">
+									<label class="input"> <i class="icon-append fa fa-map-marker"></i>
+										<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" maxlength="30" size="30">
+									</label>
+								</section>
+							</div>
+							<div class="row">
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-map-marker"></i>
+										<input type="text" name="city" placeholder="City" class="localityautocomplete0" maxlength="30" size="30">
+									</label>
+								</section>
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-map-marker"></i>
+										<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" maxlength="30" size="30">
+									</label>
+								</section>
+							</div>
+							<div class="row">
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-map-marker"></i>
+										<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only1" maxlength="15" size="15">
+									</label>
+								</section>
+								<section class="col col-6">
+									<label class="input"> <i class="icon-append fa fa-map-marker"></i>
+										<input type="text" name="country" placeholder="Country" class="countryautocomplete0" maxlength="15" size="15">
+									</label>
+								</section>
+							</div>
+						</fieldset>				
+						<footer>
+							<button type="submit" id="submit" class="btn btn-primary">
+								Add Driver
+							</button>
+						</footer>
+					</form>
+				</div>
 	        </div>
 		</div>
 	</div>

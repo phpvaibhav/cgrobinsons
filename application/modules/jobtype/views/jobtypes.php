@@ -19,7 +19,6 @@
 				<header>
 					<span class="widget-icon"> <i class="fa fa-bars"></i> </span>
 					<h2>Job Types</h2>
-				
 				</header>
 				<!-- widget div-->
 				<div>
@@ -40,8 +39,7 @@
 										<th data-hide="phone,tablet">Action</th>
 									</tr>
 								</thead>
-								<tbody>
-											
+								<tbody>			
 								</tbody>
 							</table>
 						</div>

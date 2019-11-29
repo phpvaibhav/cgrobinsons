@@ -38,26 +38,26 @@
 class S3 {
 
 	// ACL flags
-	const ACL_PRIVATE = 'private';
-	const ACL_PUBLIC_READ = 'public-read';
-	const ACL_PUBLIC_READ_WRITE = 'public-read-write';
-	const ACL_AUTHENTICATED_READ = 'authenticated-read';
+	const ACL_PRIVATE 				= 'private';
+	const ACL_PUBLIC_READ 			= 'public-read';
+	const ACL_PUBLIC_READ_WRITE 	= 'public-read-write';
+	const ACL_AUTHENTICATED_READ 	= 'authenticated-read';
 
 	// storage class flags
-	const STORAGE_CLASS_STANDARD = 'STANDARD';
-	const STORAGE_CLASS_RRS = 'REDUCED_REDUNDANCY';
+	const STORAGE_CLASS_STANDARD 	= 'STANDARD';
+	const STORAGE_CLASS_RRS 		= 'REDUCED_REDUNDANCY';
 
 	// server-side encryption flags
-	const SSE_NONE = '';
-	const SSE_AES256 = 'AES256';
+	const SSE_NONE 					= '';
+	const SSE_AES256 				= 'AES256';
 
-	public static $use_ssl = false;
-	public static $verify_peer = true;
+	public static $use_ssl 			= false;
+	public static $verify_peer 		= true;
 
-	private static $__access_key = NULL; // AWS Access key
-	private static $__secret_key = NULL; // AWS Secret key
+	private static $__access_key 	= NULL; // AWS Access key
+	private static $__secret_key 	= NULL; // AWS Secret key
 	
-	private static $region = '';
+	private static $region 			= '';
 
 	function __construct($config = array())
 	{

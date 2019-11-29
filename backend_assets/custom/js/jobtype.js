@@ -17,11 +17,11 @@ var jobtype_list = $('#jobtype_list').DataTable({
                     },
                     // Load data for the table's content from an Ajax source
                     "ajax": {
-                        "url": base_url+"adminapi/jobtype/jobtypeList",
-                        "type": "POST",
+                        "url"     : base_url+"adminapi/jobtype/jobtypeList",
+                        "type"    : "POST",
                         "dataType": "json",
-                        "headers": { 'authToken':authToken},
-                        "dataSrc": function (jsonData) {
+                        "headers" : { 'authToken':authToken},
+                        "dataSrc" : function (jsonData) {
                            
                             return jsonData.data;
                         }
@@ -36,30 +36,30 @@ var jobtype_list = $('#jobtype_list').DataTable({
 function jobTypeStatus(e){
    toastr.clear();
   swal({
-    title: "Are you sure?",
-    text:  $(e).data('message'),
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonClass: "btn-danger",
-    confirmButtonText: "Yes",
-    cancelButtonText: "No",
-    closeOnConfirm: true,
-    closeOnCancel: true,
+    title               : "Are you sure?",
+    text                : $(e).data('message'),
+    type                : "warning",
+    showCancelButton    : true,
+    confirmButtonClass  : "btn-danger",
+    confirmButtonText   : "Yes",
+    cancelButtonText    : "No",
+    closeOnConfirm      : true,
+    closeOnCancel       : true,
    // showLoaderOnConfirm: true
   },
   function(isConfirm) {
     if (isConfirm) {
       /*ajax*/
       $.ajax({
-              type: "POST",
-              url: base_url+'adminapi/jobtype/jobTypeStatus',
-              data: {use:$(e).data('useid'), status:$(e).data('status') },
-              headers: { 'authToken':authToken},
-              cache: false,
-              beforeSend: function() {
+              type          : "POST",
+              url           : base_url+'adminapi/jobtype/jobTypeStatus',
+              data          : {use:$(e).data('useid'), status:$(e).data('status') },
+              headers       : { 'authToken':authToken},
+              cache         : false,
+              beforeSend    : function() {
                 preLoadshow(true);
               },     
-              success: function (res) {
+              success       : function (res) {
                 preLoadshow(false);
                 if(res.status=='success'){
                     toastr.success(res.message, 'Success', {timeOut: 3000});
@@ -154,16 +154,16 @@ $("#createJobType").validate({// Rules for form validation
     $('#total_element').val(total_element);
     $('#submit').prop('disabled', true);
     $.ajax({
-            type: "POST",
-            url: base_url+'adminapi/'+$(form).attr('action'),
-            headers: { 'authToken':authToken},
-            data: $(form).serialize(),
-            cache: false,
-            beforeSend: function() {
+            type            : "POST",
+            url             : base_url+'adminapi/'+$(form).attr('action'),
+            headers         : { 'authToken':authToken},
+            data            : $(form).serialize(),
+            cache           : false,
+            beforeSend      : function() {
               preLoadshow(true);
               $('#submit').prop('disabled', true);  
             },     
-            success: function (res) {
+            success         : function (res) {
               preLoadshow(false);
               setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
               if(res.status=='success'){
@@ -194,30 +194,30 @@ jQuery.validator.addClassRules('questionOptionClass', {
 function jobTypeDelete(e){
    toastr.clear();
   swal({
-    title: "Are you sure?",
-    text:  $(e).data('message'),
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonClass: "btn-danger",
-    confirmButtonText: "Yes",
-    cancelButtonText: "No",
-    closeOnConfirm: true,
-    closeOnCancel: true,
+      title                 : "Are you sure?",
+      text                  :  $(e).data('message'),
+      type                  : "warning",
+      showCancelButton      : true,
+      confirmButtonClass    : "btn-danger",
+      confirmButtonText     : "Yes",
+      cancelButtonText      : "No",
+      closeOnConfirm        : true,
+      closeOnCancel         : true,  
    // showLoaderOnConfirm: true
   },
   function(isConfirm) {
     if (isConfirm) {
       /*ajax*/
       $.ajax({
-              type: "POST",
-              url: base_url+'adminapi/jobtype/jobTypeDelete',
-              data: {use:$(e).data('useid')},
-              headers: { 'authToken':authToken},
-              cache: false,
-              beforeSend: function() {
+              type          : "POST",
+              url           : base_url+'adminapi/jobtype/jobTypeDelete',
+              data          : {use:$(e).data('useid')},
+              headers       : { 'authToken':authToken},
+              cache         : false,
+              beforeSend    : function() {
                 preLoadshow(true);
               },     
-              success: function (res) {
+              success       : function (res) {
                 preLoadshow(false);
                 if(res.status=='success'){
                   toastr.success(res.message, 'Success', {timeOut: 3000});

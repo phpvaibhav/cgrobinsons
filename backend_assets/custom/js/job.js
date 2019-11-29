@@ -75,16 +75,16 @@ $("#createJob").validate({// Rules for form validation
         toastr.clear();
         $('#submit').prop('disabled', true);
         $.ajax({
-            type: "POST",
-            url: base_url+'adminapi/'+$(form).attr('action'),
-            headers: { 'authToken':authToken},
-            data: $(form).serialize(),
-            cache: false,
-            beforeSend: function() {
+            type          : "POST",
+            url           : base_url+'adminapi/'+$(form).attr('action'),
+            headers       : { 'authToken':authToken},
+            data          : $(form).serialize(),
+            cache         : false,
+            beforeSend    : function() {
               preLoadshow(true);
               $('#submit').prop('disabled', true);  
             },     
-            success: function (res) {
+            success       : function (res) {
               preLoadshow(false);
               setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
               if(res.status=='success'){
@@ -123,11 +123,11 @@ var job_list = $('#job_list').DataTable({
                 },
                 // Load data for the table's content from an Ajax source
                 "ajax": {
-                    "url": base_url+"adminapi/jobs/jobList",
-                    "type": "POST",
-                    "dataType": "json",
-                    "headers": { 'authToken':authToken},
-                    "dataSrc": function (jsonData) {
+                    "url"         : base_url+"adminapi/jobs/jobList",
+                    "type"        : "POST",
+                    "dataType"    : "json",
+                    "headers"     : { 'authToken':authToken},
+                    "dataSrc"     : function (jsonData) {
                       return jsonData.data;
                     }
                 },
@@ -140,30 +140,30 @@ var job_list = $('#job_list').DataTable({
 function jobStatus(e){
    toastr.clear();
   swal({
-    title: "Are you sure?",
-    text:  $(e).data('message'),
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonClass: "btn-danger",
-    confirmButtonText: "Yes",
-    cancelButtonText: "No",
-    closeOnConfirm: true,
-    closeOnCancel: true,
+    title               : "Are you sure?",
+    text                : $(e).data('message'),
+    type                : "warning",
+    showCancelButton    : true,
+    confirmButtonClass  : "btn-danger",
+    confirmButtonText   : "Yes",
+    cancelButtonText    : "No",
+    closeOnConfirm      : true,
+    closeOnCancel       : true,
     // showLoaderOnConfirm: true
   },
   function(isConfirm) {
     if (isConfirm) {
       /*ajax*/
       $.ajax({
-              type: "POST",
-              url: base_url+'adminapi/jobs/jobStatus',
-              data: {use:$(e).data('useid'), status:$(e).data('status') },
-              headers: { 'authToken':authToken},
-              cache: false,
-              beforeSend: function() {
+              type          : "POST",
+              url           : base_url+'adminapi/jobs/jobStatus',
+              data          : {use:$(e).data('useid'), status:$(e).data('status') },
+              headers       : { 'authToken':authToken},
+              cache         : false,
+              beforeSend    : function() {
                 preLoadshow(true);
               },     
-              success: function (res) {
+              success       : function (res) {
                 preLoadshow(false);
                 if(res.status=='success'){
                   toastr.success(res.message, 'Success', {timeOut: 3000});
@@ -184,30 +184,30 @@ function jobStatus(e){
 function jobDelete(e){
    toastr.clear();
   swal({
-  title: "Are you sure?",
-  text:  $(e).data('message'),
-  type: "warning",
-  showCancelButton: true,
-  confirmButtonClass: "btn-danger",
-  confirmButtonText: "Yes",
-  cancelButtonText: "No",
-  closeOnConfirm: true,
-  closeOnCancel: true,
-  // showLoaderOnConfirm: true
+    title               : "Are you sure?",
+    text                : $(e).data('message'),
+    type                : "warning",
+    showCancelButton    : true,
+    confirmButtonClass  : "btn-danger",
+    confirmButtonText   : "Yes",
+    cancelButtonText    : "No",
+    closeOnConfirm      : true,
+    closeOnCancel       : true,
+    // showLoaderOnConfirm: true
   },
   function(isConfirm) {
     if (isConfirm) {
       /*ajax*/
       $.ajax({
-              type: "POST",
-              url: base_url+'adminapi/jobs/jobDelete',
-              data: {use:$(e).data('useid')},
-              headers: { 'authToken':authToken},
-              cache: false,
-              beforeSend: function() {
+              type            : "POST",
+              url             : base_url+'adminapi/jobs/jobDelete',
+              data            : {use:$(e).data('useid')},
+              headers         : { 'authToken':authToken},
+              cache           : false,
+              beforeSend      : function() {
                 preLoadshow(true);
               },     
-              success: function (res) {
+              success         : function (res) {
                 preLoadshow(false);
                 if(res.status=='success'){  
                   toastr.success(res.message, 'Success', {timeOut: 3000});
@@ -229,15 +229,15 @@ function getQuestions(e){
   var jobTypeId = $(e).val();
   /*ajax*/
   $.ajax({
-          type: "POST",
-          url: base_url+'adminapi/jobtype/getQuestions',
-          data: {jobTypeId:jobTypeId,question:question,pendingJob:pendingJob},
-          headers: { 'authToken':authToken},
-          cache: false,
-          beforeSend: function() {
+          type          : "POST",
+          url           : base_url+'adminapi/jobtype/getQuestions',
+          data          : {jobTypeId:jobTypeId,question:question,pendingJob:pendingJob},
+          headers       : { 'authToken':authToken},
+          cache         : false,
+          beforeSend    : function() {
             preLoadshow(true);
           },     
-          success: function (res) {
+          success       : function (res) {
             preLoadshow(false);
             if(res.status=='success'){
               console.log(res.data);

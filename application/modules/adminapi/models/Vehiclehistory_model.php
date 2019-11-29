@@ -1,20 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Vehilcehistory_model extends CI_Model {
+class Vehiclehistory_model extends CI_Model {
 
     //var $table , $column_order, $column_search , $order =  '';
-    var $table = 'vehicleHistory';
-    var $column_order = array('v.historyId','v.vehicleId','v.vjobTypeId','v.date','v.attachment','v.fileType','v.status','vj.type'); //set column field database for datatable orderable
-    var $column_sel = array('v.historyId','v.vehicleId','v.vjobTypeId','v.date','v.attachment','v.fileType','v.status','(case when (v.status = 0) 
+    var $table          = 'vehicleHistory';
+    var $column_order   = array('v.historyId','v.vehicleId','v.vjobTypeId','v.date','v.attachment','v.fileType','v.status','vj.type'); //set column field database for datatable orderable
+    var $column_sel     = array('v.historyId','v.vehicleId','v.vjobTypeId','v.date','v.attachment','v.fileType','v.status','(case when (v.status = 0) 
         THEN "Inactive" when (v.status = 1) 
         THEN "Active" ELSE
         "Unknown" 
         END) as statusShow','vj.type'); //set column field database for datatable orderable
     var $column_search = array('v.vehicleId','v.historyId','v.vjobTypeId','v.date','v.attachment','v.status','vj.type'); //set column field database for datatable searchable 
-    var $order = array('DATE(v.crd)' => 'DESC');  // default order
-    var $where = array();
-    var $group_by = 'v.historyId'; 
+    var $order          = array('DATE(v.crd)' => 'DESC');  // default order
+    var $where          = array();
+    var $group_by       = 'v.historyId'; 
 
     public function __construct(){
         parent::__construct();
@@ -22,7 +22,7 @@ class Vehilcehistory_model extends CI_Model {
     
     public function set_data($where=''){
         $this->where = $where; 
-    }
+    }//End function
 
     private function _get_query()
     {
@@ -75,43 +75,38 @@ class Vehilcehistory_model extends CI_Model {
             $this->db->order_by(key($order), $order[key($order)]);
         }
        
-    }
+    }//End function
 
     function get_list()
     {
         $this->_get_query();
         if(isset($_POST['length']) && $_POST['length'] < 1) {
-            $_POST['length']= '10';
+            $_POST['length'] = '10';
         } else{
-        	$_POST['length']= isset($_POST['length']) ? $_POST['length'] :10;
-        }
-        
-        
+        	$_POST['length'] = isset($_POST['length']) ? $_POST['length'] :10;
+        } 
         if(isset($_POST['start']) && $_POST['start'] > 1) {
-            $_POST['start']= $_POST['start'];
+            $_POST['start']  = $_POST['start'];
         }
-         $_POST['start']= isset($_POST['start']) ? $_POST['start']:0;
+        $_POST['start']      = isset($_POST['start']) ? $_POST['start']:0;
         $this->db->limit($_POST['length'], $_POST['start']);
         //print_r($_POST);die;
         $query = $this->db->get(); //lq();
         return $query->result();
-    }
+    }//End function
 
     function count_filtered()
     {
         $this->_get_query();
         $query = $this->db->get();
         return $query->num_rows();
-    }
-
-
+    }//End function
     public function count_all()
     {
-               $this->db->from('vehicleHistory as v');
+        $this->db->from('vehicleHistory as v');
         $this->db->join('vehicleJobType as vj','vj.vjobTypeId=v.vjobTypeId','left');
-         if(!empty($this->where))
-            $this->db->where($this->where); 
+        if(!empty($this->where))
+        $this->db->where($this->where); 
         return $this->db->count_all_results();
-    }
-
-}
+    }//End function
+}//End Class

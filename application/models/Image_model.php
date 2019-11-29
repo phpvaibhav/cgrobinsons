@@ -14,11 +14,11 @@ class Image_model extends CI_Model{
     //predefined image sizes (can be changed according to project requirement)
     function image_sizes(){
         //add folder name
-        $img_sizes = array();
-        $img_sizes['thumbnail'] = array('width'=>150, 'height'=>150, 'folder'=>'/thumb');
-        $img_sizes['medium'] = array('width'=>600, 'height'=>600, 'folder'=>'/medium');
+        $img_sizes                  = array();
+        $img_sizes['thumbnail']     = array('width'=>150, 'height'=>150, 'folder'=>'/thumb');
+        $img_sizes['medium']        = array('width'=>600, 'height'=>600, 'folder'=>'/medium');
         return $img_sizes;
-    }
+    }//end function
     
     /**
      * Make upload directory
@@ -36,8 +36,7 @@ class Image_model extends CI_Model{
                 mkdir(FCPATH . $defaultFolder . '/' . $folder, $mode,true);
             }
         } 
-    }
-    
+    }//end function
     /**
      * Upload image and create resized copies
      * Modified in ver 2.0
@@ -46,22 +45,22 @@ class Image_model extends CI_Model{
         
         $this->make_dirs($folder);
         
-       	$realpath = 'uploads/';
-        $allowed_types = "gif|jpg|png|jpeg"; 	
-        $img_name = random_string('alnum', 16);  //generate random string for image name
+        $realpath       = 'uploads/';
+        $allowed_types  = "gif|jpg|png|jpeg"; 	
+        $img_name       = random_string('alnum', 16);  //generate random string for image name
         
         $config = array(
-                'upload_path'       => $realpath.$folder,
-                'allowed_types'     => $allowed_types,
-                'max_size'          => "10240",   // File size limitation, initially w'll set to 10mb (Can be changed)
-                'max_height'        => "4000", // max height in px
-                'max_width'         => "4000", // max width in px
+            'upload_path'       => $realpath.$folder,
+            'allowed_types'     => $allowed_types,
+            'max_size'          => "10240",   // File size limitation, initially w'll set to 10mb (Can be changed)
+            'max_height'        => "4000", // max height in px
+            'max_width'         => "4000", // max width in px
             //    'min_width'         => "200", // min width in px
-             //   'min_height'        => "200", // min height in px
-                'file_name'         => $img_name,
-                'overwrite'	    => FALSE,
-                'remove_spaces'	    => TRUE,
-                'quality'           => '100%',
+            //   'min_height'        => "200", // min height in px
+            'file_name'         => $img_name,
+            'overwrite'	        => FALSE,
+            'remove_spaces'	    => TRUE,
+            'quality'           => '100%',
             );
 		
         $this->load->library('upload'); //upload library
@@ -96,29 +95,28 @@ class Image_model extends CI_Model{
 
         foreach($img_sizes_arr as $k=>$v){
 
-            $real_path = realpath(FCPATH .$realpath .$folder);
+            $real_path                      = realpath(FCPATH .$realpath .$folder);
 
-            $resize['image_library']      = 'gd2';
-            $resize['source_image']       = $image_data['full_path'];
-            $resize['new_image'] 	      = $real_path.$v['folder'].'/'.$image_data['file_name'];
-            $resize['maintain_ratio']     = FALSE;
-            $resize['width'] 	      = $v['width'];
-            $resize['height'] 	      = $v['height'];
-            $resize['quality'] 	      = '100%';
+            $resize['image_library']        = 'gd2';
+            $resize['source_image']         = $image_data['full_path'];
+            $resize['new_image'] 	        = $real_path.$v['folder'].'/'.$image_data['file_name'];
+            $resize['maintain_ratio']       = FALSE;
+            $resize['width'] 	            = $v['width'];
+            $resize['height'] 	            = $v['height'];
+            $resize['quality'] 	            = '100%';
 
             $this->image_lib->initialize($resize);
             $this->image_lib->resize();   //create resized copies
         }
 
         //custom size 
-        $real_path = realpath(FCPATH .$realpath .$folder);
-
-        $resize1['source_image'] 	= $image_data['full_path'];
-        $resize1['new_image'] 	= $real_path.$large.'/'.$image_data['file_name'];
-        $resize1['maintain_ratio'] 	= FALSE;
-        $resize1['width']           = $width;
-        $resize1['height'] 		= $height;
-        $resize1['quality']         = '100%';
+        $real_path                   = realpath(FCPATH .$realpath .$folder);
+        $resize1['source_image'] 	 = $image_data['full_path'];
+        $resize1['new_image'] 	     = $real_path.$large.'/'.$image_data['file_name'];
+        $resize1['maintain_ratio'] 	 = FALSE;
+        $resize1['width']            = $width;
+        $resize1['height'] 		     = $height;
+        $resize1['quality']          = '100%';
 
         $this->image_lib->initialize($resize1);
         $this->image_lib->resize();
@@ -127,9 +125,8 @@ class Image_model extends CI_Model{
         if(empty($thumb_img))
             $thumb_img = $image_data['file_name'];
 
-        return array('image_name'=>$thumb_img);
-        
-    } 
+        return array('image_name'=>$thumb_img);   
+    }//end function 
     
     //delete(unlink) image from folder/server
     function delete_image($path,$file){
@@ -137,8 +134,8 @@ class Image_model extends CI_Model{
         $main   = $path.$file;
         $thumb  = $path.'thumb/'.$file;
         $medium = $path.'medium/'.$file;
-        $large = $path.'large/'.$file;
-//pr($thumb);
+        $large  = $path.'large/'.$file;
+        //pr($thumb);
         if(file_exists(FCPATH.$main)):
             unlink( FCPATH.$main);
         endif;
@@ -152,14 +149,13 @@ class Image_model extends CI_Model{
             unlink( FCPATH.$large);
         endif;
         return TRUE;
-    }//
+    }//end function
     function updateDocument($image,$folder){
      
-         $this->make_dirs($folder);
-        
-        $realpath ='uploads/';
+        $this->make_dirs($folder);
 
-        $allowed_types = "*";//"gif|jpg|png|jpeg"; 
+        $realpath       = 'uploads/';
+        $allowed_types  = "*";//"gif|jpg|png|jpeg"; 
 
         $config = array(
             'upload_path'       => $realpath.$folder,
@@ -182,8 +178,8 @@ class Image_model extends CI_Model{
         } else {
 
             $image_data = $this->upload->data(); 
-            $fileType = explode("/",$image_data['file_type']);
-            $file_type = ($fileType[0]=='image') ?'image' :'doc' ;
+            $fileType   = explode("/",$image_data['file_type']);
+            $file_type  = ($fileType[0]=='image') ?'image' :'doc' ;
 
 
             return array('image_name'=>$image_data['file_name'],'file_type'=> $file_type);
@@ -192,37 +188,29 @@ class Image_model extends CI_Model{
     } // End Function
   	function updateGallery($fileName,$folder,$hieght=250,$width=250)
 	{
-		  	$this->make_dirs($folder);
-
- 
-        
-       	$realpath = 'uploads/';
-        $allowed_types = "gif|jpg|png|jpeg"; 	
-      
-       
-			$storedFile 		= array();
-			$allowed_types 		= "gif|jpg|png|jpeg"; 
-			$files 				= $_FILES[$fileName];
-			$number_of_files 	= sizeof($_FILES[$fileName]['tmp_name']);
-
-			// we first load the upload library
-			$this->load->library('upload');
-			// next we pass the upload path for the images
-			
-        
+		$this->make_dirs($folder);
+        $realpath           = 'uploads/';
+        $allowed_types      = "gif|jpg|png|jpeg"; 	
+        $storedFile 		= array();
+        $allowed_types 		= "gif|jpg|png|jpeg"; 
+        $files 				= $_FILES[$fileName];
+        $number_of_files 	= sizeof($_FILES[$fileName]['tmp_name']);
+        // we first load the upload library
+        $this->load->library('upload');
+        // next we pass the upload path for the images
         $configG = array(
-                'upload_path'       => $realpath.$folder,
-                'allowed_types'     => $allowed_types,
-                'max_size'          => "10240",   // File size limitation, initially w'll set to 10mb (Can be changed)
-                'max_height'        => "4000", // max height in px
-                'max_width'         => "4000", // max width in px
-            //    'min_width'         => "200", // min width in px
-             //   'min_height'        => "200", // min height in px
-                'encrypt_name'         => TRUE,
-                'overwrite'	    => FALSE,
-                'remove_spaces'	    => TRUE,
-                'quality'           => '100%',
-            );
+                    'upload_path'       => $realpath.$folder,
+                    'allowed_types'     => $allowed_types,
+                    'max_size'          => "10240",   // File size limitation, initially w'll set to 10mb (Can be changed)
+                    'max_height'        => "4000", // max height in px
+                    'max_width'         => "4000", // max width in px
+                    //    'min_width'         => "200", // min width in px
+                    //   'min_height'        => "200", // min height in px
+                    'encrypt_name'      => TRUE,
+                    'overwrite'	        => FALSE,
+                    'remove_spaces'	    => TRUE,
+                    'quality'           => '100%',
+                );
 			// now, taking into account that there can be more than one file, for each file we will have to do the upload
 			for ($i = 0; $i < $number_of_files; $i++)
 			{
@@ -239,18 +227,12 @@ class Image_model extends CI_Model{
 					$savedFile = $this->upload->data();//upload the image
 					$storedFile[$i]['name'] = $savedFile['file_name'];
 					$storedFile[$i]['type'] = $savedFile['file_type'];
-				
-
-
 				}
 				else
 				{
 					$storedFile[$i]['error'] = $this->upload->display_errors();
 				}
-			} // END OF FOR LOOP
-		 
-		return $storedFile;
-		  
+			} // END OF FOR LOOP 
+		return $storedFile;	  
 	}//FUnction
-
 }// End of class Image_model

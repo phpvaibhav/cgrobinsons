@@ -4,17 +4,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Customer_model extends CI_Model {
 
     //var $table , $column_order, $column_search , $order =  '';
-    var $table = 'users';
-    var $column_order = array('c.id','c.fullName','c.email','c.contactNumber','c.status'); //set column field database for datatable orderable
-    var $column_sel = array('c.id','c.fullName','c.email','c.contactNumber','c.status','(case when (c.status = 0) 
-        THEN "Inactive" when (c.status = 1) 
-        THEN "Active" ELSE
-        "Unknown" 
-        END) as statusShow'); //set column field database for datatable orderable
-    var $column_search = array('c.fullName','c.contactNumber'); //set column field database for datatable searchable 
-    var $order = array('c.id' => 'DESC');  // default order
-    var $where = array();
-    var $group_by = 'c.id'; 
+    var $table          = 'users';
+    var $column_order   = array('c.id','c.fullName','c.email','c.contactNumber','c.status'); //set column field database for datatable orderable
+    var $column_sel     = array('c.id','c.fullName','c.email','c.contactNumber','c.status','(case when (c.status = 0) 
+    THEN "Inactive" when (c.status = 1) 
+    THEN "Active" ELSE
+    "Unknown" 
+    END) as statusShow'); //set column field database for datatable orderable
+    var $column_search  = array('c.fullName','c.contactNumber'); //set column field database for datatable searchable 
+    var $order          = array('c.id' => 'DESC');  // default order
+    var $where          = array();
+    var $group_by       = 'c.id'; 
 
     public function __construct(){
         parent::__construct();
@@ -22,7 +22,7 @@ class Customer_model extends CI_Model {
     
     public function set_data($where=''){
         $this->where = $where; 
-    }
+    }//End Function
 
     private function _get_query()
     {
@@ -71,10 +71,8 @@ class Customer_model extends CI_Model {
         { 
             $order = $this->order; 
             $this->db->order_by(key($order), $order[key($order)]);
-        }
-       
-    }
-
+        }    
+    }//End Function
     function get_list()
     {
         $this->_get_query();
@@ -83,8 +81,6 @@ class Customer_model extends CI_Model {
         } else{
         	$_POST['length']= isset($_POST['length']) ? $_POST['length'] :10;
         }
-        
-        
         if(isset($_POST['start']) && $_POST['start'] > 1) {
             $_POST['start']= $_POST['start'];
         }
@@ -93,16 +89,13 @@ class Customer_model extends CI_Model {
         //print_r($_POST);die;
         $query = $this->db->get(); //lq();
         return $query->result();
-    }
-
+    }//End Function
     function count_filtered()
     {
         $this->_get_query();
         $query = $this->db->get();
         return $query->num_rows();
-    }
-
-
+    }//End Function
     public function count_all()
     {
         $this->db->from($this->table);
@@ -111,22 +104,21 @@ class Customer_model extends CI_Model {
         return $this->db->count_all_results();
     }//end function
     function customerAddressManage($data){
-            $customer_val['latitude']              = $data['latitude'];
-            $customer_val['longitude']             = $data['longitude'];
-            $customer_val['customerId']             = $data['customerId'];
-        $address = $this->common_model->is_data_exists('customerAddress',$customer_val);
+        $customer_val['latitude']              = $data['latitude'];
+        $customer_val['longitude']             = $data['longitude'];
+        $customer_val['customerId']            = $data['customerId'];
+        $address                               = $this->common_model->is_data_exists('customerAddress',$customer_val);
         if(!$address){
-        $customer_val['address']               = $data['address'];
-        $customer_val['street']                = $data['street'];
-        $customer_val['street2']               = $data['street2'];
-        $customer_val['city']                  = $data['city'];
-        $customer_val['state']                 = $data['state'];
-        $customer_val['zip']                   = $data['zip'];
-        $customer_val['country']               = $data['country'];
-        $this->common_model->insertData('customerAddress',$customer_val);
+            $customer_val['address']               = $data['address'];
+            $customer_val['street']                = $data['street'];
+            $customer_val['street2']               = $data['street2'];
+            $customer_val['city']                  = $data['city'];
+            $customer_val['state']                 = $data['state'];
+            $customer_val['zip']                   = $data['zip'];
+            $customer_val['country']               = $data['country'];
+            $this->common_model->insertData('customerAddress',$customer_val);
         }
         return true;
         /*customer add address*/
     }//end function
-
 }

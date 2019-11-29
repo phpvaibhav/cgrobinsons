@@ -80,7 +80,7 @@ class ResponseMessages{
 
         );
         return (isset($codes[$status])) ? $codes[$status] : '';
-    }
-}
+    }//End function
+}//End function
 
 ?>

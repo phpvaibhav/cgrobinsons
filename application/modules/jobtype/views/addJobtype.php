@@ -15,7 +15,7 @@
 								</label>
 							</section>				
 						</div>				
-					<!-- add  -->
+						<!-- add  -->
 						<div class="row serviceContainer">
 
 							<div class="col-md-12 col-sm-12 col-lg-12 elementPro" id="divPro_1">

@@ -21,6 +21,6 @@ class Maintenance_hook {
             echo $this->CI->load->view('maintenance_view', '', TRUE); exit;
         }
         
-    }
+    }//End function
     
 } //End class

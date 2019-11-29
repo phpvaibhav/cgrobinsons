@@ -1,20 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Vehilce_model extends CI_Model {
+class Vehicle_model extends CI_Model {
 
     //var $table , $column_order, $column_search , $order =  '';
-    var $table = 'vehicles';
-    var $column_order = array('v.vehicleId','v.year','v.manufacturer','v.model','v.vin','v.plate','v.color','v.state','v.status','d.fullName'); //set column field database for datatable orderable
-    var $column_sel = array('v.vehicleId','v.year','v.manufacturer','v.model','v.vin','v.plate','v.color','v.state','v.status','(case when (v.status = 0) 
+    var $table          = 'vehicles';
+    var $column_order   = array('v.vehicleId','v.year','v.manufacturer','v.model','v.vin','v.plate','v.color','v.state','v.status','d.fullName'); //set column field database for datatable orderable
+    var $column_sel     = array('v.vehicleId','v.year','v.manufacturer','v.model','v.vin','v.plate','v.color','v.state','v.status','(case when (v.status = 0) 
         THEN "Inactive" when (v.status = 1) 
         THEN "Active" ELSE
         "Unknown" 
         END) as statusShow','d.fullName'); //set column field database for datatable orderable
     var $column_search = array('v.year','v.manufacturer','v.model','v.vin','v.plate','v.color','v.state','d.fullName'); //set column field database for datatable searchable 
-    var $order = array('v.vehicleId' => 'DESC');  // default order
-    var $where = array();
-    var $group_by = 'v.vehicleId'; 
+    var $order          = array('v.vehicleId' => 'DESC');  // default order
+    var $where          = array();
+    var $group_by       = 'v.vehicleId'; 
 
     public function __construct(){
         parent::__construct();
@@ -22,7 +22,7 @@ class Vehilce_model extends CI_Model {
     
     public function set_data($where=''){
         $this->where = $where; 
-    }
+    }//End function
 
     private function _get_query()
     {
@@ -75,34 +75,34 @@ class Vehilce_model extends CI_Model {
             $this->db->order_by(key($order), $order[key($order)]);
         }
        
-    }
+    }//End function
 
     function get_list()
     {
         $this->_get_query();
         if(isset($_POST['length']) && $_POST['length'] < 1) {
-            $_POST['length']= '10';
+            $_POST['length']        = '10';
         } else{
-        	$_POST['length']= isset($_POST['length']) ? $_POST['length'] :10;
+        	$_POST['length']       = isset($_POST['length']) ? $_POST['length'] :10;
         }
         
         
         if(isset($_POST['start']) && $_POST['start'] > 1) {
-            $_POST['start']= $_POST['start'];
+            $_POST['start']     = $_POST['start'];
         }
-         $_POST['start']= isset($_POST['start']) ? $_POST['start']:0;
+        $_POST['start']         = isset($_POST['start']) ? $_POST['start']:0;
         $this->db->limit($_POST['length'], $_POST['start']);
         //print_r($_POST);die;
         $query = $this->db->get(); //lq();
         return $query->result();
-    }
+    }//End function
 
     function count_filtered()
     {
         $this->_get_query();
         $query = $this->db->get();
         return $query->num_rows();
-    }
+    }//End function
 
 
     public function count_all()
@@ -111,6 +111,22 @@ class Vehilce_model extends CI_Model {
          if(!empty($this->where))
             $this->db->where($this->where); 
         return $this->db->count_all_results();
-    }
-
-}
+    }//End function
+    function vehilceLatlong($driverId =''){
+        $array =array();
+        $this->db->select('v.vehicleId,v.year,v.manufacturer,v.model,v.vin,v.plate,v.color,v.state,v.status,d.fullName,d.fullName,d.latitude,d.longitude');
+        $this->db->from('vehicles as v');
+        
+        $this->db->join('assignVehicle as av','av.vehicleId = v.vehicleId','left');
+        $this->db->join('users as d','d.id = av.driverId','left');
+        $this->db->where(array('d.latitude !='=>0.00000000,'d.longitude !='=>0.00000000));
+        !empty($driverId) ? $this->db->where(array('d.id'=>$driverId)):"";
+        !empty($driverId) ? $this->db->limit(1) :"";
+        $sql = $this->db->get();
+       
+        if($sql->num_rows()){
+            $array =  !empty($driverId) ? $sql->row_array(): $sql->result();
+        }
+        return $array;
+    }//End FUnction
+}//End class

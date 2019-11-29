@@ -1,5 +1,4 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jobs extends Common_Back_Controller {
@@ -24,7 +23,7 @@ class Jobs extends Common_Back_Controller {
         $data['customers']        =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
         $data['front_scripts']    = array('backend_assets/custom/js/job.js');
         $this->load->admin_render('jobs', $data);
-    }     
+    }//End Function     
     public function addJob() { 
         
         $data['title']            = 'Add Job';
@@ -34,7 +33,7 @@ class Jobs extends Common_Back_Controller {
         $data['customers']        =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
         $data['front_scripts']    = array('backend_assets/custom/js/job.js');
         $this->load->admin_render('addJob', $data);
-    } 
+    }//End Function
     public function editJob() { 
         $jobId                      = decoding($this->uri->segment(3));
 
@@ -53,7 +52,27 @@ class Jobs extends Common_Back_Controller {
         $data['front_scripts']      = array('backend_assets/custom/js/job.js');
         
         $this->load->admin_render('editJob', $data);
-    } 
+    }//End Function 
+    public function cloneJob() { 
+        $jobId                      = decoding($this->uri->segment(3));
+
+        $data['title']              = 'Clone Job';   
+        $data['jobTypes']           =  $this->common_model->getAll('jobType');
+        $data['drivers']            =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
+        $data['customers']          =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
+         $this->load->model('job_model');
+        $data['job']                = $this->job_model->jobDetail($jobId);
+        $questions                  =  $this->common_model->getAll('jobQuestionAnswer',array('jobId'=>$jobId));
+        $que =array();
+        foreach ($questions as $key => $question) {
+           $que[] = $question->questionId;
+        }
+        $data['que']                = !empty($que) ? implode(",",$que):"";
+        $data['front_scripts']      = array('backend_assets/custom/js/job.js');
+        $parentId              = $this->common_model->get_total_count('jobs',array('parentId'=>$jobId));
+        $data['parentId'] = $parentId + 1;
+        $this->load->admin_render('cloneJob', $data);
+    } //end function
     
     public function jobDetail(){
       //pr('admin@admin.com');
@@ -125,12 +144,13 @@ class Jobs extends Common_Back_Controller {
       $content = '';
       $content .= '<table border="0" cellspacing="1" cellpadding="4">
                 <tr style="background-color:#707070;color:#FFFFFF;"  nobr="true">
-                    <th width="20%">Job Name</th>
+                    <th width="17%">Job Name</th>
                     <th  width="15%">Job Type</th>
                     <th width="15%">Customer</th>
                     <th  width="15%">Driver</th>
-                    <th  width="20%">Start Date Time</th>
-                    <th  width="15%">Status</th>
+                    <th  width="15%">Creation Date</th>
+                    <th  width="10%">Priority</th>
+                    <th  width="13%">Status</th>
                 </tr>';
             //$content .= $this->fetch_employeePdf_info();
          // $content .= '</table>';
@@ -159,6 +179,22 @@ class Jobs extends Common_Back_Controller {
                   
                   default:
                     break;
+                } 
+            $workPriority ="";
+                switch ($job->workPriority) {
+                  case 0:
+                    $workPriority ='<label color="green" >'.$job->priority.'</label>';
+                    break;
+                  case 1:
+                    $workPriority ='<label color="blue">'.$job->priority.'</label>';
+                    break;
+                  case 2:
+                  
+                    $workPriority ='<label color="red">'.$job->priority.'</label>';
+                    break;
+                  
+                  default:
+                    break;
                 }
           $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
           $content .='<td>'.$job->jobName.'</td>';
@@ -166,6 +202,7 @@ class Jobs extends Common_Back_Controller {
           $content .='<td>'.$job->customerName.'</td>';
           $content .='<td>'.$job->driverName.'</td>';
           $content .='<td>'.date("d/m/Y",strtotime($job->startDate))." ".$job->startTime.'</td>';
+          $content .='<td>'.$workPriority.'</td>';
           $content .='<td>'.$labelShow.'</td>';
           $content .='</tr>';
       }
@@ -187,7 +224,7 @@ class Jobs extends Common_Back_Controller {
       //============================================================+
       // END OF FILE
       //============================================================+
-   }
+   }//End Function
    // End job PFD  
   public function jobDetailPdf()
   {
@@ -279,18 +316,40 @@ class Jobs extends Common_Back_Controller {
                   default:
                     break;
                 }
-     
+                $workPriority ="";
+                switch ($job['workPriority']) {
+                  case 0:
+                    $workPriority ='<label color="green" >'.$job['priority'].'</label>';
+                    break;
+                  case 1:
+                    $workPriority ='<label color="blue">'.$job['priority'].'</label>';
+                    break;
+                  case 2:
+                  
+                    $workPriority ='<label color="red">'.$job['priority'].'</label>';
+                    break;
+                  
+                  default:
+                    break;
+                }
        // $content .= '<table bgcolor="#cccccc" border="0" cellspacing="1" cellpadding="4">';
         $content .= '<table  border="0" cellspacing="1" cellpadding="4" bgcolor="#EAECF0">';
         $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>Basic Information</b></th></tr>';
         $content .= '<tr bgcolor="#EAECF0">';
         $content .= '<td><strong>Job Name</strong> :</td><td>'.$job['jobName'].'</td>';
         $content .= '<td><strong>Job Type</strong> :</td><td>'.$job['jobType'].'</td>';
-        $content .= '</tr>';  
+        $content .= '</tr>'; 
+
         $content .= '<tr bgcolor="#EAECF0">';
         $content .= '<td><strong>Job Status</strong> :</td><td><span style="font-size: medium;"><b>'.$labelShow.'</b></span></td>';
         $content .= '<td><strong>Creation Date</strong> :</td><td>'.date("d/m/Y",strtotime($job['startDate']))." ".$job['startTime'].'</td>';
         $content .= '</tr>';   
+  
+        $content .= '<tr bgcolor="#EAECF0">';
+        $content .= '<td><strong>Work Priority</strong> :</td><td><span style="font-size: medium;"><b>'.$workPriority.'</b></span></td>';
+        $content .= '<td></td><td></td>';
+        $content .= '</tr>';   
+
         $content .= '<tr bgcolor="#EAECF0">';
         $content .= '<td><strong>Customer Name</strong> :</td><td>'.$job['customerName'].'</td>';
         $content .= '<td><strong>Driver Name</strong> :</td><td>'.$job['driverName'].'</td>'; 
@@ -406,7 +465,7 @@ class Jobs extends Common_Back_Controller {
       //============================================================+
       // END OF FILE
       //============================================================+
-  }
+  }//End Function
  // End job PFD 
  
 }

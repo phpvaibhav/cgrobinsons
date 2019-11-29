@@ -37,7 +37,7 @@ class Api_model extends CI_Model {
                 }
         }
         return true;
-    }
+    }//End function
     
     /*
     Function for check provided token is resultid or not
@@ -54,11 +54,10 @@ class Api_model extends CI_Model {
             }
         
         return false;
-    }
+    }//End Function
 
     function registration($user)
-    {   
-       
+    {       
         $checkEmail = $this->db->select('*')->where(array('email'=>$user['email']))->get(USERS);
             if($checkEmail->num_rows()){
                 return array('regType'=>'AE'); //already exist
@@ -71,11 +70,8 @@ class Api_model extends CI_Model {
                     // Normal registration
                 endif;
             }
-        return false;
-        
+        return false;    
     } //End Function users Register
-
-   
     function updateDeviceIdToken($id,$deviceType,$deviceToken,$authToken,$table = 'users')
     {
         $req = $this->db->select('id')->where('id',$id)->get($table);
@@ -88,7 +84,7 @@ class Api_model extends CI_Model {
         return FALSE;
     }//End Function Update Device Token 
         
-        //get user info
+    //get user info
     function userInfo($where){
         $userPath    = base_url().USER_AVATAR_PATH;
         $userDefault = base_url().USER_DEFAULT_AVATAR;
@@ -110,7 +106,7 @@ class Api_model extends CI_Model {
         END) as userRole');
         $this->db->from(USERS);
         $this->db->where($where);
-        $sql= $this->db->get();
+        $sql = $this->db->get();
 
         if($sql->num_rows()):
             $user = $sql->row();
@@ -123,7 +119,7 @@ class Api_model extends CI_Model {
                     break;
                 
                 default:
-                $user->otherInfo =  new stdClass();
+                $user->otherInfo    =  new stdClass();
                     break;
             }
             return $user;
@@ -139,7 +135,7 @@ class Api_model extends CI_Model {
             return $sql->row();
         }
         return new stdClass();
-    }
+    }//End Function
     function login($data,$authToken){
             $res = $this->db->select('*')->where(array('email'=>$data['email']))->get('users');
            
@@ -191,14 +187,11 @@ class Api_model extends CI_Model {
             }*/
 
             $encoding_email = encoding($useremail);
-            $data['url']=base_url().'password/ChangePassword/change_password/'.$encoding_email.'/'.$passToken;
-      
-            $message=$this->load->view('emails/forgot_password',$data,TRUE);
-
-            $subject = "Forgot Password";
-
+            $data['url']    = base_url().'password/ChangePassword/change_password/'.$encoding_email.'/'.$passToken;
+            $message        = $this->load->view('emails/forgot_password',$data,TRUE);
+            $subject        = "Forgot Password";
             $this->load->library('smtp_email');
-            $response=$this->smtp_email->send_mail($useremail,$subject,$message); // Send email For Forgot password
+            $response       = $this->smtp_email->send_mail($useremail,$subject,$message); // Send email For Forgot password
 
             if ($response)
             {  
@@ -209,15 +202,11 @@ class Api_model extends CI_Model {
             { 
                  return  array('emailType'=>'NS') ; //NS NotSend
             }
-
         }
         else
         {
             return  array('emailType'=>'NE') ; //NE Not exist
         }
-    } //End funtion
-  
-    
-        
+    } //End funtion      
 }//ENd Class
 ?>

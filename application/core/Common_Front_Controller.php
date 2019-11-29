@@ -57,7 +57,7 @@ class Common_Front_Controller extends MX_Controller {
             }
             
         } 
-    }
+    }//End function
     
     /**
      * User logout
@@ -70,8 +70,7 @@ class Common_Front_Controller extends MX_Controller {
          
         if($is_redirect)
             redirect('/');  //redirect only when $is_redirect is set to TRUE
-    }
-    
+    }//End function
     /**
      * User authentication for ajax
      * Modified in ver 2.0
@@ -100,5 +99,5 @@ class Common_Front_Controller extends MX_Controller {
         }
 
         return TRUE; //all good
-    }
-}
+    }//End function
+}//End Class

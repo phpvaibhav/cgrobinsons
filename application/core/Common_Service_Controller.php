@@ -57,7 +57,7 @@ class Common_Service_Controller extends REST_Controller{
         //user authenticated successfully
         $this->authData = $userAuthData; 
         return TRUE;
-    }
+    }//End function
     
     /**
      * Show auth token error message
@@ -72,6 +72,6 @@ class Common_Service_Controller extends REST_Controller{
         }
 
         return $res_arr;
-    }
+    }//End function
 
 }//End Class 

@@ -14,8 +14,7 @@ class Adminapi extends Common_Admin_Controller{
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]|max_length[20]');
         $this->form_validation->set_rules('contact', 'Contact Number', 'trim|required|min_length[10]|max_length[20]');
         $this->form_validation->set_rules('fullName', 'full Name', 'trim|required|min_length[2]');
-        
-     /*   if (empty($_FILES['profileImage']['name'])) {
+        /*   if (empty($_FILES['profileImage']['name'])) {
             $this->form_validation->set_rules('profileImage', 'profile image', 'trim|required');
         }*/
         if($this->form_validation->run() == FALSE){
@@ -37,27 +36,23 @@ class Adminapi extends Common_Admin_Controller{
             $userData['password']           =   password_hash($this->post('password'), PASSWORD_DEFAULT);
             $userData['authToken']          =   $authtoken;
             $userData['passToken']          =   $passToken;
-
             //user info
             // profile pic upload
             $this->load->model('Image_model');
-          
-            $image = array(); $profileImage = '';
+            $image          = array(); 
+            $profileImage   = '';
             if (!empty($_FILES['profileImage']['name'])) {
                 $folder     = 'users';
                 $image      = $this->Image_model->upload_image('profileImage',$folder); //upload media of Seller
-                
                 //check for error
                 if(array_key_exists("error",$image) && !empty($image['error'])){
                     $response = array('status' => FAIL, 'message' => strip_tags($image['error'].'(In user Image)'));
                    $this->response($response);
-                }
-                
+                }  
                 //check for image name if present
                 if(array_key_exists("image_name",$image)):
                     $profileImage = $image['image_name'];
                 endif;
-            
             }
             $userData['profileImage']           =   $profileImage;
 
@@ -76,7 +71,6 @@ class Adminapi extends Common_Admin_Controller{
                     default:
                     $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(121),'userDetail'=>array());
                 }
-
              }else{
                 $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118),'userDetail'=>array());
             }   
@@ -99,10 +93,7 @@ class Adminapi extends Common_Admin_Controller{
             $data['email']          = $this->post('email');
             $data['password']       = $this->post('password');
             $data['authToken']      = $authtoken;
-
             $result                 = $this->adminapi_model->login($data,$authtoken);
-
-
             if(is_array($result)){
                 switch ($result['returnType']) {
                     case "SL":
@@ -124,16 +115,12 @@ class Adminapi extends Common_Admin_Controller{
                     default:
                     $response = array('status' => SUCCESS, 'message' => ResponseMessages::getStatusCodeMessage(106), 'users' => $result['userInfo']);
                 }
-            }
-            else{
+            }else{
                 $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(126));
-            }
-            
+            } 
             $this->response($response);
         }
     } //End Function
-          
-
     //user forgot password
     function forgotPassword_post(){
 
@@ -144,8 +131,8 @@ class Adminapi extends Common_Admin_Controller{
             $this->response($response);
         }
 
-        $email = $this->post('email');
-        $response = $this->adminapi_model->forgotPassword($email);
+        $email      = $this->post('email');
+        $response   = $this->adminapi_model->forgotPassword($email);
         if($response['emailType'] == 'ES'){ //ES emailSend
             $response = array('status' => SUCCESS, 'message' => 'Please check your mail to reset your password.');
         }elseif($response['emailType'] == 'NS'){ //NS NotSend
@@ -156,7 +143,6 @@ class Adminapi extends Common_Admin_Controller{
         }elseif($response['emailType'] == 'SL'){ //SL social login
             $response = array('status' => FAIL, 'message' => 'Social registered users are not allowed to access Forgot password'); 
         }
-
         $this->response($response);
     } //End function
 
@@ -175,7 +161,4 @@ class Adminapi extends Common_Admin_Controller{
         return TRUE;
     }// End Function   
     // ENd Session store value for frontEnd
-    
-
 }//End Class 
-

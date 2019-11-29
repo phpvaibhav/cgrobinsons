@@ -1,7 +1,5 @@
-
     <!--================================================== -->  
- <?php $backend_assets =  base_url().'backend_assets/'; ?>
-    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+    <?php $backend_assets =  base_url().'backend_assets/'; ?><!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
     <script src="<?php echo $backend_assets; ?>js/plugin/pace/pace.min.js"></script>
 
       <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
@@ -19,7 +17,7 @@
 
     <!-- BOOTSTRAP JS -->   
     <script src="<?php echo $backend_assets; ?>js/bootstrap/bootstrap.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <!-- JQUERY VALIDATE -->
     <script src="<?php echo $backend_assets; ?>js/plugin/jquery-validate/jquery.validate.min.js"></script>

@@ -4,18 +4,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Jobtype_model extends CI_Model {
      
     //var $table , $column_order, $column_search , $order =  '';
-    var $table = 'jobType';
-    var $column_order = array('jobTypeId','jobType','status'); //set column field database for datatable orderable
-    var $column_sel = array('jobTypeId','jobType','status','(case when (status = 0) 
+    var $table          = 'jobType';
+    var $column_order   = array('jobTypeId','jobType','status'); //set column field database for datatable orderable
+    var $column_sel     = array('jobTypeId','jobType','status','(case when (status = 0) 
         THEN "Inactive" when (status = 1) 
         THEN "Active" ELSE
         "Unknown" 
         END) as statusShow'); //set column field database for datatable orderable
 
     var $column_search = array('jobTypeId','jobType'); //set column field database for datatable searchable 
-    var $order = array('jobTypeId' => 'desc');  // default order
-    var $where = array();
-    var $group_by = 'jobTypeId'; 
+    var $order         = array('jobTypeId' => 'desc');  // default order
+    var $where         = array();
+    var $group_by      = 'jobTypeId'; 
 
     public function __construct(){
         parent::__construct();
@@ -23,7 +23,7 @@ class Jobtype_model extends CI_Model {
     
     public function set_data($where=''){
         $this->where = $where; 
-    }
+    }//End function
 
     private function _get_query()
     {
@@ -74,50 +74,45 @@ class Jobtype_model extends CI_Model {
             $this->db->order_by(key($order), $order[key($order)]);
         }
        
-    }
+    }//End function
 
     function get_list()
     {
         $this->_get_query();
         if(isset($_POST['length']) && $_POST['length'] < 1) {
-            $_POST['length']= '10';
+            $_POST['length'] = '10';
         } else{
-        	$_POST['length']= isset($_POST['length']) ? $_POST['length'] :10;
+        	$_POST['length'] = isset($_POST['length']) ? $_POST['length'] :10;
         }
         
         
         if(isset($_POST['start']) && $_POST['start'] > 1) {
-            $_POST['start']= $_POST['start'];
+            $_POST['start'] = $_POST['start'];
         }
-         $_POST['start']= isset($_POST['start']) ? $_POST['start']:0;
+         $_POST['start'] = isset($_POST['start']) ? $_POST['start']:0;
         $this->db->limit($_POST['length'], $_POST['start']);
         //print_r($_POST);die;
         $query = $this->db->get(); //lq();
         return $query->result();
-    }
-
+    }//End function
     function count_filtered()
     {
         $this->_get_query();
         $query = $this->db->get();
         return $query->num_rows();
-    }
-
-
+    }//End function
     public function count_all()
     {
         $this->db->from($this->table);
          if(!empty($this->where))
             $this->db->where($this->where); 
         return $this->db->count_all_results();
-    }
-
+    }//End function
     public function jobtypeDetails($data){
     	$this->db->select('*');
     	$this->db->from($this->table);
     	$this->db->where(array('id'=>$data['id']));
     	$query = $this->db->get();
     	return $query->row();
-    }
-
-}
+    }//End function
+}//End Class

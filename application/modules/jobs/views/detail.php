@@ -11,12 +11,6 @@
 		<div class="well well-sm">
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12">
-					<?php 
-						/*echo "<pre>";
-						print_r($job);
-						echo "</pre>";*/
-
-					?>
 					<div class="well well-light well-sm margin padding">
 						<!-- button -->
 						<ul class="demo-btns text-right">
@@ -39,6 +33,7 @@
 								$showbtn 	= false;
 								$labelShow 	= "";
 								$timeShow 	= false;
+								$driverId 	= 'test';
 								switch ($job['jobStatus']) {
 									case 0:
 
@@ -57,6 +52,7 @@
 										$showbtn 		= true;  
 										$labelShow 		='<label class="text-center center-block padding-10 label label-warning"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i>&nbsp;&nbsp;In Progress</label>';
 										$timeShow 		= true;
+										$driverId 		= $job['driverId'];
 										break;
 									case 2:
 										$msg 			= "";
@@ -75,8 +71,27 @@
 										$btn 			= "btn-warning";
 										$showtitle 		= "";
 										break;
+									}									
+									switch ($job['workPriority']) {
+									case 0:
+
+										$workPriority 		='<label class="text-center center-block padding-10 label label-info">'.$job['priority'].'</label>';
+										break;
+									case 1:
+										$workPriority 		='<label class="text-center center-block padding-10 label label-warning">'.$job['priority'].'</label>';
+										break;
+									case 2:
+										$workPriority 		='<label class="text-center center-block padding-10 label label-danger">'.$job['priority'].'</label>';
+										break;
+									
+									default:
+										$workPriority 		='<label class="text-center center-block padding-10 label label-info">'.$job['priority'].'</label>';
+										break;
 									}	
 							?>
+							<!-- 	<li>
+							<a href="<?php echo base_url().'jobs/cloneJob/'.encoding($job['jobId']); ?>" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-duplicate"></i></span>Clone Job </a>
+							</li> -->
 							<?php if($job['jobStatus'] !=2): ?>
 							<li>
 								<a href="<?php echo base_url().'jobs/editJob/'.encoding($job['jobId']); ?>" class="btn btn-labeled btn-info"> <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Edit </a>
@@ -89,17 +104,18 @@
 						<!-- button -->
 						<div class="timeline-seperator text-center"></div>
 						<header>
-							<h5>Basic Information
-								
-							 </h5>
+							<h5>Basic Information</h5>
 						</header>
 						<div class="timeline-seperator text-center"></div>
 						<br>
 						<div class="row" >
-							
 							<div class="col-lg-12 col-md-12 col-sm-12" >
 								<strong>Job Status</strong>
 								<span class="pull-right"> <?php echo $labelShow; ?></span>
+							</div>	
+							<div class="col-lg-12 col-md-12 col-sm-12" >
+								<strong>Work Priority</strong>
+								<span class="pull-right"> <?php echo $workPriority; ?></span>
 							</div>
 							<?php if($timeShow): ?>
 							<br>
@@ -118,59 +134,51 @@
 										<div class="col-lg-6 col-md-6 col-sm-12" >
 											<ul class="list-unstyled">
 												<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo $job['jobName']; ?></span>	<strong> Job Name</strong>
-								</li>
-								<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo $job['customerName']; ?></span>	<strong> Customer Name</strong>
-								</li>
-								<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo date("d/m/Y",strtotime($job['startDate']))." ".$job['startTime']; ?></span><strong>Creation Date</strong>
-								</li>	
+													<span class="pull-right txt-color-darken"><?php echo $job['jobName']; ?></span>	<strong> Job Name</strong>
+												</li>
+												<li class="list-group-item">
+													<span class="pull-right txt-color-darken"><?php echo $job['customerName']; ?></span>	<strong> Customer Name</strong>
+												</li>
+												<li class="list-group-item">
+													<span class="pull-right txt-color-darken"><?php echo date("d/m/Y",strtotime($job['startDate']))." ".$job['startTime']; ?></span><strong>Creation Date</strong>
+												</li>	
 											</ul>
 										</div>
 										<div class="col-lg-6 col-md-6 col-sm-12" >
 											<ul class="list-unstyled">
-													<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo $job['jobType']; ?></span>	<strong> Job Type</strong>
-								</li>
-									<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo $job['driverName']; ?></span>	<strong> Driver Name</strong>
-								</li>
+												<li class="list-group-item">
+													<span class="pull-right txt-color-darken"><?php echo $job['jobType']; ?></span>	<strong> Job Type</strong>
+												</li>
+												<li class="list-group-item">
+													<span class="pull-right txt-color-darken"><?php echo $job['driverName']; ?></span>	<strong> Driver Name</strong>
+												</li>
 											</ul>
 										</div>
 									</div>
 								</li>	
 								<!-- <li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo $job['jobName']; ?></span>	<strong> Job Name</strong>
+								<span class="pull-right txt-color-darken"><?php echo $job['jobName']; ?></span>	<strong> Job Name</strong>
 								</li>	 -->
-							<!-- 	<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo $job['jobType']; ?></span>	<strong> Job Type</strong>
+								<!-- 	<li class="list-group-item">
+								<span class="pull-right txt-color-darken"><?php echo $job['jobType']; ?></span>	<strong> Job Type</strong>
 								</li> -->
 								<!-- <li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo $job['customerName']; ?></span>	<strong> Customer Name</strong>
+								<span class="pull-right txt-color-darken"><?php echo $job['customerName']; ?></span>	<strong> Customer Name</strong>
 								</li> -->
-							<!-- 	<li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo $job['driverName']; ?></span>	<strong> Driver Name</strong>
+								<!-- 	<li class="list-group-item">
+								<span class="pull-right txt-color-darken"><?php echo $job['driverName']; ?></span>	<strong> Driver Name</strong>
 								</li> -->
 								<!-- <li class="list-group-item">
-									<span class="pull-right txt-color-darken"><?php echo date("d F Y",strtotime($job['startDate']))." ".$job['startTime']; ?></span><strong>Creation Date</strong>
+								<span class="pull-right txt-color-darken"><?php echo date("d F Y",strtotime($job['startDate']))." ".$job['startTime']; ?></span><strong>Creation Date</strong>
 								</li> -->
 							</ul>
-						</fieldset>							
-						
+						</fieldset>								
 					</div>
 				</div>
-				
 			</div>
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12">
 					<div class="well well-light well-sm margin padding">
-						<?php
-						/*	echo "<pre>";
-							print_r($questions);
-							echo "</pre>";*/
-
-						?>	
 						<header>
 							<h5><strong>Job Type Questions</strong> <label class="label label-info"><?php echo $job['jobType']; ?></label></h5>
 						</header>
@@ -184,12 +192,13 @@
 									foreach ($questions as $key => $question) {  $rand_color = $colors[array_rand($colors)]; ?>
 								<li class="list-group-item">
 									<div class="row smart-form">
-									<div class="col col-md-12 col-sm-12 col-lg-12">
-										<p class="alert alert-<?= $rand_color; ?>"><strong>Q. <?= $key+1;?>: <?= $question->question;?> </strong></p>
-									</div>	
-									<div class="col col-md-1 col-sm-1 col-lg-1">
-										<strong>Answer:</strong>
-									</div>	<?php switch ($question->type) {
+										<div class="col col-md-12 col-sm-12 col-lg-12">
+											<p class="alert alert-<?= $rand_color; ?>"><strong>Q. <?= $key+1;?>: <?= $question->question;?> </strong></p>
+										</div>	
+										<div class="col col-md-1 col-sm-1 col-lg-1">
+											<strong>Answer:</strong>
+										</div>	
+										<?php switch ($question->type) {
 											case 'radio':
 												$inputType = 'radio' ;
 												break;
@@ -214,24 +223,19 @@
 													<div class="col col-md-4 col-sm-4 col-lg-4">
 													<label class="<?= $inputType; ?>">
 																<input type="<?= $inputType; ?>" name="<?= $inputType.$key; ?>" <?= in_array($options[$i],$answer)? 'checked="checked"':''; ?> onclick="return false;">
-																<i></i><?= $options[$i]; ?></label>	</div>	
-												
+																<i></i><?= $options[$i]; ?></label>	</div>
 													<?php }
 												?>
 												
 											<?php }
-										 ?>
-									
-									
-								
+									 	?>
 									</div>
 								</li>
 								<?php } }else{
-									$rand_color = $colors[array_rand($colors)];
-								 ?>
-									<li class="list-group-item">
+									$rand_color = $colors[array_rand($colors)];?>
+								<li class="list-group-item">
 									<p class="text-center alert alert-<?= $rand_color; ?>"><strong>No questions found right now</strong></p>
-									
+
 								</li>
 								<?php } ?>
 							</ul>
@@ -239,11 +243,10 @@
 					</div>	
 				</div>
 			</div>
-			
 			<div class="row">
 				<!-- address -->
 				<div class="col-sm-12 col-md-12 col-lg-12">
-					<div class="well well-light well-sm margin padding">	
+					<div class="well well-light well-sm margin padding">
 						<header>
 							<h5>Address</h5>
 						</header>
@@ -259,24 +262,24 @@
 										<div class="col-sm-12 col-md-6 col-lg-6">
 											<ul class="list-unstyled">
 												<li class="list-group-item">
-												<span class="pull-right"><?php echo $job['street']." ".$job['street2']; ?></span>	<strong>Street</strong>
+													<span class="pull-right"><?php echo $job['street']." ".$job['street2']; ?></span>	<strong>Street</strong>
 												</li>
 												<li class="list-group-item">
-												<span class="pull-right"><?php echo $job['state']; ?></span>	<strong>State</strong>
+													<span class="pull-right"><?php echo $job['state']; ?></span>	<strong>State</strong>
 												</li>
 												<li class="list-group-item">
-									<span class="pull-right"><?php echo $job['country']; ?></span>	<strong>Country</strong>
-								</li>
+													<span class="pull-right"><?php echo $job['country']; ?></span>	<strong>Country</strong>
+												</li>
 											</ul>
 										</div>
 										<div class="col-sm-12 col-md-6 col-lg-6">
 											<ul class="list-unstyled">
 												<li class="list-group-item">
-									<span class="pull-right"><?php echo $job['city']; ?></span>	<strong>City</strong>
-								</li>
-								<li class="list-group-item">
-									<span class="pull-right"><?php echo $job['zip'] ; ?></span>	<strong>Zip</strong>
-								</li>
+													<span class="pull-right"><?php echo $job['city']; ?></span>	<strong>City</strong>
+												</li>
+												<li class="list-group-item">
+													<span class="pull-right"><?php echo $job['zip'] ; ?></span>	<strong>Zip</strong>
+												</li>
 											</ul>
 										</div>
 									</div>
@@ -299,7 +302,7 @@
 							</ul>
 						</fieldset>
 						<?php if(!empty($job['geoTimeDuration'])): $geoTimeDuration = $job['geoTimeDuration'];if(!empty($geoTimeDuration['timinig'])){ ?>
-							<header>
+						<header>
 							<h5>JOB WORK TIME (Geo Fencing Tracking) </h5>
 						</header>
 						<div class="timeline-seperator text-center"></div>		
@@ -307,78 +310,80 @@
 							<div class="row">
 							<!-- before -->
 								<div class="col-sm-12 col-md-12 col-lg-12">
-									<?php 
-								/*	echo "<pre>";
-									print_r($geoTimeDuration['timinig']);
-									echo "</pre>";*/
-									?>
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered table-hover" width="100%">
-								<thead>			                
-									<tr>
-										<th data-hide="phone">ID</th>
-										<th data-hide="phone">In Time </th>
-										<th data-hide="phone,tablet">Out Time</th>
-										<th data-hide="phone,tablet">Total Time </th>
-									
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ($geoTimeDuration['timinig'] as $y => $v) { ?>
-									<tr>
-										<td><?= ($y+1); ?></td>
-										<td><?= date('d/m/Y H:i A',strtotime($v->startTime)); ?></td>
-										<td><?= ($v->endTime!='Progress') ?date('d/m/Y H:i A',strtotime($v->endTime)):$v->endTime; ?></td>
-										<td><?= (($v->endTime!='Progress') && !empty($v->timeDuration))? $v->timeDuration:"NA"; ?></td>
-									</tr>	
-									<?php }  ?>	
-								</tbody>
-								<tfoot>
-									<tr>
-										<th colspan="3">Total Time Duration</th>
-										<th><?= $geoTimeDuration['total']; ?></th>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered table-hover" width="100%">
+											<thead>			                
+												<tr>
+													<th data-hide="phone">ID</th>
+													<th data-hide="phone">In Time </th>
+													<th data-hide="phone,tablet">Out Time</th>
+													<th data-hide="phone,tablet">Total Time </th>
+												</tr>
+											</thead>
+											<tbody>
+											<?php foreach ($geoTimeDuration['timinig'] as $y => $v) { ?>
+												<tr>
+													<td><?= ($y+1); ?></td>
+													<td><?= date('d/m/Y H:i A',strtotime($v->startTime)); ?></td>
+													<td><?= ($v->endTime!='Progress') ?date('d/m/Y H:i A',strtotime($v->endTime)):$v->endTime; ?></td>
+													<td><?= (($v->endTime!='Progress') && !empty($v->timeDuration))? $v->timeDuration:"NA"; ?></td>
+												</tr>	
+											<?php }  ?>	
+											</tbody>
+											<tfoot>
+												<tr>
+													<th colspan="3">Total Time Duration</th>
+													<th><?= $geoTimeDuration['total']; ?></th>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
 								</div>
 							</div>
 						</fieldset>	
 						<?php } endif; ?>
 						<?php if($job['geoFencing']==1): ?>
 						<div class="timeline-seperator text-center"></div>
-						<header>
-							<h5>Geo Fencing </h5>
-						</header>
+							<header>
+								<h5>Geo Fencing </h5>
+							</header>
 						<div class="timeline-seperator text-center"></div>		
 						<fieldset>
-							<div id="map-show"></div>
+							<!-- <div id="map-show"></div> -->
+							<div class="row">
+								<div class="col-md-12 col-sm-12">
+									<div id="map-show"></div>
+								</div>
+								<div class="col-md-12 col-sm-12 hide">
+									<button id="add-markers">Add markers</button>
+									<button id="remove-markers">Remove markers</button>
+								</div>
+							</div>
 						</fieldset>	
 						<?php endif; ?>
 					</div>	
 				</div>
 				<!-- address -->
-			<!-- 	<?php if($job['geoFencing']==1): ?>
+				<!-- 	<?php if($job['geoFencing']==1): ?>
 				<div class="col-sm-12 col-md-12 col-lg-12">
-					<div class="well well-light well-sm margin padding">
-						<div class="timeline-seperator text-center"></div>
-						<header>
-							<h5>Geo Fencing </h5>
-						</header>
-						<div class="timeline-seperator text-center"></div>		
-						<fieldset>
-							<div id="map-show"></div>
-						</fieldset>	
-					</div>
+				<div class="well well-light well-sm margin padding">
+				<div class="timeline-seperator text-center"></div>
+				<header>
+				<h5>Geo Fencing </h5>
+				</header>
+				<div class="timeline-seperator text-center"></div>		
+				<fieldset>
+				<div id="map-show"></div>
+				</fieldset>	
+				</div>
 				</div>
 				<?php endif; ?> -->
 			</div>
-			
-		<!-- Report -->
+			<!-- Report -->
 			<?php if(!empty($job['jobReport'])): $reports = json_decode($job['jobReport'],true);
 				$before = isset($reports['beforeWork']) ?$reports['beforeWork']:array();
 				$after = isset($reports['afterWork']) ?$reports['afterWork']:array();
-			  ?>
+		  	?>
 			<div class="row">
 				<!-- before -->
 				<div class="col-sm-12 col-md-12 col-lg-6">
@@ -480,11 +485,12 @@
 </div>
 <!-- end row-->
 <script type="text/javascript">
+	var driverId 		= "<?= $driverId;?>";
 	var geocoder;
 	var map;
+	var markers 		= [];
 	var polygonArray 	= [];
 	var polygonColor 	= "<?php echo $polygonColor; ?>";
-
 	var address 		=  "<?php echo (isset($job['address']) && !empty($job['address'])) ?$job['address']:'NA'; ?>";
 	var areaLatitude 	=  parseFloat("<?php echo (isset($job['latitude']) && !empty($job['latitude'])) ?$job['latitude']:22.719568; ?>");
 	var areaLongitude 	= parseFloat("<?php echo (isset($job['longitude']) && !empty($job['longitude'])) ?$job['longitude']:75.857727; ?>");
@@ -494,45 +500,44 @@
 		var myLatLng 	= new google.maps.LatLng(areaLatitude,areaLongitude);
 		// General Options
 		var mapOptions = {
-		zoom: 19,
-		center: myLatLng,
-		mapTypeId: google.maps.MapTypeId.SATELLITE,//google.maps.MapTypeId.RoadMap
+			zoom 		: 19,
+			center 		: myLatLng,
+			mapTypeId 	: google.maps.MapTypeId.SATELLITE,//google.maps.MapTypeId.RoadMap
 		};
-		var map = new google.maps.Map(document.getElementById('map-show'),mapOptions);
+		var map 				= new google.maps.Map(document.getElementById('map-show'),mapOptions);
 		// Polygon Coordinates
-		/* var triangleCoords = [
-
-		new google.maps.LatLng(22.425279,75.711479),
-		new google.maps.LatLng(22.426231,75.807953),
-		new google.maps.LatLng(22.371952,75.735855),
-		new google.maps.LatLng(22.390682,75.625305),
-		];*/
-		var f 				= '<?php echo $ppp; ?>';
-		var triangleCoords 	= jQuery.parseJSON(f) ;
+		var f 					= '<?php echo $ppp; ?>';
+		var triangleCoords 		= jQuery.parseJSON(f) ;
 		var data 				= [];
 		$.each(triangleCoords, function( index, value ) {
 			data.push( new google.maps.LatLng(value.lat,value.lng)); 
 		});
-		console.log(data);
 		// Styling & Controls
 		myPolygon = new google.maps.Polygon({
-			paths: data,
-			draggable: false, // turn off if it gets annoying
-			editable: false,
-			geodesic: false,
-			strokeColor: polygonColor,
-			strokeOpacity: 0.8,
-			strokeWeight: 2,
-			fillColor: polygonColor,
-			fillOpacity: 0.35
+			paths 			: data,
+			draggable 		: false, // turn off if it gets annoying
+			editable 		: false,
+			geodesic 		: false,
+			strokeColor 	: polygonColor,
+			strokeOpacity	: 0.8,
+			strokeWeight 	: 2,
+			fillColor 		: polygonColor,
+			fillOpacity 	: 0.35
 		});
 
 		myPolygon.setMap(map);
-		var marker = new google.maps.Marker({
+		/*var marker = new google.maps.Marker({
 			position: {lat: areaLatitude, lng: areaLongitude },
 			title: address,
 			map: map
+		});*/
+		/* imarker tracking*/
+		google.maps.event.addDomListener(document.getElementById('add-markers'), 'click', function(event) {
+		addMarkers(map);
 		});
+		google.maps.event.addDomListener(document.getElementById('remove-markers'), 'click', removeMarkers);
+	
+		/* imarker tracking*/
 		//google.maps.event.addListener(myPolygon, "dragend", getPolygonCoords);
 		google.maps.event.addListener(myPolygon.getPath(), "insert_at", getPolygonCoords);
 		//google.maps.event.addListener(myPolygon.getPath(), "remove_at", getPolygonCoords);
@@ -541,9 +546,9 @@
 
 	//Display Coordinates below map
 	function getPolygonCoords() {
-		var len = myPolygon.getPath().getLength();
+		var len 	= myPolygon.getPath().getLength();
 		var htmlStr = "";
-		for (var i = 0; i < len; i++) {
+		for (var i 	= 0; i < len; i++) {
 		
 			htmlStr += myPolygon.getPath().getAt(i).toUrlValue(6)+"|";
 			//Use this one instead if you want to get rid of the wrap > new google.maps.LatLng(),
@@ -554,5 +559,71 @@
 	function copyToClipboard(text) {
 	  window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
 	}
-	google.maps.event.addDomListener(window, 'load', initMap);
+	/*******marker********/
+	var base_url 		= $('body').data('base-url'); // Base url
+	var GREEN_MARKER 	= base_url+'backend_assets/img/output-onlinepngtools.png';
+	function addMarkers(map) {
+		$.ajax({
+			  type 		: "POST",
+	          url 		: base_url+'adminapi/vehicles/vehilceLatlong',
+	          data 		: {use:1,driverId:driverId},
+	          headers 	: { 'authToken':authToken},
+	          cache 	: false,
+	          beforeSend: function() {
+	           
+	          }, 
+	          success 	: function (res) {
+				if(res.status=='success'){
+					$( "#remove-markers" ).trigger( "click" ); 
+					//console.log(res.data);
+					var locations 	= [];
+					var set 		= {'latitude':areaLatitude,'longitude':areaLongitude,'address':"<b>Location:</b> "+address};
+					locations.push(set);
+					/*		if(res.data.length !=0){
+					var set_driver = {'latitude':res.data.latitude,'longitude':res.data.longitude,'address':"<b>Driver:</b> "+res.data.fullName+'<br><b>Vehicle:</b> '+res.data.manufacturer+' '+res.data.model+' '+res.data.year};
+					locations.push(set_driver);
+					}*/
+					var num_markers = locations.length;
+					//alert(num_markers);
+					/*map marker*/
+					var bounds 		= new google.maps.LatLngBounds();
+					for (var i = 0; i < num_markers; i++) {  
+						markers[i] 	= new google.maps.Marker({
+							position 	: {lat:parseFloat(locations[i].latitude), lng:parseFloat(locations[i].longitude)},
+							map 		: map,
+							html 		: parseFloat(locations[i].latitude),
+							title 		: locations[i].address,
+							icon 		: i==0?'':GREEN_MARKER,
+							id 			: i,
+							animation 	: i==0?'':google.maps.Animation.DROP,
+						});
+						bounds.extend(markers[i].getPosition());
+						// process multiple info windows
+						markers[i].info = new google.maps.InfoWindow({
+							content 	:locations[i].address
+						});
+						google.maps.event.addListener(markers[i], 'click', function() {  
+							// this = marker
+							var marker_map = this.getMap();
+							this.info.open(marker_map, this);
+						});
+					}
+					map.fitBounds(bounds);  	
+					/*map marker*/
+				}
+	      	}    
+		});
+	}
+	function removeMarkers() {
+	    for (var i = 0; i < markers.length; i++) {
+	        markers[i].setMap(null);
+	    }
+	}
+	/*******marker********/
+	$(document).ready(function() {
+		google.maps.event.addDomListener(window, 'load', initMap);
+		//$( "#add-markers" ).trigger( "click" );
+		setTimeout(function(){ $( "#add-markers" ).trigger( "click" ); }, 1000);
+		setInterval(function(){$( "#add-markers" ).trigger( "click" ); }, 30000);
+	});	
 </script>

@@ -3,12 +3,13 @@
 class Customers extends Common_Admin_Controller{  
     public function __construct(){
         parent::__construct();
+
         $this->check_admin_service_auth();
     }
     public function addCustomer_post(){
         $userId     = decoding($this->post('cus'));
         $where      = array('id'=>$userId);
-        $dataExist=$this->common_model->is_data_exists('users',$where);
+        $dataExist  = $this->common_model->is_data_exists('users',$where);
         if($dataExist){
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         }else{
@@ -76,29 +77,29 @@ class Customers extends Common_Admin_Controller{
                 
 
             if($dataExist){
-                 $isemailExist=$this->common_model->is_data_exists('users',array('id !='=>$userId,'email'=> $userData['email']));
+                 $isemailExist                  = $this->common_model->is_data_exists('users',array('id !='=>$userId,'email'=> $userData['email']));
                  if($isemailExist){
-                     $response = array('status'=>FAIL,'message'=>"Email already exist");
+                     $response                  = array('status'=>FAIL,'message'=>"Email already exist");
                  }else{
-                    $update = $this->common_model->updateFields('users',$userData,$where);
+                    $update                     = $this->common_model->updateFields('users',$userData,$where);
                     if($update){
-                    $userMeta['userId']         = $userId;
-                    $data_val['customerId']     = $userId;
-                    $data_val1['customerId']    = $userId;
-                    $this->common_model->updateFields('customerMeta',$userMeta,array('userId'=>$userId));
+                        $userMeta['userId']         = $userId;
+                        $data_val['customerId']     = $userId;
+                        $data_val1['customerId']    = $userId;
+                        $this->common_model->updateFields('customerMeta',$userMeta,array('userId'=>$userId));
                     /*addres*/
                         $this->load->model('customer_model');
                         $this->customer_model->customerAddressManage($data_val);
                         $this->customer_model->customerAddressManage($data_val1);
                     /*addres*/
-                    $response = array('status'=>SUCCESS,'message'=>"Customer record updated successfully.");
+                    $response                   = array('status'=>SUCCESS,'message'=>"Customer record updated successfully.");
                     }else{
-                    $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
+                    $response                   = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
                     } 
                  }
                
             }else{
-                $userId = $this->common_model->insertData('users',$userData);
+                $userId                         = $this->common_model->insertData('users',$userData);
                 if($userId){
                     $userMeta['userId']         = $userId;
                      $data_val['customerId']    = $userId;
@@ -109,9 +110,9 @@ class Customers extends Common_Admin_Controller{
                         $this->customer_model->customerAddressManage($data_val);
                         $this->customer_model->customerAddressManage($data_val1);
                     /*addres*/
-                     $response = array('status'=>SUCCESS,'message'=>"Customer record added successfully.");
+                     $response                  = array('status'=>SUCCESS,'message'=>"Customer record added successfully.");
                 }else{
-                     $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
+                     $response                  = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
                 } 
             }       
         }
@@ -121,44 +122,43 @@ class Customers extends Common_Admin_Controller{
         $this->load->helper('text');
         $this->load->model('customer_model');
         $this->customer_model->set_data(array('userType' =>1));
-        $list = $this->customer_model->get_list();
-        
+        $list   = $this->customer_model->get_list();
         $data   = array();
         $no     = $_POST['start'];
         foreach ($list as $serData) { 
-        $action ='';
-        $no++;
-        $row = array();
-      /*  $row[] = $no;*/
-        //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
-      $userLink = base_url().'customers/customerDetail/'.encoding($serData->id);
-        $row[]  = '<a href="'.$userLink.'"  class="on-default edit-row table_action">'.display_placeholder_text($serData->fullName).'</a>'; 
-        $row[]  = display_placeholder_text($serData->email); 
-        $row[]  = display_placeholder_text($serData->contactNumber); 
-        if($serData->status){
-        $row[]  = '<label class="label label-success">'.$serData->statusShow.'</label>';
-        }else{ 
-        $row[]  = '<label class="label label-danger">'.$serData->statusShow.'</label>'; 
-        } 
-        $link       = 'javascript:void(0)';
-        $action    .= "";
-        if($serData->status){
+            $action     = '';
+            $no++;
+            $row        = array();
+            /*  $row[] = $no;*/
+            //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
+            $userLink   = base_url().'customers/customerDetail/'.encoding($serData->id);
+            $row[]      = '<a href="'.$userLink.'"  class="on-default edit-row table_action">'.display_placeholder_text($serData->fullName).'</a>'; 
+            $row[]      = display_placeholder_text($serData->email); 
+            $row[]      = display_placeholder_text($serData->contactNumber); 
+            if($serData->status){
+                $row[]  = '<label class="label label-success">'.$serData->statusShow.'</label>';
+            }else{ 
+                $row[]  = '<label class="label label-danger">'.$serData->statusShow.'</label>'; 
+            } 
+            $link       = 'javascript:void(0)';
+            $action    .= "";
+            if($serData->status){
 
-            $action .= '<a href="'.$link.'" onclick="customerStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->id).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-check" aria-hidden="true"></i></a>';
-        }else{
-             $action .= '<a href="'.$link.'" onclick="customerStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->id).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-times" aria-hidden="true"></i></a>';
-        }
-        $userLink = base_url().'customers/customerDetail/'.encoding($serData->id);
+                $action .= '<a href="'.$link.'" onclick="customerStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->id).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-check" aria-hidden="true"></i></a>';
+            }else{
+                $action .= '<a href="'.$link.'" onclick="customerStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->id).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-times" aria-hidden="true"></i></a>';
+            }
+            $userLink = base_url().'customers/customerDetail/'.encoding($serData->id);
         
-        $action .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
-        $pdfLink = base_url().'customers/customersDetailPdf/'.encoding($serData->id);
-        $action .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
-        $row[]  = $action;
-        $data[] = $row;
+            $action .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+            $pdfLink = base_url().'customers/customersDetailPdf/'.encoding($serData->id);
+            $action .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+            $row[]  = $action;
+            $data[] = $row;
 
         }
 
-        $output = array(
+        $output     = array(
             "draw"              => $_POST['draw'],
             "recordsTotal"      => $this->customer_model->count_all(),
             "recordsFiltered"   => $this->customer_model->count_filtered(),
@@ -168,36 +168,35 @@ class Customers extends Common_Admin_Controller{
         $this->response($output);
     }//end function 
     function customerStatus_post(){
-        $userId     = decoding($this->post('use'));
-        $where      = array('id'=>$userId);
-         $dataExist = $this->common_model->is_data_exists('users',$where);
+        $userId         = decoding($this->post('use'));
+        $where          = array('id'=>$userId);
+        $dataExist      = $this->common_model->is_data_exists('users',$where);
         if($dataExist){
-            $status = $dataExist->status ?0:1;
+        $status         = $dataExist->status ?0:1;
 
-             $dataExist = $this->common_model->updateFields('users',array('status'=>$status),$where);
-              $showmsg  = ($status==1)? "Customer request is Active" : "Customer request is Inactive";
-                $response = array('status'=>SUCCESS,'message'=>$showmsg);
+        $dataExist      = $this->common_model->updateFields('users',array('status'=>$status),$where);
+        $showmsg        = ($status==1)? "Customer request is Active" : "Customer request is Inactive";
+        $response       = array('status'=>SUCCESS,'message'=>$showmsg);
         }else{
-           $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
+        $response       = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
         }
         $this->response($response);
     }//end function
     function creditHoldStatus_post(){
-        $userId     = decoding($this->post('use'));
-        $where      = array('userId'=>$userId);
-         $dataExist = $this->common_model->is_data_exists('customerMeta',$where);
+        $userId         = decoding($this->post('use'));
+        $where          = array('userId'=>$userId);
+        $dataExist      = $this->common_model->is_data_exists('customerMeta',$where);
         if($dataExist){
-            $status = $dataExist->creditHoldStatus ? 0:1;
+        $status         = $dataExist->creditHoldStatus ? 0:1;
 
-             $dataExist=$this->common_model->updateFields('customerMeta',array('creditHoldStatus'=>$status),$where);
-              $showmsg  ='Customer has been credit hold changed successfully.';
-                $response = array('status'=>SUCCESS,'message'=>$showmsg);
+        $dataExist      = $this->common_model->updateFields('customerMeta',array('creditHoldStatus'=>$status),$where);
+        $showmsg        = 'Customer has been credit hold changed successfully.';
+        $response       = array('status'=>SUCCESS,'message'=>$showmsg);
         }else{
-           $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
+        $response       = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
         }
         $this->response($response);
     }//end function
-     
     function customerDelete_post(){
         $userId     = decoding($this->post('use'));
         $where      = array('id'=>$userId,'userType'=>1);
@@ -220,14 +219,13 @@ class Customers extends Common_Admin_Controller{
         $where          = array('customerId'=>$customerId);
         $addresses      = $this->common_model->getAll('customerAddress',$where,'addressId','desc');
         if($addresses){
-            $data ="";
+            $data       = "";
             foreach ($addresses as $key => $address) {
               $data .= '<label class="radio setAddessLocation" onclick="radio_fun(this);" >';
               $data .='<i class="fa fa-map-marker" aria-hidden="true"></i> <input type="radio" class="hideradio" latitude="'.$address->latitude.'" longitude="'.$address->longitude.'" street="'.$address->street.'" street2="'.$address->street2.'" city="'.$address->city.'" state="'.$address->state.'" zip="'.$address->zip.'" country="'.$address->country.'"  name="address_location" value="'.$address->address.'"/> '.$address->address;
               $data .= '</label>';
             }
-            
-            $showmsg  ='record found.';
+            $showmsg  = 'record found.';
             $response = array('status'=>SUCCESS,'message'=>$showmsg,'address'=>$data);
         }else{
            $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
@@ -243,7 +241,7 @@ class Customers extends Common_Admin_Controller{
             return false;  
         }
         
-    }
+    }//end function
     function validate_billaddress($str)
     {
         if(!empty($str)){
@@ -252,5 +250,5 @@ class Customers extends Common_Admin_Controller{
             $this->form_validation->set_message('validate_billaddress','Please enter valid google place billing address.');
             return false;  
         }
-    }
+    }//end function
 }//End Class 
