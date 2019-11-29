@@ -24,7 +24,8 @@ class Vehicles extends Common_Back_Controller {
         $this->load->model('adminapi/vehicle_model');
         $latlong =$this->vehicle_model->vehilceLatlong();
         
-        $data['locations']  = $latlong;
+        $data['locations']  = !empty($latlong) ? $latlong :array();
+
         $this->load->admin_render('vehicles', $data);
     } //End Function
     public function vehicleDetail(){

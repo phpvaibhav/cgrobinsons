@@ -214,12 +214,10 @@
 	var markers 		= [];
 
 	var GREEN_MARKER 	= base_url+'backend_assets/img/output-onlinepngtools.png';
-	var areaLatitude 	= parseFloat('<?= isset($locations[0]->latitude) ? $locations[0]->latitude:22.71956800; ?>');
+	var areaLatitude 	=  parseFloat('<?= isset($locations[0]->latitude) ? $locations[0]->latitude :22.71956800; ?>');
 	var areaLongitude 	= parseFloat('<?= isset($locations[0]->longitude) ? $locations[0]->longitude:75.857727; ?>') ;
 	
-	/*	var locations = eval('<?= !empty($locations) ? json_encode($locations): new object(); ?>');
 
-	var num_markers = locations.length;*/
 	
 	function initMap() {
 		// Map Center
@@ -249,39 +247,41 @@
 	              }, 
 	              success: function (res) {
 	              	if(res.status=='success'){
-	              	$( "#remove-markers" ).trigger( "click" ); 
+	              		$( "#remove-markers" ).trigger( "click" ); 
 	                	console.log(res.data);
-	                	var locations = res.data;
+	                	var locations 	= res.data;
 	                	var num_markers = res.data.length;
 	                	//alert(num_markers);
 	                	/*map marker*/
-	                	 var bounds = new google.maps.LatLngBounds();
-	                	  for (var i = 0; i < num_markers; i++) {  
-				markers[i] = new google.maps.Marker({
-					position 	: {lat:parseFloat(locations[i].latitude), lng:parseFloat(locations[i].longitude)},
-					map 		: map,
-					html 		: parseFloat(locations[i].latitude),
-					title 		: 'Driver :'+locations[i].fullName,
-					icon 		: GREEN_MARKER,
-					id 			: i,
-					animation: google.maps.Animation.DROP,
-				});
-				  bounds.extend(markers[i].getPosition());
-				// process multiple info windows
-				markers[i].info = new google.maps.InfoWindow({
-					content 	: '<b>Vehicle :</b> '+locations[i].manufacturer+'<br>'+'<b>Driver : '+locations[i].fullName+'</b>'
-				});
-				google.maps.event.addListener(markers[i], 'click', function() {  
-					// this = marker
-					var marker_map = this.getMap();
-					this.info.open(marker_map, this);
-				});
-			}
-	              map.fitBounds(bounds);  	
-	                	/*map marker*/
+	                	if(num_markers !=0){
+                	 		var bounds = new google.maps.LatLngBounds();
+	                	  	for (var i = 0; i < num_markers; i++) {  
+								markers[i] = new google.maps.Marker({
+									position 	: {lat:parseFloat(locations[i].latitude), lng:parseFloat(locations[i].longitude)},
+									map 		: map,
+									html 		: parseFloat(locations[i].latitude),
+									title 		: 'Driver :'+locations[i].fullName,
+									icon 		: GREEN_MARKER,
+									id 			: i,
+									animation: google.maps.Animation.DROP,
+								});
+				  				bounds.extend(markers[i].getPosition());
+								// process multiple info windows
+								markers[i].info = new google.maps.InfoWindow({
+								content 	: '<b>Vehicle :</b> '+locations[i].manufacturer+'<br>'+'<b>Driver : '+locations[i].fullName+'</b>'
+								});
+								google.maps.event.addListener(markers[i], 'click', function() {  
+									// this = marker
+									var marker_map = this.getMap();
+									this.info.open(marker_map, this);
+								});
+							}
+	              			map.fitBounds(bounds);  	
+	                		/*map marker*/
+	              		}
 	                }
-	              }    
-		});
+              	}    
+			});
 	}
 
 	function removeMarkers() {
