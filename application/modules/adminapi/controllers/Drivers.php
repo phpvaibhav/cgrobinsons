@@ -30,39 +30,39 @@ class Drivers extends Common_Admin_Controller{
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));    
         }else{
-                $authtoken                          = $this->common_model->generate_token();
-                $passToken                          = $this->common_model->generate_token();
-                $userData['fullName']               = $this->post('fullName');
-                $userData['email']                  = $this->post('email');
-                $userData['password']               =  password_hash($this->post('password'), PASSWORD_DEFAULT);
-                $userData['contactNumber']          = $this->post('contactNumber');
-                $userData['userType']               = 2;
-                $userData['authToken']              =   $authtoken;
-                $userData['passToken']              =   $passToken;
-                //User meta
-                $userMeta['emergencyPersonName']    = $this->post('emergencyPersonName');
-                $userMeta['emergencyPersonNumber']  = $this->post('emergencyPersonNumber');
-                $userMeta['dob']                    = date("Y-m-d",strtotime($this->post('dob')));
-                $userMeta['doh']                    = date("Y-m-d",strtotime($this->post('doh')));
-                $userMeta['licenseNumber']          = $this->post('licenseNumber');
-                $userMeta['licenseExpiryDate']      = date("Y-m-d",strtotime($this->post('expiryDate')));
-                $userMeta['address']                = $this->post('address');
-                $userMeta['street']                 = $this->post('street');
-                $userMeta['street2']                = $this->post('street2');
-                $userMeta['city']                   = $this->post('city');
-                $userMeta['state']                  = $this->post('state');
-                $userMeta['zip']                    = $this->post('zip');
-                $userMeta['country']                = $this->post('country');
-                $userMeta['latitude']               = $this->post('latitude');
-                $userMeta['longitude']              = $this->post('longitude');
-                // profile pic upload
-                $this->load->model('Image_model');
-                 //pr($userMeta);
-                $image          = array(); 
-                $profileImage   = '';
-                if (!empty($_FILES['profileImage']['name'])) {
-                    $folder     = 'users';
-                    $image      = $this->Image_model->upload_image('profileImage',$folder); //upload media of Seller
+            $authtoken                          = $this->common_model->generate_token();
+            $passToken                          = $this->common_model->generate_token();
+            $userData['fullName']               = $this->post('fullName');
+            $userData['email']                  = $this->post('email');
+            $userData['password']               =  password_hash($this->post('password'), PASSWORD_DEFAULT);
+            $userData['contactNumber']          = $this->post('contactNumber');
+            $userData['userType']               = 2;
+            $userData['authToken']              =   $authtoken;
+            $userData['passToken']              =   $passToken;
+            //User meta
+            $userMeta['emergencyPersonName']    = $this->post('emergencyPersonName');
+            $userMeta['emergencyPersonNumber']  = $this->post('emergencyPersonNumber');
+            $userMeta['dob']                    = date("Y-m-d",strtotime($this->post('dob')));
+            $userMeta['doh']                    = date("Y-m-d",strtotime($this->post('doh')));
+            $userMeta['licenseNumber']          = $this->post('licenseNumber');
+            $userMeta['licenseExpiryDate']      = date("Y-m-d",strtotime($this->post('expiryDate')));
+            $userMeta['address']                = $this->post('address');
+            $userMeta['street']                 = $this->post('street');
+            $userMeta['street2']                = $this->post('street2');
+            $userMeta['city']                   = $this->post('city');
+            $userMeta['state']                  = $this->post('state');
+            $userMeta['zip']                    = $this->post('zip');
+            $userMeta['country']                = $this->post('country');
+            $userMeta['latitude']               = $this->post('latitude');
+            $userMeta['longitude']              = $this->post('longitude');
+            // profile pic upload
+            $this->load->model('Image_model');
+            //pr($userMeta);
+            $image          = array(); 
+            $profileImage   = '';
+            if (!empty($_FILES['profileImage']['name'])) {
+                $folder     = 'users';
+                $image      = $this->Image_model->upload_image('profileImage',$folder); //upload media of Seller
 
                 //check for error
                 if(array_key_exists("error",$image) && !empty($image['error'])){
@@ -73,42 +73,38 @@ class Drivers extends Common_Admin_Controller{
                 //check for image name if present
                 if(array_key_exists("image_name",$image)):
                     $profileImage = $image['image_name'];
-                      if(!empty($dataExist->profileImage)){
-                         $this->Image_model->delete_image('uploads/users/',$dataExist->profileImage);
-                      }
-                   
+                    if(!empty($dataExist->profileImage)){
+                        $this->Image_model->delete_image('uploads/users/',$dataExist->profileImage);
+                    }     
                 endif;
-
-                }
-                if(!empty($profileImage)){
-                    $userData['profileImage']           =   $profileImage;
-                }
-                
-                    //update
-
+            }
+            if(!empty($profileImage)){
+                $userData['profileImage']      =  $profileImage;
+            }
+            //update
             if($dataExist){
-                 $isemailExist = $this->common_model->is_data_exists('users',array('id !='=>$userId,'email'=> $userData['email']));
-                 if($isemailExist){
-                     $response = array('status'=>FAIL,'message'=>"Email already exist");
-                 }else{
+                $isemailExist = $this->common_model->is_data_exists('users',array('id !='=>$userId,'email'=> $userData['email']));
+                if($isemailExist){
+                    $response = array('status'=>FAIL,'message'=>"Email already exist");
+                }else{
                     $update     = $this->common_model->updateFields('users',$userData,$where);
                     if($update){
-                    $userMeta['userId'] = $userId;
-                    $this->common_model->updateFields('driverMeta',$userMeta,array('userId'=>$userId));
-                    $response = array('status'=>SUCCESS,'message'=>"Driver record updated successfully.");
+                        $userMeta['userId'] = $userId;
+                        $this->common_model->updateFields('driverMeta',$userMeta,array('userId'=>$userId));
+                        $response = array('status'=>SUCCESS,'message'=>"Driver record updated successfully.");
                     }else{
-                    $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
+                        $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
                     } 
-                 }
+                }
                
             }else{
                 $userId                 = $this->common_model->insertData('users',$userData);
                 if($userId){
                     $userMeta['userId'] = $userId;
                     $this->common_model->insertData('driverMeta',$userMeta);
-                     $response = array('status'=>SUCCESS,'message'=>"Driver record added successfully.");
+                    $response = array('status'=>SUCCESS,'message'=>"Driver record added successfully.");
                 }else{
-                     $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
+                    $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
                 } 
             }         
         }
@@ -132,9 +128,9 @@ class Drivers extends Common_Admin_Controller{
             $row[]          = display_placeholder_text($serData->email); 
             $row[]          = display_placeholder_text($serData->contactNumber); 
             if($serData->status){
-            $row[]          = '<label class="label label-success">'.$serData->statusShow.'</label>';
+                $row[]          = '<label class="label label-success">'.$serData->statusShow.'</label>';
             }else{ 
-            $row[]          = '<label class="label label-danger">'.$serData->statusShow.'</label>'; 
+                $row[]          = '<label class="label label-danger">'.$serData->statusShow.'</label>'; 
             } 
                 $link       = 'javascript:void(0)';
                 $action     .= "";
@@ -142,22 +138,15 @@ class Drivers extends Common_Admin_Controller{
 
                 $action     .= '<a href="'.$link.'" onclick="driverStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->id).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-check" aria-hidden="true"></i></a>';
             }else{
-                 $action    .= '<a href="'.$link.'" onclick="driverStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->id).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                $action    .= '<a href="'.$link.'" onclick="driverStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->id).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-times" aria-hidden="true"></i></a>';
             }
             $userLink       = base_url().'drivers/driverDetail/'.encoding($serData->id);
             $action         .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
-             $pdfLink       = base_url().'drivers/driverDetailPdf/'.encoding($serData->id);
+            $pdfLink       = base_url().'drivers/driverDetailPdf/'.encoding($serData->id);
             $action         .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
-              /*  $action .= '<a href="'.$link.'" onclick="statusChange(this);" data-message="You want to change status!" data-serid="'.encoding($serData->serviceId).'" data-sid="'.encoding($applyStatus).'"  class="on-default edit-row table_action" title="View user">'.$applyMsg.'</a>';*/
-                 
-                // $clk_edit =  "editFn('admin/categoryCtrl','editGenres','$usersData->id');" ;
-                // $action .= '<a href="javascript:void(0)" onclick="'.$clk_edit.'" class="on-default edit-row table_action" title="Edit Event"><i class="fa fa-pencil-square-o"></i></a>';          
-
             $row[]  = $action;
             $data[] = $row;
-
         }
-
         $output = array(
             "draw"              => $_POST['draw'],
             "recordsTotal"      => $this->driver_model->count_all(),
@@ -184,7 +173,7 @@ class Drivers extends Common_Admin_Controller{
     function creditHoldStatus_post(){
         $userId         = decoding($this->post('use'));
         $where          = array('userId'=>$userId);
-         $dataExist     = $this->common_model->is_data_exists('customerMeta',$where);
+        $dataExist      = $this->common_model->is_data_exists('customerMeta',$where);
         if($dataExist){
             $status     = $dataExist->creditHoldStatus ? 0:1;
             $dataExist  = $this->common_model->updateFields('customerMeta',array('creditHoldStatus'=>$status),$where);
@@ -198,7 +187,7 @@ class Drivers extends Common_Admin_Controller{
      function driverDelete_post(){
         $userId     = decoding($this->post('use'));
         $where      = array('id'=>$userId,'userType'=>2);
-         $dataExist = $this->common_model->is_data_exists('users',$where);
+        $dataExist = $this->common_model->is_data_exists('users',$where);
         if($dataExist){
             if(!empty($dataExist->profileImage)){
                 $this->load->model('Image_model');

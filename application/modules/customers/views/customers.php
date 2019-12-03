@@ -41,8 +41,7 @@
 										<th data-hide="phone,tablet">Action</th>
 									</tr>
 								</thead>
-								<tbody>
-											
+								<tbody>			
 								</tbody>
 							</table>
 						</div>

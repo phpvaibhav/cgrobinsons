@@ -22,8 +22,7 @@ class Jobs extends Common_Admin_Controller{
         }
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors())); 
-        }
-        else{
+        }else{
          
             $data_val['jobName']                = $this->post('jobName');
             $data_val['jobTypeId']              = $this->post('jobTypeId');
@@ -149,7 +148,7 @@ class Jobs extends Common_Admin_Controller{
                     }
                 }//endif
                 /*question*/
-                $response   = array('status'=>SUCCESS,'message'=>$msg);
+                $response       = array('status'=>SUCCESS,'message'=>$msg);
             }else{
                 $response       = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
             }  
@@ -342,12 +341,12 @@ class Jobs extends Common_Admin_Controller{
                     break;
             }
        
-            $link           = 'javascript:void(0)';
-            $action         .= "";
+            $link               = 'javascript:void(0)';
+            $action             .= "";
        
-            $userLink       = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
+            $userLink           = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
             // $userLink = "javascript:void(0);";
-            $action         .= '<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;';
+            $action             .= '<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;';
             $pdfLink        = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
             $action         .= '&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
             $row[]          = $action;

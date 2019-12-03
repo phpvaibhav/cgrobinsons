@@ -16,8 +16,7 @@ class Vehicles extends Common_Admin_Controller{
         $this->form_validation->set_rules('state', 'state', 'trim|required');
         $this->form_validation->set_rules('color', 'color', 'trim|required');
         if($this->form_validation->run() == FALSE){
-            $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
-            
+            $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));    
         }else{
           
 			$data_val['year']       	= $this->post('year');
@@ -52,9 +51,9 @@ class Vehicles extends Common_Admin_Controller{
         $this->form_validation->set_rules('vehicleId', 'vehicle', 'trim|required');
         $hid = decoding($this->post('hid'));
         if($hid==0):
-         if (empty($_FILES['attachment']['name'])) {
-            $this->form_validation->set_rules('attachment', 'attachment', 'trim|required');
-        }
+            if (empty($_FILES['attachment']['name'])) {
+                $this->form_validation->set_rules('attachment', 'attachment', 'trim|required');
+            }
         endif;
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
@@ -113,15 +112,15 @@ class Vehicles extends Common_Admin_Controller{
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
         }
         else{
-          		$vehicleId                  = decoding($this->post('vid'));
-				$data_val['driverId']       = $this->post('driverId');
-				$data_val['assignDate']     = date("Y-m-d",strtotime($this->post('assignDate')));
-				$where                      = array('vehicleId'=>$vehicleId);
-                $this->common_model->updateFields('assignVehicle',array('driverId'=>0),array('driverId'=>$data_val['driverId']));
-            	$isExist                    = $this->common_model->is_data_exists('vehicles',$where);
-                if($isExist){
-                	$assignExist            = $this->common_model->is_data_exists('assignVehicle',$where);
-                  if($assignExist){
+      		$vehicleId                  = decoding($this->post('vid'));
+			$data_val['driverId']       = $this->post('driverId');
+			$data_val['assignDate']     = date("Y-m-d",strtotime($this->post('assignDate')));
+			$where                      = array('vehicleId'=>$vehicleId);
+            $this->common_model->updateFields('assignVehicle',array('driverId'=>0),array('driverId'=>$data_val['driverId']));
+        	$isExist                    = $this->common_model->is_data_exists('vehicles',$where);
+            if($isExist){
+            	$assignExist            = $this->common_model->is_data_exists('assignVehicle',$where);
+                if($assignExist){
             		$result                 = $this->common_model->updateFields('assignVehicle',$data_val,$where);
             		$msg                    = "Vehicle assign driver successfully.";
             	}else{
@@ -129,10 +128,10 @@ class Vehicles extends Common_Admin_Controller{
             		$result                       = $this->common_model->insertData('assignVehicle',$data_val);
             		$msg                          = "Vehicle assign driver successfully.";
             	}
-                   $response    = array('status'=>SUCCESS,'message'=>$msg);
-                }else{
-                     $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
-                }  
+                $response    = array('status'=>SUCCESS,'message'=>$msg);
+            }else{
+                $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
+            }  
         }
         $this->response($response);
     }//end function
@@ -170,8 +169,8 @@ class Vehicles extends Common_Admin_Controller{
             }else{
                 $action .= '<a href="'.$link.'" onclick="vehilceStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->vehicleId).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-times" aria-hidden="true"></i></a>';
             }
-            $link       = base_url().'vehicles/vehicleDetail/'.encoding($serData->vehicleId);
-            $action .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$link.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+            $link           = base_url().'vehicles/vehicleDetail/'.encoding($serData->vehicleId);
+            $action         .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$link.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
             $row[]  = $action;
             $data[] = $row;
 
@@ -203,7 +202,7 @@ class Vehicles extends Common_Admin_Controller{
             $row[] = display_placeholder_text(date('d/m/Y',strtotime($serData->date)));
             $row[] = display_placeholder_text($serData->type); 
         
-            $attachmentUrl = S3VEHICLE_URL.$serData->attachment; 
+            $attachmentUrl  = S3VEHICLE_URL.$serData->attachment; 
             if($serData->fileType=='image'){
                 $attachment = '<img src="'.S3VEHICLE_URL.$serData->attachment.'" width="100" height="100">'; 
                 

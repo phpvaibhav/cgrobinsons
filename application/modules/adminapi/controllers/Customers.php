@@ -25,63 +25,62 @@ class Customers extends Common_Admin_Controller{
         $this->form_validation->set_rules('latitude1', 'billing latitude', 'trim|required|min_length[2]|callback_validate_billaddress');
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));       
-        }
-        else{
-                $authtoken                  = $this->common_model->generate_token();
-                $passToken                  = $this->common_model->generate_token();
-                $userData['fullName']       = $this->post('fullName');
-                $userData['email']          = $this->post('email');
-                $userData['password']       =  password_hash($this->post('password'), PASSWORD_DEFAULT);
-                $userData['contactNumber']  = $this->post('contactNumber');
-                $userData['userType']       = 1;
-                $userData['authToken']      =   $authtoken;
-                $userData['passToken']      =   $passToken;
-                //User meta
-                $userMeta['address']        = $this->post('address');
-                $userMeta['street']         = $this->post('street');
-                $userMeta['street2']        = $this->post('street2');
-                $userMeta['city']           = $this->post('city');
-                $userMeta['state']          = $this->post('state');
-                $userMeta['zip']            = $this->post('zip');
-                $userMeta['country']        = $this->post('country');
-                $userMeta['latitude']       = $this->post('latitude');
-                $userMeta['longitude']      = $this->post('longitude');
-                $userMeta['billAddress']    = $this->post('address1');
-                $userMeta['billStreet']     = $this->post('street1');
-                $userMeta['billStreet2']    = $this->post('street21');
-                $userMeta['billCity']       = $this->post('city1');
-                $userMeta['billState']      = $this->post('state1');
-                $userMeta['billZip']        = $this->post('zip1');
-                $userMeta['billCountry']    = $this->post('country1');
-                $userMeta['billLatitude']   = $this->post('latitude1');
-                $userMeta['billLongitude']  = $this->post('longitude1');
-                  //data_val
-                $data_val['address']        = $this->post('address');
-                $data_val['street']         = $this->post('street');
-                $data_val['street2']        = $this->post('street2');
-                $data_val['city']           = $this->post('city');
-                $data_val['state']          = $this->post('state');
-                $data_val['zip']            = $this->post('zip');
-                $data_val['country']        = $this->post('country');
-                $data_val['latitude']       = $this->post('latitude');
-                $data_val['longitude']      = $this->post('longitude');
-                $data_val1['address']       = $this->post('address1');
-                $data_val1['street']        = $this->post('street1');
-                $data_val1['street2']       = $this->post('street21');
-                $data_val1['city']          = $this->post('city1');
-                $data_val1['state']         = $this->post('state1');
-                $data_val1['zip']           = $this->post('zip1');
-                $data_val1['country']       = $this->post('country1');
-                $data_val1['latitude']      = $this->post('latitude1');
-                $data_val1['longitude']     = $this->post('longitude1');
+        }else{
+            $authtoken                  = $this->common_model->generate_token();
+            $passToken                  = $this->common_model->generate_token();
+            $userData['fullName']       = $this->post('fullName');
+            $userData['email']          = $this->post('email');
+            $userData['password']       =  password_hash($this->post('password'), PASSWORD_DEFAULT);
+            $userData['contactNumber']  = $this->post('contactNumber');
+            $userData['userType']       = 1;
+            $userData['authToken']      =   $authtoken;
+            $userData['passToken']      =   $passToken;
+            //User meta
+            $userMeta['address']        = $this->post('address');
+            $userMeta['street']         = $this->post('street');
+            $userMeta['street2']        = $this->post('street2');
+            $userMeta['city']           = $this->post('city');
+            $userMeta['state']          = $this->post('state');
+            $userMeta['zip']            = $this->post('zip');
+            $userMeta['country']        = $this->post('country');
+            $userMeta['latitude']       = $this->post('latitude');
+            $userMeta['longitude']      = $this->post('longitude');
+            $userMeta['billAddress']    = $this->post('address1');
+            $userMeta['billStreet']     = $this->post('street1');
+            $userMeta['billStreet2']    = $this->post('street21');
+            $userMeta['billCity']       = $this->post('city1');
+            $userMeta['billState']      = $this->post('state1');
+            $userMeta['billZip']        = $this->post('zip1');
+            $userMeta['billCountry']    = $this->post('country1');
+            $userMeta['billLatitude']   = $this->post('latitude1');
+            $userMeta['billLongitude']  = $this->post('longitude1');
+            //data_val
+            $data_val['address']        = $this->post('address');
+            $data_val['street']         = $this->post('street');
+            $data_val['street2']        = $this->post('street2');
+            $data_val['city']           = $this->post('city');
+            $data_val['state']          = $this->post('state');
+            $data_val['zip']            = $this->post('zip');
+            $data_val['country']        = $this->post('country');
+            $data_val['latitude']       = $this->post('latitude');
+            $data_val['longitude']      = $this->post('longitude');
+            $data_val1['address']       = $this->post('address1');
+            $data_val1['street']        = $this->post('street1');
+            $data_val1['street2']       = $this->post('street21');
+            $data_val1['city']          = $this->post('city1');
+            $data_val1['state']         = $this->post('state1');
+            $data_val1['zip']           = $this->post('zip1');
+            $data_val1['country']       = $this->post('country1');
+            $data_val1['latitude']      = $this->post('latitude1');
+            $data_val1['longitude']     = $this->post('longitude1');
                 
 
             if($dataExist){
-                 $isemailExist                  = $this->common_model->is_data_exists('users',array('id !='=>$userId,'email'=> $userData['email']));
+                 $isemailExist              = $this->common_model->is_data_exists('users',array('id !='=>$userId,'email'=> $userData['email']));
                  if($isemailExist){
-                     $response                  = array('status'=>FAIL,'message'=>"Email already exist");
+                     $response              = array('status'=>FAIL,'message'=>"Email already exist");
                  }else{
-                    $update                     = $this->common_model->updateFields('users',$userData,$where);
+                    $update                 = $this->common_model->updateFields('users',$userData,$where);
                     if($update){
                         $userMeta['userId']         = $userId;
                         $data_val['customerId']     = $userId;
@@ -92,17 +91,17 @@ class Customers extends Common_Admin_Controller{
                         $this->customer_model->customerAddressManage($data_val);
                         $this->customer_model->customerAddressManage($data_val1);
                     /*addres*/
-                    $response                   = array('status'=>SUCCESS,'message'=>"Customer record updated successfully.");
+                    $response               = array('status'=>SUCCESS,'message'=>"Customer record updated successfully.");
                     }else{
                     $response                   = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
                     } 
-                 }
+                }
                
             }else{
                 $userId                         = $this->common_model->insertData('users',$userData);
                 if($userId){
                     $userMeta['userId']         = $userId;
-                     $data_val['customerId']    = $userId;
+                    $data_val['customerId']     = $userId;
                     $data_val1['customerId']    = $userId;
                     $this->common_model->insertData('customerMeta',$userMeta);
                       /*addres*/
@@ -221,9 +220,9 @@ class Customers extends Common_Admin_Controller{
         if($addresses){
             $data       = "";
             foreach ($addresses as $key => $address) {
-              $data .= '<label class="radio setAddessLocation" onclick="radio_fun(this);" >';
-              $data .='<i class="fa fa-map-marker" aria-hidden="true"></i> <input type="radio" class="hideradio" latitude="'.$address->latitude.'" longitude="'.$address->longitude.'" street="'.$address->street.'" street2="'.$address->street2.'" city="'.$address->city.'" state="'.$address->state.'" zip="'.$address->zip.'" country="'.$address->country.'"  name="address_location" value="'.$address->address.'"/> '.$address->address;
-              $data .= '</label>';
+                $data .= '<label class="radio setAddessLocation" onclick="radio_fun(this);" >';
+                $data .='<i class="fa fa-map-marker" aria-hidden="true"></i> <input type="radio" class="hideradio" latitude="'.$address->latitude.'" longitude="'.$address->longitude.'" street="'.$address->street.'" street2="'.$address->street2.'" city="'.$address->city.'" state="'.$address->state.'" zip="'.$address->zip.'" country="'.$address->country.'"  name="address_location" value="'.$address->address.'"/> '.$address->address;
+                $data .= '</label>';
             }
             $showmsg  = 'record found.';
             $response = array('status'=>SUCCESS,'message'=>$showmsg,'address'=>$data);

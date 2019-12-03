@@ -42,9 +42,7 @@ class Customer_model extends CI_Model {
             {
                 $this->db->group_start();
                 $this->db->like(($emp), $_POST['search']['value']);
-            }
-            else
-            {
+            }else{
                 $this->db->or_like(($emp), $_POST['search']['value']);
             }
 
@@ -66,9 +64,7 @@ class Customer_model extends CI_Model {
         if(isset($_POST['order'])) // here order processing
         { 
             $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-        } 
-        else if(isset($this->order))
-        { 
+        }else if(isset($this->order)){ 
             $order = $this->order; 
             $this->db->order_by(key($order), $order[key($order)]);
         }    
@@ -78,13 +74,13 @@ class Customer_model extends CI_Model {
         $this->_get_query();
         if(isset($_POST['length']) && $_POST['length'] < 1) {
             $_POST['length']= '10';
-        } else{
+        }else{
         	$_POST['length']= isset($_POST['length']) ? $_POST['length'] :10;
         }
         if(isset($_POST['start']) && $_POST['start'] > 1) {
             $_POST['start']= $_POST['start'];
         }
-         $_POST['start']= isset($_POST['start']) ? $_POST['start']:0;
+        $_POST['start']= isset($_POST['start']) ? $_POST['start']:0;
         $this->db->limit($_POST['length'], $_POST['start']);
         //print_r($_POST);die;
         $query = $this->db->get(); //lq();

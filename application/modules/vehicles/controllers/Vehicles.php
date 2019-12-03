@@ -23,7 +23,7 @@ class Vehicles extends Common_Back_Controller {
         $data['front_scripts']  = array('backend_assets/custom/js/vehicle.js');
         $this->load->model('adminapi/vehicle_model');
         $latlong =$this->vehicle_model->vehilceLatlong();
-        
+        //pr($latlong);
         $data['locations']  = !empty($latlong) ? $latlong :array();
 
         $this->load->admin_render('vehicles', $data);

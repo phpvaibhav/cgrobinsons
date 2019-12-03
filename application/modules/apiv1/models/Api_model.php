@@ -23,9 +23,9 @@ class Api_model extends CI_Model {
         $sql = $this->db->select('id')->where('deviceToken', $deviceToken)->get($table);
 
         if($sql->num_rows()){
-                $id = array();
+                $id         = array();
                 foreach($sql->result() as $result){
-                    $id[] = $result->id;
+                    $id[]   = $result->id;
                 }
                 $this->db->where_in('id', $id);
                 $this->db->update('users',array('deviceToken'=>''));
@@ -48,10 +48,10 @@ class Api_model extends CI_Model {
         $this->db->where('authToken',$authToken);
         $sql = $this->db->get($table);
          //echo $this->db->last_query();die;
-            if($sql->num_rows() > 0)
-            {
-                return $sql->row();
-            }
+        if($sql->num_rows() > 0)
+        {
+            return $sql->row();
+        }
         
         return false;
     }//End Function
@@ -64,7 +64,6 @@ class Api_model extends CI_Model {
             }else{
                 $this->db->insert(USERS,$user);
                 $lastId = $this->db->insert_id();
-
                 if($lastId):
                     return array('regType'=>'NR','returnData'=>$this->userInfo(array('id' => $lastId)));
                     // Normal registration

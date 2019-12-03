@@ -21,9 +21,7 @@ class Users extends Common_Admin_Controller{
        if($this->form_validation->run($this) == FALSE){
            $messages    = (validation_errors()) ? validation_errors() : '';
            $response    = array('status' => 0, 'message' => $messages);
-        }
-        else 
-        {
+        }else{
             $password   = $this->input->post('password');
             $npassword  = $this->input->post('npassword');
             $select     = "password";
@@ -56,8 +54,7 @@ class Users extends Common_Admin_Controller{
         $this->form_validation->set_rules('contact', 'Contact Number', 'trim|required|min_length[10]|max_length[20]');
         $this->form_validation->set_rules('fullName', 'full Name', 'trim|required|min_length[2]');
         if($this->form_validation->run() == FALSE){
-            $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
-           
+            $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));  
         }else{
         
             $userid             =  $this->post('userauth');

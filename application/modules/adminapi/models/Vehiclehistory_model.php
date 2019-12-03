@@ -44,9 +44,7 @@ class Vehiclehistory_model extends CI_Model {
             {
                 $this->db->group_start();
                 $this->db->like(($emp), $_POST['search']['value']);
-            }
-            else
-            {
+            }else{
                 $this->db->or_like(($emp), $_POST['search']['value']);
             }
 
@@ -68,9 +66,7 @@ class Vehiclehistory_model extends CI_Model {
         if(isset($_POST['order'])) // here order processing
         { 
             $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-        } 
-        else if(isset($this->order))
-        { 
+        }else if(isset($this->order)){ 
             $order = $this->order; 
             $this->db->order_by(key($order), $order[key($order)]);
         }

@@ -13,22 +13,18 @@ class Admin extends Common_Back_Controller {
     }//End Function
 
     public function index() { 
-
         $data['title'] = "Login";
         $this->load->login_render('login', $data);
     }//End Function
     public function signup() { 
-
         $data['title'] = "Sign up";
         $this->load->login_render('signup', $data);
     }//End Function
     public function forgot() { 
-
         $data['title'] = "Forgot";
         $this->load->login_render('forgot', $data);
     }//End Function
     public function logout() {
-
         $this->admin_logout(FALSE);
         $this->session->set_flashdata('success', 'Sign out successfully done! ');
         $response = array('status' => 1);
@@ -37,7 +33,6 @@ class Admin extends Common_Back_Controller {
         die;
     }//End Function
     public function dashboard() {
-       
         $data['parent']     = "Dashboard";
         $data['title']      = '<i class="fa-fw fa fa-home"></i> Dashboard';
         $data['customers']  = $this->common_model->get_total_count('users',array('userType' =>1));
@@ -62,8 +57,7 @@ class Admin extends Common_Back_Controller {
         if($this->form_validation->run($this) == FALSE){
            $messages = (validation_errors()) ? validation_errors() : '';
            $response = array('status' => 0, 'message' => $messages);
-        }
-        else{
+        }else{
             $update_data        = array();
             $image              = array(); 
             $where_id           = $this->input->post('admin_id');
@@ -111,19 +105,14 @@ class Admin extends Common_Back_Controller {
     }//End Function
     public function changePassword()
     {
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[6]');
         $this->form_validation->set_rules('npassword', 'new password', 'trim|required|matches[rnpassword]|min_length[6]');
         $this->form_validation->set_rules('rnpassword', 'retype new password ','trim|required|min_length[6]');
-
-        
        if($this->form_validation->run($this) == FALSE){
            $messages = (validation_errors()) ? validation_errors() : '';
            $response = array('status' => 0, 'message' => $messages);
-        }
-        else 
-        {
+        }else{
             $password       = $this->input->post('password');
             $npassword      = $this->input->post('npassword');
             $select         = "password";

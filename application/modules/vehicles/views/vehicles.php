@@ -82,7 +82,7 @@
 				data-widget-sortable="false"
 				-->
 				<header>
-					<span class="widget-icon"> <i class="fa fa-marker"></i> </span>
+					<span class="widget-icon"> <i class="fa fa-map"></i> </span>
 					<h2>Route Map </h2>
 				</header>
 				<!-- widget div-->
@@ -213,7 +213,8 @@
 	var map;
 	var markers 		= [];
 
-	var GREEN_MARKER 	= base_url+'backend_assets/img/output-onlinepngtools.png';
+	//var GREEN_MARKER 	= base_url+'backend_assets/img/output-onlinepngtools.png';
+	var GREEN_MARKER 	= base_url+'backend_assets/img/pinset.png';
 	var areaLatitude 	=  parseFloat('<?= isset($locations[0]->latitude) ? $locations[0]->latitude :22.71956800; ?>');
 	var areaLongitude 	= parseFloat('<?= isset($locations[0]->longitude) ? $locations[0]->longitude:75.857727; ?>') ;
 	
@@ -238,14 +239,14 @@
 	function addMarkers(map) {
 		$.ajax({
 			type: "POST",
-	              url: base_url+'adminapi/vehicles/vehilceLatlong',
-	              data: {use:1},
-	              headers: { 'authToken':authToken},
-	              cache: false,
+	              url 		: base_url+'adminapi/vehicles/vehilceLatlong',
+	              data 		: {use:1},
+	              headers 	: { 'authToken':authToken},
+	              cache		: false,
 	              beforeSend: function() {
 	               
 	              }, 
-	              success: function (res) {
+	              success	: function (res) {
 	              	if(res.status=='success'){
 	              		$( "#remove-markers" ).trigger( "click" ); 
 	                	console.log(res.data);
@@ -266,9 +267,21 @@
 									animation: google.maps.Animation.DROP,
 								});
 				  				bounds.extend(markers[i].getPosition());
+				  				var content = '<p><b>Basic Information:</b><hr></p><p><b>Vehicle :</b> <a href="'+base_url+locations[i].vehicleLink+'" target="_blank" >'+locations[i].manufacturer+' '+locations[i].year+' '+locations[i].vin+' '+locations[i].model+' '+locations[i].plate+'</a><br>'+'<b>Driver : <a href="'+base_url+locations[i].driverLink+'" target="_blank" > '+locations[i].fullName+'</a></b><hr></p><p><strong>Assign Job :</strong><hr></p><p>';
+				  				var job = locations[i].assignJob;
+				  				if(job.length==0){
+				  					content += '<span class="text-center">No assign job found.</span>';
+				  				}else{
+				  				for (var j = 0; j < job.length; j++) { 
+
+				  					content += (j+1)+': <b><a href="'+job[j].jobLink+'" target="_blank" >'+job[j].jobName+'</a> <span class="pull-right txt-color-'+job[j].statusColor+'" >('+job[j].statusShow+')</span></b><br>';
+				  				}
+				  				}
+				  				content +='</p>';
 								// process multiple info windows
 								markers[i].info = new google.maps.InfoWindow({
-								content 	: '<b>Vehicle :</b> '+locations[i].manufacturer+'<br>'+'<b>Driver : '+locations[i].fullName+'</b>'
+								content 	: content
+									
 								});
 								google.maps.event.addListener(markers[i], 'click', function() {  
 									// this = marker

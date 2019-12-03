@@ -6,11 +6,11 @@ class Manage extends Common_Front_Controller {
     /**
      * load list modal 
      */
-     function __Construct(){
-       parent::__Construct();
+ 	function __Construct(){
+       	parent::__Construct();
 			$this->load->library('smtp_email');
 			$this->load->library('background');
-     }
+ 	}
 	function mailSent(){
 		
 		$email 		= trim($this->input->post('email'));

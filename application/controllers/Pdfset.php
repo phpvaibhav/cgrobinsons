@@ -112,10 +112,10 @@ class Pdfset extends Common_Front_Controller {
     $content .= '<td><strong>Creation Date</strong> :</td><td>'.date("d/m/Y",strtotime($job['startDate']))." ".$job['startTime'].'</td>';
     $content .= '</tr>';
 
-    $content .= '<tr bgcolor="#EAECF0">';
+/*    $content .= '<tr bgcolor="#EAECF0">';
     $content .= '<td><strong>Work Priority</strong> :</td><td><span style="font-size: medium;"><b>'.$workPriority.'</b></span></td>';
     $content .= '<td></td><td></td>';
-    $content .= '</tr>';  
+    $content .= '</tr>';  */
 
     $content .= '<tr bgcolor="#EAECF0">';
     $content .= '<td><strong>Customer Name</strong> :</td><td>'.$job['customerName'].'</td>';

@@ -24,7 +24,6 @@
 							<ul class="list-unstyled">
 								<li class="list-group-item">
 									<span class="label label-<?php echo $customermeta['creditHoldStatus'] ?'danger' :'warning'; ?> pull-right"><?php echo $customermeta['creditHoldStatus'] ?'Yes' :'No'; ?></span>	<strong>Credit Hold</strong>
-								
 								</li>
 								<li class="list-group-item">
 									<span class="pull-right"><?php echo ucfirst($customer['fullName']); ?></span>	<strong>Customer Name</strong>

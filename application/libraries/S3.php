@@ -87,8 +87,8 @@ class S3 {
 			self::setAuth($access_key, $secret_key);
 		}
 
-		self::$use_ssl = $use_ssl;
-		self::$verify_peer = $verify_peer;
+		self::$use_ssl 		= $use_ssl;
+		self::$verify_peer 	= $verify_peer;
 	}
 
 	/**

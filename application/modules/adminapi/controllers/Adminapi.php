@@ -20,8 +20,7 @@ class Adminapi extends Common_Admin_Controller{
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
             $this->response($response);
-        }
-        else{
+        }else{
         
             $email                          =  $this->post('email');
             $fullName                       =  $this->post('fullName');
@@ -85,9 +84,7 @@ class Adminapi extends Common_Admin_Controller{
         {
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
             $this->response($response);
-        }
-        else
-        {
+        }else{
             $authtoken              = $this->adminapi_model->generate_token();
             $data                   = array();
             $data['email']          = $this->post('email');

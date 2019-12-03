@@ -44,9 +44,7 @@ class Vehicle_model extends CI_Model {
             {
                 $this->db->group_start();
                 $this->db->like(($emp), $_POST['search']['value']);
-            }
-            else
-            {
+            }else{
                 $this->db->or_like(($emp), $_POST['search']['value']);
             }
 
@@ -68,8 +66,7 @@ class Vehicle_model extends CI_Model {
         if(isset($_POST['order'])) // here order processing
         { 
             $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-        } 
-        else if(isset($this->order))
+        }else if(isset($this->order))
         { 
             $order = $this->order; 
             $this->db->order_by(key($order), $order[key($order)]);
@@ -114,19 +111,56 @@ class Vehicle_model extends CI_Model {
     }//End function
     function vehilceLatlong($driverId =''){
         $array =array();
-        $this->db->select('v.vehicleId,v.year,v.manufacturer,v.model,v.vin,v.plate,v.color,v.state,v.status,d.fullName,d.fullName,d.latitude,d.longitude');
+        $this->db->select('v.vehicleId,v.year,v.manufacturer,v.model,v.vin,v.plate,v.color,v.state,v.status,d.fullName,d.id as driverId,d.fullName,d.latitude,d.longitude');
         $this->db->from('vehicles as v');
         
         $this->db->join('assignVehicle as av','av.vehicleId = v.vehicleId','left');
         $this->db->join('users as d','d.id = av.driverId','left');
-        $this->db->where(array('d.latitude !='=>0.00000000,'d.longitude !='=>0.00000000));
+        $this->db->where(array('d.latitude !='=>0.00000000,'d.longitude !='=>0.00000000,'v.status'=>1));
         !empty($driverId) ? $this->db->where(array('d.id'=>$driverId)):"";
         !empty($driverId) ? $this->db->limit(1) :"";
         $sql = $this->db->get();
        
         if($sql->num_rows()){
             $array =  !empty($driverId) ? $sql->row_array(): $sql->result();
+            if(empty($driverId)){
+                foreach ($array as $ky => $v) {
+                   $array[$ky]->driverLink = 'drivers/driverDetail/'.encoding($v->driverId);
+                   $array[$ky]->vehicleLink = 'vehicles/vehicleDetail/'.encoding($v->vehicleId);
+                   $array[$ky]->assignJob = $this->assignJob($v->driverId);
+                }
+            }
         }
+       // pr($array);
         return $array;
     }//End FUnction
+    function assignJob($driverId){
+        $where = array('d.id'=>$driverId,'j.jobStatus !='=>2);
+        $this->db->select('j.jobId,j.jobName,(case when (j.jobStatus = 0) 
+        THEN "Open" when (j.jobStatus = 1) 
+        THEN "In Progress" when (j.jobStatus = 2) 
+        THEN "Completed" ELSE
+        "Unknown" 
+        END) as statusShow,(case when (j.jobStatus = 0) 
+        THEN "blue" when (j.jobStatus = 1) 
+        THEN "orange" when (j.jobStatus = 2) 
+        THEN "green" ELSE
+        "Unknown" 
+        END) as statusColor');
+        $this->db->from('jobs as j');
+        $this->db->join('jobType as jt','j.jobTypeId=jt.jobTypeId');
+        $this->db->join('users as c','c.id=j.customerId','left');
+        $this->db->join('users as d','d.id=j.driverId','left');
+        !empty($where) ? $this->db->where($where) :"";
+        $this->db->order_by('DATE(j.upd)','desc');
+        $sql = $this->db->get();
+        if($sql->num_rows()):
+            $data = $sql->result();
+            foreach ($data as $e => $u) {
+                $data[$e]->jobLink = base_url().'jobs/jobDetail/'.encoding($u->jobId);
+            }
+            return $data;
+        endif;
+        return array();
+    }//end function1
 }//End class

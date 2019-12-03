@@ -50,7 +50,7 @@ class Smtp_email{
 
     public function send_mail_multiple($to,$subject,$message){
 
-        $mail   = new PHPMailer(true); // Passing `true` enables exceptions
+        $mail               = new PHPMailer(true); // Passing `true` enables exceptions
         try {
         //Server settings
        // $mail->SMTPDebug = 2; // Enable verbose debug output

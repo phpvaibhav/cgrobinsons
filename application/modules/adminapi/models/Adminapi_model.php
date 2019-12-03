@@ -155,14 +155,10 @@ class Adminapi_model extends CI_Model {
             if ($response)
             {  
                 return  array('emailType'=>'ES' ); //ES emailSend
-            }
-            else
-            { 
+            }else{ 
                  return  array('emailType'=>'NS') ; //NS NotSend
             }
-        }
-        else
-        {
+        }else{
             return  array('emailType'=>'NE') ; //NE Not exist
         }
     } //End funtion       

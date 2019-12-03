@@ -19,76 +19,75 @@ class Jobtype extends Common_Admin_Controller{
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));   
         }else{
-              //  pr($this->post());
-                $data_val['jobType']        = $this->post('jobType');
-                $total_element              = $this->post('total_element');
-                $total_element              = !empty($total_element) ? $total_element :0;
-                $queData                    = array();
-                $queNonDeleteId             = array();
-                $j = 0;
-                for ($i=0; $i < $total_element ; $i++) { 
-                   $k                       = $i+1;
-                   $question                = $this->post('question_'.$k);
-                   $questionId              = $this->post('questionId_'.$k);
-                   if(!empty($questionId) && $questionId !=0){
-                        $queNonDeleteId[]   = $questionId;
-                   }
+            //  pr($this->post());
+            $data_val['jobType']        = $this->post('jobType');
+            $total_element              = $this->post('total_element');
+            $total_element              = !empty($total_element) ? $total_element :0;
+            $queData                    = array();
+            $queNonDeleteId             = array();
+            $j = 0;
+            for ($i=0; $i < $total_element ; $i++) { 
+                $k                       = $i+1;
+                $question                = $this->post('question_'.$k);
+                $questionId              = $this->post('questionId_'.$k);
+                if(!empty($questionId) && $questionId !=0){
+                    $queNonDeleteId[]   = $questionId;
+                }
                   
-                   $questionType            = $this->post('questionType_'.$k);
-                   $option                  = $this->post('option_'.$k);
-                   $option1                 = $this->post('option_1_'.$k);
-                   if(isset($question) && !empty($question)){
-                        $queData[$j]['questionId']      = $questionId;
-                        $queData[$j]['question']        = $question;
-                        $queData[$j]['questionType']    = $questionType;
-                        if($questionType !='text'){
-                            $queData[$j]['option']      = json_encode(array($option,$option1));
-                        }else{
-                            $queData[$j]['option']      = "";
-                        }
-                        $j++;
-                   } 
-                }
+                $questionType            = $this->post('questionType_'.$k);
+                $option                  = $this->post('option_'.$k);
+                $option1                 = $this->post('option_1_'.$k);
+                if(isset($question) && !empty($question)){
+                    $queData[$j]['questionId']      = $questionId;
+                    $queData[$j]['question']        = $question;
+                    $queData[$j]['questionType']    = $questionType;
+                    if($questionType !='text'){
+                        $queData[$j]['option']      = json_encode(array($option,$option1));
+                    }else{
+                        $queData[$j]['option']      = "";
+                    }
+                    $j++;
+                } 
+            }
                  
-                $jobTypeId      = decoding($this->post('jobTypeId'));
-                $where          = array('jobTypeId'=>$jobTypeId);               
-                $isExist        = $this->common_model->is_data_exists('jobType',$where);
-                if($isExist){
-                    $result     = $this->common_model->updateFields('jobType',$data_val,$where);
-                    $result     =  $isExist->jobTypeId;
-                    $jobTypeId  = $result;
-                    $msg        = "Job type record updated successfully.";
-                }else{
-                    $result     = $this->common_model->insertData('jobType',$data_val);
-                    $jobTypeId  = $result;
-                    $msg        = "Job type created successfully.";
-                }
-                if(!empty($jobTypeId)){
-                    if(!empty($queNonDeleteId)){
-                        $this->common_model->deleteDataJobType('jobTypeQuestions',array('jobTypeId'=>$jobTypeId),$queNonDeleteId);
-                    }
-                    
-                    for ($x=0; $x <sizeof($queData) ; $x++) { 
-                        $questionData                   = array();
-                        $qId                            =  $queData[$x]['questionId'];
-                        $questionData['question']       = $queData[$x]['question'];
-                        $questionData['type']           = $queData[$x]['questionType'];
-                        $questionData['options']        = $queData[$x]['option'];
-                        $isQue                          = $this->common_model->is_data_exists('jobTypeQuestions',array('questionId'=>$qId));
-                        if($isQue){
-                            $this->common_model->updateFields('jobTypeQuestions',$questionData,array('questionId'=>$qId));
-                        }else{
-                            $questionData['jobTypeId']     = $jobTypeId;
-                            $this->common_model->insertData('jobTypeQuestions',$questionData);
-                        }
+            $jobTypeId      = decoding($this->post('jobTypeId'));
+            $where          = array('jobTypeId'=>$jobTypeId);               
+            $isExist        = $this->common_model->is_data_exists('jobType',$where);
+            if($isExist){
+                $result     = $this->common_model->updateFields('jobType',$data_val,$where);
+                $result     =  $isExist->jobTypeId;
+                $jobTypeId  = $result;
+                $msg        = "Job type record updated successfully.";
+            }else{
+                $result     = $this->common_model->insertData('jobType',$data_val);
+                $jobTypeId  = $result;
+                $msg        = "Job type created successfully.";
+            }
+            if(!empty($jobTypeId)){
+                if(!empty($queNonDeleteId)){
+                    $this->common_model->deleteDataJobType('jobTypeQuestions',array('jobTypeId'=>$jobTypeId),$queNonDeleteId);
+                }    
+                for ($x=0; $x <sizeof($queData) ; $x++) { 
+                    $questionData                   = array();
+                    $qId                            =  $queData[$x]['questionId'];
+                    $questionData['question']       = $queData[$x]['question'];
+                    $questionData['type']           = $queData[$x]['questionType'];
+                    $questionData['options']        = $queData[$x]['option'];
+                    $isQue                          = $this->common_model->is_data_exists('jobTypeQuestions',array('questionId'=>$qId));
+                    if($isQue){
+                        $this->common_model->updateFields('jobTypeQuestions',$questionData,array('questionId'=>$qId));
+                    }else{
+                        $questionData['jobTypeId']     = $jobTypeId;
+                        $this->common_model->insertData('jobTypeQuestions',$questionData);
                     }
                 }
-                //$jobId = $this->common_model->insertData('jobs',$data_val);
-                if($result){
-                    $response = array('status'=>SUCCESS,'message'=>$msg);
-                }else{
-                    $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
-                }  
+            }
+            //$jobId = $this->common_model->insertData('jobs',$data_val);
+            if($result){
+                $response = array('status'=>SUCCESS,'message'=>$msg);
+            }else{
+                $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
+            }  
         }
         $this->response($response);
     }//end function
@@ -174,7 +173,7 @@ class Jobtype extends Common_Admin_Controller{
             $html             = '';
             $colors           = array('info', 'warning','success');
             foreach ($questions as $key => $question) {
-              $rand_color = $colors[array_rand($colors)];
+                $rand_color = $colors[array_rand($colors)];
                 $html    .= '<div class="col col-md-12"><p class="alert alert-'.$rand_color.'"><label class="checkbox"><input type="checkbox" class="checkbox_question"  name="questionId[]" value="'.$question->questionId.'" '.(in_array($question->questionId,$que) ? 'checked="checked"' :'').(($pendingJob!=0)?'onclick="return false;"':'onclick="funcheck();"').' ><i></i><strong class="txt-color-blueDark">'.$question->question.'</strong></label></p></div>';
             }
             $response   = array('status'=>SUCCESS,'message'=>ResponseMessages::getStatusCodeMessage(118),'data'=>$html);
