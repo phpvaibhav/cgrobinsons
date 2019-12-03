@@ -561,7 +561,8 @@
 	}
 	/*******marker********/
 	var base_url 		= $('body').data('base-url'); // Base url
-	var GREEN_MARKER 	= base_url+'backend_assets/img/output-onlinepngtools.png';
+	var GREEN_MARKER 	=  base_url+'backend_assets/img/driverset.png';
+
 	function addMarkers(map) {
 		$.ajax({
 			  type 		: "POST",
@@ -577,12 +578,12 @@
 					$( "#remove-markers" ).trigger( "click" ); 
 					//console.log(res.data);
 					var locations 	= [];
-					var set 		= {'latitude':areaLatitude,'longitude':areaLongitude,'address':"<b>Location:</b> "+address};
+					var set 		= {'latitude':areaLatitude,'longitude':areaLongitude,'address':"<b>Location:</b> "+address,title:"<b>Location:</b> "+address};
 					locations.push(set);
-					/*		if(res.data.length !=0){
-					var set_driver = {'latitude':res.data.latitude,'longitude':res.data.longitude,'address':"<b>Driver:</b> "+res.data.fullName+'<br><b>Vehicle:</b> '+res.data.manufacturer+' '+res.data.model+' '+res.data.year};
+							if(res.data.length !=0){
+					var set_driver = {'latitude':res.data.latitude,'longitude':res.data.longitude,'address':'<p><b>Basic Information:</b><hr></p><p><b>Vehicle :</b> <a href="'+base_url+res.data.vehicleLink+'" target="_blank" >'+res.data.manufacturer+' '+res.data.year+' '+res.data.vin+' '+res.data.model+' '+res.data.plate+'</a><br>'+'<b>Driver : <a href="'+base_url+res.data.driverLink+'" target="_blank" > '+res.data.fullName+'</a></b></p>',title:res.data.fullName};
 					locations.push(set_driver);
-					}*/
+					}
 					var num_markers = locations.length;
 					//alert(num_markers);
 					/*map marker*/
@@ -592,7 +593,7 @@
 							position 	: {lat:parseFloat(locations[i].latitude), lng:parseFloat(locations[i].longitude)},
 							map 		: map,
 							html 		: parseFloat(locations[i].latitude),
-							title 		: locations[i].address,
+							title 		: locations[i].title,
 							icon 		: i==0?'':GREEN_MARKER,
 							id 			: i,
 							animation 	: i==0?'':google.maps.Animation.DROP,
