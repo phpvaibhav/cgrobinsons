@@ -82,8 +82,7 @@ class Vehicle_model extends CI_Model {
         } else{
         	$_POST['length']       = isset($_POST['length']) ? $_POST['length'] :10;
         }
-        
-        
+
         if(isset($_POST['start']) && $_POST['start'] > 1) {
             $_POST['start']     = $_POST['start'];
         }
@@ -105,7 +104,7 @@ class Vehicle_model extends CI_Model {
     public function count_all()
     {
         $this->db->from($this->table);
-         if(!empty($this->where))
+        if(!empty($this->where))
             $this->db->where($this->where); 
         return $this->db->count_all_results();
     }//End function
@@ -125,10 +124,16 @@ class Vehicle_model extends CI_Model {
             $array =  !empty($driverId) ? $sql->row_array(): $sql->result();
             if(empty($driverId)){
                 foreach ($array as $ky => $v) {
-                   $array[$ky]->driverLink = 'drivers/driverDetail/'.encoding($v->driverId);
+                   $array[$ky]->driverLink  = 'drivers/driverDetail/'.encoding($v->driverId);
                    $array[$ky]->vehicleLink = 'vehicles/vehicleDetail/'.encoding($v->vehicleId);
-                   $array[$ky]->assignJob = $this->assignJob($v->driverId);
+                   $array[$ky]->assignJob   = $this->assignJob($v->driverId);
+                //   $array[$ky]->currentAddress = $this->common_model->geolocationaddress($v->latitude,$v->longitude);
                 }
+            }else{
+                $array['driverLink']    = 'drivers/driverDetail/'.encoding($array['driverId']);
+                $array['vehicleLink']   = 'vehicles/vehicleDetail/'.encoding($array['vehicleId']);
+                 
+                  // $array['currentAddress'] = $this->common_model->geolocationaddress($v['latitude'],$v['longitude']); 
             }
         }
        // pr($array);

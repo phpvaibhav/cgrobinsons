@@ -57,20 +57,18 @@ class Adminapi extends Common_Admin_Controller{
 
             $result = $this->adminapi_model->registration($userData);
             if(is_array($result)){
-
-               switch ($result['regType']){
+                switch ($result['regType']){
                     case "NR": // Normal registration
-                    $this->StoreSession($result['returnData']);
-                   
-                    $response = array('status'=>SUCCESS,'message'=>ResponseMessages::getStatusCodeMessage(110), 'messageCode'=>'normal_reg','users'=>$result['returnData']);
+                        $this->StoreSession($result['returnData']);
+                        $response = array('status'=>SUCCESS,'message'=>ResponseMessages::getStatusCodeMessage(110), 'messageCode'=>'normal_reg','users'=>$result['returnData']);
                     break;
                     case "AE": // User already registered
-                    $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(117),'users'=>array());
+                        $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(117),'users'=>array());
                     break;
                     default:
-                    $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(121),'userDetail'=>array());
+                        $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(121),'userDetail'=>array());
                 }
-             }else{
+            }else{
                 $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118),'userDetail'=>array());
             }   
             $this->response($response);

@@ -118,8 +118,7 @@ class Adminapi_model extends CI_Model {
                     $updateData = $this->updateDeviceIdToken($result->id,$authToken);
                     if($updateData){
                        return array('returnType'=>'SL','userInfo'=>$this->userInfo(array('id'=>$result->id)));
-                    }
-                    else{
+                    }else{
                         return FALSE;
                     } 
                 }else{
@@ -141,10 +140,9 @@ class Adminapi_model extends CI_Model {
             $useremail          = $result->email;
             $passToken          = $result->passToken;
             $data['full_name']  = $result->fullName;
-
             // Check for social id
             /*  if(!empty($result->socialId)){
-            return  array('emailType'=>'SL' ); //SL social login
+                return  array('emailType'=>'SL' ); //SL social login
             }*/
             $encoding_email     = encoding($useremail);
             $data['url']        = base_url().'password/ChangePassword/change_password/'.$encoding_email.'/'.$passToken;
@@ -156,7 +154,7 @@ class Adminapi_model extends CI_Model {
             {  
                 return  array('emailType'=>'ES' ); //ES emailSend
             }else{ 
-                 return  array('emailType'=>'NS') ; //NS NotSend
+                return  array('emailType'=>'NS') ; //NS NotSend
             }
         }else{
             return  array('emailType'=>'NE') ; //NE Not exist
