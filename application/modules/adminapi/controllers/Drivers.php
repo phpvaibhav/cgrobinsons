@@ -114,9 +114,9 @@ class Drivers extends Common_Admin_Controller{
         $this->load->helper('text');
         $this->load->model('driver_model');
         $this->driver_model->set_data(array('userType' =>2));
-        $list   = $this->driver_model->get_list();
-        $data   = array();
-        $no     = $_POST['start'];
+        $list               = $this->driver_model->get_list();
+        $data               = array();
+        $no                 = $_POST['start'];
         foreach ($list as $serData) { 
             $action         = '';
             $no++;

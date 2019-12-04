@@ -121,9 +121,9 @@ class Customers extends Common_Admin_Controller{
         $this->load->helper('text');
         $this->load->model('customer_model');
         $this->customer_model->set_data(array('userType' =>1));
-        $list   = $this->customer_model->get_list();
-        $data   = array();
-        $no     = $_POST['start'];
+        $list           = $this->customer_model->get_list();
+        $data           = array();
+        $no             = $_POST['start'];
         foreach ($list as $serData) { 
             $action     = '';
             $no++;

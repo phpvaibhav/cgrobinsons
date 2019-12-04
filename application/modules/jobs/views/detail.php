@@ -578,7 +578,7 @@
 					$( "#remove-markers" ).trigger( "click" ); 
 					//console.log(res.data);
 					var locations 	= [];
-					var set 		= {'latitude':areaLatitude,'longitude':areaLongitude,'address':"<b>Location:</b> "+address,title:"<b>Location:</b> "+address};
+					var set 		= {'latitude':areaLatitude,'longitude':areaLongitude,'address':"<b>Location:</b> "+address,title:address};
 					locations.push(set);
 							if(res.data.length !=0){
 					var set_driver = {'latitude':res.data.latitude,'longitude':res.data.longitude,'address':'<p><b>Basic Information:</b><hr></p><p><b>Vehicle :</b> <a href="'+base_url+res.data.vehicleLink+'" target="_blank" >'+res.data.manufacturer+' '+res.data.year+' '+res.data.vin+' '+res.data.model+' '+res.data.plate+'</a><br>'+'<b>Driver : <a href="'+base_url+res.data.driverLink+'" target="_blank" > '+res.data.fullName+'</a></b></p>',title:res.data.fullName};

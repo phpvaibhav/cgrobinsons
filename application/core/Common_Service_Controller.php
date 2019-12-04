@@ -21,7 +21,7 @@ class Common_Service_Controller extends REST_Controller{
     public function check_service_auth(){
         
         $this->authData = '';
-        $header = $this->input->request_headers();
+        $header         = $this->input->request_headers();
         
         /*
          * Convert all keys to lower case as some server manipulates header keys
