@@ -2,17 +2,46 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Job_model extends CI_Model {
-    var $column_sel = array('j.jobId','j.jobName','j.jobTypeId','j.driverId','c.fullName as customerName','jt.jobType','d.fullName as driverName','j.customerId','j.jobStatus','j.startDate','j.startTime','(case when (j.jobStatus = 0) 
+    var $column_sel = array('j.jobId',
+        'j.jobName',
+        'j.jobTypeId',
+        'j.driverId',
+        'c.fullName as customerName',
+        'jt.jobType',
+        'd.fullName as driverName',
+        'j.customerId',
+        'j.jobStatus',
+        'j.startDate',
+        'j.startTime',
+        '(case when (j.jobStatus = 0) 
         THEN "Open" when (j.jobStatus = 1) 
         THEN "In-progress" when (j.jobStatus = 2) 
         THEN "Completed" ELSE
         "Unknown" 
-        END) as statusShow','j.jobStatus as JobStatus','j.address','j.street','j.street2','j.city','j.state','j.zip','j.country','j.latitude','j.longitude','j.jobReport','j.geoFencing','j.points','j.polygonColor','j.crd','j.upd','(case when (j.workPriority = 0) 
+        END) as statusShow',
+        'j.jobStatus as JobStatus',
+        'j.address',
+        'j.street',
+        'j.street2',
+        'j.city',
+        'j.state',
+        'j.zip',
+        'j.country',
+        'j.latitude',
+        'j.longitude',
+        'j.jobReport',
+        'j.geoFencing',
+        'j.points',
+        'j.polygonColor',
+        'j.crd',
+        'j.upd',
+        '(case when (j.workPriority = 0) 
         THEN "Low" when (j.workPriority = 1) 
         THEN "Medium" when (j.workPriority = 2) 
         THEN "High" ELSE
         "Unknown" 
-        END) as priority','j.workPriority');
+        END) as priority',
+        'j.workPriority');
     public function __construct(){
         parent::__construct();
 
@@ -150,40 +179,40 @@ class Job_model extends CI_Model {
     }//end function
     function reportFormat($report){
         if(!empty($report)):
-                $bimage = $aimage = array();
-                if(isset($report['beforeWork'])){
-                    if(isset($report['beforeWork']['driverSignature']) && !empty($report['beforeWork']['driverSignature'])){
-                        $report['beforeWork']['driverSignature'] =  S3JOBS_URL.$report['beforeWork']['driverSignature'] ;
-                    }else{
-                        $report['beforeWork']['driverSignature'] = "";
-                    }
-                    $beforeWorkImage = isset($report['beforeWork']['workImage']) ? $report['beforeWork']['workImage']:array();
-                        for ($i=0; $i <sizeof($beforeWorkImage) ; $i++) { 
-                            $bimage[] = S3JOBS_URL.$beforeWorkImage[$i];
-                        }
-                        $report['beforeWork']['workImage']          = $bimage;
+            $bimage = $aimage = array();
+            if(isset($report['beforeWork'])){
+                if(isset($report['beforeWork']['driverSignature']) && !empty($report['beforeWork']['driverSignature'])){
+                    $report['beforeWork']['driverSignature'] =  S3JOBS_URL.$report['beforeWork']['driverSignature'] ;
                 }else{
-                   $report['beforeWork'] = new stdClass();  
+                    $report['beforeWork']['driverSignature'] = "";
                 }
-                if(isset($report['afterWork'])){
-                    if(isset($report['afterWork']['customerSignature']) && !empty($report['afterWork']['customerSignature'])){
-                         $report['afterWork']['customerSignature']   = S3JOBS_URL.$report['afterWork']['customerSignature'];
-                    }else{
-                        $report['afterWork']['customerSignature'] ="";
-                    }
-                    $afterWorkImage = isset($report['afterWork']['workImage']) ? $report['afterWork']['workImage']:array();
-                    for ($j=0; $j <sizeof($afterWorkImage) ; $j++) { 
-                        $aimage[] = S3JOBS_URL.$afterWorkImage[$j];
-                    }
-                    $report['afterWork']['workImage'] = $aimage;
+                $beforeWorkImage = isset($report['beforeWork']['workImage']) ? $report['beforeWork']['workImage']:array();
+                for ($i=0; $i <sizeof($beforeWorkImage) ; $i++) { 
+                    $bimage[] = S3JOBS_URL.$beforeWorkImage[$i];
+                }
+                $report['beforeWork']['workImage']          = $bimage;
+            }else{
+               $report['beforeWork'] = new stdClass();  
+            }
+            if(isset($report['afterWork'])){
+                if(isset($report['afterWork']['customerSignature']) && !empty($report['afterWork']['customerSignature'])){
+                     $report['afterWork']['customerSignature']   = S3JOBS_URL.$report['afterWork']['customerSignature'];
                 }else{
-                  $report['afterWork'] = new stdClass();   
-                }  
-                return $report;
+                    $report['afterWork']['customerSignature'] ="";
+                }
+                $afterWorkImage = isset($report['afterWork']['workImage']) ? $report['afterWork']['workImage']:array();
+                for ($j=0; $j <sizeof($afterWorkImage) ; $j++) { 
+                    $aimage[] = S3JOBS_URL.$afterWorkImage[$j];
+                }
+                $report['afterWork']['workImage'] = $aimage;
+            }else{
+              $report['afterWork'] = new stdClass();   
+            }  
+            return $report;
         endif;
         $x = new stdClass();
         return $x;
-    }
+    }//end function
     function jobTracking($jobId,$driverId,$latitude,$longitude){
        $jobMsg  = new stdClass();
        $sql     = "SELECT jobId FROM jobs as j  WHERE ST_CONTAINS(j.boundary, Point($longitude,$latitude))
@@ -222,20 +251,19 @@ class Job_model extends CI_Model {
                     $date       = date("Y-m-d H:i:s");
                     $setData    = array('jobId'=>$jobId,'driverId'=>$driverId,'inDateTime'=>$date);
                     $set        = ($areaStatus=='inside') ? $this->common_model->insertData('jobTiming',$setData) : false;  
-                    }
+                }
             }else if($areaStatus=='outside'){
-                 if($inDateTime !='0000-00-00 00:00:00' && $outDateTime =='0000-00-00 00:00:00'){
+                if($inDateTime !='0000-00-00 00:00:00' && $outDateTime =='0000-00-00 00:00:00'){
                     $date       = date("Y-m-d H:i:s");
                     $setData    = array('outDateTime'=>$date);
-                     $update    = $this->common_model->updateFields('jobTiming',$setData,array('jobTimeId'=>$jobtime->jobTimeId,'jobId'=>$jobId,'driverId'=>$driverId));
-                 }
-
+                    $update     = $this->common_model->updateFields('jobTiming',$setData,array('jobTimeId'=>$jobtime->jobTimeId,'jobId'=>$jobId,'driverId'=>$driverId));
+                }
             }else{
-               if($inDateTime !='0000-00-00 00:00:00' && $outDateTime =='0000-00-00 00:00:00'){
+                if($inDateTime !='0000-00-00 00:00:00' && $outDateTime =='0000-00-00 00:00:00'){
                     $date       = date("Y-m-d H:i:s");
                     $setData    = array('outDateTime'=>$date);
-                     $update    = $this->common_model->updateFields('jobTiming',$setData,array('jobTimeId'=>$jobtime->jobTimeId,'jobId'=>$jobId,'driverId'=>$driverId));
-                 }  
+                    $update     = $this->common_model->updateFields('jobTiming',$setData,array('jobTimeId'=>$jobtime->jobTimeId,'jobId'=>$jobId,'driverId'=>$driverId));
+                }  
             }
             //exits
         }else{
@@ -244,7 +272,7 @@ class Job_model extends CI_Model {
                 $date       = date("Y-m-d H:i:s");
                 $setData    = array('jobId'=>$jobId,'driverId'=>$driverId,'inDateTime'=>$date);
                 $set        = ($areaStatus=='inside') ? $this->common_model->insertData('jobTiming',$setData) : false;
-                $setin = true;
+                $setin      = true;
             } 
         }//end if
         if($mailsent && $setin){
@@ -255,8 +283,8 @@ class Job_model extends CI_Model {
             //email send
             if($jobTime){
             //send mail
-                $maildata['title']          = "";
-                $message                    = "";
+                $maildata['title']              = "";
+                $message                        = "";
                 $message                    .= "Hello<br>";
                 $message                    .= $driver->fullName." has arrived at the location for:<br><br>";
                 $message                    .= "Job Reference: ".$job->jobName."<br>";
@@ -265,20 +293,19 @@ class Job_model extends CI_Model {
                 $message                    .= "Company: ".SITE_NAME."<br><br><br>";
                 $message                    .= "Thanks,<br>Admin";
 
-                $maildata['message']        = $message;
-                $subject                    = $driver->fullName." has arrived at ".SITE_NAME." for Job Ref: ".$job->jobName;
-                $message                    = $this->load->view('emails/email',$maildata,TRUE);
-                $emails                     = $this->common_model->adminEmails();
+                $maildata['message']         = $message;
+                $subject                     = $driver->fullName." has arrived at ".SITE_NAME." for Job Ref: ".$job->jobName;
+                $message                     = $this->load->view('emails/email',$maildata,TRUE);
+                $emails                      = $this->common_model->adminEmails();
                 if($customer){
                     array_push($emails,$customer->email);
                 }
                 if(!empty($emails)){
-
                     $this->load->library('smtp_email');
                     $this->smtp_email->send_mail_multiple($emails,$subject,$message);
                 }
-            //send mail
-                }
+                //send mail
+            }
             //email send
         }
         return true;
@@ -297,14 +324,19 @@ class Job_model extends CI_Model {
         return $array; 
     }//end function
     function geoTimeDuration($jobId){
-        $timeing =array();
-        $time = $this->db->select('jobId,inDateTime,outDateTime,SEC_TO_TIME(TIME_TO_SEC(timediff(outDateTime, inDateTime))) as timeDuration,(case when (inDateTime = "0000-00-00 00:00:00") 
-        THEN "-" ELSE
-        inDateTime 
-        END) as startTime,(case when (outDateTime = "0000-00-00 00:00:00") 
-        THEN "Progress" ELSE
-        outDateTime 
-        END) as endTime')->from('jobTiming')->where(array('jobId'=>$jobId))->order_by('jobTimeId','asc')->get();
+        $timeing    = array();
+        $time       = $this->db->select('jobId,
+                                        inDateTime,
+                                        outDateTime,
+                                        SEC_TO_TIME(TIME_TO_SEC(timediff(outDateTime, inDateTime))) as timeDuration,
+                                        (case when (inDateTime = "0000-00-00 00:00:00") 
+                                        THEN "-" ELSE
+                                        inDateTime 
+                                        END) as startTime,
+                                        (case when (outDateTime = "0000-00-00 00:00:00") 
+                                        THEN "Progress" ELSE
+                                        outDateTime 
+                                        END) as endTime')->from('jobTiming')->where(array('jobId'=>$jobId))->order_by('jobTimeId','asc')->get();
         if($time->num_rows()){
             $timeing = $time->result();
 
@@ -312,7 +344,7 @@ class Job_model extends CI_Model {
         $timinigT    = $this->db->select('SEC_TO_TIME(SUM(TIME_TO_SEC(timediff(outDateTime, inDateTime)))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
         $timeT       = 'NA';
         if($timinigT->num_rows()){
-            $timeT = isset($timinigT->row()->timeDuration) ? $timinigT->row()->timeDuration:"NA";;
+            $timeT = isset($timinigT->row()->timeDuration) ? $timinigT->row()->timeDuration:"NA";
         }else{
             $timeT = 'NA';
         }

@@ -7,19 +7,27 @@ class User_model extends CI_Model {
     //var $table , $column_order, $column_search , $order =  '';
     var $table              = 'users';
     var $column_order       = array('id','fullName','email','userType','contactNumber','status'); //set column field database for datatable orderable
-    var $column_sel         = array('id','fullName','email','userType','contactNumber','status','(case when (status = 0) 
-    THEN "Inactive" when (status = 1) 
-    THEN "Active" ELSE
-    "Unknown" 
-    END) as statusShow','(case when (userType = 1) 
-    THEN "Super Admin" when (userType = 2) 
-    THEN "Customer" when (userType = 3) 
-    THEN "Employee" ELSE
-    "Unknown" 
-    END) as userRole','(case when (profileImage = "") 
-    THEN "backend_assets/img/avatars/1.png" ELSE
-    concat("uploads/users/",profileImage) 
-    END) as profileImage'); //set column field database for datatable orderable
+    var $column_sel         = array('id',
+        'fullName',
+        'email',
+        'userType',
+        'contactNumber',
+        'status',
+        '(case when (status = 0) 
+        THEN "Inactive" when (status = 1) 
+        THEN "Active" ELSE
+        "Unknown" 
+        END) as statusShow',
+        '(case when (userType = 1) 
+        THEN "Super Admin" when (userType = 2) 
+        THEN "Customer" when (userType = 3) 
+        THEN "Employee" ELSE
+        "Unknown" 
+        END) as userRole',
+        '(case when (profileImage = "") 
+        THEN "backend_assets/img/avatars/1.png" ELSE
+        concat("uploads/users/",profileImage) 
+        END) as profileImage'); //set column field database for datatable orderable
 
     var $column_search          = array('fullName','email'); //set column field database for datatable searchable 
     var $order                  = array('id' => 'desc');  // default order
@@ -44,21 +52,21 @@ class User_model extends CI_Model {
         {
             if(isset($_POST['search']['value']) && !empty($_POST['search']['value'])){
             $_POST['search']['value'] = $_POST['search']['value'];
-        } else
+            } else
             $_POST['search']['value'] = '';
-        if($_POST['search']['value']) // if datatable send POST for search
-        {
-            if($i===0) // first loop
+            if($_POST['search']['value']) // if datatable send POST for search
             {
-                $this->db->group_start();
-                $this->db->like(($emp), $_POST['search']['value']);
-            }else{
-                $this->db->or_like(($emp), $_POST['search']['value']);
+                if($i===0) // first loop
+                {
+                    $this->db->group_start();
+                    $this->db->like(($emp), $_POST['search']['value']);
+                }else{
+                    $this->db->or_like(($emp), $_POST['search']['value']);
+                }
+                if(count($this->column_search) - 1 == $i) //last loop
+                    $this->db->group_end(); //close bracket
             }
-            if(count($this->column_search) - 1 == $i) //last loop
-                $this->db->group_end(); //close bracket
-        }
-        $i++;
+            $i++;
         }
 
         if(!empty($this->where))
@@ -104,7 +112,7 @@ class User_model extends CI_Model {
     public function count_all()
     {
         $this->db->from($this->table);
-         if(!empty($this->where))
+        if(!empty($this->where))
             $this->db->where($this->where); 
         return $this->db->count_all_results();
     }//End function
@@ -114,5 +122,5 @@ class User_model extends CI_Model {
     	$this->db->where(array('id'=>$data['id']));
     	$query = $this->db->get();
     	return $query->row();
-    }
-}
+    }//End Function
+}//End Class

@@ -171,13 +171,13 @@ class Customers extends Common_Admin_Controller{
         $where          = array('id'=>$userId);
         $dataExist      = $this->common_model->is_data_exists('users',$where);
         if($dataExist){
-        $status         = $dataExist->status ?0:1;
+            $status         = $dataExist->status ?0:1;
 
-        $dataExist      = $this->common_model->updateFields('users',array('status'=>$status),$where);
-        $showmsg        = ($status==1)? "Customer request is Active" : "Customer request is Inactive";
-        $response       = array('status'=>SUCCESS,'message'=>$showmsg);
+            $dataExist      = $this->common_model->updateFields('users',array('status'=>$status),$where);
+            $showmsg        = ($status==1)? "Customer request is Active" : "Customer request is Inactive";
+            $response       = array('status'=>SUCCESS,'message'=>$showmsg);
         }else{
-        $response       = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
+            $response       = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
         }
         $this->response($response);
     }//end function
@@ -186,13 +186,13 @@ class Customers extends Common_Admin_Controller{
         $where          = array('userId'=>$userId);
         $dataExist      = $this->common_model->is_data_exists('customerMeta',$where);
         if($dataExist){
-        $status         = $dataExist->creditHoldStatus ? 0:1;
+            $status         = $dataExist->creditHoldStatus ? 0:1;
 
-        $dataExist      = $this->common_model->updateFields('customerMeta',array('creditHoldStatus'=>$status),$where);
-        $showmsg        = 'Customer has been credit hold changed successfully.';
-        $response       = array('status'=>SUCCESS,'message'=>$showmsg);
+            $dataExist      = $this->common_model->updateFields('customerMeta',array('creditHoldStatus'=>$status),$where);
+            $showmsg        = 'Customer has been credit hold changed successfully.';
+            $response       = array('status'=>SUCCESS,'message'=>$showmsg);
         }else{
-        $response       = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
+            $response       = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
         }
         $this->response($response);
     }//end function
@@ -227,7 +227,7 @@ class Customers extends Common_Admin_Controller{
             $showmsg  = 'record found.';
             $response = array('status'=>SUCCESS,'message'=>$showmsg,'address'=>$data);
         }else{
-           $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
+            $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
         }
         $this->response($response);
     }//end function
@@ -238,8 +238,7 @@ class Customers extends Common_Admin_Controller{
         }else{
             $this->form_validation->set_message('validate_address','Please enter valid google place address.');
             return false;  
-        }
-        
+        }      
     }//end function
     function validate_billaddress($str)
     {

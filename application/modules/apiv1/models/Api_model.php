@@ -21,24 +21,22 @@ class Api_model extends CI_Model {
     */
     function checkDeviceToken($deviceToken,$table = 'users'){
         $sql = $this->db->select('id')->where('deviceToken', $deviceToken)->get($table);
-
         if($sql->num_rows()){
-                $id         = array();
-                foreach($sql->result() as $result){
-                    $id[]   = $result->id;
-                }
-                $this->db->where_in('id', $id);
-                $this->db->update('users',array('deviceToken'=>''));
+            $id         = array();
+            foreach($sql->result() as $result){
+                $id[]   = $result->id;
+            }
+            $this->db->where_in('id', $id);
+            $this->db->update('users',array('deviceToken'=>''));
 
-                if($this->db->affected_rows() > 0){
-                    return true;
-                }else{
-                    return false;
-                }
+            if($this->db->affected_rows() > 0){
+                return true;
+            }else{
+                return false;
+            }
         }
         return true;
-    }//End function
-    
+    }//End function  
     /*
     Function for check provided token is resultid or not
     */
@@ -51,8 +49,7 @@ class Api_model extends CI_Model {
         if($sql->num_rows() > 0)
         {
             return $sql->row();
-        }
-        
+        }   
         return false;
     }//End Function
 
@@ -81,28 +78,27 @@ class Api_model extends CI_Model {
             return TRUE;
         }
         return FALSE;
-    }//End Function Update Device Token 
-        
+    }//End Function Update Device Token    
     //get user info
     function userInfo($where){
         $userPath    = base_url().USER_AVATAR_PATH;
         $userDefault = base_url().USER_DEFAULT_AVATAR;
         $this->db->select('id,
-            id as userId,
-            fullName,
-            email,
-            authToken,
-            userType,
-        (case when (profileImage = "") 
-        THEN "'.$userDefault.'" ELSE
-        concat("'.$userPath.'",profileImage) 
-        END) as profileImage,
-        (case when (userType = 1) 
-        THEN "Customer" when (userType = 2) 
-        THEN "Driver" when (userType = 3) 
-        THEN "Employee" ELSE
-        "Unknown" 
-        END) as userRole');
+                        id as userId,
+                        fullName,
+                        email,
+                        authToken,
+                        userType,
+                        (case when (profileImage = "") 
+                        THEN "'.$userDefault.'" ELSE
+                        concat("'.$userPath.'",profileImage) 
+                        END) as profileImage,
+                        (case when (userType = 1) 
+                        THEN "Customer" when (userType = 2) 
+                        THEN "Driver" when (userType = 3) 
+                        THEN "Employee" ELSE
+                        "Unknown" 
+                        END) as userRole');
         $this->db->from(USERS);
         $this->db->where($where);
         $sql = $this->db->get();
@@ -136,55 +132,49 @@ class Api_model extends CI_Model {
         return new stdClass();
     }//End Function
     function login($data,$authToken){
-            $res = $this->db->select('*')->where(array('email'=>$data['email']))->get('users');
-           
-            if($res->num_rows()){
-                $result = $res->row();
-             
-                if($result->status == 1)
-                {
+        $res = $this->db->select('*')->where(array('email'=>$data['email']))->get('users');
+        if($res->num_rows()){
+            $result = $res->row();
+         
+            if($result->status == 1)
+            {
 
-                    //verify password- It is good to use php's password hashing functions so we are using password_verify fn here
-                    if(password_verify($data['password'], $result->password)){
+                //verify password- It is good to use php's password hashing functions so we are using password_verify fn here
+                if(password_verify($data['password'], $result->password)){
 
-                        $deviceType     = $data['deviceType'];
-                        $deviceToken    = $data['deviceToken'];
-                        $updateData     = $this->updateDeviceIdToken($result->id,$deviceType,$deviceToken,$authToken);
-                        if($updateData){
-                           return array('returnType'=>'SL','userInfo'=>$this->userInfo(array('id'=>$result->id)));
-                        }
-                        else{
-                            return FALSE;
-                        }  
-                    }
-                    else{
-                        return array('returnType'=>'WP'); // Wrong Password
-                    }
+                    $deviceType     = $data['deviceType'];
+                    $deviceToken    = $data['deviceToken'];
+                    $updateData     = $this->updateDeviceIdToken($result->id,$deviceType,$deviceToken,$authToken);
+                    if($updateData){
+                       return array('returnType'=>'SL','userInfo'=>$this->userInfo(array('id'=>$result->id)));
+                    }else{
+                        return FALSE;
+                    }  
+                }else{
+                    return array('returnType'=>'WP'); // Wrong Password
                 }
-                return array('returnType'=>'WS');
-                // InActive
             }
-            else {
-                return array('returnType'=>'WE'); // Wrong Email
-            }
+            return array('returnType'=>'WS');
+            // InActive
+        }else{
+            return array('returnType'=>'WE'); // Wrong Email
+        }
     }//End users Login
   
     function forgotPassword($email)
     {
         $sql = $this->db->select('id,fullName,email,password,passToken')->where(array('email'=>$email))->get(USERS);
-     
+
         if($sql->num_rows())
         {
             $result             = $sql->row();
             $useremail          = $result->email;
             $passToken          = $result->passToken;
-            $data['full_name']  = $result->fullName;
-            
+            $data['full_name']  = $result->fullName;       
             // Check for social id
-          /*  if(!empty($result->socialId)){
-               return  array('emailType'=>'SL' ); //SL social login
+            /*  if(!empty($result->socialId)){
+            return  array('emailType'=>'SL' ); //SL social login
             }*/
-
             $encoding_email = encoding($useremail);
             $data['url']    = base_url().'password/ChangePassword/change_password/'.$encoding_email.'/'.$passToken;
             $message        = $this->load->view('emails/forgot_password',$data,TRUE);
@@ -194,16 +184,11 @@ class Api_model extends CI_Model {
 
             if ($response)
             {  
-
                 return  array('emailType'=>'ES' ); //ES emailSend
+            }else{ 
+                return  array('emailType'=>'NS') ; //NS NotSend
             }
-            else
-            { 
-                 return  array('emailType'=>'NS') ; //NS NotSend
-            }
-        }
-        else
-        {
+        }else{
             return  array('emailType'=>'NE') ; //NE Not exist
         }
     } //End funtion      

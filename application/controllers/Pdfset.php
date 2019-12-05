@@ -73,13 +73,13 @@ class Pdfset extends Common_Front_Controller {
     $labelShow  = "";
     switch ($job['jobStatus']) {
       case 0:
-        $labelShow ='<label color="red">Open</label>';
+        $labelShow = '<label color="red">Open</label>';
         break;
       case 1:
-        $labelShow ='<label color="blue">In Progress</label>';
+        $labelShow = '<label color="blue">In Progress</label>';
         break;
       case 2:
-        $labelShow ='<label color="green">Completed</label>';
+        $labelShow = '<label color="green">Completed</label>';
         break;
       default:
         break;
@@ -87,14 +87,14 @@ class Pdfset extends Common_Front_Controller {
     $workPriority ="";
     switch ($job['workPriority']) {
       case 0:
-        $workPriority ='<label color="green" >'.$job['priority'].'</label>';
+        $workPriority = '<label color="green" >'.$job['priority'].'</label>';
         break;
       case 1:
-        $workPriority ='<label color="blue">'.$job['priority'].'</label>';
+        $workPriority = '<label color="blue">'.$job['priority'].'</label>';
         break;
       case 2:
       
-        $workPriority ='<label color="red">'.$job['priority'].'</label>';
+        $workPriority = '<label color="red">'.$job['priority'].'</label>';
         break;
       
       default:
@@ -155,23 +155,23 @@ class Pdfset extends Common_Front_Controller {
         }
         $content .='</p></div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$after['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$after['customerSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right"><b>Customer Signature</b></p></td>';
              else:
-        $content .='<td colspan="2" align="center"> No record found</td>';
+        $content .= '<td colspan="2" align="center"> No record found</td>';
       endif;
            
     else:
-      $content .='<td colspan="4" align="center"> No record found</td>';
+      $content .= '<td colspan="4" align="center"> No record found</td>';
            
     endif;
-    $content .='</tr>'; 
-    $content .='</table>';
+    $content .= '</tr>'; 
+    $content .= '</table>';
     /*questions manage*/     
     if(!empty($questions)){ 
       $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
       $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4" ><b>JOB CHECKLIST</b></th></tr>';
       foreach ($questions as $key => $question) {
         $content .= '<tr bgcolor="#EAECF0">';
-        $content .='<td colspan="4"><p><strong>Question : '.$question->question.'</strong></p><p><strong>Answer :</strong> '.(!empty($question->answer) ? $question->answer :"NA").'</p>';
-        $content .='</td>';
+        $content .= '<td colspan="4"><p><strong>Question : '.$question->question.'</strong></p><p><strong>Answer :</strong> '.(!empty($question->answer) ? $question->answer :"NA").'</p>';
+        $content .= '</td>';
         $content .= '</tr>';
       }
       $content .= '</table>';
@@ -206,13 +206,13 @@ class Pdfset extends Common_Front_Controller {
           $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
           $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4" ><b>GEO FENCING</b></th></tr>';
           $content .= '<tr>';
-          $content .='<td colspan="4"><strong>Geo image :</strong>';
-          $content .='</td>';
+          $content .= '<td colspan="4"><strong>Geo image :</strong>';
+          $content .= '</td>';
           $content .= '</tr>';
           $content .= '<tr>';
-          $content .='<td colspan="4">';
+          $content .= '<td colspan="4">';
           $content .= '<img src="'.$job['geoFencingUrl'].'" alt="Map" border="0" />';
-          $content .='</td>';
+          $content .= '</td>';
           $content .= '</tr>';
 
           $content .= '</table>';

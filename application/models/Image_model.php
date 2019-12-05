@@ -3,7 +3,6 @@
 * Handles image upload and resizing
 * version: 2.0 (14-08-2018)
 */
-
 class Image_model extends CI_Model{
     
     public function __construct(){
@@ -29,7 +28,6 @@ class Image_model extends CI_Model{
         if(!@is_dir(FCPATH . $defaultFolder)){
             mkdir(FCPATH . $defaultFolder, $mode);
         }
-        
         if(!empty($folder)){
 
             if(!@is_dir(FCPATH . $defaultFolder . '/' . $folder)){
@@ -71,7 +69,6 @@ class Image_model extends CI_Model{
             return $error; //error in upload
 
         }
-        
         //image uploaded successfully - proceed to create resized copies
         $image_data = $this->upload->data(); //get uploaded data
         $this->load->library('image_lib'); //image library
@@ -121,7 +118,6 @@ class Image_model extends CI_Model{
         $this->image_lib->initialize($resize1);
         $this->image_lib->resize();
         $this->image_lib->clear(); //clear memory
-
         if(empty($thumb_img))
             $thumb_img = $image_data['file_name'];
 
@@ -153,7 +149,6 @@ class Image_model extends CI_Model{
     function updateDocument($image,$folder){
      
         $this->make_dirs($folder);
-
         $realpath       = 'uploads/';
         $allowed_types  = "*";//"gif|jpg|png|jpeg"; 
 
@@ -169,7 +164,6 @@ class Image_model extends CI_Model{
         
         $this->load->library('upload');
         $this->upload->initialize($config);
-
         if(!$this->upload->do_upload($image)){
 
             $error = array('error' => $this->upload->display_errors());
@@ -225,11 +219,9 @@ class Image_model extends CI_Model{
 				if ($this->upload->do_upload($fileName))
 				{
 					$savedFile = $this->upload->data();//upload the image
-					$storedFile[$i]['name'] = $savedFile['file_name'];
-					$storedFile[$i]['type'] = $savedFile['file_type'];
-				}
-				else
-				{
+					$storedFile[$i]['name']  = $savedFile['file_name'];
+					$storedFile[$i]['type']  = $savedFile['file_type'];
+				}else{
 					$storedFile[$i]['error'] = $this->upload->display_errors();
 				}
 			} // END OF FOR LOOP 

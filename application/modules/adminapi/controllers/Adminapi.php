@@ -93,22 +93,22 @@ class Adminapi extends Common_Admin_Controller{
                 switch ($result['returnType']) {
                     case "SL":
                         $this->StoreSession($result['userInfo']);
-                    $response = array('status' => SUCCESS, 'message' => ResponseMessages::getStatusCodeMessage(106), 'users' => $result['userInfo']);
+                        $response = array('status' => SUCCESS, 'message' => ResponseMessages::getStatusCodeMessage(106), 'users' => $result['userInfo']);
                     break;
                     case "WP":
-                    $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(102));
+                        $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(102));
                     break;
                     case "WE":
-                    $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(126));
+                        $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(126));
                     break;
                     case "IU":
-                    $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(118));
+                        $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(118));
                     break;
                     case "WS":
-                    $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(118));
+                        $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(118));
                     break;
                     default:
-                    $response = array('status' => SUCCESS, 'message' => ResponseMessages::getStatusCodeMessage(106), 'users' => $result['userInfo']);
+                        $response = array('status' => SUCCESS, 'message' => ResponseMessages::getStatusCodeMessage(106), 'users' => $result['userInfo']);
                 }
             }else{
                 $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(126));
@@ -132,8 +132,7 @@ class Adminapi extends Common_Admin_Controller{
             $response = array('status' => SUCCESS, 'message' => 'Please check your mail to reset your password.');
         }elseif($response['emailType'] == 'NS'){ //NS NotSend
             $response = array('status' => FAIL, 'message' => 'Error not able to send email');
-        }
-        elseif($response['emailType'] == 'NE'){ //NE Not exist
+        }elseif($response['emailType'] == 'NE'){ //NE Not exist
             $response = array('status' => FAIL, 'message' => 'This Email does not exist'); 
         }elseif($response['emailType'] == 'SL'){ //SL social login
             $response = array('status' => FAIL, 'message' => 'Social registered users are not allowed to access Forgot password'); 

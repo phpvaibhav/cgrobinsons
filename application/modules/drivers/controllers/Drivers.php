@@ -93,15 +93,15 @@ class Drivers extends Common_Back_Controller {
           $colr = "background-color:#fff;";
         }
         $content .= '<tr nobr="true" style="color:#000; '.$colr.'">';
-        $content .= '<td>'.$user->fullName.'</td>';
-        $content .= '<td>'.$user->email.'</td>';
-        $content .= '<td>'.$user->contactNumber.'</td>';
+            $content .= '<td>'.$user->fullName.'</td>';
+            $content .= '<td>'.$user->email.'</td>';
+            $content .= '<td>'.$user->contactNumber.'</td>';
         $content .= '</tr>';
       }
     }else{
       $colr     = "background-color:#f1f1f1;";
       $content .= '<tr nobr="true" style="color:#000; '.$colr.'">';
-      $content .= '<td colspan="3" align="center">No driver found.</td>';
+        $content .= '<td colspan="3" align="center">No driver found.</td>';
       $content .= '</tr>';
     } 
     $content .='</table>';
@@ -180,77 +180,76 @@ class Drivers extends Common_Back_Controller {
       $img = base_url().'uploads/users/thumb/'.$driver['profileImage'];
     endif;
     $content .= '<table  border="0" cellspacing="1" cellpadding="3" bgcolor="#EAECF0">';
-    $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>Driver Information</b></th></tr>';
-    $content .= '<tr  bgcolor="#EAECF0">';
-    $content .= '<td rowspan="4"><span><img src="'.$img.'" alt="" width="95" height="95" border="0" /></span></td>';
-    $content .= '<td><strong>Driver Name</strong> :</td><td colspan="2">'.$driver['fullName'].'</td>';
-    $content .= '</tr>';   
+        $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>Driver Information</b></th></tr>';
+        $content .= '<tr  bgcolor="#EAECF0">';
+            $content .= '<td rowspan="4"><span><img src="'.$img.'" alt="" width="95" height="95" border="0" /></span></td>';
+            $content .= '<td><strong>Driver Name</strong> :</td><td colspan="2">'.$driver['fullName'].'</td>';
+        $content .= '</tr>';   
     $content .= '<tr  bgcolor="#EAECF0">'; 
-    $content .= '<td><strong>Email</strong> :</td><td colspan="2">'.$driver['email'].'</td>';
+        $content .= '<td><strong>Email</strong> :</td><td colspan="2">'.$driver['email'].'</td>';
     $content .= '</tr>'; 
     $content .= '<tr  bgcolor="#EAECF0">';
-    $content .= '<td><strong>Contact Number</strong> :</td><td colspan="2">'.$driver['contactNumber'].'</td>';
+        $content .= '<td><strong>Contact Number</strong> :</td><td colspan="2">'.$driver['contactNumber'].'</td>';
     $content .= '</tr>'; 
     $content .= '<tr  bgcolor="#EAECF0">';
-    $content .= '<td><strong>Date of Birth</strong> :</td><td colspan="2">'.date('d M Y',strtotime($drivermeta['dob'])).'</td>';
+        $content .= '<td><strong>Date of Birth</strong> :</td><td colspan="2">'.date('d M Y',strtotime($drivermeta['dob'])).'</td>';
     $content .= '</tr>'; 
     $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="2"><b>Basic Information</b></th><th align="left" colspan="2"><b>Emergency Person Information</b></th></tr>';
     $content .= '<tr>';
-    $content .= '<td><strong>Date of Hire</strong> :</td><td>'.date('d M Y',strtotime($drivermeta['doh'])).'</td>';
-    $content .= '<td><strong>Person Name</strong> :</td><td>'.$drivermeta['emergencyPersonName'].'</td>';
+        $content .= '<td><strong>Date of Hire</strong> :</td><td>'.date('d M Y',strtotime($drivermeta['doh'])).'</td>';
+        $content .= '<td><strong>Person Name</strong> :</td><td>'.$drivermeta['emergencyPersonName'].'</td>';
     $content .= '</tr>';
     $content .= '<tr>';
-    $content .= '<td><strong>License Number</strong> :</td><td>'.$drivermeta['licenseNumber'].'</td>';
-    $content .= '<td><strong>Person Number</strong> :</td><td>'.$drivermeta['emergencyPersonNumber'].'</td>';
+        $content .= '<td><strong>License Number</strong> :</td><td>'.$drivermeta['licenseNumber'].'</td>';
+        $content .= '<td><strong>Person Number</strong> :</td><td>'.$drivermeta['emergencyPersonNumber'].'</td>';
     $content .= '</tr>';
     $content .= '<tr>';
-    $content .= '<td><strong>License Expiry Date</strong> :</td><td colspan="3">'.date("d M Y",strtotime($drivermeta['licenseExpiryDate'])).'</td>';     
+        $content .= '<td><strong>License Expiry Date</strong> :</td><td colspan="3">'.date("d M Y",strtotime($drivermeta['licenseExpiryDate'])).'</td>';     
     $content .= '</tr>';
     $content .= '<tr>';
-
-    $content .= '<td><strong>Address</strong> :</td><td colspan="3">'.$drivermeta['address'].'</td>';
+        $content .= '<td><strong>Address</strong> :</td><td colspan="3">'.$drivermeta['address'].'</td>';
     $content .= '</tr>';
 
     $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>Vehicle Information</b></th></tr>'; 
     if(isset($vehicle) && !empty($vehicle)):
       $content .= '<tr>';
-      $content .= '<td><strong>Year</strong> :</td><td>'.(isset($vehicle['year'])? $vehicle['year']:"NA").'</td>';
-      $content .= '<td><strong>Manufacturer</strong> :</td><td>'.(isset($vehicle['manufacturer'])? $vehicle['manufacturer'] :"NA").'</td>';
+        $content .= '<td><strong>Year</strong> :</td><td>'.(isset($vehicle['year'])? $vehicle['year']:"NA").'</td>';
+        $content .= '<td><strong>Manufacturer</strong> :</td><td>'.(isset($vehicle['manufacturer'])? $vehicle['manufacturer'] :"NA").'</td>';
       $content .= '</tr>';
       $content .= '<tr>';
-      $content .= '<td><strong>Model</strong> :</td><td>'.(isset($vehicle['model'])? $vehicle['model']:"NA").'</td>';
-      $content .= '<td><strong>Vin</strong> :</td><td>'.(isset($vehicle['vin'])? $vehicle['vin'] :"NA").'</td>';
+        $content .= '<td><strong>Model</strong> :</td><td>'.(isset($vehicle['model'])? $vehicle['model']:"NA").'</td>';
+        $content .= '<td><strong>Vin</strong> :</td><td>'.(isset($vehicle['vin'])? $vehicle['vin'] :"NA").'</td>';
       $content .= '</tr>';
       $content .= '<tr>';
-      $content .= '<td><strong>Plate</strong> :</td><td>'.(isset($vehicle['plate'])? $vehicle['plate']:"NA").'</td>';
-      $content .= '<td><strong>Color</strong> :</td><td>'.(isset($vehicle['color'])? $vehicle['color'] :"NA").'</td>';
+        $content .= '<td><strong>Plate</strong> :</td><td>'.(isset($vehicle['plate'])? $vehicle['plate']:"NA").'</td>';
+        $content .= '<td><strong>Color</strong> :</td><td>'.(isset($vehicle['color'])? $vehicle['color'] :"NA").'</td>';
       $content .= '</tr>';
     else:
       $content .= '<tr>';
-      $content .= '<td colspan="4"><p align="center">No vehicle found</p></td>';
+        $content .= '<td colspan="4"><p align="center">No vehicle found</p></td>';
       $content .= '</tr>';
     endif; 
     /*<td colspan="4"><p><strong>Address</strong><span align="right" >&nbsp;&nbsp;'.$drivermeta['address'].'</span></p></td>*/
     $content .='</table>';
     $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
-    $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="7"><b>Driver Assign Jobs</b></th></tr>';
-    $content .= '<tr  bgcolor="#EAECF0"><th width="5%"><b>#</b></th><th><b>Job Name</b></th><th><b>Job Type</b></th><th><b>Customer</b></th><th><b>Driver</b></th><th width="23.5%"><b>Creation Date</b></th><th><b>Status</b></th></tr>';
+        $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="7"><b>Driver Assign Jobs</b></th></tr>';
+        $content .= '<tr  bgcolor="#EAECF0"><th width="5%"><b>#</b></th><th><b>Job Name</b></th><th><b>Job Type</b></th><th><b>Customer</b></th><th><b>Driver</b></th><th width="23.5%"><b>Creation Date</b></th><th><b>Status</b></th></tr>';
     // pr($jobs);
     if(!empty($jobs)):
       for ($i=0; $i <sizeof($jobs) ; $i++) { 
         $content .= '<tr>';
-        $content .= '<td>'.($i+1).'</td>';
-        $content .= '<td>'.$jobs[$i]->jobName.'</td>';
-        $content .= '<td>'.$jobs[$i]->jobType.'</td>';
-        $content .= '<td>'.$jobs[$i]->customerName.'</td>';
-        $content .= '<td>'.$jobs[$i]->driverName.'</td>';
-        $content .= '<td>'.date("d/m/Y",strtotime($jobs[$i]->startDate))." ".$jobs[$i]->startTime.'</td>';
-        $content .= '<td><span style="color:green;">'.$jobs[$i]->statusShow.'</span></td>';
+            $content .= '<td>'.($i+1).'</td>';
+            $content .= '<td>'.$jobs[$i]->jobName.'</td>';
+            $content .= '<td>'.$jobs[$i]->jobType.'</td>';
+            $content .= '<td>'.$jobs[$i]->customerName.'</td>';
+            $content .= '<td>'.$jobs[$i]->driverName.'</td>';
+            $content .= '<td>'.date("d/m/Y",strtotime($jobs[$i]->startDate))." ".$jobs[$i]->startTime.'</td>';
+            $content .= '<td><span style="color:green;">'.$jobs[$i]->statusShow.'</span></td>';
         $content .= '</tr>';
       }
     else :
       $content .= '<tr>';
-      $content .= '<td colspan="7"><p align="center">No record found</p></td>';
+        $content .= '<td colspan="7"><p align="center">No record found</p></td>';
       $content .= '</tr>';
     endif;
     $content .='</table>';

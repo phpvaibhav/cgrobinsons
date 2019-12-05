@@ -45,8 +45,7 @@
 							</section>
 						</div>
 						<div class="row">
-							<section class="col col-6">
-												
+							<section class="col col-6">				
 								<select style="width:100%;" class="select2" name="driverId" data-placeholder="Please select a driver">
 									<optgroup label="">
 									<option></option>
@@ -83,7 +82,7 @@
 							<section class="col col-6">
 								<label class="select">
 								<select name="workPriority">
-								<!-- <option value="" selected="" disabled="">Job Priority</option> -->
+									<!-- <option value="" selected="" disabled="">Job Priority</option> -->
 									<option value="0"  selected="">Low Priority</option>
 									<option value="1">Medium Priority</option>
 									<option value="2">High Priority</option>
@@ -95,8 +94,7 @@
 						<label class="checkbox state-error"><input type="checkbox" id="select_questionAll"  value="1" name="checkbox"><i></i> <strong> Job Type Questions</strong></label>
 					</header>
 					<fieldset class="queDataHideShow">	
-							<section id="showQue">						
-							</section>		
+						<section id="showQue"></section>		
 					</fieldset>
 					<header>
 						Address <span class="getAddressshow  pull-right"><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-toggle="modal" data-target="#setAddress">Previous Address</a></span>
@@ -105,7 +103,7 @@
 						<div class="row">
 							<section class="col col-md-12">
 								<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-									<input type="text" name="address" placeholder="Address" id="autocomplete0" class="mapautocomplete" data-id="0" maxlength="300" size="300">
+									<input type="text" name="address" placeholder="Address" id="autocomplete0" class="mapautocomplete" data-id="0" maxlength="300" size="300" >
 									<input type="hidden" class="latitudeautocomplete0" name="latitude" placeholder="latitude">
 									<input type="hidden" class="longitudeautocomplete0" name="longitude" placeholder="longitude">
 								</label>
@@ -173,8 +171,7 @@
 
 									<button type="button" class="btn btn-warnig hide" id="delete-all-button">Delete</button>
 								</div>	
-							</div>
-												
+							</div>							
 							<div class="row" id="html-content-holder">
 								<div id="map-canvas"></div>
 								<div id="map"></div>
@@ -184,9 +181,7 @@
 						</section>
 					</fieldset>						
 					<footer>
-						<button type="submit" id="submit" class="btn btn-primary">
-							Add Job
-						</button>
+						<button type="submit" id="submit" class="btn btn-primary">Add Job</button>
 					</footer>
 				</form>
 			</div>

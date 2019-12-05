@@ -17,20 +17,20 @@
 		cursor: pointer;
 	}
 </style>
-<?php $backend_assets = base_url().'backend_assets/';?>
+<?php $backend_assets 	= base_url().'backend_assets/';?>
 <?php 
-	$pointsArray 	= array();
+	$pointsArray 		= array();
 	if($job['points']):
-	  $pointsArray 	= array_values(array_filter(explode("|",$job['points'])));
+	  $pointsArray 		= array_values(array_filter(explode("|",$job['points'])));
 	endif;
 	$p = array();
 	for ($i=0; $i < sizeof($pointsArray) ; $i++) { 
-		$pp = explode(",",$pointsArray[$i]);
-		 $p[$i]['lat'] = $pp[0];
-		 $p[$i]['lng'] = $pp[1];
+		$pp 			= explode(",",$pointsArray[$i]);
+		 $p[$i]['lat'] 	= $pp[0];
+		 $p[$i]['lng'] 	= $pp[1];
 	}
-	$ppp 			= json_encode($p);
-	$polygonColor 	= !empty($job['polygonColor']) ?$job['polygonColor']:"#1E90FF";
+	$ppp 				= json_encode($p);
+	$polygonColor 		= !empty($job['polygonColor']) ?$job['polygonColor']:"#1E90FF";
 ?>
 <section id="widget-grid" class="">     
   	<!-- row -->
@@ -295,7 +295,7 @@
 		new google.maps.LatLng(22.371952,75.735855),
 		new google.maps.LatLng(22.390682,75.625305),
 		];*/
-  		var f = '<?php echo $ppp; ?>';
+  		var f 				= '<?php echo $ppp; ?>';
   		var triangleCoords 	= jQuery.parseJSON(f) ;
   		var data 			= [];
 		$.each(triangleCoords, function( index, value ) {
@@ -389,10 +389,10 @@
  	// Adds a marker to the map and push to the array.
   	function addMarker(location,formatted_address) {
         var marker = new google.maps.Marker({
-          position: location,
-           title: formatted_address,
-          map: map
-        });
+					position 	: location,
+					title 		: formatted_address,
+					map 		: map
+        		});
         markers.push(marker);
   	}
   	// Sets the map on all markers in the array.

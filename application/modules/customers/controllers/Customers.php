@@ -95,15 +95,15 @@ class Customers extends Common_Back_Controller {
           $colr = "background-color:#fff!important;;";
         }            
         $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
-        $content .='<td>'.$user->fullName.'</td>';
-        $content .='<td>'.$user->email.'</td>';
-        $content .='<td>'.$user->contactNumber.'</td>';  
+            $content .='<td>'.$user->fullName.'</td>';
+            $content .='<td>'.$user->email.'</td>';
+            $content .='<td>'.$user->contactNumber.'</td>';  
         $content .='</tr>';
       }
     }else{
       $colr     = "background-color:#f1f1f1;";
       $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
-      $content .='<td colspan="3" align="center">No customer found.</td>';   
+        $content .='<td colspan="3" align="center">No customer found.</td>';   
       $content .='</tr>';
     } 
     $content .='</table>';
@@ -176,40 +176,40 @@ class Customers extends Common_Back_Controller {
     $content = '';
     // $content .= '<table bgcolor="#cccccc" border="0" cellspacing="1" cellpadding="4">';
     $content .= '<table  border="0" cellspacing="1" cellpadding="4" bgcolor="#EAECF0">';
-    $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>Customer Information</b></th></tr>';
-    $content .= '<tr >';
-    $content .= '<td><strong>Customer Name</strong> :</td><td>'.$customer['fullName'].'</td>';
-    $content .= '<td><strong>Credit Hold</strong> :</td><td>'.($customermeta['creditHoldStatus'] ?'Yes' :'No').'</td>';
-    $content .= '</tr>';
-    $content .= '<tr>';
-    $content .= '<td><strong>Email</strong> :</td><td>'.$customer['email'].'</td>';
-    $content .= '<td><strong>Contact Number</strong> :</td><td>'.$customer['contactNumber'].'</td>';
-    $content .= '</tr>';
-    $content .= '<tr>';
-    $content .= '<td><strong>Address</strong> :</td><td colspan="3">'.$customermeta['address'].'</td>';
-    $content .= '</tr>';
-    $content .= '<tr>';
-    $content .= '<td><strong>Billing Address</strong> :</td><td colspan="3">'.$customermeta['billAddress'].'</td>';
-    $content .= '</tr>';
+        $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>Customer Information</b></th></tr>';
+        $content .= '<tr >';
+            $content .= '<td><strong>Customer Name</strong> :</td><td>'.$customer['fullName'].'</td>';
+            $content .= '<td><strong>Credit Hold</strong> :</td><td>'.($customermeta['creditHoldStatus'] ?'Yes' :'No').'</td>';
+        $content .= '</tr>';
+        $content .= '<tr>';
+            $content .= '<td><strong>Email</strong> :</td><td>'.$customer['email'].'</td>';
+            $content .= '<td><strong>Contact Number</strong> :</td><td>'.$customer['contactNumber'].'</td>';
+        $content .= '</tr>';
+        $content .= '<tr>';
+            $content .= '<td><strong>Address</strong> :</td><td colspan="3">'.$customermeta['address'].'</td>';
+        $content .= '</tr>';
+        $content .= '<tr>';
+            $content .= '<td><strong>Billing Address</strong> :</td><td colspan="3">'.$customermeta['billAddress'].'</td>';
+        $content .= '</tr>';
     $content .='</table>';
     $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
-    $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="7"><b>Customer Jobs</b></th></tr>';
-    $content .= '<tr  bgcolor="#EAECF0"><th width="5%"><b>#</b></th><th><b>Job Name</b></th><th><b>Job Type</b></th><th><b>Customer</b></th><th><b>Driver</b></th><th width="23.5%"><b>Creation Date</b></th><th><b>Status</b></th></tr>';
+        $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="7"><b>Customer Jobs</b></th></tr>';
+        $content .= '<tr  bgcolor="#EAECF0"><th width="5%"><b>#</b></th><th><b>Job Name</b></th><th><b>Job Type</b></th><th><b>Customer</b></th><th><b>Driver</b></th><th width="23.5%"><b>Creation Date</b></th><th><b>Status</b></th></tr>';
     if(!empty($jobs)):
       for ($i=0; $i <sizeof($jobs) ; $i++) { 
         $content .= '<tr>';
-        $content .= '<td>'.($i+1).'</td>';
-        $content .= '<td>'.$jobs[$i]->jobName.'</td>';
-        $content .= '<td>'.$jobs[$i]->jobType.'</td>';
-        $content .= '<td>'.$jobs[$i]->customerName.'</td>';
-        $content .= '<td>'.$jobs[$i]->driverName.'</td>';
-        $content .= '<td>'.date("d/m/Y",strtotime($jobs[$i]->startDate))." ".$jobs[$i]->startTime.'</td>';
-        $content .= '<td><span style="color:green;">'.$jobs[$i]->statusShow.'</span></td>';
+            $content .= '<td>'.($i+1).'</td>';
+            $content .= '<td>'.$jobs[$i]->jobName.'</td>';
+            $content .= '<td>'.$jobs[$i]->jobType.'</td>';
+            $content .= '<td>'.$jobs[$i]->customerName.'</td>';
+            $content .= '<td>'.$jobs[$i]->driverName.'</td>';
+            $content .= '<td>'.date("d/m/Y",strtotime($jobs[$i]->startDate))." ".$jobs[$i]->startTime.'</td>';
+            $content .= '<td><span style="color:green;">'.$jobs[$i]->statusShow.'</span></td>';
         $content .= '</tr>';
       }
     else :
         $content .= '<tr>';
-        $content .= '<td colspan="7"><p align="center">No record found</p></td>';
+            $content .= '<td colspan="7"><p align="center">No record found</p></td>';
         $content .= '</tr>';
     endif;
     $content .='</table>';

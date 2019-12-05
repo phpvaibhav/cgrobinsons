@@ -99,8 +99,8 @@
 								<div id="map-show"></div>
 							</div>
 							<div class="col-md-12 col-sm-12 hide">
-									<button id="add-markers">Add markers</button>
-									<button id="remove-markers">Remove markers</button>
+								<button id="add-markers">Add markers</button>
+								<button id="remove-markers">Remove markers</button>
 							</div>
 						</div>
 					</div>
@@ -267,7 +267,7 @@
 									animation: google.maps.Animation.DROP,
 								});
 				  				bounds.extend(markers[i].getPosition());
-				  				var content = '<p><b>Basic Information:</b><hr></p><p><b>Vehicle :</b> <a href="'+base_url+locations[i].vehicleLink+'" target="_blank" >'+locations[i].manufacturer+' '+locations[i].year+' '+locations[i].vin+' '+locations[i].model+' '+locations[i].plate+'</a><br>'+'<b>Driver : <a href="'+base_url+locations[i].driverLink+'" target="_blank" > '+locations[i].fullName+'</a></b><hr></p><p><strong>Assign Job :</strong><hr></p><p>';
+				  				var content = '<p><b>Basic Information:</b><hr></p><p><b>Vehicle :</b> <a href="'+base_url+locations[i].vehicleLink+'" target="_blank" >'+locations[i].manufacturer+' '+locations[i].year+' '+locations[i].vin+' '+locations[i].model+' '+locations[i].plate+'</a><br>'+'<b>Driver : <a href="'+base_url+locations[i].driverLink+'" target="_blank" > '+locations[i].fullName+'</a></b><hr></p><p><strong>Assigned Job :</strong><hr></p><p>';
 				  				var job = locations[i].assignJob;
 				  				if(job.length==0){
 				  					content += '<span class="text-center">No assign job found.</span>';

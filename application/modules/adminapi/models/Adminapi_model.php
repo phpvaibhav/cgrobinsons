@@ -23,18 +23,18 @@ class Adminapi_model extends CI_Model {
     function checkDeviceToken($table = 'admin'){
         $sql = $this->db->select('id')->where('deviceToken', $deviceToken)->get($table);
         if($sql->num_rows()){
-                $id = array();
-                foreach($sql->result() as $result){
-                    $id[] = $result->id;
-                }
-                $this->db->where_in('id', $id);
-                $this->db->update('users',array('deviceToken'=>''));
+            $id = array();
+            foreach($sql->result() as $result){
+                $id[] = $result->id;
+            }
+            $this->db->where_in('id', $id);
+            $this->db->update('users',array('deviceToken'=>''));
 
-                if($this->db->affected_rows() > 0){
-                    return true;
-                }else{
-                    return false;
-                }
+            if($this->db->affected_rows() > 0){
+                return true;
+            }else{
+                return false;
+            }
         }
         return true;
     }//End function
@@ -88,16 +88,16 @@ class Adminapi_model extends CI_Model {
             email,
             authToken,
             userType,
-        (case when (profileImage = "") 
-        THEN "'.$userDefault.'" ELSE
-        concat("'.$userPath.'",profileImage) 
-        END) as profileImage,
-        (case when (userType = 1) 
-        THEN "Super Admin" when (userType = 2) 
-        THEN "Customer" when (userType = 3) 
-        THEN "Employee" ELSE
-        "Unknown" 
-        END) as userRole');
+            (case when (profileImage = "") 
+            THEN "'.$userDefault.'" ELSE
+            concat("'.$userPath.'",profileImage) 
+            END) as profileImage,
+            (case when (userType = 1) 
+            THEN "Super Admin" when (userType = 2) 
+            THEN "Customer" when (userType = 3) 
+            THEN "Employee" ELSE
+            "Unknown" 
+            END) as userRole');
         $this->db->from(ADMIN);
         $this->db->where($where);
         $sql= $this->db->get();

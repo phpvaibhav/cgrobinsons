@@ -16,11 +16,9 @@ class Users extends Common_Admin_Controller{
         $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[6]');
         $this->form_validation->set_rules('npassword', 'new password', 'trim|required|matches[rnpassword]|min_length[6]');
         $this->form_validation->set_rules('rnpassword', 'retype new password ','trim|required|min_length[6]');
-
-        
        if($this->form_validation->run($this) == FALSE){
-           $messages    = (validation_errors()) ? validation_errors() : '';
-           $response    = array('status' => 0, 'message' => $messages);
+            $messages    = (validation_errors()) ? validation_errors() : '';
+            $response    = array('status' => 0, 'message' => $messages);
         }else{
             $password   = $this->input->post('password');
             $npassword  = $this->input->post('npassword');
@@ -34,8 +32,7 @@ class Users extends Common_Admin_Controller{
                     $res = array();
                     if($update){
                         $response = array('status' =>SUCCESS, 'message' => 'Successfully Updated', 'url' => base_url('users/userDetail'));
-                    }
-                    else{
+                    }else{
                         $response = array('status' => FAIL, 'message' => 'Failed! Please try again', 'url' => base_url('users/userDetail'));
                     }
                     
@@ -61,7 +58,7 @@ class Users extends Common_Admin_Controller{
             $userauth           =  decoding($userid);
             $email              =  $this->post('email');
             $fullName           =  $this->post('fullName');
-            $isExist            = $this->common_model->is_data_exists('admin',array('id'=>$userauth));
+            $isExist            =  $this->common_model->is_data_exists('admin',array('id'=>$userauth));
             if($isExist){
                 $isExistEmail   = $this->common_model->is_data_exists('admin',array('id  !='=>$userauth,'email'=>$email));
                 if(!$isExistEmail){
@@ -101,7 +98,6 @@ class Users extends Common_Admin_Controller{
                     }else{
                         $response   = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118),'userDetail'=>array());
                     }  
-
                 }else{
                     $response       = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(117),'userDetail'=>array());
                 }

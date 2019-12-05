@@ -6,17 +6,30 @@ class Job_model extends CI_Model {
     //var $table , $column_order, $column_search , $order =  '';
     var $table          = 'jobs';
     var $column_order   = array('j.jobId','j.jobName','jt.jobType','c.fullName','d.fullName','j.startDate','j.workPriority','j.jobStatus'); //set column field database for datatable orderable
-    var $column_sel     = array('j.jobId','j.jobName','j.jobTypeId','j.driverId','c.fullName as customerName','jt.jobType','d.fullName as driverName','j.customerId','j.jobStatus','j.startDate','j.startTime','(case when (j.jobStatus = 0) 
+    var $column_sel     = array('j.jobId',
+        'j.jobName',
+        'j.jobTypeId',
+        'j.driverId',
+        'c.fullName as customerName',
+        'jt.jobType',
+        'd.fullName as driverName',
+        'j.customerId',
+        'j.jobStatus',
+        'j.startDate',
+        'j.startTime',
+        '(case when (j.jobStatus = 0) 
         THEN "Open" when (j.jobStatus = 1) 
         THEN "In-progress" when (j.jobStatus = 2) 
         THEN "Completed" ELSE
         "Unknown" 
-        END) as statusShow','(case when (j.workPriority = 0) 
+        END) as statusShow',
+        '(case when (j.workPriority = 0) 
         THEN "Low" when (j.workPriority = 1) 
         THEN "Medium" when (j.workPriority = 2) 
         THEN "High" ELSE
         "Unknown" 
-        END) as priority','j.workPriority'); //set column field database for datatable orderable
+        END) as priority',
+        'j.workPriority'); //set column field database for datatable orderable
     var $column_search  = array('j.jobName','d.fullName','c.fullName','jt.jobType'); //set column field database for datatable searchable 
     var $order          = array('j.jobId' => 'DESC');  // default order
     var $where          = array();
@@ -42,34 +55,32 @@ class Job_model extends CI_Model {
         foreach ($this->column_search as $emp) // loop column 
         {
             if(isset($_POST['search']['value']) && !empty($_POST['search']['value'])){
-            $_POST['search']['value'] = $_POST['search']['value'];
-        } else
+                $_POST['search']['value'] = $_POST['search']['value'];
+            } else
             $_POST['search']['value'] = '';
-        if($_POST['search']['value']) // if datatable send POST for search
-        {
-            if($i===0) // first loop
+            if($_POST['search']['value']) // if datatable send POST for search
             {
-                $this->db->group_start();
-                $this->db->like(($emp), $_POST['search']['value']);
-            }else{
-                $this->db->or_like(($emp), $_POST['search']['value']);
-            }
+                if($i===0) // first loop
+                {
+                    $this->db->group_start();
+                    $this->db->like(($emp), $_POST['search']['value']);
+                }else{
+                    $this->db->or_like(($emp), $_POST['search']['value']);
+                }
 
-            if(count($this->column_search) - 1 == $i) //last loop
-                $this->db->group_end(); //close bracket
-        }
-        $i++;
+                if(count($this->column_search) - 1 == $i) //last loop
+                    $this->db->group_end(); //close bracket
+            }
+            $i++;
         }
 
         if(!empty($this->where))
             $this->db->where($this->where); 
 
-
         if(!empty($this->group_by)){
             $this->db->group_by($this->group_by);
         }
          
-
         if(isset($_POST['order'])) // here order processing
         { 
             $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);

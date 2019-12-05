@@ -1,11 +1,10 @@
- 
- <style type="text/css">
-  #map-show {
-  width: auto;
-  height:500px;
-}
+<style type="text/css">
+	#map-show {
+		width: auto;
+		height:500px;
+	}
 </style>
-<?php $backend_assets=base_url().'backend_assets/'; ?>
+<?php $backend_assets = base_url().'backend_assets/'; ?>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="well well-sm">
@@ -17,23 +16,23 @@
 							<?php       
 					           $pointsArray=array();
 					           if($job['points']):
-					              $pointsArray= array_values(array_filter(explode("|",$job['points'])));
+					              $pointsArray = array_values(array_filter(explode("|",$job['points'])));
 					            endif;
 					           $p = array();
 					           for ($i=0; $i < sizeof($pointsArray) ; $i++) { 
 					            $pp = explode(",",$pointsArray[$i]);
-					             $p[$i]['lat'] = $pp[0];
-					             $p[$i]['lng'] = $pp[1];
+					             $p[$i]['lat'] 	= $pp[0];
+					             $p[$i]['lng'] 	= $pp[1];
 					           }
 					          // echo "<pre>";
-					           $ppp= json_encode($p);
+					           $ppp 			= json_encode($p);
 					        
-					            $polygonColor = !empty($job['polygonColor'])?$job['polygonColor']:'#FF0000';
+					            $polygonColor 	= !empty($job['polygonColor'])?$job['polygonColor']:'#FF0000';
 					         
-								$showbtn 	= false;
-								$labelShow 	= "";
-								$timeShow 	= false;
-								$driverId 	= 'test';
+								$showbtn 		= false;
+								$labelShow 		= "";
+								$timeShow 		= false;
+								$driverId 		= 'test';
 								switch ($job['jobStatus']) {
 									case 0:
 
@@ -75,17 +74,17 @@
 									switch ($job['workPriority']) {
 									case 0:
 
-										$workPriority 		='<label class="text-center center-block padding-10 label label-info">'.$job['priority'].'</label>';
+										$workPriority 		= '<label class="text-center center-block padding-10 label label-info">'.$job['priority'].'</label>';
 										break;
 									case 1:
-										$workPriority 		='<label class="text-center center-block padding-10 label label-warning">'.$job['priority'].'</label>';
+										$workPriority 		= '<label class="text-center center-block padding-10 label label-warning">'.$job['priority'].'</label>';
 										break;
 									case 2:
-										$workPriority 		='<label class="text-center center-block padding-10 label label-danger">'.$job['priority'].'</label>';
+										$workPriority 		= '<label class="text-center center-block padding-10 label label-danger">'.$job['priority'].'</label>';
 										break;
 									
 									default:
-										$workPriority 		='<label class="text-center center-block padding-10 label label-info">'.$job['priority'].'</label>';
+										$workPriority 		= '<label class="text-center center-block padding-10 label label-info">'.$job['priority'].'</label>';
 										break;
 									}	
 							?>
@@ -543,7 +542,6 @@
 		//google.maps.event.addListener(myPolygon.getPath(), "remove_at", getPolygonCoords);
 		google.maps.event.addListener(myPolygon.getPath(), "set_at", getPolygonCoords);
 	}
-
 	//Display Coordinates below map
 	function getPolygonCoords() {
 		var len 	= myPolygon.getPath().getLength();

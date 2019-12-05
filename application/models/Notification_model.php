@@ -9,7 +9,7 @@ class Notification_model extends CI_Model {
 
     public function __construct() {
         parent::__construct();  
-        $this->notify_log_file = 'notification_log.txt';    //notifcation file path
+        $this->notify_log_file  = 'notification_log.txt';    //notifcation file path
     }
     
     /* Firebase notification for Andriod and ios */
@@ -29,7 +29,7 @@ class Notification_model extends CI_Model {
         
         //curl request
         $ch = curl_init();
-        curl_setopt( $ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );  //firebase end url
+        curl_setopt( $ch, CURLOPT_URL,'https://fcm.googleapis.com/fcm/send' );  //firebase end url
         //curl_setopt( $ch,CURLOPT_URL, 'https://android.googleapis.com/gcm/send' );
         curl_setopt( $ch,CURLOPT_POST, true );
         curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );

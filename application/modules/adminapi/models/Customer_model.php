@@ -6,11 +6,16 @@ class Customer_model extends CI_Model {
     //var $table , $column_order, $column_search , $order =  '';
     var $table          = 'users';
     var $column_order   = array('c.id','c.fullName','c.email','c.contactNumber','c.status'); //set column field database for datatable orderable
-    var $column_sel     = array('c.id','c.fullName','c.email','c.contactNumber','c.status','(case when (c.status = 0) 
-    THEN "Inactive" when (c.status = 1) 
-    THEN "Active" ELSE
-    "Unknown" 
-    END) as statusShow'); //set column field database for datatable orderable
+    var $column_sel     = array('c.id',
+        'c.fullName',
+        'c.email',
+        'c.contactNumber',
+        'c.status',
+        '(case when (c.status = 0) 
+        THEN "Inactive" when (c.status = 1) 
+        THEN "Active" ELSE
+        "Unknown" 
+        END) as statusShow'); //set column field database for datatable orderable
     var $column_search  = array('c.fullName','c.contactNumber'); //set column field database for datatable searchable 
     var $order          = array('c.id' => 'DESC');  // default order
     var $where          = array();
@@ -95,7 +100,7 @@ class Customer_model extends CI_Model {
     public function count_all()
     {
         $this->db->from($this->table);
-         if(!empty($this->where))
+        if(!empty($this->where))
             $this->db->where($this->where); 
         return $this->db->count_all_results();
     }//end function

@@ -17,7 +17,6 @@ class Common_model extends CI_Model {
         $insert = $this->db->insert_batch($table, $dataInsert);
         return $insert;
     }//end function
-
     /* UPDATE RECORD FROM SINGLE TABLE */
     function updateFields($table, $data, $where){
         $update = $this->db->update($table, $data, $where);
@@ -28,7 +27,6 @@ class Common_model extends CI_Model {
             return false;
         }
     }//end function
-    
     /* UPDATE RECORD FROM TABLE */
     function deleteData($table,$where){
         $this->db->where($where);
@@ -50,7 +48,6 @@ class Common_model extends CI_Model {
             return false;
         }   
     }//end function
-    
     /* GET SINGLE RECORD 
      * Modified in ver 2.0
      */
@@ -70,7 +67,6 @@ class Common_model extends CI_Model {
         $q = $this->db->get($table);
         return $q->row_array();
     }//end function
-    
     /* GET MULTIPLE RECORD 
      * Modified in ver 2.0
      */
@@ -99,7 +95,6 @@ class Common_model extends CI_Model {
         $q = $this->db->get();
         return $q->result(); //return multiple records
     }//end function
-    
     /* get single record using join 
      * Modified in ver 2.0
      */
@@ -118,7 +113,6 @@ class Common_model extends CI_Model {
         $q = $this->db->get();
         return $q->row();  //return only single record
     }//end function
-
     /* Get mutiple records using join 
      * Modified in ver 2.0
      */ 
@@ -149,7 +143,6 @@ class Common_model extends CI_Model {
         $q = $this->db->get();
         return $q->result();
     }//end function
-    
     /* Get records joining 3 tables 
      * Modified in ver 2.0
      */
@@ -183,7 +176,6 @@ class Common_model extends CI_Model {
         $q = $this->db->get();
         return $q->result();
     }//end function
-    
     /* Exceute a custom build query by query binding- Useful when we are not able to build queries using CI DB methods
      * Prefreably to be used in SELECT queries
      * The main advantage of building query this way is that the values are automatically escaped which produce safe queries.
@@ -229,8 +221,7 @@ class Common_model extends CI_Model {
         
         $query = $this->db->get();
         return $query->num_rows(); //total records
-    }//end function
-    
+    }//end function 
     /* Check if given data exists in table and return record if exist- Very useful fn
      * Modified in ver 2.0
      */
@@ -241,8 +232,7 @@ class Common_model extends CI_Model {
         $rowcount   = $query->num_rows();
         if($rowcount==0){
             return FALSE; //record not found
-        }
-        else {
+        }else{
             return $query->row(); //return record if found (In preveious versions, this use to return TRUE(bool) only)
         }
     } //end function
@@ -255,16 +245,16 @@ class Common_model extends CI_Model {
             email,
             authToken,
             userType,
-        (case when (profileImage = "") 
-        THEN "'.$userDefault.'" ELSE
-        concat("'.$userPath.'",profileImage) 
-        END) as profileImage,
-        (case when (userType = 1) 
-        THEN "Super Admin" when (userType = 2) 
-        THEN "Customer" when (userType = 3) 
-        THEN "Employee" ELSE
-        "Unknown" 
-        END) as userRole');
+            (case when (profileImage = "") 
+            THEN "'.$userDefault.'" ELSE
+            concat("'.$userPath.'",profileImage) 
+            END) as profileImage,
+            (case when (userType = 1) 
+            THEN "Super Admin" when (userType = 2) 
+            THEN "Customer" when (userType = 3) 
+            THEN "Employee" ELSE
+            "Unknown" 
+            END) as userRole');
         $this->db->from(USERS);
         $this->db->where($where);
         $sql = $this->db->get();
@@ -283,16 +273,16 @@ class Common_model extends CI_Model {
             email,
             authToken,
             userType,
-        (case when (profileImage = "") 
-        THEN "'.$userDefault.'" ELSE
-        concat("'.$userPath.'",profileImage) 
-        END) as profileImage,
-        (case when (userType = 1) 
-        THEN "Super Admin" when (userType = 2) 
-        THEN "Customer" when (userType = 3) 
-        THEN "Employee" ELSE
-        "Unknown" 
-        END) as userRole');
+            (case when (profileImage = "") 
+            THEN "'.$userDefault.'" ELSE
+            concat("'.$userPath.'",profileImage) 
+            END) as profileImage,
+            (case when (userType = 1) 
+            THEN "Super Admin" when (userType = 2) 
+            THEN "Customer" when (userType = 3) 
+            THEN "Employee" ELSE
+            "Unknown" 
+            END) as userRole');
         $this->db->from(ADMIN);
         $this->db->where($where);
         $sql= $this->db->get();
@@ -339,9 +329,7 @@ class Common_model extends CI_Model {
         $email = array();
         $this->db->select('email');
         $this->db->from('admin');
-        
         $sql= $this->db->get();
-
         if($sql->num_rows()):
             foreach ($sql->result() as $k => $v) {
               $email[] = $v->email;
@@ -350,8 +338,8 @@ class Common_model extends CI_Model {
         return $email;
     } //End Function usersInfo 
     function roadRouteDistance($lat1,$long1,$lat2,$long2){
-        $origins = $lat1.','.$long1;
-        $destinations =  $lat2.','.$long2;
+        $origins        = $lat1.','.$long1;
+        $destinations   =  $lat2.','.$long2;
        // echo $origins." ".$destinations;
         $mile   =  0;
         $url    = "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyDjhKBJtoevmCuR5iD1El6cuDHTMByw9Co&origins=".$origins."&destinations=".$destinations."&mode=driving&mode=driving&language=pl-PL";
@@ -379,25 +367,23 @@ class Common_model extends CI_Model {
         return $mile; 
     }//ENd FUnction
     /**
- * find address using lat long
- */
+    * find address using lat long
+    */
     public static function geolocationaddress($lat,$long)
     {
        // $geolocation = $lat.','.$long;
-      
         $geocode = "https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&sensor=false&key=AIzaSyDjhKBJtoevmCuR5iD1El6cuDHTMByw9Co";
-       
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $geocode);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        $response = curl_exec($ch);
+        $response   = curl_exec($ch);
         curl_close($ch);
-        $output = json_decode($response);
+        $output     = json_decode($response);
         pr($output);
-        $dataarray = get_object_vars($output);
+        $dataarray  = get_object_vars($output);
         if ($dataarray['status'] != 'ZERO_RESULTS' && $dataarray['status'] != 'INVALID_REQUEST') {
             if (isset($dataarray['results'][0]->formatted_address)) {
 
@@ -410,7 +396,6 @@ class Common_model extends CI_Model {
         } else {
             $address = 'Not Found';
         }
-
         return $address;
     }//End Function
 } //end of class

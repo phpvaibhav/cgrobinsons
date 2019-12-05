@@ -2,23 +2,39 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Job_model extends CI_Model {
-    var $column_sel = array('j.*','j.jobId','j.jobName','j.points','j.polygonColor','j.jobTypeId','j.driverId','c.fullName as customerName','jt.jobType','d.fullName as driverName','j.customerId','j.jobStatus','j.startDate','j.startTime','(case when (j.jobStatus = 0) 
+    var $column_sel = array('j.*',
+        'j.jobId',
+        'j.jobName',
+        'j.points',
+        'j.polygonColor',
+        'j.jobTypeId',
+        'j.driverId',
+        'c.fullName as customerName',
+        'jt.jobType',
+        'd.fullName as driverName',
+        'j.customerId',
+        'j.jobStatus',
+        'j.startDate',
+        'j.startTime',
+        '(case when (j.jobStatus = 0) 
         THEN "Open" when (j.jobStatus = 1) 
         THEN "In-progress" when (j.jobStatus = 2) 
         THEN "Completed" ELSE
         "Unknown" 
-        END) as statusShow','(case when (j.workPriority = 0) 
+        END) as statusShow',
+        '(case when (j.workPriority = 0) 
         THEN "Low" when (j.workPriority = 1) 
         THEN "Medium" when (j.workPriority = 2) 
         THEN "High" ELSE
         "Unknown" 
-        END) as priority','j.workPriority');
+        END) as priority',
+        'j.workPriority');
     
     public function __construct(){
         parent::__construct();
     }
     function  jobDetail($jobId){
-         $sel_fields = array_filter($this->column_sel); 
+        $sel_fields = array_filter($this->column_sel); 
         $this->db->select($sel_fields);
         $this->db->from('jobs as j');
         $this->db->join('jobType as jt','j.jobTypeId=jt.jobTypeId');
@@ -28,30 +44,28 @@ class Job_model extends CI_Model {
         $sql = $this->db->get();
 
         if($sql->num_rows()):
-            $job =$sql->row_array();
+            $job = $sql->row_array();
            
             $timinig = $this->db->select('SEC_TO_TIME(SUM(TIME_TO_SEC(timediff(outDateTime, inDateTime)))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$job['jobId'],'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->group_by('jobId')->get();
             //lq();
             if($timinig->num_rows()){
-                $time = isset($timinig->row()->timeDuration) ? $timinig->row()->timeDuration:"NA";;
+                $time  = isset($timinig->row()->timeDuration) ? $timinig->row()->timeDuration:"NA";;
             }else{
                  $time = 'NA';
             }
-            $job['timeDuration'] = $time;
+            $job['timeDuration']    = $time;
             $job['geoTimeDuration'] = $this->geoTimeDuration($job['jobId']);
             if($job['geoFencing']==1){
-                 $geopint = substr_replace($job['points'],"",-1); 
-                        $geopint = trim($geopint);
-            $job['geoFencingUrl'] = "https://maps.googleapis.com/maps/api/staticmap?center=".$job['latitude'].",".$job['longitude']."&zoom=auto&scale=1&size=640x500&maptype=satellite&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C".$job['latitude'].",".$job['longitude']."&path=fillcolor:0xFEFEFE%7Ccolor:0xFEFEFE|weight:2|".$geopint."&key=".GOOGLE_API_KEY;
+                $geopint                = substr_replace($job['points'],"",-1); 
+                $geopint                = trim($geopint);
+                $job['geoFencingUrl']   = "https://maps.googleapis.com/maps/api/staticmap?center=".$job['latitude'].",".$job['longitude']."&zoom=auto&scale=1&size=640x500&maptype=satellite&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:o%7C".$job['latitude'].",".$job['longitude']."&path=fillcolor:0xFEFEFE%7Ccolor:0xFEFEFE|weight:2|".$geopint."&key=".GOOGLE_API_KEY;
             }else{
                 $job['geoFencingUrl'] = ""; 
             }
-           
-
             return $job;
         endif;
         return false;
-    }//
+    }//end function 
     function  assignJobs($where=array()){
         $sel_fields = array_filter($this->column_sel); 
         $this->db->select($sel_fields);
@@ -81,11 +95,16 @@ class Job_model extends CI_Model {
         return $array; 
     }//end function
     function geoTimeDuration($jobId){
-        $timeing =array();
-        $time = $this->db->select('jobId,inDateTime,outDateTime,SEC_TO_TIME(TIME_TO_SEC(timediff(outDateTime, inDateTime))) as timeDuration,(case when (inDateTime = "0000-00-00 00:00:00") 
+        $timeing = array();
+        $time    = $this->db->select('jobId,
+            inDateTime,
+            outDateTime,
+            SEC_TO_TIME(TIME_TO_SEC(timediff(outDateTime, inDateTime))) as timeDuration,
+            (case when (inDateTime = "0000-00-00 00:00:00") 
         THEN "-" ELSE
         inDateTime 
-        END) as startTime,(case when (outDateTime = "0000-00-00 00:00:00") 
+        END) as startTime,
+        (case when (outDateTime = "0000-00-00 00:00:00") 
         THEN "Progress" ELSE
         outDateTime 
         END) as endTime')->from('jobTiming')->where(array('jobId'=>$jobId))->order_by('jobTimeId','asc')->get();
@@ -93,7 +112,7 @@ class Job_model extends CI_Model {
             $timeing = $time->result();
 
         }
-        $timinigT = $this->db->select('SEC_TO_TIME(SUM(TIME_TO_SEC(timediff(outDateTime, inDateTime)))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
+        $timinigT    = $this->db->select('SEC_TO_TIME(SUM(TIME_TO_SEC(timediff(outDateTime, inDateTime)))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$jobId,'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->get();
         $timeT = 'NA';
         if($timinigT->num_rows()){
             $timeT = isset($timinigT->row()->timeDuration) ? $timinigT->row()->timeDuration:"NA";;
@@ -102,4 +121,4 @@ class Job_model extends CI_Model {
         }
         return array('timinig'=>$timeing,'total'=>$timeT);
     }//end Function
-}//Function 
+}//Class Function 

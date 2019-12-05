@@ -70,7 +70,6 @@ $pdf->AddPage();
 // set some text to print
 $txt = <<<EOD
 TCPDF Example 002
-
 Default page header and footer are disabled using setPrintHeader() and setPrintFooter() methods.
 EOD;
 

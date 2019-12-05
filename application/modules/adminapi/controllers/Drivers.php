@@ -63,13 +63,11 @@ class Drivers extends Common_Admin_Controller{
             if (!empty($_FILES['profileImage']['name'])) {
                 $folder     = 'users';
                 $image      = $this->Image_model->upload_image('profileImage',$folder); //upload media of Seller
-
                 //check for error
                 if(array_key_exists("error",$image) && !empty($image['error'])){
                     $response = array('status' => FAIL, 'message' => strip_tags($image['error'].'(In user Image)'));
                    $this->response($response);die;
                 }
-
                 //check for image name if present
                 if(array_key_exists("image_name",$image)):
                     $profileImage = $image['image_name'];
@@ -180,14 +178,14 @@ class Drivers extends Common_Admin_Controller{
             $showmsg    = 'Customer has been credit hold changed successfully.';
             $response   = array('status'=>SUCCESS,'message'=>$showmsg);
         }else{
-           $response    = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
+            $response    = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
         }
         $this->response($response);
     }//end function
      function driverDelete_post(){
         $userId     = decoding($this->post('use'));
         $where      = array('id'=>$userId,'userType'=>2);
-        $dataExist = $this->common_model->is_data_exists('users',$where);
+        $dataExist  = $this->common_model->is_data_exists('users',$where);
         if($dataExist){
             if(!empty($dataExist->profileImage)){
                 $this->load->model('Image_model');
@@ -197,7 +195,7 @@ class Drivers extends Common_Admin_Controller{
             $showmsg        = 'Driver has been deleted successfully.';
             $response       = array('status'=>SUCCESS,'message'=>$showmsg);
         }else{
-           $response        = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
+            $response        = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));  
         }
         $this->response($response);
     }//end function
@@ -206,8 +204,8 @@ class Drivers extends Common_Admin_Controller{
         if(!empty($str)){
             return true;
         }else{
-          $this->form_validation->set_message('validate_address','Please enter valid google place address.');
-        return false;  
+            $this->form_validation->set_message('validate_address','Please enter valid google place address.');
+            return false;  
         }    
     }//end function
 }//End Class 

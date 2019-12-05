@@ -167,14 +167,14 @@ class Jobs extends Common_Back_Controller {
            $labelShow ="";
                 switch ($job->jobStatus) {
                   case 0:
-                    $labelShow ='<label color="orange" >Open</label>';
+                    $labelShow =' <label color="orange" >Open</label>';
                     break;
                   case 1:
-                    $labelShow ='<label color="red">In Progress</label>';
+                    $labelShow =' <label color="red">In Progress</label>';
                     break;
                   case 2:
                   
-                    $labelShow ='<label color="green">Completed</label>';
+                    $labelShow =' <label color="green">Completed</label>';
                     break;
                   
                   default:
@@ -183,7 +183,7 @@ class Jobs extends Common_Back_Controller {
             $workPriority ="";
                 switch ($job->workPriority) {
                   case 0:
-                    $workPriority ='<label color="green" >'.$job->priority.'</label>';
+                    $workPriority =' <label color="green" >'.$job->priority.'</label>';
                     break;
                   case 1:
                     $workPriority ='<label color="blue">'.$job->priority.'</label>';
@@ -197,19 +197,19 @@ class Jobs extends Common_Back_Controller {
                     break;
                 }
           $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
-          $content .='<td>'.$job->jobName.'</td>';
-          $content .='<td>'.$job->jobType.'</td>';
-          $content .='<td>'.$job->customerName.'</td>';
-          $content .='<td>'.$job->driverName.'</td>';
-          $content .='<td>'.date("d/m/Y",strtotime($job->startDate))." ".$job->startTime.'</td>';
-          $content .='<td>'.$workPriority.'</td>';
-          $content .='<td>'.$labelShow.'</td>';
+            $content .='<td>'.$job->jobName.'</td>';
+            $content .='<td>'.$job->jobType.'</td>';
+            $content .='<td>'.$job->customerName.'</td>';
+            $content .='<td>'.$job->driverName.'</td>';
+            $content .='<td>'.date("d/m/Y",strtotime($job->startDate))." ".$job->startTime.'</td>';
+            $content .='<td>'.$workPriority.'</td>';
+            $content .='<td>'.$labelShow.'</td>';
           $content .='</tr>';
       }
       }else{
-         $colr = "background-color:#f1f1f1;";
-         $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
-          $content .='<td colspan="6" align="center">No job found.</td>';
+          $colr = "background-color:#f1f1f1;";
+          $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
+            $content .='<td colspan="6" align="center">No job found.</td>';
          
           $content .='</tr>';
       }
@@ -303,14 +303,14 @@ class Jobs extends Common_Back_Controller {
                 $labelShow ="";
                 switch ($job['jobStatus']) {
                   case 0:
-                    $labelShow ='<label color="orange" >Open</label>';
+                    $labelShow =' <label color="orange" >Open</label>';
                     break;
                   case 1:
-                    $labelShow ='<label color="red">In Progress</label>';
+                    $labelShow =' <label color="red">In Progress</label>';
                     break;
                   case 2:
                   
-                    $labelShow ='<label color="green">Completed</label>';
+                    $labelShow =' <label color="green">Completed</label>';
                     break;
                   
                   default:
@@ -319,14 +319,14 @@ class Jobs extends Common_Back_Controller {
                 $workPriority ="";
                 switch ($job['workPriority']) {
                   case 0:
-                    $workPriority ='<label color="green" >'.$job['priority'].'</label>';
+                    $workPriority =' <label color="green" >'.$job['priority'].'</label>';
                     break;
                   case 1:
-                    $workPriority ='<label color="blue">'.$job['priority'].'</label>';
+                    $workPriority =' <label color="blue">'.$job['priority'].'</label>';
                     break;
                   case 2:
                   
-                    $workPriority ='<label color="red">'.$job['priority'].'</label>';
+                    $workPriority =' <label color="red">'.$job['priority'].'</label>';
                     break;
                   
                   default:
@@ -334,71 +334,70 @@ class Jobs extends Common_Back_Controller {
                 }
        // $content .= '<table bgcolor="#cccccc" border="0" cellspacing="1" cellpadding="4">';
         $content .= '<table  border="0" cellspacing="1" cellpadding="4" bgcolor="#EAECF0">';
-        $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>Basic Information</b></th></tr>';
-        $content .= '<tr bgcolor="#EAECF0">';
-        $content .= '<td><strong>Job Name</strong> :</td><td>'.$job['jobName'].'</td>';
-        $content .= '<td><strong>Job Type</strong> :</td><td>'.$job['jobType'].'</td>';
-        $content .= '</tr>'; 
+          $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>Basic Information</b></th></tr>';
+          $content .= '<tr bgcolor="#EAECF0">';
+            $content .= '<td><strong>Job Name</strong> :</td><td>'.$job['jobName'].'</td>';
+            $content .= '<td><strong>Job Type</strong> :</td><td>'.$job['jobType'].'</td>';
+          $content .= '</tr>'; 
 
-        $content .= '<tr bgcolor="#EAECF0">';
-        $content .= '<td><strong>Job Status</strong> :</td><td><span style="font-size: medium;"><b>'.$labelShow.'</b></span></td>';
-        $content .= '<td><strong>Creation Date</strong> :</td><td>'.date("d/m/Y",strtotime($job['startDate']))." ".$job['startTime'].'</td>';
-        $content .= '</tr>';   
+          $content .= '<tr bgcolor="#EAECF0">';
+            $content .= '<td><strong>Job Status</strong> :</td><td><span style="font-size: medium;"><b>'.$labelShow.'</b></span></td>';
+            $content .= '<td><strong>Creation Date</strong> :</td><td>'.date("d/m/Y",strtotime($job['startDate']))." ".$job['startTime'].'</td>';
+          $content .= '</tr>';   
   
-        $content .= '<tr bgcolor="#EAECF0">';
-        $content .= '<td><strong>Work Priority</strong> :</td><td><span style="font-size: medium;"><b>'.$workPriority.'</b></span></td>';
-        $content .= '<td></td><td></td>';
-        $content .= '</tr>';   
+          $content .= '<tr bgcolor="#EAECF0">';
+            $content .= '<td><strong>Work Priority</strong> :</td><td><span style="font-size: medium;"><b>'.$workPriority.'</b></span></td>';
+            $content .= '<td></td><td></td>';
+          $content .= '</tr>';   
 
-        $content .= '<tr bgcolor="#EAECF0">';
-        $content .= '<td><strong>Customer Name</strong> :</td><td>'.$job['customerName'].'</td>';
-        $content .= '<td><strong>Driver Name</strong> :</td><td>'.$job['driverName'].'</td>'; 
-        $content .= '</tr>';
-        $content .= '<tr bgcolor="#EAECF0">';
-        $content .= '<td><strong>Address</strong> :</td><td colspan="3"><strong>'.$job['address'].'</strong></td>';
-        $content .= '</tr>';
-         $content .= '</table>';
+          $content .= '<tr bgcolor="#EAECF0">';
+            $content .= '<td><strong>Customer Name</strong> :</td><td>'.$job['customerName'].'</td>';
+            $content .= '<td><strong>Driver Name</strong> :</td><td>'.$job['driverName'].'</td>'; 
+          $content .= '</tr>';
+          $content .= '<tr bgcolor="#EAECF0">';
+            $content .= '<td><strong>Address</strong> :</td><td colspan="3"><strong>'.$job['address'].'</strong></td>';
+          $content .= '</tr>';
+        $content .= '</table>';
       
-         $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
-
-        $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="2"><b>BEFORE WORK</b></th><th align="left" colspan="2"><b>AFTER WORK</b></th></tr>';
-/*         $content .= '<tr bgcolor="#EAECF0">';
-        $content .= '<td colspan="2"><strong>Job Work Time Duration </strong> :</td><td colspan="2">'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
-        $content .= '</tr>';*/
-        $content .= '<tr bgcolor="#EAECF0">';
-        if(!empty($job['jobReport'])):
-            $reports  = json_decode($job['jobReport'],true);
-          $before   = isset($reports['beforeWork']) ? $reports['beforeWork']:array();
-          $after    = isset($reports['afterWork']) ? $reports['afterWork']:array();
-          
-          
-          if(!empty($before)):
-          $content .='<td colspan="2"><p><strong>Job Start </strong><span align="right" >&nbsp;&nbsp;'.date("d/m/Y H:i A",strtotime($before['startDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
-            $bworkImage = (isset($before['workImage'])&& !empty($before['workImage'])) ? $before['workImage']:array();
-            for ($i=0; $i <sizeof($bworkImage) ; $i++) {
-              $image1 = S3JOBS_URL.$before['workImage'][$i];
-              $content .= '<img src="'.$image1.'" alt="" width="95" height="95" border="0" />&nbsp;';
-            }
-          $content .='</p></div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$before['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$before['driverSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right"><b>Driver Signature</b></p></td>';
-           else:
-             $content .='<td colspan="2" align="center"> No record found</td>';
-         endif;  if(!empty($after)):
-           $content .='<td colspan="2"><p><strong>Job End </strong><span align="right" >&nbsp;&nbsp;'.date("d/m/Y H:i A",strtotime($after['endDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
-           $aworkImage = (isset($after['workImage'])&& !empty($after['workImage'])) ? $after['workImage']:array();
-            for ($j=0; $j <sizeof($aworkImage) ; $j++) {
-              $image = S3JOBS_URL.$after['workImage'][$j];
-              $content .= '<img src="'.$image.'" alt="" width="95" height="95" border="0" />&nbsp;';
-            }
-            $content .='</p></div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$after['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$after['customerSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right"><b>Customer Signature</b></p></td>';
-             else:
-             $content .='<td colspan="2" align="center"> No record found</td>';
+        $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
+          $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="2"><b>BEFORE WORK</b></th><th align="left" colspan="2"><b>AFTER WORK</b></th></tr>';
+            /*         $content .= '<tr bgcolor="#EAECF0">';
+            $content .= '<td colspan="2"><strong>Job Work Time Duration </strong> :</td><td colspan="2">'.$job['timeDuration'].' (<b>'.$labelShow.'</b>)</td>';
+            $content .= '</tr>';*/
+            $content .= '<tr bgcolor="#EAECF0">';
+              if(!empty($job['jobReport'])):
+                $reports  = json_decode($job['jobReport'],true);
+                $before   = isset($reports['beforeWork']) ? $reports['beforeWork']:array();
+                $after    = isset($reports['afterWork']) ? $reports['afterWork']:array();
+                
+                
+                if(!empty($before)):
+                  $content .='<td colspan="2"><p><strong>Job Start </strong><span align="right" >&nbsp;&nbsp;'.date("d/m/Y H:i A",strtotime($before['startDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
+                  $bworkImage = (isset($before['workImage'])&& !empty($before['workImage'])) ? $before['workImage']:array();
+                  for ($i=0; $i <sizeof($bworkImage) ; $i++) {
+                    $image1 = S3JOBS_URL.$before['workImage'][$i];
+                    $content .= '<img src="'.$image1.'" alt="" width="95" height="95" border="0" />&nbsp;';
+                  }
+                  $content .='</p></div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$before['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$before['driverSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right"><b>Driver Signature</b></p></td>';
+              else:
+                $content .='<td colspan="2" align="center"> No record found</td>';
+              endif;  
+              if(!empty($after)):
+                $content .='<td colspan="2"><p><strong>Job End </strong><span align="right" >&nbsp;&nbsp;'.date("d/m/Y H:i A",strtotime($after['endDateTime'])).'</span></p><p><strong>Work image</strong></p><div><p>';
+                $aworkImage = (isset($after['workImage'])&& !empty($after['workImage'])) ? $after['workImage']:array();
+                for ($j=0; $j <sizeof($aworkImage) ; $j++) {
+                  $image = S3JOBS_URL.$after['workImage'][$j];
+                  $content .= '<img src="'.$image.'" alt="" width="95" height="95" border="0" />&nbsp;';
+                }
+                $content .='</p></div><p><strong>Comments </strong></p><p align="left" >&nbsp;&nbsp;'.$after['comments'].'</p><p align="right"><img src="'.S3JOBS_URL.$after['customerSignature'].'" alt="" width="90" height="90" border="0" /></p><p align="right"><b>Customer Signature</b></p></td>';
+              else:
+                $content .='<td colspan="2" align="center"> No record found</td>';
             endif;
-           
-        else:
+          else:
             $content .='<td colspan="4" align="center"> No record found</td>'; 
-        endif;
-         $content .='</tr>'; 
-        $content .='</table>';
+          endif;
+        $content .='</tr>'; 
+      $content .='</table>';
                   /*questions manage*/     
           if(!empty($questions)){ 
              
@@ -467,5 +466,4 @@ class Jobs extends Common_Back_Controller {
       //============================================================+
   }//End Function
  // End job PFD 
- 
-}
+}//End Class

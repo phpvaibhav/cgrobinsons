@@ -45,15 +45,15 @@ class ChangePassword extends Common_Back_Controller {
                 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                 'passToken' => "",
             );
-            $table           = USERS;
+            $table          = USERS;
             $where_email    = array('email'=>decoding($this->input->post('e'))); // decode email id
             $response       = $this->common_model->getsingle($table, $where_email);    
             if($response){
-              $rurl=base_url().'password/ChangePassword/success';  // For Redirect after change password
+              $rurl         = base_url().'password/ChangePassword/success';  // For Redirect after change password
               $this->common_model->updateFields($table, $update_data, $where_email);  //update Password
-              $response = array('status' =>SUCCESS, 'message' =>'Password Change successfully.', 'url'=>$rurl); //success msg
+              $response     = array('status' =>SUCCESS, 'message' =>'Password Change successfully.', 'url'=>$rurl); //success msg
             }else{
-              $response = array('status' =>FAIL, 'message' => 'Email id does not exist.');  
+              $response     = array('status' =>FAIL, 'message' => 'Email id does not exist.');  
             }
             //print_r($response); die();
         }

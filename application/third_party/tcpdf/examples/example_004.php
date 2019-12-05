@@ -97,7 +97,6 @@ for ($stretching = 90; $stretching <= 110; $stretching += 10) {
 
 		// set general stretching (scaling) value
 		$pdf->setFontStretching($stretching);
-
 		// set general spacing value
 		$pdf->setFontSpacing($spacing);
 
@@ -112,7 +111,6 @@ for ($stretching = 90; $stretching <= 110; $stretching += 10) {
 }
 
 // ---------------------------------------------------------
-
 //Close and output PDF document
 $pdf->Output('example_004.pdf', 'I');
 

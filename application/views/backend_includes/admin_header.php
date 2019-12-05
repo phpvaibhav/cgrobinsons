@@ -5,7 +5,7 @@
     <title><?php echo SITE_NAME.' | Admin' ?></title>
     <meta name="description" content="">
     <meta name="author" content="">
-       <?php $backend_assets =  base_url().'backend_assets/';?>
+    <?php $backend_assets =  base_url().'backend_assets/';?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- #CSS Links -->
     <!-- Basic Styles -->
@@ -20,15 +20,12 @@
     <!-- We recommend you use "your_style.css" to override SmartAdmin
          specific styles this will also ensure you retrain your customization with each SmartAdmin update.
     <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
-
-     <!-- sweetalert -->
+    <!-- sweetalert -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css">
     <!-- DataTables -->
     <!--  <link rel="stylesheet" href="<?php echo $backend_assets ?>plugins/datatables/dataTables.bootstrap.css"> -->
-
     <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $backend_assets; ?>css/demo.min.css">
-
     <!-- #FAVICONS -->
     <link rel="shortcut icon" href="<?php echo $backend_assets; ?>img/favicon/favicon.ico" type="image/x-icon">
     <link rel="icon" href="<?php echo $backend_assets; ?>img/favicon/favicon.ico" type="image/x-icon">
@@ -82,11 +79,10 @@
     * 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
   -->
   <body class="" data-base-url="<?php echo base_url(); ?>" data-auth-url="<?php echo $user['authToken']; ?>">
-
-  <!-- #preloader -->
-  <!--   <div class="preloader" id="preloader">
-      <div class="spinner"></div>
-   </div> -->
+    <!-- #preloader -->
+    <!--   <div class="preloader" id="preloader">
+    <div class="spinner"></div>
+    </div> -->
     <!-- #preloader -->
     <!-- #HEADER -->
     <header id="header">

@@ -15,31 +15,27 @@ class Api_model extends CI_Model {
         $res = do_hash(time().mt_rand());
         $new_key = substr($res,0,config_item('rest_key_length'));
         return $new_key;
-
     }
     /**
     * Update users deviceid and auth token while login
     */
     function checkDeviceToken($deviceToken,$table = 'users'){
         $sql = $this->db->select('id')->where('deviceToken', $deviceToken)->get($table);
-
         if($sql->num_rows()){
-                $id = array();
-                foreach($sql->result() as $result){
-                    $id[] = $result->id;
-                }
-                $this->db->where_in('id', $id);
-                $this->db->update('users',array('deviceToken'=>''));
-
-                if($this->db->affected_rows() > 0){
-                    return true;
-                }else{
-                    return false;
-                }
+            $id = array();
+            foreach($sql->result() as $result){
+                $id[] = $result->id;
+            }
+            $this->db->where_in('id', $id);
+            $this->db->update('users',array('deviceToken'=>''));
+            if($this->db->affected_rows() > 0){
+                return true;
+            }else{
+                return false;
+            }
         }
         return true;
     }
-	
 	/*
 	Function for check provided token is resultid or not
 	*/
@@ -49,66 +45,58 @@ class Api_model extends CI_Model {
 		$this->db->where('authToken',$authToken);
 		$sql = $this->db->get($table);
 		 //echo $this->db->last_query();die;
-			if($sql->num_rows() > 0)
-			{
-				return $sql->row();
-			}
-		
+		if($sql->num_rows() > 0)
+		{
+			return $sql->row();
+		}	
 		return false;
 	}
-
 	function registration($user)
 	{	
-       
         $checkEmail = $this->db->select('*')->where(array('email'=>$user['email']))->get(USERS);
-            if($checkEmail->num_rows()){
-                return array('regType'=>'AE'); //already exist
-            }else{
-                $this->db->insert(USERS,$user);
-                $lastId = $this->db->insert_id();
-
-                if($lastId):
-                    return array('regType'=>'NR','returnData'=>$this->userInfo(array('id' => $lastId)));
-                    // Normal registration
-                endif;
-            }
-        return false;
-		
+        if($checkEmail->num_rows()){
+            return array('regType'=>'AE'); //already exist
+        }else{
+            $this->db->insert(USERS,$user);
+            $lastId = $this->db->insert_id();
+            if($lastId):
+                return array('regType'=>'NR','returnData'=>$this->userInfo(array('id' => $lastId)));
+                // Normal registration
+            endif;
+        }
+        return false;	
 	} //End Function users Register
-
-   
 	function updateDeviceIdToken($id,$deviceType,$deviceToken,$authToken,$table = 'users')
 	{
 		$req = $this->db->select('id')->where('id',$id)->get($table);
 		if($req->num_rows())
 		{
-	       $this->checkDeviceToken($deviceToken);
-			$this->db->update($table,array('authToken'=>$authToken,'deviceType'=>$deviceType,'deviceToken'=>$deviceToken),array('id'=>$id));
-			return TRUE;
+            $this->checkDeviceToken($deviceToken);
+            $this->db->update($table,array('authToken'=>$authToken,'deviceType'=>$deviceType,'deviceToken'=>$deviceToken),array('id'=>$id));
+            return TRUE;
 		}
 		return FALSE;
-	}//End Function Update Device Token 
-        
-        //get user info
+	}//End Function Update Device Token  
+    //get user info
 	function userInfo($where){
         $userPath    = base_url().USER_AVATAR_PATH;
         $userDefault = base_url().USER_DEFAULT_AVATAR;
         $this->db->select('id,
-            id as userId,
-            fullName,
-            email,
-            authToken,
-            userType,
-        (case when (profileImage = "") 
-        THEN "'.$userDefault.'" ELSE
-        concat("'.$userPath.'",profileImage) 
-        END) as profileImage,
-        (case when (userType = 1) 
-        THEN "Customer" when (userType = 2) 
-        THEN "Driver" when (userType = 3) 
-        THEN "Employee" ELSE
-        "Unknown" 
-        END) as userRole');
+                        id as userId,
+                        fullName,
+                        email,
+                        authToken,
+                        userType,
+                        (case when (profileImage = "") 
+                        THEN "'.$userDefault.'" ELSE
+                        concat("'.$userPath.'",profileImage) 
+                        END) as profileImage,
+                        (case when (userType = 1) 
+                        THEN "Customer" when (userType = 2) 
+                        THEN "Driver" when (userType = 3) 
+                        THEN "Employee" ELSE
+                        "Unknown" 
+                        END) as userRole');
         $this->db->from(USERS);
         $this->db->where($where);
         $sql= $this->db->get();
@@ -119,39 +107,32 @@ class Api_model extends CI_Model {
         return false;
     } //End Function usersInfo
 	function login($data,$authToken){
-            $res = $this->db->select('*')->where(array('email'=>$data['email']))->get('users');
-            lq();
-            if($res->num_rows()){
-                $result = $res->row();
-                pr($result);
-                if($result->status == 1)
-                {
-
-                    //verify password- It is good to use php's password hashing functions so we are using password_verify fn here
-                    if(password_verify($data['password'], $result->password)){
-                        $deviceType     = $data['deviceType'];
-                        $deviceToken    = $data['deviceToken'];
-                      $updateData       = $this->updateDeviceIdToken($result->id,$deviceType,$deviceToken,$authToken);
-                        if($updateData){
-                           return array('returnType'=>'SL','userInfo'=>$this->userInfo(array('id'=>$result->id)));
-                        }
-                        else{
-                            return FALSE;
-                        }     
-                    }
-                    else{
-                        return array('returnType'=>'WP'); // Wrong Password
-                    }
+        $res = $this->db->select('*')->where(array('email'=>$data['email']))->get('users');
+        //lq();
+        if($res->num_rows()){
+            $result = $res->row();
+            if($result->status == 1)
+            {
+                //verify password- It is good to use php's password hashing functions so we are using password_verify fn here
+                if(password_verify($data['password'], $result->password)){
+                    $deviceType         = $data['deviceType'];
+                    $deviceToken        = $data['deviceToken'];
+                    $updateData         = $this->updateDeviceIdToken($result->id,$deviceType,$deviceToken,$authToken);
+                    if($updateData){
+                       return array('returnType'=>'SL','userInfo'=>$this->userInfo(array('id'=>$result->id)));
+                    }else{
+                        return FALSE;
+                    }     
+                }else{
+                    return array('returnType'=>'WP'); // Wrong Password
                 }
-
-                return array('returnType'=>'WS');
-                // InActive
             }
-            else {
-                return array('returnType'=>'WE'); // Wrong Email
-            }
+            return array('returnType'=>'WS');
+            // InActive
+        }else{
+            return array('returnType'=>'WE'); // Wrong Email
+        }
     }//End users Login
-  
     function forgotPassword($email)
     {
         $sql = $this->db->select('id,fullName,email,password,passToken')->where(array('email'=>$email))->get(USERS);
@@ -161,7 +142,6 @@ class Api_model extends CI_Model {
             $useremail          = $result->email;
             $passToken          = $result->passToken;
             $data['full_name']  = $result->fullName;
-          
             $encoding_email     = encoding($useremail);
             $data['url']        = base_url().'password/ChangePassword/change_password/'.$encoding_email.'/'.$passToken;
             $message            = $this->load->view('emails/forgot_password',$data,TRUE);
@@ -170,16 +150,11 @@ class Api_model extends CI_Model {
             $response=$this->smtp_email->send_mail($useremail,$subject,$message); // Send email For Forgot password
             if ($response)
             {  
-
                 return  array('emailType'=>'ES' ); //ES emailSend
+            }else{ 
+                return  array('emailType'=>'NS') ; //NS NotSend
             }
-            else
-            { 
-                 return  array('emailType'=>'NS') ; //NS NotSend
-            }
-        }
-        else
-        {
+        }else{
             return  array('emailType'=>'NE') ; //NE Not exist
         }
     } //End funtion       

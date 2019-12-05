@@ -11,46 +11,46 @@
         </div>
         <div class="col-xs-6 col-sm-6 text-right hidden-xs">
           <div class="txt-color-white inline-block">
-              <!--   <i class="txt-color-blueLight hidden-mobile">Last account activity <i class="fa fa-clock-o"></i> <strong>52 mins ago &nbsp;</strong> </i> -->
-              <!--  <div class="btn-group dropup">
-              <button class="btn btn-xs dropdown-toggle bg-color-blue txt-color-white" data-toggle="dropdown">
-                <i class="fa fa-link"></i> <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu pull-right text-left">
-                <li>
-                  <div class="padding-5">
-                    <p class="txt-color-darken font-sm no-margin">Download Progress</p>
-                    <div class="progress progress-micro no-margin">
-                      <div class="progress-bar progress-bar-success" style="width: 50%;"></div>
-                    </div>
+            <!--   <i class="txt-color-blueLight hidden-mobile">Last account activity <i class="fa fa-clock-o"></i> <strong>52 mins ago &nbsp;</strong> </i> -->
+            <!--  <div class="btn-group dropup">
+            <button class="btn btn-xs dropdown-toggle bg-color-blue txt-color-white" data-toggle="dropdown">
+              <i class="fa fa-link"></i> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right text-left">
+              <li>
+                <div class="padding-5">
+                  <p class="txt-color-darken font-sm no-margin">Download Progress</p>
+                  <div class="progress progress-micro no-margin">
+                    <div class="progress-bar progress-bar-success" style="width: 50%;"></div>
                   </div>
-                </li>
-                <li class="divider"></li>
-                <li>
-                  <div class="padding-5">
-                    <p class="txt-color-darken font-sm no-margin">Server Load</p>
-                    <div class="progress progress-micro no-margin">
-                      <div class="progress-bar progress-bar-success" style="width: 20%;"></div>
-                    </div>
+                </div>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <div class="padding-5">
+                  <p class="txt-color-darken font-sm no-margin">Server Load</p>
+                  <div class="progress progress-micro no-margin">
+                    <div class="progress-bar progress-bar-success" style="width: 20%;"></div>
                   </div>
-                </li>
-                <li class="divider"></li>
-                <li>
-                  <div class="padding-5">
-                    <p class="txt-color-darken font-sm no-margin">Memory Load <span class="text-danger">*critical*</span></p>
-                    <div class="progress progress-micro no-margin">
-                      <div class="progress-bar progress-bar-danger" style="width: 70%;"></div>
-                    </div>
+                </div>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <div class="padding-5">
+                  <p class="txt-color-darken font-sm no-margin">Memory Load <span class="text-danger">*critical*</span></p>
+                  <div class="progress progress-micro no-margin">
+                    <div class="progress-bar progress-bar-danger" style="width: 70%;"></div>
                   </div>
-                </li>
-                <li class="divider"></li>
-                <li>
-                  <div class="padding-5">
-                    <button class="btn btn-block btn-default">refresh</button>
-                  </div>
-                </li>
-              </ul>
-            </div> -->
+                </div>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <div class="padding-5">
+                  <button class="btn btn-block btn-default">refresh</button>
+                </div>
+              </li>
+            </ul>
+          </div> -->
           </div>
         </div>
       </div>
@@ -159,56 +159,56 @@
     <script>
       $(document).ready(function() {
         
-        /* DO NOT REMOVE : GLOBAL FUNCTIONS!
-         *
-         * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
-         *
-         * // activate tooltips
-         * $("[rel=tooltip]").tooltip();
-         *
-         * // activate popovers
-         * $("[rel=popover]").popover();
-         *
-         * // activate popovers with hover states
-         * $("[rel=popover-hover]").popover({ trigger: "hover" });
-         *
-         * // activate inline charts
-         * runAllCharts();
-         *
-         * // setup widgets
-         * setup_widgets_desktop();
-         *
-         * // run form elements
-         * runAllForms();
-         *
-         ********************************
-         *
-         * pageSetUp() is needed whenever you load a page.
-         * It initializes and checks for all basic elements of the page
-         * and makes rendering easier.
-         *
-         */
-        
-         pageSetUp();
-         
-        /*
-         * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
-         * eg alert("my home function");
-         * 
-         * var pagefunction = function() {
-         *   ...
-         * }
-         * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
-         * 
-         * TO LOAD A SCRIPT:
-         * var pagefunction = function (){ 
-         *  loadScript(".../plugin.js", run_after_loaded);  
-         * }
-         * 
-         * OR
-         * 
-         * loadScript(".../plugin.js", run_after_loaded);
-         */
+      /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+       *
+       * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+       *
+       * // activate tooltips
+       * $("[rel=tooltip]").tooltip();
+       *
+       * // activate popovers
+       * $("[rel=popover]").popover();
+       *
+       * // activate popovers with hover states
+       * $("[rel=popover-hover]").popover({ trigger: "hover" });
+       *
+       * // activate inline charts
+       * runAllCharts();
+       *
+       * // setup widgets
+       * setup_widgets_desktop();
+       *
+       * // run form elements
+       * runAllForms();
+       *
+       ********************************
+       *
+       * pageSetUp() is needed whenever you load a page.
+       * It initializes and checks for all basic elements of the page
+       * and makes rendering easier.
+       *
+       */
+      
+       pageSetUp();
+       
+      /*
+       * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+       * eg alert("my home function");
+       * 
+       * var pagefunction = function() {
+       *   ...
+       * }
+       * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+       * 
+       * TO LOAD A SCRIPT:
+       * var pagefunction = function (){ 
+       *  loadScript(".../plugin.js", run_after_loaded);  
+       * }
+       * 
+       * OR
+       * 
+       * loadScript(".../plugin.js", run_after_loaded);
+       */
         
       })
     </script>
@@ -219,11 +219,11 @@
         _gaq.push(['_trackPageview']);
       
       (function() {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
+        var ga    = document.createElement('script');
+        ga.type   = 'text/javascript';
+        ga.async  = true;
+        ga.src    = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s     = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(ga, s);
       })();
       $(document).ready(function() {

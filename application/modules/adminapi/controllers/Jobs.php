@@ -15,10 +15,10 @@ class Jobs extends Common_Admin_Controller{
         $this->form_validation->set_rules('startDate', 'startDate', 'trim|required');
         $this->form_validation->set_rules('startTime', 'startTime', 'trim|required');
         $this->form_validation->set_rules('address', 'address', 'trim|required');
-          $this->form_validation->set_rules('latitude', 'latitude', 'trim|required|min_length[2]|callback_validate_address');
-          $geoFencing = $this->post('geoFencing');
+        $this->form_validation->set_rules('latitude', 'latitude', 'trim|required|min_length[2]|callback_validate_address');
+        $geoFencing = $this->post('geoFencing');
         if($geoFencing){
-          $this->form_validation->set_rules('boundary', 'geo fencing area', 'trim|required');   
+            $this->form_validation->set_rules('boundary', 'geo fencing area', 'trim|required');   
         }
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors())); 
@@ -295,21 +295,21 @@ class Jobs extends Common_Admin_Controller{
         $this->load->helper('text');
         $this->load->model('job_model');
         $this->job_model->set_data(array('j.driverId'=>$this->post('id')));
-        $list   = $this->job_model->get_list();
-        $data   = array();
-        $no     = $_POST['start'];
+        $list           = $this->job_model->get_list();
+        $data           = array();
+        $no             = $_POST['start'];
         foreach ($list as $serData) { 
-            $action  = '';
+            $action     = '';
             $no++;
-            $row     = array();
-            $row[]   = $no;
+            $row        = array();
+            $row[]      = $no;
             //$row[] = '<img src='.base_url($serData->profileImage).' alt="user profile" style="height:50px;width:50px;" >';
-            $jobLink = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
-            $row[]   = '<a href="'.$jobLink.'"  class="on-default edit-row table_action">'.display_placeholder_text($serData->jobName).'</a>'; 
-            $row[]   = display_placeholder_text($serData->jobType); 
-            $row[]   = display_placeholder_text($serData->customerName); 
-            $row[]   = display_placeholder_text($serData->driverName); 
-            $row[]   = date("d/m/Y",strtotime($serData->startDate))." ".display_placeholder_text($serData->startTime); 
+            $jobLink    = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
+            $row[]      = '<a href="'.$jobLink.'"  class="on-default edit-row table_action">'.display_placeholder_text($serData->jobName).'</a>'; 
+            $row[]      = display_placeholder_text($serData->jobType); 
+            $row[]      = display_placeholder_text($serData->customerName); 
+            $row[]      = display_placeholder_text($serData->driverName); 
+            $row[]      = date("d/m/Y",strtotime($serData->startDate))." ".display_placeholder_text($serData->startTime); 
             switch ($serData->workPriority) {
                 case 2:
                    $row[]       = '<label class="label label-danger">'.$serData->priority.'</label>';

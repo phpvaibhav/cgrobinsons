@@ -6,11 +6,21 @@ class Vehicle_model extends CI_Model {
     //var $table , $column_order, $column_search , $order =  '';
     var $table          = 'vehicles';
     var $column_order   = array('v.vehicleId','v.year','v.manufacturer','v.model','v.vin','v.plate','v.color','v.state','v.status','d.fullName'); //set column field database for datatable orderable
-    var $column_sel     = array('v.vehicleId','v.year','v.manufacturer','v.model','v.vin','v.plate','v.color','v.state','v.status','(case when (v.status = 0) 
+    var $column_sel     = array('v.vehicleId',
+        'v.year',
+        'v.manufacturer',
+        'v.model',
+        'v.vin',
+        'v.plate',
+        'v.color',
+        'v.state',
+        'v.status',
+        '(case when (v.status = 0) 
         THEN "Inactive" when (v.status = 1) 
         THEN "Active" ELSE
         "Unknown" 
-        END) as statusShow','d.fullName'); //set column field database for datatable orderable
+        END) as statusShow',
+        'd.fullName'); //set column field database for datatable orderable
     var $column_search = array('v.year','v.manufacturer','v.model','v.vin','v.plate','v.color','v.state','d.fullName'); //set column field database for datatable searchable 
     var $order          = array('v.vehicleId' => 'DESC');  // default order
     var $where          = array();
@@ -36,33 +46,31 @@ class Vehicle_model extends CI_Model {
         {
             if(isset($_POST['search']['value']) && !empty($_POST['search']['value'])){
             $_POST['search']['value'] = $_POST['search']['value'];
-        } else
+            } else
             $_POST['search']['value'] = '';
-        if($_POST['search']['value']) // if datatable send POST for search
-        {
-            if($i===0) // first loop
+            if($_POST['search']['value']) // if datatable send POST for search
             {
-                $this->db->group_start();
-                $this->db->like(($emp), $_POST['search']['value']);
-            }else{
-                $this->db->or_like(($emp), $_POST['search']['value']);
-            }
+                if($i===0) // first loop
+                {
+                    $this->db->group_start();
+                    $this->db->like(($emp), $_POST['search']['value']);
+                }else{
+                    $this->db->or_like(($emp), $_POST['search']['value']);
+                }
 
-            if(count($this->column_search) - 1 == $i) //last loop
-                $this->db->group_end(); //close bracket
-        }
-        $i++;
+                if(count($this->column_search) - 1 == $i) //last loop
+                    $this->db->group_end(); //close bracket
+            }
+            $i++;
         }
 
         if(!empty($this->where))
             $this->db->where($this->where); 
 
-
         if(!empty($this->group_by)){
             $this->db->group_by($this->group_by);
         }
          
-
         if(isset($_POST['order'])) // here order processing
         { 
             $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
@@ -100,7 +108,6 @@ class Vehicle_model extends CI_Model {
         return $query->num_rows();
     }//End function
 
-
     public function count_all()
     {
         $this->db->from($this->table);
@@ -110,7 +117,19 @@ class Vehicle_model extends CI_Model {
     }//End function
     function vehilceLatlong($driverId =''){
         $array =array();
-        $this->db->select('v.vehicleId,v.year,v.manufacturer,v.model,v.vin,v.plate,v.color,v.state,v.status,d.fullName,d.id as driverId,d.fullName,d.latitude,d.longitude');
+        $this->db->select('v.vehicleId,
+            v.year,
+            v.manufacturer,
+            v.model,
+            v.vin,
+            v.plate,
+            v.color,
+            v.state,
+            v.status,
+            d.fullName,
+            d.id as driverId,
+            d.fullName,
+            d.latitude,d.longitude');
         $this->db->from('vehicles as v');
         
         $this->db->join('assignVehicle as av','av.vehicleId = v.vehicleId','left');
@@ -136,22 +155,25 @@ class Vehicle_model extends CI_Model {
                   // $array['currentAddress'] = $this->common_model->geolocationaddress($v['latitude'],$v['longitude']); 
             }
         }
-       // pr($array);
+       //pr($array);
         return $array;
     }//End FUnction
     function assignJob($driverId){
         $where = array('d.id'=>$driverId,'j.jobStatus !='=>2);
-        $this->db->select('j.jobId,j.jobName,(case when (j.jobStatus = 0) 
-        THEN "Open" when (j.jobStatus = 1) 
-        THEN "In Progress" when (j.jobStatus = 2) 
-        THEN "Completed" ELSE
-        "Unknown" 
-        END) as statusShow,(case when (j.jobStatus = 0) 
-        THEN "blue" when (j.jobStatus = 1) 
-        THEN "orange" when (j.jobStatus = 2) 
-        THEN "green" ELSE
-        "Unknown" 
-        END) as statusColor');
+        $this->db->select('j.jobId,
+            j.jobName,
+            (case when (j.jobStatus = 0) 
+            THEN "Open" when (j.jobStatus = 1) 
+            THEN "In Progress" when (j.jobStatus = 2) 
+            THEN "Completed" ELSE
+            "Unknown" 
+            END) as statusShow,
+            (case when (j.jobStatus = 0) 
+            THEN "blue" when (j.jobStatus = 1) 
+            THEN "orange" when (j.jobStatus = 2) 
+            THEN "green" ELSE
+            "Unknown" 
+            END) as statusColor');
         $this->db->from('jobs as j');
         $this->db->join('jobType as jt','j.jobTypeId=jt.jobTypeId');
         $this->db->join('users as c','c.id=j.customerId','left');
@@ -164,6 +186,7 @@ class Vehicle_model extends CI_Model {
             foreach ($data as $e => $u) {
                 $data[$e]->jobLink = base_url().'jobs/jobDetail/'.encoding($u->jobId);
             }
+           // pr($data);
             return $data;
         endif;
         return array();

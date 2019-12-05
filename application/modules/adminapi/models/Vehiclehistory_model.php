@@ -6,12 +6,20 @@ class Vehiclehistory_model extends CI_Model {
     //var $table , $column_order, $column_search , $order =  '';
     var $table          = 'vehicleHistory';
     var $column_order   = array('v.historyId','v.vehicleId','v.vjobTypeId','v.date','v.attachment','v.fileType','v.status','vj.type'); //set column field database for datatable orderable
-    var $column_sel     = array('v.historyId','v.vehicleId','v.vjobTypeId','v.date','v.attachment','v.fileType','v.status','(case when (v.status = 0) 
+    var $column_sel     = array('v.historyId',
+        'v.vehicleId',
+        'v.vjobTypeId',
+        'v.date',
+        'v.attachment',
+        'v.fileType',
+        'v.status',
+        '(case when (v.status = 0) 
         THEN "Inactive" when (v.status = 1) 
         THEN "Active" ELSE
         "Unknown" 
-        END) as statusShow','vj.type'); //set column field database for datatable orderable
-    var $column_search = array('v.vehicleId','v.historyId','v.vjobTypeId','v.date','v.attachment','v.status','vj.type'); //set column field database for datatable searchable 
+        END) as statusShow',
+        'vj.type'); //set column field database for datatable orderable
+    var $column_search  = array('v.vehicleId','v.historyId','v.vjobTypeId','v.date','v.attachment','v.status','vj.type'); //set column field database for datatable searchable 
     var $order          = array('DATE(v.crd)' => 'DESC');  // default order
     var $where          = array();
     var $group_by       = 'v.historyId'; 
@@ -38,31 +46,28 @@ class Vehiclehistory_model extends CI_Model {
             $_POST['search']['value'] = $_POST['search']['value'];
         } else
             $_POST['search']['value'] = '';
-        if($_POST['search']['value']) // if datatable send POST for search
-        {
-            if($i===0) // first loop
+            if($_POST['search']['value']) // if datatable send POST for search
             {
-                $this->db->group_start();
-                $this->db->like(($emp), $_POST['search']['value']);
-            }else{
-                $this->db->or_like(($emp), $_POST['search']['value']);
+                if($i===0) // first loop
+                {
+                    $this->db->group_start();
+                    $this->db->like(($emp), $_POST['search']['value']);
+                }else{
+                    $this->db->or_like(($emp), $_POST['search']['value']);
+                }
+                if(count($this->column_search) - 1 == $i) //last loop
+                    $this->db->group_end(); //close bracket
             }
-
-            if(count($this->column_search) - 1 == $i) //last loop
-                $this->db->group_end(); //close bracket
-        }
-        $i++;
+            $i++;
         }
 
         if(!empty($this->where))
             $this->db->where($this->where); 
 
-
         if(!empty($this->group_by)){
             $this->db->group_by($this->group_by);
         }
          
-
         if(isset($_POST['order'])) // here order processing
         { 
             $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);

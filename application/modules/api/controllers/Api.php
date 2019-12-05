@@ -14,25 +14,22 @@ class Api extends Common_Service_Controller{
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]',
             array('is_unique' => 'Email already exist')
         );
-      
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]|max_length[20]');
         $this->form_validation->set_rules('contact', 'Contact Number', 'trim|required|min_length[10]|max_length[20]');
         $this->form_validation->set_rules('fullName', 'full Name', 'trim|required|min_length[2]');
         
-     /*   if (empty($_FILES['profileImage']['name'])) {
+        /*   if (empty($_FILES['profileImage']['name'])) {
             $this->form_validation->set_rules('profileImage', 'profile image', 'trim|required');
         }*/
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
             $this->response($response);
-        }
-        else{
+        }else{
         
             $email          =  $this->post('email');
             $fullName       =  $this->post('fullName');
-          
-            $authtoken      = $this->api_model->generate_token();
-            $passToken      = $this->api_model->generate_token();
+            $authtoken      =  $this->api_model->generate_token();
+            $passToken      =  $this->api_model->generate_token();
 
             //user info
                 $userData['fullName']           =   $fullName;
@@ -48,7 +45,7 @@ class Api extends Common_Service_Controller{
             // profile pic upload
             $this->load->model('Image_model');
           
-            $image = array(); $profileImage = '';
+            $image          = array(); $profileImage = '';
             if (!empty($_FILES['profileImage']['name'])) {
                 $folder     = 'users';
                 $image      = $this->Image_model->upload_image('profileImage',$folder); //upload media of Seller
@@ -107,11 +104,8 @@ class Api extends Common_Service_Controller{
         {
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
             $this->response($response);
-        }
-        else
-        {
+        }else{
             $authtoken              = $this->api_model->generate_token();
-           
             $data                   = array();
             $data['email']          = $this->post('email');
             $data['password']       = $this->post('password');
@@ -119,7 +113,7 @@ class Api extends Common_Service_Controller{
             $data['deviceToken']    = $this->post('deviceToken');
             $data['authToken']      = $authtoken;
 
-            $result = $this->api_model->login($data,$authtoken);
+            $result                 = $this->api_model->login($data,$authtoken);
 
 
             if(is_array($result)){
@@ -150,21 +144,17 @@ class Api extends Common_Service_Controller{
             
             $this->response($response);
         }
-    } //End Function
-          
-
+    } //End Function     
     //user forgot password
     function forgotPassword_post(){
 
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-        
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
             $this->response($response);
         }
-
-        $email = $this->post('email');
-        $response = $this->api_model->forgotPassword($email);
+        $email      = $this->post('email');
+        $response   = $this->api_model->forgotPassword($email);
         if($response['emailType'] == 'ES'){ //ES emailSend
             $response = array('status' => SUCCESS, 'message' => 'Please check your mail to reset your password.');
         }elseif($response['emailType'] == 'NS'){ //NS NotSend
@@ -175,10 +165,8 @@ class Api extends Common_Service_Controller{
         }elseif($response['emailType'] == 'SL'){ //SL social login
             $response = array('status' => FAIL, 'message' => 'Social registered users are not allowed to access Forgot password'); 
         }
-
         $this->response($response);
     } //End function
-
     // Session store value for frontEnd
     function StoreSession($userData){
         $session_data['id']             = $userData->userId;
@@ -194,6 +182,5 @@ class Api extends Common_Service_Controller{
         return TRUE;
     }// End Function   
     // ENd Session store value for frontEnd
-
 }//End Class 
 

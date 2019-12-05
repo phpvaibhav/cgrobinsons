@@ -101,7 +101,6 @@ $pdf->AddPage();
 // set some text to print
 $txt = <<<EOD
 TCPDF Example 003
-
 Custom page header and footer are defined by extending the TCPDF class and overriding the Header() and Footer() methods.
 EOD;
 

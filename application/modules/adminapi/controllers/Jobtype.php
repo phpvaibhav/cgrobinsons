@@ -31,7 +31,7 @@ class Jobtype extends Common_Admin_Controller{
                 $question                = $this->post('question_'.$k);
                 $questionId              = $this->post('questionId_'.$k);
                 if(!empty($questionId) && $questionId !=0){
-                    $queNonDeleteId[]   = $questionId;
+                    $queNonDeleteId[]    = $questionId;
                 }
                   
                 $questionType            = $this->post('questionType_'.$k);
