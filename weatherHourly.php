@@ -34,6 +34,15 @@ if ($err) {
   echo "cURL Error #:" . $err;
 } else {
   $data = json_decode($response,true);
+ /* echo $data['features'][0]['properties']['timeSeries'][0]['time']."<br>";
+  echo date('d-m-Y H:i A',strtotime($data['features'][0]['properties']['timeSeries'][0]['time']));*/
+
+  for ($i=0; $i <sizeof($data['features']) ; $i++) { 
+  		for ($j=0; $j <sizeof($data['features'][$i]['properties']['timeSeries']) ; $j++) { 
+  			$d=$data['features'][$i]['properties']['timeSeries'][$j]['time'];
+  			$data['features'][$i]['properties']['timeSeries'][$j]['time']=date('d-m-Y h:i A',strtotime($d));
+  		}
+  }
   echo "<pre>";
   print_r($data);
   echo "</pre>";
