@@ -16,14 +16,17 @@ class Admin extends Common_Back_Controller {
         $data['title'] = "Login";
         $this->load->login_render('login', $data);
     }//End Function
+
     public function signup() { 
         $data['title'] = "Sign up";
         $this->load->login_render('signup', $data);
     }//End Function
+
     public function forgot() { 
         $data['title'] = "Forgot";
         $this->load->login_render('forgot', $data);
     }//End Function
+
     public function logout() {
         $this->admin_logout(FALSE);
         $this->session->set_flashdata('success', 'Sign out successfully done! ');
@@ -32,6 +35,7 @@ class Admin extends Common_Back_Controller {
         echo json_encode($response);
         die;
     }//End Function
+
     public function dashboard() {
         $data['parent']     = "Dashboard";
         $data['title']      = '<i class="fa-fw fa fa-home"></i> Dashboard';
@@ -42,6 +46,7 @@ class Admin extends Common_Back_Controller {
         $data['jobType']    = $this->common_model->get_total_count('jobType'); 
         $this->load->admin_render('dashboard', $data, '');
     }//End Function
+
     //view admin profile
     public function admin_profile(){
         $data['title']      = "Admin profile";
@@ -50,6 +55,7 @@ class Admin extends Common_Back_Controller {
         $data['userData']   = $result;
         $this->load->admin_render('admin_profile', $data, '');
     }//End Function
+
     //update admin profile
     public function admin_update(){
         $this->form_validation->set_rules('fullName','name','trim|required');
@@ -103,6 +109,7 @@ class Admin extends Common_Back_Controller {
         }
         echo json_encode($response); die;
     }//End Function
+    
     public function changePassword()
     {
         $this->load->library('form_validation');

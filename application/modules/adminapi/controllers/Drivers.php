@@ -130,18 +130,18 @@ class Drivers extends Common_Admin_Controller{
             }else{ 
                 $row[]          = '<label class="label label-danger">'.$serData->statusShow.'</label>'; 
             } 
-                $link       = 'javascript:void(0)';
-                $action     .= "";
+                $link           = 'javascript:void(0)';
+                $action         .= "";
             if($serData->status){
 
-                $action     .= '<a href="'.$link.'" onclick="driverStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->id).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-check" aria-hidden="true"></i></a>';
+                $action         .= '<a href="'.$link.'" onclick="driverStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->id).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-check" aria-hidden="true"></i></a>';
             }else{
-                $action    .= '<a href="'.$link.'" onclick="driverStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->id).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                $action         .= '<a href="'.$link.'" onclick="driverStatus(this);" data-message="You want to change status!" data-useid="'.encoding($serData->id).'"  class="on-default edit-row table_action" title="status"><i class="fa fa-times" aria-hidden="true"></i></a>';
             }
-            $userLink       = base_url().'drivers/driverDetail/'.encoding($serData->id);
-            $action         .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
-            $pdfLink       = base_url().'drivers/driverDetailPdf/'.encoding($serData->id);
-            $action         .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+            $userLink           = base_url().'drivers/driverDetail/'.encoding($serData->id);
+            $action             .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+            $pdfLink            = base_url().'drivers/driverDetailPdf/'.encoding($serData->id);
+            $action             .= '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
             $row[]  = $action;
             $data[] = $row;
         }

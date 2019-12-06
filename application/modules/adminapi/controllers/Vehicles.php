@@ -72,35 +72,33 @@ class Vehicles extends Common_Admin_Controller{
                 $attachmentname         = $_FILES['attachment']['name'];
                 $attachmentsize         = $_FILES['attachment']['size'];
                 $attachmenttmp          = $_FILES['attachment']['tmp_name'];
-                $attachmentext          = $this->s3_model->getExtension($attachmentname);;
+                $attachmentext          = $this->s3_model->getExtension($attachmentname);
                 $uploadFor              = "vehicles";
                 //Rename image name.
                 $actual_image_attachment = time().".".$attachmentext;
-                    if($this->s3->putObjectFile($attachmenttmp, BUCKETNAME , $uploadFor.'/'.$actual_image_attachment, S3::ACL_PUBLIC_READ) )
+                    if($this->s3->putObjectFile($attachmenttmp, BUCKETNAME , $uploadFor.'/'.$actual_image_attachment, S3::ACL_PUBLIC_READ))
                     {
                         $data_val['attachment']         = $actual_image_attachment;
                         $data_val['fileType']           = isset($imageType[0]) ?$imageType[0]:'image';;
                     }
+            }
+            $where      = array('historyId'=>$historyId);
+            $isExist    = $this->common_model->is_data_exists('vehicleHistory',$where);
+            if($isExist){
+                if(isset($data_val['attachment']) && !empty($data_val['attachment'])){
+                 $this->s3_model->deleteImg($uploadFor,$isExist->attachment);
                 }
-                $where      = array('historyId'=>$historyId);
-                $isExist    = $this->common_model->is_data_exists('vehicleHistory',$where);
-                if($isExist){
-                    if(isset($data_val['attachment']) && !empty($data_val['attachment'])){
-                     $this->s3_model->deleteImg($uploadFor,$isExist->attachment);
-                    }
-                    $result     = $this->common_model->updateFields('vehicleHistory',$data_val,$where);
-                    $msg        = "Vehicle history record updated successfully.";
-                }else{
-                    $result     = $this->common_model->insertData('vehicleHistory',$data_val);
-                    
-                    $msg        = "Vehicle history added successfully.";
-                }
-                if($result){
-                  
-                     $response = array('status'=>SUCCESS,'message'=>$msg);
-                }else{
-                     $response = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
-                } 
+                $result     = $this->common_model->updateFields('vehicleHistory',$data_val,$where);
+                $msg        = "Vehicle history record updated successfully.";
+            }else{
+                $result     = $this->common_model->insertData('vehicleHistory',$data_val);                    
+                $msg        = "Vehicle history added successfully.";
+            }
+            if($result){
+                $response   = array('status'=>SUCCESS,'message'=>$msg);
+            }else{
+                $response   = array('status'=>FAIL,'message'=>ResponseMessages::getStatusCodeMessage(118));
+            } 
         }
         $this->response($response);
     }//end function  
@@ -110,8 +108,7 @@ class Vehicles extends Common_Admin_Controller{
         $this->form_validation->set_rules('assignDate', 'assign date', 'trim|required');
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
-        }
-        else{
+        }else{
       		$vehicleId                  = decoding($this->post('vid'));
 			$data_val['driverId']       = $this->post('driverId');
 			$data_val['assignDate']     = date("Y-m-d",strtotime($this->post('assignDate')));
@@ -121,8 +118,8 @@ class Vehicles extends Common_Admin_Controller{
             if($isExist){
             	$assignExist            = $this->common_model->is_data_exists('assignVehicle',$where);
                 if($assignExist){
-            		$result                 = $this->common_model->updateFields('assignVehicle',$data_val,$where);
-            		$msg                    = "Vehicle assign driver successfully.";
+            		$result             = $this->common_model->updateFields('assignVehicle',$data_val,$where);
+            		$msg                = "Vehicle assign driver successfully.";
             	}else{
             		$data_val['vehicleId']        = $vehicleId;
             		$result                       = $this->common_model->insertData('assignVehicle',$data_val);
@@ -175,7 +172,6 @@ class Vehicles extends Common_Admin_Controller{
             $data[] = $row;
 
         }
-
         $output = array(
             "draw"              => $_POST['draw'],
             "recordsTotal"      => $this->vehicle_model->count_all(),
@@ -204,13 +200,11 @@ class Vehicles extends Common_Admin_Controller{
         
             $attachmentUrl  = S3VEHICLE_URL.$serData->attachment; 
             if($serData->fileType=='image'){
-                $attachment = '<img src="'.S3VEHICLE_URL.$serData->attachment.'" width="100" height="100">'; 
-                
+                $attachment = '<img src="'.S3VEHICLE_URL.$serData->attachment.'" width="100" height="100">';   
             }else{
                 $attachment = '<img src="'.base_url().'backend_assets/img/attachment/attachment.jpeg" width="100" height="100">'; 
-             }
-            $row[] = display_placeholder_text('<a href="'.S3VEHICLE_URL.$serData->attachment.'" target="_blank" title="">'.$attachment.'</a>');
-       
+            }
+            $row[] = display_placeholder_text('<a href="'.S3VEHICLE_URL.$serData->attachment.'" target="_blank" title="">'.$attachment.'</a>');      
             $link    = 'javascript:void(0)';
             $action .= "";
             $link    = 'javascript:void(0);';

@@ -14,9 +14,6 @@ class Adminapi extends Common_Admin_Controller{
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]|max_length[20]');
         $this->form_validation->set_rules('contact', 'Contact Number', 'trim|required|min_length[10]|max_length[20]');
         $this->form_validation->set_rules('fullName', 'full Name', 'trim|required|min_length[2]');
-        /*   if (empty($_FILES['profileImage']['name'])) {
-            $this->form_validation->set_rules('profileImage', 'profile image', 'trim|required');
-        }*/
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors()));
             $this->response($response);

@@ -50,8 +50,8 @@ class Customers extends Common_Back_Controller {
     //$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH);
     $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.'', PDF_HEADER_STRING);
     // set header and footer fonts
-    $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-    $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+    $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN,'', PDF_FONT_SIZE_MAIN));
+    $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA,'', PDF_FONT_SIZE_DATA));
     // set default monospaced font
     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
     // set margins
@@ -73,10 +73,10 @@ class Customers extends Common_Back_Controller {
     // add a page
     $pdf->AddPage();
     // print a line
-    $pdf->Cell(0, 12, 'CUSTOMERS',0, 0, 'C');
+    $pdf->Cell(0, 12,'CUSTOMERS',0, 0, 'C');
     $pdf->Ln(5);
     $pdf->Ln(5);
-    $pdf->Write(0, 'Date: '. date('m/d/Y') , '', 0, 'L', false, 0, true, false, 0);
+    $pdf->Write(0, 'Date: '.date('m/d/Y') , '', 0, 'L', false, 0, true, false, 0);
     // Logged in username
     $userName = $_SESSION[ADMIN_USER_SESS_KEY]['fullName'];
     $pdf->Write(0, 'By: '.$userName, '', 0, 'R', true, 0, false, false, 0);
@@ -95,9 +95,9 @@ class Customers extends Common_Back_Controller {
           $colr = "background-color:#fff!important;;";
         }            
         $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
-            $content .='<td>'.$user->fullName.'</td>';
-            $content .='<td>'.$user->email.'</td>';
-            $content .='<td>'.$user->contactNumber.'</td>';  
+            $content .= '<td>'.$user->fullName.'</td>';
+            $content .= '<td>'.$user->email.'</td>';
+            $content .= '<td>'.$user->contactNumber.'</td>';  
         $content .='</tr>';
       }
     }else{
@@ -128,7 +128,7 @@ class Customers extends Common_Back_Controller {
     $jobs         = $this->job_model->assignJobs(array('j.customerId'=>$userId));
     ob_start();
     // create new PDF document
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    $pdf          = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     // set document information
     $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetAuthor('Customer Detail');
@@ -173,7 +173,7 @@ class Customers extends Common_Back_Controller {
       $pdf->Ln(5);
     $pdf->SetFont('helvetica', '', 9);
     // -----------------------------------------------------------------------------
-    $content = '';
+    $content  = '';
     // $content .= '<table bgcolor="#cccccc" border="0" cellspacing="1" cellpadding="4">';
     $content .= '<table  border="0" cellspacing="1" cellpadding="4" bgcolor="#EAECF0">';
         $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4"><b>Customer Information</b></th></tr>';

@@ -17,25 +17,24 @@ class Users extends Common_Admin_Controller{
         $this->form_validation->set_rules('npassword', 'new password', 'trim|required|matches[rnpassword]|min_length[6]');
         $this->form_validation->set_rules('rnpassword', 'retype new password ','trim|required|min_length[6]');
        if($this->form_validation->run($this) == FALSE){
-            $messages    = (validation_errors()) ? validation_errors() : '';
-            $response    = array('status' => 0, 'message' => $messages);
+            $messages       = (validation_errors()) ? validation_errors() : '';
+            $response       = array('status' => 0, 'message' => $messages);
         }else{
-            $password   = $this->input->post('password');
-            $npassword  = $this->input->post('npassword');
-            $select     = "password";
-            $where      = array('id' => $userId); 
-            $admin      = $this->common_model->getsingle('admin', $where,'password');
+            $password       = $this->input->post('password');
+            $npassword      = $this->input->post('npassword');
+            $select         = "password";
+            $where          = array('id' => $userId); 
+            $admin          = $this->common_model->getsingle('admin', $where,'password');
             if(password_verify($password, $admin['password'])){
-                $set    = array('password'=> password_hash($this->input->post('npassword') , PASSWORD_DEFAULT)); 
-                $update = $this->common_model->updateFields('admin', $set, $where);
+                $set        = array('password'=> password_hash($this->input->post('npassword') , PASSWORD_DEFAULT)); 
+                $update     = $this->common_model->updateFields('admin', $set, $where);
                 if($update){
                     $res = array();
                     if($update){
                         $response = array('status' =>SUCCESS, 'message' => 'Successfully Updated', 'url' => base_url('users/userDetail'));
                     }else{
                         $response = array('status' => FAIL, 'message' => 'Failed! Please try again', 'url' => base_url('users/userDetail'));
-                    }
-                    
+                    }    
                 } 
             }else{
                 $response = array('status' =>FAIL, 'message' => 'Your Current Password is Wrong !', 'url' => base_url('users/userDetail'));                 

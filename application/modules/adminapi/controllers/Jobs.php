@@ -23,7 +23,6 @@ class Jobs extends Common_Admin_Controller{
         if($this->form_validation->run() == FALSE){
             $response = array('status' => FAIL, 'message' => strip_tags(validation_errors())); 
         }else{
-         
             $data_val['jobName']                = $this->post('jobName');
             $data_val['jobTypeId']              = $this->post('jobTypeId');
             $jobTypeId                          = $this->post('jobTypeId');
@@ -40,8 +39,7 @@ class Jobs extends Common_Admin_Controller{
             $data_val['country']                = $this->post('country');
             $data_val['latitude']               = $this->post('latitude');
             $data_val['longitude']              = $this->post('longitude');  
-            $data_val['workPriority']           = $this->post('workPriority');  
-            /*select address customer*/  
+            $data_val['workPriority']           = $this->post('workPriority'); /*select address customer*/  
             $customer_val['latitude']           = $this->post('latitude');
             $customer_val['longitude']          = $this->post('longitude');
             $customer_val['customerId']         = $this->post('customerId');
@@ -226,11 +224,11 @@ class Jobs extends Common_Admin_Controller{
         $this->load->helper('text');
         $this->load->model('job_model');
         $this->job_model->set_data(array('j.customerId'=>$this->post('id')));
-        $list   = $this->job_model->get_list();
-        $data   = array();
-        $no     = $_POST['start'];
+        $list           = $this->job_model->get_list();
+        $data           = array();
+        $no             = $_POST['start'];
         foreach ($list as $serData) { 
-            $action     ='';
+            $action     = '';
             $no++;
             $row        = array();
             $row[]      = $no;
@@ -279,8 +277,8 @@ class Jobs extends Common_Admin_Controller{
             $action         .= '&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;';
             $pdfLink        = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
             $action         .= '&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
-            $row[]      = $action;
-            $data[]     = $row;
+            $row[]          = $action;
+            $data[]         = $row;
         }
         $output = array(
             "draw"              => $_POST['draw'],
@@ -327,17 +325,17 @@ class Jobs extends Common_Admin_Controller{
             }
             switch ($serData->jobStatus) {
                 case 2:
-                   $row[] = '<label class="label label-success">'.$serData->statusShow.'</label>';
+                   $row[]       = '<label class="label label-success">'.$serData->statusShow.'</label>';
                     break;
                 case 1:
-                   $row[] = '<label class="label label-danger">'.$serData->statusShow.'</label>';
+                   $row[]       = '<label class="label label-danger">'.$serData->statusShow.'</label>';
                     break;
                 case 0:
-                   $row[] = '<label class="label label-warning">'.$serData->statusShow.'</label>';
+                   $row[]       = '<label class="label label-warning">'.$serData->statusShow.'</label>';
                     break;
                 
                 default:
-                      $row[] = '<label class="label label-warning">'.$serData->statusShow.'</label>';
+                      $row[]    = '<label class="label label-warning">'.$serData->statusShow.'</label>';
                     break;
             }
        
@@ -347,10 +345,10 @@ class Jobs extends Common_Admin_Controller{
             $userLink           = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
             // $userLink = "javascript:void(0);";
             $action             .= '<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;';
-            $pdfLink        = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
-            $action         .= '&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
-            $row[]          = $action;
-            $data[]         = $row;
+            $pdfLink            = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
+            $action             .= '&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+            $row[]              = $action;
+            $data[]             = $row;
         }
         $output = array(
             "draw"              => $_POST['draw'],

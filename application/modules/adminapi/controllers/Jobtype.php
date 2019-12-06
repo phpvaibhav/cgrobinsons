@@ -9,7 +9,7 @@ class Jobtype extends Common_Admin_Controller{
     public function createJobType_post(){
         $jobTypeId  = decoding($this->post('jobTypeId'));
         $jobType    = $this->post('jobType');
-        $check      = $this->common_model->is_data_exists('jobType',array('jobTypeId !='=>$jobTypeId,'jobType'=>$jobType));
+        $check      = $this->common_model->is_data_exists('jobType',array('jobTypeId !='=> $jobTypeId,'jobType'=> $jobType));
 
         if($check){
             $this->form_validation->set_rules('jobType', 'jobType', 'trim|required|is_unique[jobType.jobType]', array('is_unique' => 'Job type already exist'));
@@ -33,7 +33,6 @@ class Jobtype extends Common_Admin_Controller{
                 if(!empty($questionId) && $questionId !=0){
                     $queNonDeleteId[]    = $questionId;
                 }
-                  
                 $questionType            = $this->post('questionType_'.$k);
                 $option                  = $this->post('option_'.$k);
                 $option1                 = $this->post('option_1_'.$k);
@@ -173,8 +172,8 @@ class Jobtype extends Common_Admin_Controller{
             $html             = '';
             $colors           = array('info', 'warning','success');
             foreach ($questions as $key => $question) {
-                $rand_color = $colors[array_rand($colors)];
-                $html    .= '<div class="col col-md-12"><p class="alert alert-'.$rand_color.'"><label class="checkbox"><input type="checkbox" class="checkbox_question"  name="questionId[]" value="'.$question->questionId.'" '.(in_array($question->questionId,$que) ? 'checked="checked"' :'').(($pendingJob!=0)?'onclick="return false;"':'onclick="funcheck();"').' ><i></i><strong class="txt-color-blueDark">'.$question->question.'</strong></label></p></div>';
+                $rand_color   = $colors[array_rand($colors)];
+                $html         .= '<div class="col col-md-12"><p class="alert alert-'.$rand_color.'"><label class="checkbox"><input type="checkbox" class="checkbox_question"  name="questionId[]" value="'.$question->questionId.'" '.(in_array($question->questionId,$que) ? 'checked="checked"' :'').(($pendingJob!=0)?'onclick="return false;"':'onclick="funcheck();"').' ><i></i><strong class="txt-color-blueDark">'.$question->question.'</strong></label></p></div>';
             }
             $response   = array('status'=>SUCCESS,'message'=>ResponseMessages::getStatusCodeMessage(118),'data'=>$html);
         }else{
