@@ -125,13 +125,12 @@ class Admin extends Common_Back_Controller {
                     $res = array();
                     if($update){
                         $response = array('status' => 1, 'message' => 'Successfully Updated', 'url' => base_url('admin/admin_profile'));
-                    }
-                    else{
+                    }else{
                         $response = array('status' => 0, 'message' => 'Failed! Please try again', 'url' => base_url('admin/admin_profile'));   
                     }    
                 } 
             }else{
-                 $response = array('status' => 0, 'message' => 'Your Current Password is Wrong !', 'url' => base_url('admin/admin_profile'));                 
+                $response = array('status' => 0, 'message' => 'Your Current Password is Wrong !', 'url' => base_url('admin/admin_profile'));                 
             }
         }
         echo json_encode($response); die;  
