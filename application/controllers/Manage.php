@@ -81,7 +81,7 @@ $client_id      = "2e873775-fdff-440e-ba04-2b66054945cc" ;
 		
 		  return "cURL Error #:" . $err;
 		} else {
-			
+			log_event($response,'background_log.txt'); 
 	  		$data = json_decode($response,true);
 	  		if(isset($data['features']) && !empty($data['features'])){
 
@@ -110,12 +110,13 @@ $client_id      = "2e873775-fdff-440e-ba04-2b66054945cc" ;
 				}
 		  		/*test*/
 	  		}else{
-				$data_val['addressId'] 		= $addressId;
+	  			log_event($data['httpMessage'],'background_log.txt'); 
+			/*	$data_val['addressId'] 		= $addressId;
 				$data_val['customerId'] 	= $customerId;
 				$data_val['temperature'] 	= $data['httpMessage'];
 				$data_val['alertDate'] 		= date("Y-m-d");
 				$data_val['alertTime'] 		= date('H:i A');
-				$this->common_model->insertData('weatherNotification',$data_val);
+				$this->common_model->insertData('weatherNotification',$data_val);*/
 		  	}
 		return true;
 		}
