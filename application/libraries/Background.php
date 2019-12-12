@@ -16,8 +16,27 @@ class Background
     //Use otherwise for localhost and non-secure servers
     //For secure server
       //$fp = fsockopen('ssl://' . $parts['host'], isset($parts['port'])  ? $parts['port'] : 443, $errno, $errstr, 30);
+  switch (ENVIRONMENT)
+  {
+    case 'development':
+     $fp = fsockopen('ssl://' . $parts['host'], isset($parts['port'])  ? $parts['port'] : 443, $errno, $errstr, 30);
+    break;
+
+  case 'testing':
+  //For localhost and un-secure server
+    $fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80, $errno, $errstr, 30);
+  break;  
+  case 'production':
+    //For localhost and un-secure server
+    $fp = fsockopen('ssl://' . $parts['host'], isset($parts['port'])  ? $parts['port'] : 443, $errno, $errstr, 30);
+    
+  break;
+
+  default:
     //For localhost and un-secure server
     $fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80, $errno, $errstr, 30);
+    
+}
     
     if(!$fp)
     {
