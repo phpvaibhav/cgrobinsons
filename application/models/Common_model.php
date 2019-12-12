@@ -398,6 +398,61 @@ class Common_model extends CI_Model {
         }
         return $address;
     }//End Function
+    function customerAddresses(){
+        $addresses = $this->db->select('*')->from('customerAddress')->get();
+        if($addresses->num_rows()){
+        
+            return $addresses->result();
+           
+        }
+/*        $this->db->select('users.id as custId');
+        $this->db->from('users');
+        $this->db->where(array('users.userType'=>1));
+        $this->db->order_by('custId','asc');
+        $sql= $this->db->get();
+        if($sql->num_rows()):
+            $customers = $sql->result();
+            $address_array =array();
+            $i=0;
+            foreach ($customers as $k => $v) {
+                $addresses = $this->db->select('*')->from('customerAddress')->where(array('customerAddress.customerId'=>$v->custId))->get();
+                if($addresses->num_rows()){
+                    $address_array[$i]['customerId'] = $v->custId;
+                    $address_array[$i]['addresses'] = $addresses->result();
+                    $i++; 
+                }
+               
+            }
+            return $address_array;
+        endif;*/
+        return false;
+    }//End Function
+    function customerNotification($where=array()){
+        
+        $this->db->select('users.id as custId,users.fullName as customerName');
+        $this->db->from('users');
+        $this->db->where(array('users.userType'=>1));
+        !empty($where) ?$this->db->where($where):"";
+        $this->db->order_by('custId','asc');
+        $sql= $this->db->get();
+        if($sql->num_rows()):
+            $customers = $sql->result();
+            $address_array =array();
+            $i=0;
+            foreach ($customers as $k => $v) {
+                $addresses = $this->db->select('ca.*,wn.temperature,wn.alertDate,wn.alertTime')->from('customerAddress as ca')->join('weatherNotification as wn','wn.addressId =ca.addressId')->where(array('ca.customerId'=>$v->custId))->get();
+                if($addresses->num_rows()){
+                    $address_array[$i]['customerId']    = $v->custId;
+                    $address_array[$i]['customerName']  = $v->customerName;
+                    $address_array[$i]['addresses']     = $addresses->result();
+                    $i++; 
+                }
+               
+            }
+            return $address_array;
+        endif;
+        return array();
+    }//end function
 } //end of class
 /* Do not close php tags */
 /* IMP: Do not add any new method in this file */

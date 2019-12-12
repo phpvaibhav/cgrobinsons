@@ -14,28 +14,25 @@
 						<!-- button -->
 						<ul class="demo-btns text-right">
 							<?php       
-					           $pointsArray=array();
-					           if($job['points']):
-					              $pointsArray = array_values(array_filter(explode("|",$job['points'])));
-					            endif;
-					           $p = array();
-					           for ($i=0; $i < sizeof($pointsArray) ; $i++) { 
-					            $pp = explode(",",$pointsArray[$i]);
-					             $p[$i]['lat'] 	= $pp[0];
-					             $p[$i]['lng'] 	= $pp[1];
-					           }
-					          // echo "<pre>";
-					           $ppp 			= json_encode($p);
-					        
-					            $polygonColor 	= !empty($job['polygonColor'])?$job['polygonColor']:'#FF0000';
-					         
-								$showbtn 		= false;
-								$labelShow 		= "";
-								$timeShow 		= false;
-								$driverId 		= 'test';
+			           			$pointsArray=array();
+				           		if($job['points']):
+			              			$pointsArray = array_values(array_filter(explode("|",$job['points'])));
+			            		endif;
+				           		$p = array();
+				           		for ($i=0; $i < sizeof($pointsArray) ; $i++) { 
+									$pp 			= explode(",",$pointsArray[$i]);
+									$p[$i]['lat'] 	= $pp[0];
+									$p[$i]['lng'] 	= $pp[1];
+					           	}
+
+				           		$ppp 				= json_encode($p);
+					            $polygonColor 		= !empty($job['polygonColor'])?$job['polygonColor']:'#FF0000';
+								$showbtn 			= false;
+								$labelShow 			= "";
+								$timeShow 			= false;
+								$driverId 			= 'test';
 								switch ($job['jobStatus']) {
 									case 0:
-
 										$msg 			= "Are you sure want to start this job.";	 
 										$showtitle 		= "Start Job";	 
 										$status 		= 1;	 
@@ -62,7 +59,6 @@
 										$labelShow 		='<label class="text-center center-block padding-10 label label-success"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Completed</label>';
 										$timeShow 		= true;
 										break;
-									
 									default:
 										$msg 			= "";
 										$showbtn 		= false;
@@ -70,10 +66,9 @@
 										$btn 			= "btn-warning";
 										$showtitle 		= "";
 										break;
-									}									
-									switch ($job['workPriority']) {
+								}									
+								switch ($job['workPriority']) {
 									case 0:
-
 										$workPriority 		= '<label class="text-center center-block padding-10 label label-info">'.$job['priority'].'</label>';
 										break;
 									case 1:
@@ -86,11 +81,11 @@
 									default:
 										$workPriority 		= '<label class="text-center center-block padding-10 label label-info">'.$job['priority'].'</label>';
 										break;
-									}	
+								}	
 							?>
-							<!-- 	<li>
-							<a href="<?php echo base_url().'jobs/cloneJob/'.encoding($job['jobId']); ?>" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-duplicate"></i></span>Clone Job </a>
-							</li> -->
+							<li>
+								<a href="<?php echo base_url().'jobs/cloneJob/'.encoding($job['jobId']); ?>" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-duplicate"></i></span>Clone Job </a>
+							</li>
 							<?php if($job['jobStatus'] !=2): ?>
 							<li>
 								<a href="<?php echo base_url().'jobs/editJob/'.encoding($job['jobId']); ?>" class="btn btn-labeled btn-info"> <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Edit </a>
@@ -401,7 +396,7 @@
 								<li class="list-group-item">
 									<div class="row">
 										<?php 
-										$bworkImage= (isset($before['workImage']) && !empty($before['workImage'])) ? $before['workImage'] :array();
+										$bworkImage = (isset($before['workImage']) && !empty($before['workImage'])) ? $before['workImage'] :array();
 										for ($i=0; $i <sizeof($bworkImage) ; $i++) { ?>
 										<div class="col-sm-4 col-md-4 col-lg-4">
 											<img src="<?php echo S3JOBS_URL.$before['workImage'][$i];  ?>" class="img img-thumbnail" >

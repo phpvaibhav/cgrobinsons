@@ -4,10 +4,10 @@ function preLoadshow(e){
   if(e){
     $('.pace').addClass('pace-active').removeClass('pace-inactive');
   }else{
-     $('.pace').addClass('pace-inactive').removeClass('pace-active');
+    $('.pace').addClass('pace-inactive').removeClass('pace-active');
   }
 }//end function
-  function injectTrim(handler) {
+function injectTrim(handler) {
   return function (element, event) {
     if (element.tagName === "TEXTAREA" || (element.tagName === "INPUT" 
                                        && element.type !== "password")) {
@@ -15,7 +15,7 @@ function preLoadshow(e){
     }
     return handler.call(this, element, event);
   };
- }
+}
 //loader manage
 //number check 
 $('.number-only').keypress(function(e) {
@@ -44,10 +44,10 @@ $( "#purchaseDate" ).datepicker({
 */ 
 $('#timepicker').timepicker();
 $('.select2').select2({
-    minimumResultsForSearch: -1,
-    placeholder : function(){
-        $(this).data('placeholder');
-    }
+  minimumResultsForSearch: -1,
+  placeholder : function(){
+    $(this).data('placeholder');
+  }
 });
 $("#dob").datepicker({
   dateFormat  : 'dd-mm-yy',

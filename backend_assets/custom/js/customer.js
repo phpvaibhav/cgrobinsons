@@ -15,8 +15,8 @@ $("#customerAddUpdate").validate({// Rules for form validation
       required : true
     },
     email : {
-      required : true,
-      email : true
+      required  : true,
+      email     : true
     },
     contactNumber : {
       required : true,
@@ -51,11 +51,11 @@ $("#customerAddUpdate").validate({// Rules for form validation
       required : 'Please enter your customer name'
     },
     email : {
-      required : 'Please enter your email address',
-      email : 'Please enter a valid email address'
+      required  : 'Please enter your email address',
+      email     : 'Please enter a valid email address'
     },
     contactNumber : {
-      required : 'Please enter your contact number'
+      required  : 'Please enter your contact number'
     },
     password : {
       required : 'Please enter your password'
@@ -102,17 +102,17 @@ $("#customerAddUpdate").validate({// Rules for form validation
 });
 /*listing customer_list */
 var customer_list = $('#customer_list').DataTable({ 
-                      "processing": true, //Feature control the processing indicator.
-                      "serverSide": true, //Feature control DataTables' servermside processing mode.
-                      "order": [], //Initial no order.
-                      "lengthChange": false,
-                      "oLanguage": {
+                      "processing"    : true, //Feature control the processing indicator.
+                      "serverSide"    : true, //Feature control DataTables' servermside processing mode.
+                      "order"         : [], //Initial no order.
+                      "lengthChange"  : false,
+                      "oLanguage"     : {
                         "sEmptyTable" : '<center>No customer found</center>',
-                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                        "sSearch"     : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                       },
                       "oLanguage": {
-                        "sZeroRecords" : '<center>No customer found</center>',
-                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                        "sZeroRecords"  : '<center>No customer found</center>',
+                        "sSearch"       : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                       },
                       initComplete: function () {
                         $('.dataTables_filter input[type="search"]').css({ 'height': '32px'});
@@ -135,7 +135,7 @@ var customer_list = $('#customer_list').DataTable({
 /*listing customer_list*/
 //customer status      
 function customerStatus(e){
-   toastr.clear();
+  toastr.clear();
   swal({
       title               : "Are you sure?",
       text                :  $(e).data('message'),
@@ -252,16 +252,15 @@ function customerDelete(e){
                     preLoadshow(true);
                   },     
                   success   : function (res) {
-                        preLoadshow(false);
-                        $(e).prop('disabled', false);
-                        if(res.status=='success'){
-                     
-                          toastr.success(res.message, 'Success', {timeOut: 3000});
-                          //  swal("Success", "Your process  has been successfully done.", "success");
-                          setTimeout(function(){  window.location = base_url+'customers'; },3000);
-                        }else{
-                          toastr.error(res.message, 'Alert!', {timeOut: 5000});
-                        }
+                    preLoadshow(false);
+                    $(e).prop('disabled', false);
+                    if(res.status=='success'){
+                      toastr.success(res.message, 'Success', {timeOut: 3000});
+                      //  swal("Success", "Your process  has been successfully done.", "success");
+                      setTimeout(function(){  window.location = base_url+'customers'; },3000);
+                    }else{
+                      toastr.error(res.message, 'Alert!', {timeOut: 5000});
+                    }
                   }
                 });
           /*ajax*/  

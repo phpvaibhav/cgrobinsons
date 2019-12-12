@@ -124,8 +124,11 @@ function initialize() {
       drawingModes: ['polygon'],
     },
     polylineOptions: {
-      editable  : true,
-      draggable   : true, zoomControl: true, scrollwheel: true, disableDoubleClickZoom: true
+      editable                : true,
+      draggable               : true, 
+      zoomControl             : true, 
+      scrollwheel             : true, 
+      disableDoubleClickZoom  : true
     },
     rectangleOptions  : polyOptions,
     circleOptions     : polyOptions,
@@ -170,9 +173,19 @@ function initialize() {
   });// google event
   google.maps.event.addListener(drawingManager, "drawingmode_changed", function() {
     if (drawingManager.getDrawingMode() != null) {
-      map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
+      map.setOptions({
+        draggable               : false, 
+        zoomControl             : false, 
+        scrollwheel             : false, 
+        disableDoubleClickZoom  : true
+      });
     }else{
-      map.setOptions({draggable: true, zoomControl: true, scrollwheel: true, disableDoubleClickZoom: true});
+      map.setOptions({
+        draggable               : true, 
+        zoomControl             : true, 
+        scrollwheel             : true, 
+        disableDoubleClickZoom  : true
+      });
     }
   });
   // Clear the current selection when the drawing mode is changed, or when the
@@ -202,8 +215,8 @@ function initialize() {
       map.setCenter(LatLng);
       marker.setMap(null);
       marker  = new google.maps.Marker({
-        position: {lat: latitude, lng: longitude },
-        title: place.formatted_address,
+        position  : {lat: latitude, lng: longitude },
+        title     : place.formatted_address,
         //map: map
       });  
       marker.setMap(map);

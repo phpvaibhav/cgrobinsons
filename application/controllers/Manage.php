@@ -21,5 +21,106 @@ class Manage extends Common_Front_Controller {
 		$response 	= $this->smtp_email->send_mail($email,$subject,$message);
 		log_event($response,'background_log.txt');  //create log of notifcation
 	}//ENd FUnction
+	function weatherHourly(){
+		$customers =  $this->common_model->customerAddresses();
+		$this->db->truncate('weatherNotification');
+		if(!empty($customers)){
+			foreach ($customers as $key => $value) {
+				$url 	= base_url()."manage/weatherHourlyWithCustomer";
+				$param 	= array('customerId' => $value->customerId,'addressId'=> $value->addressId,'latitude'=> $value->latitude,'longitude'=> $value->longitude);
+				$res=$this->background->do_in_background($url, $param);
+
+
+			}
+		}
+		$responce = array('status'=>SUCCESS,'message'=>"Ok");
+		echo json_encode($responce);
+	}//End Function
+	function weatherHourlyWithCustomer(){
+		$res 						= $this->input->post();
+		$latitude 					= $res['latitude'];
+		$longitude 					= $res['longitude'];
+		$location 					= true;
+		$excludeParameterMetadata 	= true;
+		$addressId 					= $res['addressId'];
+		$customerId 			    = $res['customerId'];
+		/*$data_val['addressId'] 		= $addressId;
+		$data_val['customerId'] 	= $data['customerId'];
+		$data_val['temperature'] 	= "test";
+		$data_val['alertDate'] 		= date("Y-m-d");
+		$data_val['alertTime'] 		= date('H:i A');*/
+		//$this->common_model->insertData('weatherNotification',$data_val);
+		/***********************************************************************/
+/*		$client_id 			= "8b291788-f31d-4d57-8c94-1ffff528d739" ;
+		$client_secret_key 	= "E6pM1yQ3sU0uC4nQ0dX2rE3rV5bX2vX5uQ3yM6xW8oB7cF8oL2";*/
+		$client_secret_key  = "yU4fL0cB2qB0jL1eM0lG5bA8cA4jT6dO5rM7mS1yS3yH0hY3fF";
+$client_id      = "2e873775-fdff-440e-ba04-2b66054945cc" ;
+		$url 				= "https://api-metoffice.apiconnect.ibmcloud.com/metoffice/production/v0/forecasts/point/hourly?excludeParameterMetadata=".$excludeParameterMetadata."&includeLocationName=".$location."&latitude=".$latitude."&longitude=".$longitude;
+		$curl 				= curl_init();
+		curl_setopt_array($curl, array(
+		  CURLOPT_URL 				=> $url,
+		  CURLOPT_RETURNTRANSFER 	=> true,
+		  CURLOPT_ENCODING 			=> "",
+		  CURLOPT_MAXREDIRS 		=> 10,
+		  CURLOPT_TIMEOUT 			=> 30,
+		  CURLOPT_HTTP_VERSION 		=> CURL_HTTP_VERSION_1_1,
+		  CURLOPT_CUSTOMREQUEST 	=> "GET",
+		  CURLOPT_HTTPHEADER 		=> array(
+		    "accept: application/json",
+		    "x-ibm-client-id:$client_id",
+		    "x-ibm-client-secret:$client_secret_key"
+		  ),
+		));
+
+		$response 	= curl_exec($curl);
+		$err 		= curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+		
+		  return "cURL Error #:" . $err;
+		} else {
+			
+	  		$data = json_decode($response,true);
+	  		if(isset($data['features']) && !empty($data['features'])){
+
+		  		/*test*/
+				for ($i=0; $i <sizeof($data['features']) ; $i++) { 
+
+					for ($j=0; $j <sizeof($data['features'][$i]['properties']['timeSeries']) ; $j++) { 
+
+						$d = $data['features'][$i]['properties']['timeSeries'][$j]['time'];
+						$screenTemperature = $data['features'][$i]['properties']['timeSeries'][$j]['screenTemperature'];
+						$weatherdate = strtotime(date('Y-m-d',strtotime($d)));
+						$today = strtotime(date('Y-m-d'));
+						if($today==$weatherdate){
+							if($screenTemperature <=0){
+								$data_val = array();
+								$data_val['addressId'] 		= $addressId;
+								$data_val['customerId'] 	= $res['customerId'];
+								$data_val['temperature'] 	= $screenTemperature;
+								$data_val['alertDate'] 		= date("Y-m-d",strtotime($d));
+								$data_val['alertTime'] 		= date('h:i A',strtotime($d));
+								$this->common_model->insertData('weatherNotification',$data_val);
+							}
+						}//end
+					/*$data['features'][$i]['properties']['timeSeries'][$j]['time']=date('d-m-Y h:i A',strtotime($d));*/
+					}
+				}
+		  		/*test*/
+	  		}else{
+				$data_val['addressId'] 		= $addressId;
+				$data_val['customerId'] 	= $customerId;
+				$data_val['temperature'] 	= $data['httpMessage'];
+				$data_val['alertDate'] 		= date("Y-m-d");
+				$data_val['alertTime'] 		= date('H:i A');
+				$this->common_model->insertData('weatherNotification',$data_val);
+		  	}
+		return true;
+		}
+	/**************************************************************/
+
+	}//End Function
 }//End Class
 ?>

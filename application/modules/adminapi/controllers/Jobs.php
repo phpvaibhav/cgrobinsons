@@ -171,7 +171,8 @@ class Jobs extends Common_Admin_Controller{
             $row[]      = display_placeholder_text($serData->jobType); 
             $row[]      = display_placeholder_text($serData->customerName); 
             $row[]      = display_placeholder_text($serData->driverName); 
-            $row[]      = date("d/m/Y",strtotime($serData->startDate))." ".display_placeholder_text($serData->startTime); 
+            $row[]      = date("d/m/Y",strtotime($serData->startDate));
+            //." ".display_placeholder_text($serData->startTime); 
             switch ($serData->workPriority) {
                 case 2:
                    $row[]       = '<label class="label label-danger">'.$serData->priority.'</label>';
@@ -208,6 +209,8 @@ class Jobs extends Common_Admin_Controller{
             $action             .= '<a href="'.$jobLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>';
             $pdfLink             = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
             $action             .= '&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+            $copyLink             = base_url().'jobs/cloneJob/'.encoding($serData->jobId);
+            $action             .= '&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Clone Job"><i class="glyphicon glyphicon-duplicate" aria-hidden="true"></i></a>';
             $row[]  = $action;
             $data[] = $row;
         }
@@ -236,9 +239,10 @@ class Jobs extends Common_Admin_Controller{
             $jobLink    = base_url().'jobs/jobDetail/'.encoding($serData->jobId);
             $row[]      = '<a href="'.$jobLink.'"  class="on-default edit-row table_action">'.display_placeholder_text($serData->jobName).'</a>'; 
             $row[]      = display_placeholder_text($serData->jobType); 
-            $row[]      = display_placeholder_text($serData->customerName); 
+           // $row[]      = display_placeholder_text($serData->customerName); 
             $row[]      = display_placeholder_text($serData->driverName); 
-            $row[]      = date("d/m/Y",strtotime($serData->startDate))." ".display_placeholder_text($serData->startTime); 
+            $row[]      = date("d/m/Y",strtotime($serData->startDate));
+            ///." ".display_placeholder_text($serData->startTime); 
             switch ($serData->workPriority) {
                 case 2:
                    $row[]       = '<label class="label label-danger">'.$serData->priority.'</label>';
@@ -277,6 +281,9 @@ class Jobs extends Common_Admin_Controller{
             $action         .= '&nbsp;<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;';
             $pdfLink        = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
             $action         .= '&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+            $copyLink             = base_url().'jobs/cloneJob/'.encoding($serData->jobId);
+            $action             .= '&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Clone Job"><i class="glyphicon glyphicon-duplicate" aria-hidden="true"></i></a>';
+           
             $row[]          = $action;
             $data[]         = $row;
         }
@@ -306,8 +313,9 @@ class Jobs extends Common_Admin_Controller{
             $row[]      = '<a href="'.$jobLink.'"  class="on-default edit-row table_action">'.display_placeholder_text($serData->jobName).'</a>'; 
             $row[]      = display_placeholder_text($serData->jobType); 
             $row[]      = display_placeholder_text($serData->customerName); 
-            $row[]      = display_placeholder_text($serData->driverName); 
-            $row[]      = date("d/m/Y",strtotime($serData->startDate))." ".display_placeholder_text($serData->startTime); 
+          //  $row[]      = display_placeholder_text($serData->driverName); 
+            $row[]      = date("d/m/Y",strtotime($serData->startDate));
+            //." ".display_placeholder_text($serData->startTime); 
             switch ($serData->workPriority) {
                 case 2:
                    $row[]       = '<label class="label label-danger">'.$serData->priority.'</label>';
@@ -347,6 +355,8 @@ class Jobs extends Common_Admin_Controller{
             $action             .= '<a href="'.$userLink.'"  class="on-default edit-row table_action" title="Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;';
             $pdfLink            = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
             $action             .= '&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+            $copyLink             = base_url().'jobs/cloneJob/'.encoding($serData->jobId);
+            $action              .= '&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Clone Job"><i class="glyphicon glyphicon-duplicate" aria-hidden="true"></i></a>';
             $row[]              = $action;
             $data[]             = $row;
         }

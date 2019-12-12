@@ -1,7 +1,7 @@
 <style>
 	#map-show {
-		width: auto;
-		height: 500px;
+		width 	: auto;
+		height 	: 500px;
 	}
 </style>
 <section id="widget-grid" class="">
@@ -212,14 +212,10 @@
 	var authToken 		= $('body').data('auth-url'); // Base url
 	var map;
 	var markers 		= [];
-
 	//var GREEN_MARKER 	= base_url+'backend_assets/img/output-onlinepngtools.png';
 	var GREEN_MARKER 	= base_url+'backend_assets/img/pinset.png';
 	var areaLatitude 	=  parseFloat('<?= isset($locations[0]->latitude) ? $locations[0]->latitude :22.71956800; ?>');
 	var areaLongitude 	= parseFloat('<?= isset($locations[0]->longitude) ? $locations[0]->longitude:75.857727; ?>') ;
-	
-
-	
 	function initMap() {
 		// Map Center
 		var myLatLng 	= new google.maps.LatLng(areaLatitude,areaLongitude);
@@ -243,9 +239,7 @@
 	              data 		: {use:1},
 	              headers 	: { 'authToken':authToken},
 	              cache		: false,
-	              beforeSend: function() {
-	               
-	              }, 
+	              beforeSend: function() {}, 
 	              success	: function (res) {
 	              	if(res.status=='success'){
 	              		$( "#remove-markers" ).trigger( "click" ); 
@@ -264,7 +258,7 @@
 									title 		: 'Driver :'+locations[i].fullName,
 									icon 		: GREEN_MARKER,
 									id 			: i,
-									animation: google.maps.Animation.DROP,
+									animation 	: google.maps.Animation.DROP,
 								});
 				  				bounds.extend(markers[i].getPosition());
 				  				var content = '<p><b>Basic Information:</b><hr></p><p><b>Vehicle :</b> <a href="'+base_url+locations[i].vehicleLink+'" target="_blank" >'+locations[i].manufacturer+' '+locations[i].year+' '+locations[i].vin+' '+locations[i].model+' '+locations[i].plate+'</a><br>'+'<b>Driver : <a href="'+base_url+locations[i].driverLink+'" target="_blank" > '+locations[i].fullName+'</a></b><hr></p><p><strong>Assigned Job :</strong><hr></p><p>';
@@ -280,8 +274,7 @@
 				  				content +='</p>';
 								// process multiple info windows
 								markers[i].info = new google.maps.InfoWindow({
-								content 	: content
-									
+									content 	: content
 								});
 								google.maps.event.addListener(markers[i], 'click', function() {  
 									// this = marker

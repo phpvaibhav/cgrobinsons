@@ -6,19 +6,19 @@ $excludeParameterMetadata   = true;
 
 echo "*******************Global daily spot data 1.0.0 (WEATHER API)**************************<br>";
 /***********************************************************************/
-$client_id      = "8b291788-f31d-4d57-8c94-1ffff528d739" ;
+$client_id          = "8b291788-f31d-4d57-8c94-1ffff528d739" ;
 $client_secret_key  = "E6pM1yQ3sU0uC4nQ0dX2rE3rV5bX2vX5uQ3yM6xW8oB7cF8oL2";
-$curl = curl_init();
-$url        = "https://api-metoffice.apiconnect.ibmcloud.com/metoffice/production/v0/forecasts/point/daily??excludeParameterMetadata=".$excludeParameterMetadata."&includeLocationName=".$location."&latitude=".$latitude."&longitude=".$longitude;
+$curl               = curl_init();
+$url                = "https://api-metoffice.apiconnect.ibmcloud.com/metoffice/production/v0/forecasts/point/daily??excludeParameterMetadata=".$excludeParameterMetadata."&includeLocationName=".$location."&latitude=".$latitude."&longitude=".$longitude;
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $url,
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
-  CURLOPT_HTTPHEADER => array(
+  CURLOPT_URL             => $url,
+  CURLOPT_RETURNTRANSFER  => true,
+  CURLOPT_ENCODING        => "",
+  CURLOPT_MAXREDIRS       => 10,
+  CURLOPT_TIMEOUT         => 30,
+  CURLOPT_HTTP_VERSION    => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST   => "GET",
+  CURLOPT_HTTPHEADER      => array(
     "accept: application/json",
     "x-ibm-client-id:$client_id",
     "x-ibm-client-secret:$client_secret_key"

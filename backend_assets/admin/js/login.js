@@ -223,9 +223,9 @@ $("#smart-form-register").validate({// Rules for form validation
     },
     messages: {
       password:{
-        required: "Please enter password.",
-        minlength: "Password should have minimum 6 characters.",
-        maxlength: "Password should have Maxlength 15 characters.",
+        required  : "Please enter password.",
+        minlength : "Password should have minimum 6 characters.",
+        maxlength : "Password should have Maxlength 15 characters.",
       }, 
       cpassword:{ 
         required  : "Please enter confirm password.",

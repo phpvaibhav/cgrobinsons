@@ -246,7 +246,7 @@
 															<th data-hide="phone">Job Name</th>
 															<th data-hide="phone,tablet">Job Type</th>
 															<th data-hide="phone,tablet">Customer</th>
-															<th data-hide="phone,tablet">Driver</th>
+															<!-- <th data-hide="phone,tablet">Driver</th> -->
 															<th data-hide="phone,tablet">Creation Date</th>
 															<th data-hide="phone,tablet">Priority</th>
 															<th data-hide="phone,tablet">Status</th>

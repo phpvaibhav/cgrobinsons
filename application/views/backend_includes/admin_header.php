@@ -90,6 +90,63 @@
         <!-- PLACE YOUR LOGO HERE -->
         <span id="logo"> <img src="<?php echo $backend_assets; ?>img/logo.png" alt="SmartAdmin"> </span>
         <!-- END LOGO PLACEHOLDER -->
+          <!-- Note: The activity badge color changes when clicked and resets the number to 0
+        Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
+    <!--     <span id="activity" class="activity-dropdown"> <i class="fa fa-sun-o"></i> <b class="badge"> <?= sizeof($customerNotification);?> </b> </span> -->
+                <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
+        <div class="ajax-dropdown">
+
+          <!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
+          <!-- notification content -->
+          <div class="ajax-notifications custom-scroll">
+
+            <div class="alert alert-transparent">
+                <div class="row" >
+                  <div class="panel-group smart-accordion-default" id="accordion-2">
+                  <?php if(!empty($customerNotification)){
+                  
+                    for ($x=0; $x <sizeof($customerNotification) ; $x++) {
+                   
+                   ?>
+                    <!-- customer -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-2" href="#collapseThree-<?= $x;?>" class="collapsed"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> <?= ucfirst($customerNotification[$x]['customerName']); ?>- <span class="badge bg-color-blue txt-color-white"><?= sizeof($customerNotification[$x]['addresses']); ?></span></a></h4>
+                    </div>
+                    <div id="collapseThree-<?= $x;?>" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        <?php 
+                        $addresses = $customerNotification[$x]['addresses'];
+                        $colors = array('info', 'warning','success');
+                        foreach ($addresses as $y => $ad) {
+                          $rand_color = $colors[array_rand($colors)];
+                        ?>
+                        <div class="alert alert-<?= $rand_color; ?>">
+                          <p><strong><a href="javascript:void(0);"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <?= $ad->address; ?></a></strong></p>
+                          <p><strong><?= date("d/m/Y",strtotime($ad->alertDate)).' '.$ad->alertTime; ?></strong><span class="badge bg-color-blue txt-color-white pull-right "> <?= number_format($ad->temperature,2).'° C'; ?></span></p>
+                          <p><a href="<?php echo base_url().'jobs/addJob'; ?>"><strong> Create Job</strong></a></p>
+                          
+                        </div>
+                        <?php } ?>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  <?php  } }else{ ?>
+                    <p class="alert alert-info text-center">
+                      No record Found.
+                    </p>
+                  <?php } ?>
+                  </div>                   
+                </div>
+            </div>
+             
+          </div>
+          <!-- end notification content -->
+        </div>
+
+        <!-- END AJAX-DROPDOWN -->
       </div>
       <!-- #TOGGLE LAYOUT BUTTONS -->
       <!-- pulled right: nav area -->

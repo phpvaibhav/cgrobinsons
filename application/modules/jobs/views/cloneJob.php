@@ -1,20 +1,19 @@
 <!-- widget grid -->
 <style type="text/css">
 	#map {
-		width: auto;
-		height:500px;
+		width 	: auto;
+		height 	: 500px;
 	}
 	#color-palette {
-		clear: both;
+		clear 	: both;
 	}
-
 	.color-button {
-		width: 14px;
-		height: 14px;
-		font-size: 0;
-		margin: 2px;
-		float: left;
-		cursor: pointer;
+		width 		: 14px;
+		height 		: 14px;
+		font-size 	: 0;
+		margin 		: 2px;
+		float 		: left;
+		cursor 		: pointer;
 	}
 </style>
 <?php $backend_assets 	= base_url().'backend_assets/';?>
@@ -26,8 +25,8 @@
 	$p = array();
 	for ($i=0; $i < sizeof($pointsArray) ; $i++) { 
 		$pp 			= explode(",",$pointsArray[$i]);
-		 $p[$i]['lat'] 	= $pp[0];
-		 $p[$i]['lng'] 	= $pp[1];
+		$p[$i]['lat'] 	= $pp[0];
+		$p[$i]['lng'] 	= $pp[1];
 	}
 	$ppp 				= json_encode($p);
 	$polygonColor 		= !empty($job['polygonColor']) ?$job['polygonColor']:"#1E90FF";
@@ -110,7 +109,7 @@
 						<label class="checkbox state-error"><input type="checkbox" id="select_questionAll<?= ($job['jobStatus']!=0)?'_1':'';?>"  value="1" <?= ($job['jobStatus']!=0)?'onclick="return false;"':"";?> name="checkbox"><i></i> <strong> Job Type Questions</strong></label>
 					</header>
 					<fieldset class="queDataHideShow">	
-							<section id="showQue"></section>		
+						<section id="showQue"></section>		
 					</fieldset>
 					<header>
 						Address
@@ -135,7 +134,7 @@
 							</section>
 							<section class="col col-9">
 								<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-								<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" maxlength="30" size="30" value="<?php echo $job['street2']; ?>">
+									<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" maxlength="30" size="30" value="<?php echo $job['street2']; ?>">
 								</label>
 							</section>
 						</div>
@@ -147,7 +146,7 @@
 							</section>
 							<section class="col col-6">
 								<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-								<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" maxlength="30" size="30" value="<?php echo $job['state']; ?>">
+									<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" maxlength="30" size="30" value="<?php echo $job['state']; ?>">
 								</label>
 							</section>
 						</div>
@@ -332,7 +331,6 @@
 		for (var i = 0; i < acInputs.length; i++) {
  
         	var autocomplete 		= new google.maps.places.Autocomplete(acInputs[i]);
-
         	autocomplete.inputId 	= acInputs[i].id;
         	google.maps.event.addListener(autocomplete, 'place_changed', function () {
 	    	 	var place   	= this.getPlace();
@@ -350,8 +348,8 @@
 				map.setCenter(LatLng);
 				marker.setMap(null);
 				marker = new google.maps.Marker({
-					position: {lat: latitude, lng: longitude },
-					title: place.formatted_address,
+					position 	: {lat: latitude, lng: longitude },
+					title 		: place.formatted_address,
 					//map: map
 				});
 				marker.setMap(map);
@@ -436,8 +434,8 @@
 				}
 
 				marker = new google.maps.Marker({
-					position: {lat: latitude, lng: longitude },
-					title: address,
+					position 	: {lat: latitude, lng: longitude },
+					title      	: address,
 					//map: map
 				});
 				marker.setMap(map);

@@ -49,8 +49,9 @@ class MY_Loader extends MX_Loader {
      
         $where = array('id'=>$session_u_id,'status'=>1); //status:0 means active 
         $uData = $this->common_model->adminInfo($where);
-        
+        $customerNotification = $this->common_model->customerNotification();
         $vars['user'] =  $uData;
+        $vars['customerNotification'] =  $customerNotification;
         $this->view('backend_includes/admin_header', $vars);
         $this->view($template_name, $vars);
 

@@ -1,19 +1,19 @@
 <!-- widget grid -->
 <style type="text/css">
 	#map {
-		width: auto;
-		height:500px;
+		width 	: auto;
+		height 	: 500px;
 	}
 	#color-palette {
-		clear: both;
+		clear 	: both;
 	}
 	.color-button {
-		width: 14px;
-		height: 14px;
-		font-size: 0;
-		margin: 2px;
-		float: left;
-		cursor: pointer;
+		width 		: 14px;
+		height 		: 14px;
+		font-size 	: 0;
+		margin 		: 2px;
+		float 		: left;
+		cursor 		: pointer;
 	}
 </style>
 <?php $backend_assets = base_url().'backend_assets/';?>
@@ -259,12 +259,12 @@
 </script>
 <script type="text/javascript">
 	var componentForm = {
-		street_number 		: 'short_name',
-		route 				: 'long_name',
-		locality 			: 'long_name',
-		administrative_area_level_1: 'short_name',
-		country 			: 'long_name',
-		postal_code 		: 'short_name'
+		street_number 				: 'short_name',
+		route 						: 'long_name',
+		locality 					: 'long_name',
+		administrative_area_level_1 : 'short_name',
+		country 					: 'long_name',
+		postal_code 				: 'short_name'
 	};
 	var geocoder;
 	var map;
@@ -333,7 +333,6 @@
 				var place   	= this.getPlace();
 				var aId      	= this.inputId
 	    	 	if (!place.geometry) {
-	             
 	              window.alert("No details available for input: '" + place.name + "'");
 	              return;
 	            }

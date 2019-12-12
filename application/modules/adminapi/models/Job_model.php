@@ -24,9 +24,9 @@ class Job_model extends CI_Model {
         "Unknown" 
         END) as statusShow',
         '(case when (j.workPriority = 0) 
-        THEN "Low" when (j.workPriority = 1) 
-        THEN "Medium" when (j.workPriority = 2) 
-        THEN "High" ELSE
+        THEN "L" when (j.workPriority = 1) 
+        THEN "M" when (j.workPriority = 2) 
+        THEN "H" ELSE
         "Unknown" 
         END) as priority',
         'j.workPriority'); //set column field database for datatable orderable

@@ -38,8 +38,8 @@ $("#smart-form-changepass").validate({
 
           // Ajax form submition
           submitHandler : function(form) {
-                toastr.clear();
-               $('#submit').prop('disabled', true);
+            toastr.clear();
+            $('#submit').prop('disabled', true);
             $.ajax({
               type        : "POST",
               url         : base_url+'adminapi/users/'+$(form).attr('action'),
@@ -50,25 +50,21 @@ $("#smart-form-changepass").validate({
                 preLoadshow(true);
                 $('#submit').prop('disabled', true);  
               },     
-               success: function (res) {
-                   preLoadshow(false);
-                    setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
-                  if(res.status=='success'){
-                   toastr.success(res.message, 'Success', {timeOut: 3000});
-                   setTimeout(function(){ window.location = base_url+'dashboard'; },4000);
-                    
-                      //window.location = base_url+'admin/dashboard';
-                
-                  }else{
-                    toastr.error(res.message, 'Alert!', {timeOut: 4000});
-                  }
-                  
-                    //$('#submit').prop('disabled', false);  
-                 }
+              success: function (res) {
+                preLoadshow(false);
+                setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
+                if(res.status=='success'){
+                  toastr.success(res.message, 'Success', {timeOut: 3000});
+                  setTimeout(function(){ window.location = base_url+'dashboard'; },4000);
+                  //window.location = base_url+'admin/dashboard';
+                }else{
+                  toastr.error(res.message, 'Alert!', {timeOut: 4000});
+                }
+                //$('#submit').prop('disabled', false);  
+              }
              });
              return false; // required to block normal submit since you used ajax
           },
-
           // Do not change code below
           errorPlacement : function(error, element) {
             error.insertAfter(element.parent());
@@ -77,7 +73,7 @@ $("#smart-form-changepass").validate({
         // Change Password
 
          // update profile
-         $("#smart-form-updateuser").validate({
+        $("#smart-form-updateuser").validate({
 
           // Rules for form validation
           rules : {
@@ -103,14 +99,12 @@ $("#smart-form-changepass").validate({
             },
             email : {
               required : 'Please enter your email address',
-              email : 'Please enter a valid email address'
+              email    : 'Please enter a valid email address'
             },
            contact : {
               required : 'Please enter your contact number',
             
-            },
-           
-          
+            }, 
           },
 
           // Ajax form submition
@@ -124,9 +118,7 @@ $("#smart-form-changepass").validate({
             error.insertAfter(element.parent());
           }
         });
-        // update profile
-
-                          
+        // update profile                         
 // Validation
 $(function() {
       

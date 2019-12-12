@@ -2,19 +2,19 @@ var base_url  = $('body').data('base-url'); // Base url
 var authToken = $('body').data('auth-url'); // Base url
 /*listing service */
 var service_list = $('#service_list').DataTable({ 
-                    "processing": true, //Feature control the processing indicator.
-                    "serverSide": true, //Feature control DataTables' servermside processing mode.
-                    "order": [], //Initial no order.
+                    "processing"  : true, //Feature control the processing indicator.
+                    "serverSide"  : true, //Feature control DataTables' servermside processing mode.
+                    "order"       : [], //Initial no order.
                     "lengthChange": false,
-                    "oLanguage": {
+                    "oLanguage"   : {
                       "sEmptyTable" : '<center>No serivce found</center>',
-                      "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                      "sSearch"     : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                     },
-                    "oLanguage": {
-                      "sZeroRecords" : '<center>No serivce found</center>',
-                      "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                    "oLanguage"   : {
+                      "sZeroRecords"  : '<center>No serivce found</center>',
+                      "sSearch"       : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                     },
-                    initComplete: function () {
+                    initComplete  : function () {
                       $('.dataTables_filter input[type="search"]').css({ 'height': '32px'});
                     },
                     // Load data for the table's content from an Ajax source
@@ -35,19 +35,19 @@ var service_list = $('#service_list').DataTable({
 /*listing service*/
 /*listing user*/
 var user_list = $('#user_list').DataTable({ 
-                  "processing": true, //Feature control the processing indicator.
-                  "serverSide": true, //Feature control DataTables' servermside processing mode.
-                  "order": [], //Initial no order.
-                  "lengthChange": false,
-                  "oLanguage": {
+                  "processing"    : true, //Feature control the processing indicator.
+                  "serverSide"    : true, //Feature control DataTables' servermside processing mode.
+                  "order"         : [], //Initial no order.
+                  "lengthChange"  : false,
+                  "oLanguage"     : {
                     "sEmptyTable" : '<center>No customer found</center>',
-                    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                    "sSearch"     : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                   },
-                  "oLanguage": {
-                    "sZeroRecords" : '<center>No customer found</center>',
-                    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+                  "oLanguage"     : {
+                    "sZeroRecords"  : '<center>No customer found</center>',
+                    "sSearch"       : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
                   },
-                  initComplete: function () {
+                  initComplete    : function () {
                     $('.dataTables_filter input[type="search"]').css({ 'height': '32px'});
                   },
                   // Load data for the table's content from an Ajax source
@@ -61,7 +61,7 @@ var user_list = $('#user_list').DataTable({
                     }
                   },
                   //Set column definition initialisation properties.
-                  "columnDefs": [
+                  "columnDefs"  : [
                     { orderable: false, targets: -1 },
                   ]
                 });

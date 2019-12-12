@@ -1,19 +1,19 @@
 <!-- widget grid -->
 <style type="text/css">
   #map {
-  width: auto;
-  height:500px;
+  width 	: auto;
+  height 	:500px;
 }
 #color-palette {
-    clear: both;
+    clear 	: both;
 }
 .color-button {
-	width: 14px;
-	height: 14px;
-	font-size: 0;
-	margin: 2px;
-	float: left;
-	cursor: pointer;
+	width 		: 14px;
+	height 		: 14px;
+	font-size 	: 0;
+	margin 		: 2px;
+	float 		: left;
+	cursor 		: pointer;
 }
 </style>
 <?php $backend_assets = base_url().'backend_assets/'; ?>
