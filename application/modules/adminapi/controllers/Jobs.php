@@ -210,7 +210,7 @@ class Jobs extends Common_Admin_Controller{
             $pdfLink             = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
             $action             .= '&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
             $copyLink             = base_url().'jobs/cloneJob/'.encoding($serData->jobId);
-            $action             .= '&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Clone Job"><i class="glyphicon glyphicon-duplicate" aria-hidden="true"></i></a>';
+            $action             .= '&nbsp;&nbsp;<a href="'.$copyLink.'"  class="on-default edit-row table_action" title="Clone Job"><i class="glyphicon glyphicon-duplicate" aria-hidden="true"></i></a>';
             $row[]  = $action;
             $data[] = $row;
         }
@@ -282,7 +282,7 @@ class Jobs extends Common_Admin_Controller{
             $pdfLink        = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
             $action         .= '&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
             $copyLink             = base_url().'jobs/cloneJob/'.encoding($serData->jobId);
-            $action             .= '&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Clone Job"><i class="glyphicon glyphicon-duplicate" aria-hidden="true"></i></a>';
+            $action             .= '&nbsp;&nbsp;<a href="'.$copyLink.'"  class="on-default edit-row table_action" title="Clone Job"><i class="glyphicon glyphicon-duplicate" aria-hidden="true"></i></a>';
            
             $row[]          = $action;
             $data[]         = $row;
@@ -356,7 +356,7 @@ class Jobs extends Common_Admin_Controller{
             $pdfLink            = base_url().'jobs/jobDetailPdf/'.encoding($serData->jobId);
             $action             .= '&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Pdf Download" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
             $copyLink             = base_url().'jobs/cloneJob/'.encoding($serData->jobId);
-            $action              .= '&nbsp;&nbsp;<a href="'.$pdfLink.'"  class="on-default edit-row table_action" title="Clone Job"><i class="glyphicon glyphicon-duplicate" aria-hidden="true"></i></a>';
+            $action              .= '&nbsp;&nbsp;<a href="'.$copyLink.'"  class="on-default edit-row table_action" title="Clone Job"><i class="glyphicon glyphicon-duplicate" aria-hidden="true"></i></a>';
             $row[]              = $action;
             $data[]             = $row;
         }
