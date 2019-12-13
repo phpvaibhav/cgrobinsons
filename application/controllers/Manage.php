@@ -30,8 +30,8 @@ class Manage extends Common_Front_Controller {
 				$param 	= array('customerId' => $value->customerId,'addressId'=> $value->addressId,'latitude'=> $value->latitude,'longitude'=> $value->longitude);
 				$res = $this->background->do_in_background($url, $param);
 			}
-			
-			
+			sleep(50);
+			$this->weatherEmailSent();
 		}
 		$responce = array('status'=>SUCCESS,'message'=>"Ok");
 		echo json_encode($responce);
