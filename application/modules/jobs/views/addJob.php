@@ -68,7 +68,7 @@
 						<div class="row">
 							<section class="col col-6">
 								<label class="input"> <i class="icon-append fa fa-calendar"></i>
-									<input type="text" name="startDate" placeholder="Creation Date" class="datepicker" data-dateformat='dd-mm-yy' readonly="">
+									<input type="text" name="startDate" placeholder="Creation Date" class="" id="CreationDate" data-dateformat='dd-mm-yy' readonly="">
 								</label>
 							</section>
 							<section class="col col-6">
