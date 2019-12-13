@@ -261,7 +261,7 @@
 							</div>
 						</fieldset>	
 						<footer>
-							<button type="submit" class="btn btn-primary">Assign
+							<button type="submit" id="submitA" class="btn btn-primary">Assign
 							</button>
 						</footer>
 					</form>

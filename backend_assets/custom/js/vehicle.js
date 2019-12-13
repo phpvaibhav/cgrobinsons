@@ -245,7 +245,7 @@ $("#vehicleAssignDriver").validate({// Rules for form validation
   // Ajax form submition
   submitHandler : function(form) {
     toastr.clear();
-    //$('#submit').prop('disabled', true);
+    $('#submitA').prop('disabled', true);
     $.ajax({
             type          : "POST",
             url           : base_url+'adminapi/'+$(form).attr('action'),
@@ -254,11 +254,11 @@ $("#vehicleAssignDriver").validate({// Rules for form validation
             cache         : false,
             beforeSend    : function() {
               preLoadshow(true);
-              $('#submit').prop('disabled', true);  
+              $('#submitA').prop('disabled', true);  
             },     
             success       : function (res) {
               preLoadshow(false);
-              setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
+              setTimeout(function(){  $('#submitA').prop('disabled', false); },4000);
               if(res.status=='success'){
                 toastr.success(res.message, 'Success', {timeOut: 3000});
                 setTimeout(function(){window.location.reload(); },4000);
