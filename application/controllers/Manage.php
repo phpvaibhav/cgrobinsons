@@ -129,7 +129,7 @@ class Manage extends Common_Front_Controller {
 		$data['customerNotification']    = $customerNotification;
 		$emails                      	 = $this->common_model->adminEmails();
 		$message        				 = $this->load->view('emails/weatherEmail',$data,TRUE);
-		$subject         				 = SITE_NAME."- Weather Notification";
+		$subject         				 = "Weather Notification";
 		
 		
 		$response = 0;

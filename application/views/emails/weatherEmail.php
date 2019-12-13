@@ -66,9 +66,9 @@
                         ?>
                         <tr bgcolor="#EFF0F0">
                            <td><?= ($y+1); ?></td>
-                           <td><?= $ad->address; ?></td>
+                           <td><span color="blue"><?= $ad->address; ?></span></td>
                            <td><?= date("d/m/Y",strtotime($ad->alertDate)).' '.$ad->alertTime; ?></td>
-                           <td><b><?= number_format($ad->temperature,2).'° C'; ?></b></td>
+                           <td><b color="red"><?= number_format($ad->temperature,2).'° C'; ?></b></td>
                         </tr> 
                         <?php }?>
                     </tbody>
