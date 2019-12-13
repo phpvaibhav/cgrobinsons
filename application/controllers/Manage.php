@@ -135,7 +135,7 @@ class Manage extends Common_Front_Controller {
 		$response = 0;
 		if(!empty($customerNotification)){
 		//	pr($customerNotification);
-			$this->load->library('smtp_email');
+		
 			$response 		= $this->smtp_email->send_mail_multiple($emails,$subject,$message);
 		}
 		if ($response)
