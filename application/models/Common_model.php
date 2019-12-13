@@ -444,6 +444,7 @@ class Common_model extends CI_Model {
                 if($addresses->num_rows()){
                     $address_array[$i]['customerId']    = $v->custId;
                     $address_array[$i]['customerName']  = $v->customerName;
+                    $address_array[$i]['email']         = $v->email;
                     $address_array[$i]['addresses']     = $addresses->result();
                     $i++; 
                 }

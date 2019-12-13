@@ -52,7 +52,7 @@
             <td style="text-align: center; padding: 10px;">
                  <table width="100%" border="1" bordercolor="#fff" cellpadding="5" cellspacing="0" bgcolor="#fff">
                     <thead>
-                        <tr  bgcolor="#EFF0F0" >
+                        <tr  bgcolor="#EFF0F0">
                             <th>ID</th>
                             <th>Address</th>
                             <th>Date</th>
