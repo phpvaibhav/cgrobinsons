@@ -42,7 +42,7 @@
             <td style="text-align: left;padding: 5px">
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#fff">
                     <tr>
-                        <td style="padding: 10px;background: #cccccc;color: #000;"><strong><?= ucfirst($customerNotification[$x]['customerName']); ?> -<?= sizeof($customerNotification[$x]['addresses']); ?></strong></td>
+                        <td style="padding: 10px;background: #cccccc;color: #000;"><strong><?= ucfirst($customerNotification[$x]['customerName']); ?> -<?= sizeof($customerNotification[$x]['addresses']); ?></strong> <span style="float:right;"><b><?= $customerNotification[$x]['email']; ?></b></span></td>
                         <!-- email -->
                     </tr>
                 </table>
