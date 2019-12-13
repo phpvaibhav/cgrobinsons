@@ -314,8 +314,8 @@
     	myPolygon.setMap(map);
  		// addMarker(myLatLng,'<?php echo $job['address']; ?>');
 		marker = new google.maps.Marker({
-			position: {lat: latitude, lng: longitude },
-			title: "<?php echo $job['address']; ?>",
+			position : {lat: latitude, lng: longitude },
+			title 	 : "<?php echo $job['address']; ?>",
 			// map: map
 		});
 		marker.setMap(map);
@@ -327,9 +327,9 @@
   		/*Address*/
   		var acInputs = document.getElementsByClassName("mapautocomplete");
 		for (var i = 0; i < acInputs.length; i++) {
-        var autocomplete = new google.maps.places.Autocomplete(acInputs[i]);
-        autocomplete.inputId = acInputs[i].id;
-    	google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        	var autocomplete = new google.maps.places.Autocomplete(acInputs[i]);
+        	autocomplete.inputId = acInputs[i].id;
+    		google.maps.event.addListener(autocomplete, 'place_changed', function () {
 				var place   	= this.getPlace();
 				var aId      	= this.inputId
 	    	 	if (!place.geometry) {

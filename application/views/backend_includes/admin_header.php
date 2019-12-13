@@ -92,16 +92,22 @@
         <!-- END LOGO PLACEHOLDER -->
           <!-- Note: The activity badge color changes when clicked and resets the number to 0
         Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
-    <!--     <span id="activity" class="activity-dropdown"> <i class="fa fa-sun-o"></i> <b class="badge"> <?= sizeof($customerNotification);?> </b> </span> -->
+       <!--  <span id="activity" class="activity-dropdown"> <i class="fa fa-bell-o"></i> <b class="badge"> <?= sizeof($customerNotification);?> </b> </span> -->
                 <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
         <div class="ajax-dropdown">
-
+          <!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
+          <div class="btn-group btn-group-justified" >
+            <label class="btn btn-default">
+             Weather alert for Customers</label>
+           
+          </div>
           <!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
           <!-- notification content -->
           <div class="ajax-notifications custom-scroll">
 
             <div class="alert alert-transparent">
                 <div class="row" >
+                  
                   <div class="panel-group smart-accordion-default" id="accordion-2">
                   <?php if(!empty($customerNotification)){
                   
@@ -124,7 +130,7 @@
                         <div class="alert alert-<?= $rand_color; ?>">
                           <p><strong><a href="javascript:void(0);"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <?= $ad->address; ?></a></strong></p>
                           <p><strong><?= date("d/m/Y",strtotime($ad->alertDate)).' '.$ad->alertTime; ?></strong><span class="badge bg-color-blue txt-color-white pull-right "> <?= number_format($ad->temperature,2).'° C'; ?></span></p>
-                          <p><a href="<?php echo base_url().'jobs/addJob'; ?>"><strong> Create Job</strong></a></p>
+                          <p><a href="<?php echo base_url().'jobs/weatherJob/'.encoding($ad->notificationId); ?>"><strong> Create Job</strong></a></p>
                           
                         </div>
                         <?php } ?>

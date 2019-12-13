@@ -28,10 +28,10 @@ class Manage extends Common_Front_Controller {
 			foreach ($customers as $key => $value) {
 				$url 	= base_url()."manage/weatherHourlyWithCustomer";
 				$param 	= array('customerId' => $value->customerId,'addressId'=> $value->addressId,'latitude'=> $value->latitude,'longitude'=> $value->longitude);
-				$res=$this->background->do_in_background($url, $param);
-
-
+				$res = $this->background->do_in_background($url, $param);
 			}
+			
+			
 		}
 		$responce = array('status'=>SUCCESS,'message'=>"Ok");
 		echo json_encode($responce);
@@ -54,7 +54,7 @@ class Manage extends Common_Front_Controller {
 /*		$client_id 			= "8b291788-f31d-4d57-8c94-1ffff528d739" ;
 		$client_secret_key 	= "E6pM1yQ3sU0uC4nQ0dX2rE3rV5bX2vX5uQ3yM6xW8oB7cF8oL2";*/
 		$client_secret_key  = "yU4fL0cB2qB0jL1eM0lG5bA8cA4jT6dO5rM7mS1yS3yH0hY3fF";
-$client_id      = "2e873775-fdff-440e-ba04-2b66054945cc" ;
+		$client_id      = "2e873775-fdff-440e-ba04-2b66054945cc" ;
 		$url 				= "https://api-metoffice.apiconnect.ibmcloud.com/metoffice/production/v0/forecasts/point/hourly?excludeParameterMetadata=".$excludeParameterMetadata."&includeLocationName=".$location."&latitude=".$latitude."&longitude=".$longitude;
 		$curl 				= curl_init();
 		curl_setopt_array($curl, array(
@@ -123,5 +123,28 @@ $client_id      = "2e873775-fdff-440e-ba04-2b66054945cc" ;
 	/**************************************************************/
 
 	}//End Function
+	function weatherEmailSent(){
+		$customerNotification = $this->common_model->customerNotification();
+		$data['url']    				 = base_url();
+		$data['customerNotification']    = $customerNotification;
+		$emails                      	 = $this->common_model->adminEmails();
+		$message        				 = $this->load->view('emails/weatherEmail',$data,TRUE);
+		$subject         				 = SITE_NAME."- Weather Notification";
+		
+		
+		$response = 0;
+		if(!empty($customerNotification)){
+		//	pr($customerNotification);
+			$this->load->library('smtp_email');
+			$response 		= $this->smtp_email->send_mail_multiple($emails,$subject,$message);
+		}
+		if ($response)
+		{  
+			$res = array('emailType'=>'ES' ); //ES emailSend
+		}else{ 
+			$res = array('emailType'=>'NS') ; //NS NotSend
+		}
+		echo json_encode($res);
+	}//end function
 }//End Class
 ?>

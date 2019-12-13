@@ -253,9 +253,9 @@
 	});
 	var geoFencing = "<?php echo $job['geoFencing']; ?>";
 	if(geoFencing==1){
-	  $(".boxshow").show();
+		$(".boxshow").show();
 	}else{
-		 $(".boxshow").hide();
+		$(".boxshow").hide();
 	}
 </script>
 <script type="text/javascript">
@@ -280,10 +280,10 @@
   		var myLatLng = new google.maps.LatLng(latitude,longitude);
   		// General Options
 		var mapOptions = {
-		zoom 		: 19,
-		center 		: myLatLng,
-		mapTypeId 	: google.maps.MapTypeId.SATELLITE
-		};
+							zoom 		: 19,
+							center 		: myLatLng,
+							mapTypeId 	: google.maps.MapTypeId.SATELLITE
+						};
   		map = new google.maps.Map(document.getElementById('map'),mapOptions);
 
 		// Polygon Coordinates
@@ -315,7 +315,7 @@
 		});
     	myPolygon.setMap(map);
  		// addMarker(myLatLng,'<?php echo $job['address']; ?>');
-		marker = new google.maps.Marker({
+		marker 			= new google.maps.Marker({
 			position 	: {lat: latitude, lng: longitude },
 			title 		: "<?php echo $job['address']; ?>",
 			// map: map

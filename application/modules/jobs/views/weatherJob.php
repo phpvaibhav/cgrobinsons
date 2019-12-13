@@ -20,11 +20,20 @@
 <section id="widget-grid" class="">
     <!-- row -->
 	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="alert alert-warning">
+				<p><strong><a href="javascript:void(0);"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <?= $address['address']; ?></a></strong></p>
+				<p><strong><?= date("d/m/Y",strtotime($weather['alertDate'])).' '.$weather['alertTime']; ?></strong><span class="badge bg-color-blue txt-color-white pull-right "> <?= number_format($weather['temperature'],2).'° C'; ?></span></p>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 			<div class="well no-padding">
 				<form action="jobs/createJob" id="createJob" class="smart-form" novalidate="novalidate" autocomplete="off" enctype="multipart/form-data">
 					<header>
-						Basic Information
+						Basic Information 
 					</header>
 					<fieldset>
 						<div class="row">
@@ -40,6 +49,7 @@
 							            <?php foreach ($jobTypes as $jt => $type) {?>
 							            <option value="<?php echo $type->jobTypeId; ?>"><?php echo $type->jobType; ?></option>
 							        	<?php } ?>
+							           
 							        </select> <i></i> </label>
 							</section>
 						</div>
@@ -59,7 +69,7 @@
 									<optgroup label="">
 									<option></option>
 									<?php foreach ($customers as $c => $customer) {?>
-									<option value="<?php echo $customer->id; ?>"><?php echo $customer->fullName; ?></option>
+									<option value="<?php echo $customer->id; ?>" <?php echo ($address['customerId']==$customer->id) ?"selected='selected'":"";  ?> ><?php echo $customer->fullName; ?></option>
 									<?php }?>
 									</optgroup>
 								</select>
@@ -102,45 +112,45 @@
 						<div class="row">
 							<section class="col col-md-12">
 								<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-									<input type="text" name="address" placeholder="Address" id="autocomplete0" class="mapautocomplete" data-id="0" maxlength="300" size="300" >
-									<input type="hidden" class="latitudeautocomplete0" name="latitude" placeholder="latitude">
-									<input type="hidden" class="longitudeautocomplete0" name="longitude" placeholder="longitude">
+									<input type="text" name="address" placeholder="Address" id="autocomplete0" class="mapautocomplete" data-id="0" maxlength="300" size="300" value="<?= $address['address'];?>" >
+									<input type="hidden" class="latitudeautocomplete0" name="latitude" placeholder="latitude" value="<?= $address['latitude'];?>">
+									<input type="hidden" class="longitudeautocomplete0" name="longitude" placeholder="longitude" value="<?= $address['longitude'];?>">
 								</label>
 							</section>
 						</div>
 						<div class="row">
 							<section class="col col-3">
 								<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-									<input type="text" name="street" placeholder="Street" class="street_numberautocomplete0" maxlength="20" size="20">
+									<input type="text" name="street" placeholder="Street" class="street_numberautocomplete0" maxlength="20" size="20" value="<?= $address['street'];?>">
 								</label>
 							</section>
 							<section class="col col-9">
 								<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-								<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" maxlength="30" size="30">
+								<input type="text" name="street2" placeholder="Street Second" class="routeautocomplete0" maxlength="30" size="30" value="<?= $address['street2'];?>">
 								</label>
 							</section>
 						</div>
 						<div class="row">
 							<section class="col col-6">
 								<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-									<input type="text" name="city" placeholder="City" class="localityautocomplete0" maxlength="30" size="30">
+									<input type="text" name="city" placeholder="City" class="localityautocomplete0" maxlength="30" size="30" value="<?= $address['city'];?>">
 								</label>
 							</section>
 							<section class="col col-6">
 								<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-								<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" maxlength="30" size="30">
+								<input type="text" name="state" placeholder="State" class="administrative_area_level_1autocomplete0" maxlength="30" size="30" value="<?= $address['state'];?>">
 								</label>
 							</section>
 						</div>
 						<div class="row">
 							<section class="col col-6">
 								<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-									<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only1" maxlength="15" size="15">
+									<input type="text" name="zip" placeholder="Zip Code" class="postal_codeautocomplete0 number-only1" maxlength="15" size="15" value="<?= $address['zip'];?>">
 								</label>
 							</section>
 							<section class="col col-6">
 								<label class="input"> <i class="icon-append fa fa-map-marker"></i>
-								<input type="text" name="country" placeholder="Country" class="countryautocomplete0" maxlength="15" size="15">
+								<input type="text" name="country" placeholder="Country" class="countryautocomplete0" maxlength="15" size="15" value="<?= $address['country'];?>">
 								</label>
 							</section>
 						</div>
@@ -222,9 +232,9 @@
 </div>
 <!-- End modal -->
 <script type="text/javascript">
-	var question 		= 	"";
-	var pendingJob 		= 	"0";
-	var latitude      	=  	51.509865;
-	var longitude     	=   -0.118092;
+	var question 		= "";
+	var pendingJob 		= "0";
+	var latitude      	= parseFloat("<?= isset($address['latitude'])? $address['latitude']:51.509865;?>");
+	var longitude     	= parseFloat("<?= isset($address['longitude'])? $address['longitude']:-0.118092;?>");
 </script>
 <script src="<?php echo $backend_assets; ?>custom/js/polygon.js"></script>

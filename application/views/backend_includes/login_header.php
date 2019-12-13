@@ -39,7 +39,7 @@
     <!-- #preloader -->
     <header id="header">
       <div id="logo-group">
-        <span id="logo"> <img src="<?php echo $backend_assets; ?>img/logo.png" alt="SmartAdmin"> </span>
+        <span id="logo"> <img src="<?php echo $backend_assets; ?>img/logo.png" alt="<?= SITE_NAME; ?>"> </span>
       </div>
       <!--  <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Need an account?</span> <a href="<?php echo base_url().'admin/signup'; ?>" class="btn btn-danger">Create account</a> </span>  -->
       <!--   <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Already registered?</span> <a href="<?php echo base_url(); ?>" class="btn btn-danger">Sign In</a> </span> -->

@@ -2,8 +2,7 @@ var drawingManager;
 var marker;
 var selectedShape;
 var selectedColor;
-var latitude      =  51.509865;
-var longitude     =  -0.118092;
+
 var all_overlays  = [];
 var colors        = ['#1E90FF', '#FF1493', '#32CD32', '#FF8C00', '#4B0082', '#C0262C', '#7FFF00','#FF0000','#820041','#EB6001','#872B4C','#AC0000','#ECB400','#000000'];
 var colorButtons  = {};

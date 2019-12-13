@@ -46,11 +46,11 @@ $("#smart-form-changepass").validate({
               headers     : { 'authToken':authToken},
               data        : $(form).serialize(),
               cache       : false,
-              beforeSend     : function() {
+              beforeSend  : function() {
                 preLoadshow(true);
                 $('#submit').prop('disabled', true);  
               },     
-              success: function (res) {
+              success     : function (res) {
                 preLoadshow(false);
                 setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
                 if(res.status=='success'){
@@ -81,15 +81,12 @@ $("#smart-form-changepass").validate({
               required : true
             },
             email : {
-              required : true,
-              email : true
+              required  : true,
+              email     : true
             },
             contact : {
-              required : true,
-            
+              required : true,       
             },
-          
-          
           },
 
           // Messages for form validation
@@ -101,7 +98,7 @@ $("#smart-form-changepass").validate({
               required : 'Please enter your email address',
               email    : 'Please enter a valid email address'
             },
-           contact : {
+            contact : {
               required : 'Please enter your contact number',
             
             }, 
@@ -144,7 +141,6 @@ $(function() {
           if(res.status=='success'){
             toastr.success(res.message, 'Success', {timeOut: 3000});
             setTimeout(function(){ window.location = base_url+'profile/'+res.url; },4000);
-             
           }else{
             toastr.error(res.message, 'Alert!', {timeOut: 4000});
           }         

@@ -34,6 +34,26 @@ class Jobs extends Common_Back_Controller {
         $data['front_scripts']    = array('backend_assets/custom/js/job.js');
         $this->load->admin_render('addJob', $data);
     }//End Function
+    public function weatherJob() { 
+        $notificationId           = decoding($this->uri->segment(3));
+
+        $data['title']            = 'Weather Job';
+      
+        $data['jobTypes']         =  $this->common_model->getAll('jobType',array('status'=>1));
+        $data['drivers']          =  $this->common_model->getAll('users',array('userType'=>2,'status'=>1));
+        $data['customers']        =  $this->common_model->getAll('users',array('userType'=>1,'status'=>1));
+        $weather                  =  $this->common_model->getsingle('weatherNotification',array('notificationId'=>$notificationId));
+
+        $data['weather']          =  $weather;
+        if(empty($weather)){
+          redirect('jobs');
+        }
+        $data['address']          =  $this->common_model->getsingle('customerAddress',array('addressId'=>$weather['addressId']));
+        
+        $data['front_scripts']    = array('backend_assets/custom/js/job.js');
+        $this->load->admin_render('weatherJob', $data);
+    }//End Function
+    
     public function editJob() { 
         $jobId                      = decoding($this->uri->segment(3));
 

@@ -2,11 +2,11 @@
 $("#customerAddUpdate").validate({// Rules for form validation
   errorClass    : errorClass,
   errorElement  : errorElement,
-  highlight: function(element) {
+  highlight     : function(element) {
     $(element).parent().removeClass('state-success').addClass("state-error");
     $(element).removeClass('valid');
     },
-  unhighlight: function(element) {
+  unhighlight   : function(element) {
     $(element).parent().removeClass("state-error").addClass('state-success');
     $(element).addClass('valid');
     },
@@ -271,19 +271,19 @@ function customerDelete(e){
 }
 /*listing job */
 var customerjob_list = $('#customnerjobList').DataTable({ 
-                "processing": true, //Feature control the processing indicator.
-                "serverSide": true, //Feature control DataTables' servermside processing mode.
-                "order": [], //Initial no order.
+                "processing"  : true, //Feature control the processing indicator.
+                "serverSide"  : true, //Feature control DataTables' servermside processing mode.
+                "order"       : [], //Initial no order.
                 "lengthChange": false,
-                "oLanguage": {
+                "oLanguage"   : {
                   "sEmptyTable" : '<center>No job found</center>',
-                  "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                  "sSearch"     : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                 },
-                "oLanguage": {
-                  "sZeroRecords" : '<center>No job found</center>',
-                  "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                "oLanguage"   : {
+                  "sZeroRecords"  : '<center>No job found</center>',
+                  "sSearch"       : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                 },
-                initComplete: function () {
+                initComplete  : function () {
                   $('.dataTables_filter input[type="search"]').css({ 'height': '32px'});
                 },
                 // Load data for the table's content from an Ajax source

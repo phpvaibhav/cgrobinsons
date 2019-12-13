@@ -2,11 +2,11 @@
 $("#vehicleAddUpdate").validate({// Rules for form validation
   errorClass    : errorClass,
   errorElement  : errorElement,
-  highlight: function(element) {
+  highlight     : function(element) {
     $(element).parent().removeClass('state-success').addClass("state-error");
     $(element).removeClass('valid');
   },
-  unhighlight: function(element) {
+  unhighlight   : function(element) {
     $(element).parent().removeClass("state-error").addClass('state-success');
     $(element).addClass('valid');
   },
@@ -92,19 +92,19 @@ $("#vehicleAddUpdate").validate({// Rules for form validation
 });//end validation
 /*listing vehilce_list */
 var vehilce_list = $('#vehilce_list').DataTable({ 
-                    "processing": true, //Feature control the processing indicator.
-                    "serverSide": true, //Feature control DataTables' servermside processing mode.
-                    "order": [], //Initial no order.
+                    "processing"  : true, //Feature control the processing indicator.
+                    "serverSide"  : true, //Feature control DataTables' servermside processing mode.
+                    "order"       : [], //Initial no order.
                     "lengthChange": false,
-                    "oLanguage": {
+                    "oLanguage"   : {
                       "sEmptyTable" : '<center>No vehilce found</center>',
-                      "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                      "sSearch"     : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                     },
-                    "oLanguage": {
-                      "sZeroRecords" : '<center>No vehilce found</center>',
-                      "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                    "oLanguage"   : {
+                      "sZeroRecords"  : '<center>No vehilce found</center>',
+                      "sSearch"       : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                     },
-                    initComplete: function () {
+                    initComplete  : function () {
                       $('.dataTables_filter input[type="search"]').css({ 'height': '32px'});
                     },
                     // Load data for the table's content from an Ajax source
@@ -355,17 +355,17 @@ $(function() {
 });//end history
 /*listing vehilceHistory_list */
 var vehilce_list = $('#vehilceHistory_list').DataTable({ 
-                    "processing": true, //Feature control the processing indicator.
-                    "serverSide": true, //Feature control DataTables' servermside processing mode.
-                    "order": [], //Initial no order.
-                    "lengthChange": false,
-                    "oLanguage": {
+                    "processing"    : true, //Feature control the processing indicator.
+                    "serverSide"    : true, //Feature control DataTables' servermside processing mode.
+                    "order"         : [], //Initial no order.
+                    "lengthChange"  : false,
+                    "oLanguage"     : {
                       "sEmptyTable" : '<center>No history found</center>',
-                      "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                      "sSearch"     : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                     },
-                    "oLanguage": {
-                      "sZeroRecords" : '<center>No history found</center>',
-                      "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                    "oLanguage"     : {
+                      "sZeroRecords"  : '<center>No history found</center>',
+                      "sSearch"       : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                     },
                     initComplete: function () {
                       $('.dataTables_filter input[type="search"]').css({ 'height': '32px'});

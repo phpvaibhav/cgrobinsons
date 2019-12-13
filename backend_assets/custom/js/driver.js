@@ -1,19 +1,19 @@
 /*******************************************************************************/
 /*listing driver_list */
 var driver_list = $('#driver_list').DataTable({ 
-                  "processing": true, //Feature control the processing indicator.
-                  "serverSide": true, //Feature control DataTables' servermside processing mode.
-                  "order": [], //Initial no order.
+                  "processing"  : true, //Feature control the processing indicator.
+                  "serverSide"  : true, //Feature control DataTables' servermside processing mode.
+                  "order"       : [], //Initial no order.
                   "lengthChange": false,
-                  "oLanguage": {
+                  "oLanguage"   : {
                     "sEmptyTable" : '<center>No driver found</center>',
-                    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                    "sSearch"     : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                   },
-                  "oLanguage": {
-                    "sZeroRecords" : '<center>No driver found</center>',
-                    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                  "oLanguage"   : {
+                    "sZeroRecords": '<center>No driver found</center>',
+                    "sSearch"     : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                   },
-                  initComplete: function () {
+                  initComplete  : function () {
                     $('.dataTables_filter input[type="search"]').css({ 'height': '32px'});
                   },   
                   // Load data for the table's content from an Ajax source
@@ -49,14 +49,14 @@ $("#driverAddUpdate").validate({// Rules for form validation
       required : true
     },
     email : {
-      required : true,
-      email : true
+      required  : true,
+      email     : true
     },
     contactNumber : {
       required : true,
     },
     password : {
-      required : true,
+      required  : true,
       minlength : 3,
       maxlength : 20
     }, 
@@ -90,42 +90,42 @@ $("#driverAddUpdate").validate({// Rules for form validation
   },
   // Messages for form validation
   messages : {
-        fullName : {
-          required : 'Please enter your driver name'
-        },
-        email : {
-          required : 'Please enter your email address',
-          email : 'Please enter a valid email address'
-        },
-        contactNumber : {
-          required : 'Please enter your contact number'
-        },
-        password : {
-          required : 'Please enter your password'
-        },
-        dob : {
-          required : 'Please enter your date of birth'
-        },
-        doh : {
-          required : 'Please enter your date of hire'
-        },
-        licenseNumber : {
-          required : 'Please enter your driver license number'
-        },
-        expiryDate : {
-          required : 'Please enter your driver license number expiration date'
-        }, 
-        emergencyPersonName : {
-          required : 'Please enter your emergency contact person name'
-        },
-        emergencyPersonNumber : {
-          required : 'Please enter your emergency contact person number'
-        },
-        address : {
-          required : 'Please enter your address'
-        }  
+    fullName : {
+      required : 'Please enter your driver name'
+    },
+    email : {
+      required : 'Please enter your email address',
+      email    : 'Please enter a valid email address'
+    },
+    contactNumber : {
+      required : 'Please enter your contact number'
+    },
+    password : {
+      required : 'Please enter your password'
+    },
+    dob : {
+      required : 'Please enter your date of birth'
+    },
+    doh : {
+      required : 'Please enter your date of hire'
+    },
+    licenseNumber : {
+      required : 'Please enter your driver license number'
+    },
+    expiryDate : {
+      required : 'Please enter your driver license number expiration date'
+    }, 
+    emergencyPersonName : {
+      required : 'Please enter your emergency contact person name'
+    },
+    emergencyPersonNumber : {
+      required : 'Please enter your emergency contact person number'
+    },
+    address : {
+      required : 'Please enter your address'
+    }  
   },
-   onfocusout: injectTrim($.validator.defaults.onfocusout),
+  onfocusout: injectTrim($.validator.defaults.onfocusout),
   // Do not change code below
   errorPlacement : function(error, element) {
     error.insertAfter(element.parent());
@@ -254,19 +254,19 @@ function driverDelete(e){
   });
 }
 var driverjobList = $('#driverjobList').DataTable({ 
-                    "processing": true, //Feature control the processing indicator.
-                    "serverSide": true, //Feature control DataTables' servermside processing mode.
-                    "order": [], //Initial no order.
+                    "processing"  : true, //Feature control the processing indicator.
+                    "serverSide"  : true, //Feature control DataTables' servermside processing mode.
+                    "order"       : [], //Initial no order.
                     "lengthChange": false,
-                    "oLanguage": {
+                    "oLanguage"   : {
                       "sEmptyTable" : '<center>No job found</center>',
-                      "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                      "sSearch"     : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                     },
-                    "oLanguage": {
-                      "sZeroRecords" : '<center>No job found</center>',
-                      "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                    "oLanguage"   : {
+                      "sZeroRecords"  : '<center>No job found</center>',
+                      "sSearch"       : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                     },
-                    initComplete: function () {
+                    initComplete  : function () {
                       $('.dataTables_filter input[type="search"]').css({ 'height': '32px'});
                     },
                     // Load data for the table's content from an Ajax source
@@ -282,7 +282,9 @@ var driverjobList = $('#driverjobList').DataTable({
                     },
                     //Set column definition initialisation properties.
                     "columnDefs": [
-                      { orderable: false, targets: -1 }, 
+                      { orderable   : false, 
+                        targets     : -1 
+                      }, 
                     ]
                 });
 /*listing customer_list*/

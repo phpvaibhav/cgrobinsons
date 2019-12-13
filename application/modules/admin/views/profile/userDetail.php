@@ -33,7 +33,7 @@
 										<img src="<?php echo $img;?>" alt="<?php echo $userData['fullName'];?>">
 									</div>
 									<div class="col-sm-8">
-										<?php $fullName =$userData['fullName'];
+										<?php $fullName =  $userData['fullName'];
 											$name = explode(" ",$fullName);
 										?>
 										<h1>

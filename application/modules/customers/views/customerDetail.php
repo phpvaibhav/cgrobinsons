@@ -195,8 +195,8 @@
 											$addressesA = isset($customerNotification[0]['addresses']) ? $customerNotification[0]['addresses']:array();
 
 											?>
-<!-- 											<div class="table-responsive">
-												<table class="table table-striped table-bordered table-hover" width="100%">
+											<div class="table-responsive">
+<!-- 												<table class="table table-striped table-bordered table-hover" width="100%">
 													<thead>			                
 														<tr>
 															<th data-hide="phone">ID</th>
@@ -225,13 +225,13 @@
 															<strong><?= date("d/m/Y",strtotime($add->alertDate)).' '.$add->alertTime; ?>	
 															</strong>
 														</td>
-														<td>	<a href="<?php echo base_url().'jobs/addJob'; ?>"> Create Job</a>
+														<td>	<a href="<?php echo base_url().'jobs/weatherJob/'.encoding($add->notificationId); ?>"> Create Job</a>
 														</td>
 													</tr>
 													<?php } ?>
 													</tbody>
-												</table>
-											</div> -->
+												</table> -->
+											</div>
 										</div>
 										<!-- end widget content -->
 									</div>

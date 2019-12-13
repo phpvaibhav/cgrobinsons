@@ -11,7 +11,6 @@
 								<label class="input"> <i class="icon-append fa fa-bookmark"></i>
 									<input type="text" name="jobType" placeholder="Job Type" maxlength="30" size="30"  >
 									<input type="hidden" name="total_element" id="total_element" value="0" >
-									
 								</label>
 							</section>				
 						</div>				

@@ -20,10 +20,11 @@
 			<!-- Timeline Content -->
 			<div class="smart-timeline">
 				<ul class="smart-timeline-list">
-					<?php if(!empty($questions)){
-							$colors = array('info', 'warning','success');
-							foreach ($questions as $key => $question) {
-								$rand_color = $colors[array_rand($colors)];
+					<?php 
+					if(!empty($questions)){
+						$colors = array('info', 'warning','success');
+						foreach ($questions as $key => $question) {
+							$rand_color = $colors[array_rand($colors)];
 					?>
 					<li>
 						<div class="smart-timeline-icon">
@@ -31,17 +32,14 @@
 						</div>			
 						<div class="smart-timeline-content">
 							<div class="well well-sm">
-								<p class="alert alert-<?= $rand_color; ?>">
-								Question <?= ($key+1);?>: <strong><?= $question->question;?></strong>
-								</p>
+								<p class="alert alert-<?= $rand_color; ?>">Question <?= ($key+1);?>: <strong><?= $question->question;?></strong></p>
 								<p>Type : <strong> <?=  ucfirst($question->type); ?></strong></p> 
 								<?php if($question->type !='text'): ?>
 								<p>Option : <strong> <?php $questionOptions = !empty($question->options) ? json_decode($question->options,true):array(); 
 									//echo implode(",", $question); 
 									for ($i=0; $i <sizeof($questionOptions) ; $i++) { 
 									echo '<span class="label label-success">'.$questionOptions[$i].' NOTE</span>&nbsp;&nbsp;';
-													}?></strong>
-								</p>
+													}?></strong></p>
 								<?php endif; ?>
 							</div>									
 						</div>

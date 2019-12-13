@@ -15,33 +15,31 @@ class Background
     //Use SSL & port 443 for secure servers
     //Use otherwise for localhost and non-secure servers
     //For secure server
-      //$fp = fsockopen('ssl://' . $parts['host'], isset($parts['port'])  ? $parts['port'] : 443, $errno, $errstr, 30);
-  switch (ENVIRONMENT)
-  {
-    case 'development':
-     $fp = fsockopen('ssl://' . $parts['host'], isset($parts['port'])  ? $parts['port'] : 443, $errno, $errstr, 30);
-    break;
+    //$fp = fsockopen('ssl://' . $parts['host'], isset($parts['port'])  ? $parts['port'] : 443, $errno, $errstr, 30);
+    switch (ENVIRONMENT)
+    {
+      case 'development':
+        $fp = fsockopen('ssl://' . $parts['host'], isset($parts['port'])  ? $parts['port'] : 443, $errno, $errstr, 30);
+      break;
 
-  case 'testing':
-  //For localhost and un-secure server
-    $fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80, $errno, $errstr, 30);
-  break;  
-  case 'production':
-    //For localhost and un-secure server
-    $fp = fsockopen('ssl://' . $parts['host'], isset($parts['port'])  ? $parts['port'] : 443, $errno, $errstr, 30);
-    
-  break;
+      case 'testing':
+        //For localhost and un-secure server
+        $fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80, $errno, $errstr, 30);
+      break;  
+      case 'production':
+        //For localhost and un-secure server
+        $fp = fsockopen('ssl://' . $parts['host'], isset($parts['port'])  ? $parts['port'] : 443, $errno, $errstr, 30);
+      break;
 
-  default:
-    //For localhost and un-secure server
-    $fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80, $errno, $errstr, 30);
-    
-}
+      default:
+        //For localhost and un-secure server
+        $fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80, $errno, $errstr, 30);
+    }
     
     if(!$fp)
     {
-		 log_event("Something going wrong.", $this->background_log_file);  //create log of notifcation
-         //   echo "Some thing Problem";    
+      log_event("Something going wrong.", $this->background_log_file);  //create log of notifcation
+      //   echo "Some thing Problem";    
     }
     $out = "POST ".$parts['path']." HTTP/1.1\r\n";
     $out.= "Host: ".$parts['host']."\r\n";

@@ -56,8 +56,7 @@
 // echo "<pre>";
 // print_r($_SERVER['CI_ENV']);
 // die();
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-
+define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING

@@ -1,6 +1,6 @@
 /// Create job 
 function getMsgboundary(){
-  var msg= 'Please select geo fencing area';
+  var msg   = 'Please select geo fencing area';
   toastr.error(msg, 'Alert!', {timeOut: 3000});
   return msg;
 }
@@ -98,7 +98,7 @@ $("#createJob").validate({// Rules for form validation
         });
         return false; // required to block normal submit since you used ajax
       },
-       onfocusout: injectTrim($.validator.defaults.onfocusout),
+      onfocusout     : injectTrim($.validator.defaults.onfocusout),
       // Do not change code below
       errorPlacement : function(error, element) {
         error.insertAfter(element.parent());
@@ -106,19 +106,19 @@ $("#createJob").validate({// Rules for form validation
     });
 /*listing job */
 var job_list = $('#job_list').DataTable({ 
-                "processing": true, //Feature control the processing indicator.
-                "serverSide": true, //Feature control DataTables' servermside processing mode.
-                "order": [], //Initial no order.
+                "processing"  : true, //Feature control the processing indicator.
+                "serverSide"  : true, //Feature control DataTables' servermside processing mode.
+                "order"       : [], //Initial no order.
                 "lengthChange": false,
-                "oLanguage": {
+                "oLanguage"   : {
                   "sEmptyTable" : '<center>No job found</center>',
-                  "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                  "sSearch"     : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                 },
-                "oLanguage": {
-                  "sZeroRecords" : '<center>No job found</center>',
-                  "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                "oLanguage"   : {
+                  "sZeroRecords"  : '<center>No job found</center>',
+                  "sSearch"       : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                 },
-                initComplete: function () {
+                initComplete  : function () {
                   $('.dataTables_filter input[type="search"]').css({ 'height': '32px'});
                 },
                 // Load data for the table's content from an Ajax source

@@ -440,7 +440,7 @@ class Common_model extends CI_Model {
             $address_array =array();
             $i=0;
             foreach ($customers as $k => $v) {
-                $addresses = $this->db->select('ca.*,wn.temperature,wn.alertDate,wn.alertTime')->from('customerAddress as ca')->join('weatherNotification as wn','wn.addressId =ca.addressId')->where(array('ca.customerId'=>$v->custId))->get();
+                $addresses = $this->db->select('ca.*,wn.temperature,wn.alertDate,wn.alertTime,wn.notificationId')->from('customerAddress as ca')->join('weatherNotification as wn','wn.addressId =ca.addressId')->where(array('ca.customerId'=>$v->custId))->get();
                 if($addresses->num_rows()){
                     $address_array[$i]['customerId']    = $v->custId;
                     $address_array[$i]['customerName']  = $v->customerName;

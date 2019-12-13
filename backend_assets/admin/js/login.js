@@ -17,7 +17,9 @@ $(function() {
       localStorage.usrname  = $('#username').val();
       localStorage.pass     = $('#password').val();
       localStorage.chkbx    = $('#remember_me').val();
+
     } else {
+
       localStorage.usrname  = '';
       localStorage.pass     = '';
       localStorage.chkbx    = '';
@@ -47,7 +49,7 @@ $("#login-form").validate({
               email     : 'Please enter a valid email address'
             },
     password : {
-              required : 'Please enter your password'
+              required  : 'Please enter your password'
             }
   },
   // Do not change code below
@@ -139,7 +141,7 @@ $("#smart-form-register").validate({// Rules for form validation
       email     : true
     },
     contact : {
-      required : true,
+      required  : true,
     
     },
     password : {
@@ -151,7 +153,7 @@ $("#smart-form-register").validate({// Rules for form validation
       required  : true,
       minlength : 3,
       maxlength : 20,
-      equalTo : '#password'
+      equalTo   : '#password'
     },
 
   },
@@ -161,18 +163,18 @@ $("#smart-form-register").validate({// Rules for form validation
       required : 'Please enter your full name'
     },
     email : {
-      required : 'Please enter your email address',
-      email : 'Please enter a valid email address'
+      required  : 'Please enter your email address',
+      email     : 'Please enter a valid email address'
     },
     contact : {
-      required : 'Please enter your contact number'
+      required  : 'Please enter your contact number'
     },
     password : {
-      required : 'Please enter your password'
+      required  : 'Please enter your password'
     },
     passwordConfirm : {
-      required : 'Please re-enter your password',
-      equalTo : 'Please enter the same password as above'
+      required  : 'Please re-enter your password',
+      equalTo   : 'Please enter the same password as above'
     }
   },
   // Ajax form submition

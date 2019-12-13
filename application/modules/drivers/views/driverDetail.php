@@ -40,38 +40,37 @@
 										<img src="<?php echo $img;?>" alt="<?php echo $driver['fullName'];?>">
 									</div>
 									<div class="col-sm-9 profile-pic">
-										<?php $fullName =$driver['fullName'];
-										$fullName= substr($fullName, 0,16);
-										$name = explode(" ",$fullName);
+										<?php 
+											$fullName 	= $driver['fullName'];
+											$fullName 	= substr($fullName, 0,16);
+											$name 		= explode(" ",$fullName);
 										?>
 
 										<h1>
 										<?php for ($i=0; $i <sizeof($name) ; $i++) { 
 										if($i==0){
-										echo $name[0]."&nbsp;";
+											echo $name[0]."&nbsp;";
 										}else{
-										echo '<span class="semi-bold">'.$name[1].'</span>';
+											echo '<span class="semi-bold">'.$name[1].'</span>';
 										}
 										} ?>
 										<!-- <span class="semi-bold">Doe</span> -->
 										<br>
 										<small><?php switch ($driver['userType']) {
 										case 1:
-										echo 'Super Admin';
+											echo 'Super Admin';
 										break;
 										case 2:
-										echo 'Driver';
+											echo 'Driver';
 										break;
 										case 3:
-										echo 'Employee';
+											echo 'Employee';
 										break;
 
 										default:
-										echo 'Unknown';
+											echo 'Unknown';
 										break;
 										}
-
-
 										?></small></h1>
 									</div>
 								</div>
