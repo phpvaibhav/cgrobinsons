@@ -11,7 +11,7 @@
                 <table width="100%" border="0" cellpadding="30" cellspacing="0">
                     <tr>
                         <td>
-                            <img style="max-width: 125px; width: 100%;padding: 10px;"  src="backend_assets/img/logo.png" >
+                            <img style="max-width: 125px; width: 100%;padding: 10px;"  src="<?= base_url(); ?>backend_assets/img/logo.png" >
                         </td>
                     </tr>
                 </table>
@@ -43,6 +43,7 @@
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#fff">
                     <tr>
                         <td style="padding: 10px;background: #cccccc;color: #000;"><strong><?= ucfirst($customerNotification[$x]['customerName']); ?> -<?= sizeof($customerNotification[$x]['addresses']); ?></strong></td>
+                        <!-- email -->
                     </tr>
                 </table>
             </td>

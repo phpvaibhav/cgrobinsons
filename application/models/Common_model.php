@@ -429,7 +429,7 @@ class Common_model extends CI_Model {
     }//End Function
     function customerNotification($where=array()){
         
-        $this->db->select('users.id as custId,users.fullName as customerName');
+        $this->db->select('users.id as custId,users.fullName as customerName,users.email');
         $this->db->from('users');
         $this->db->where(array('users.userType'=>1));
         !empty($where) ?$this->db->where($where):"";
