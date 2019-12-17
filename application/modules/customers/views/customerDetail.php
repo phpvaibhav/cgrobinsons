@@ -178,7 +178,7 @@
 								-->
 									<header>
 										<span class="widget-icon"> <i class="fa fa-sun-o"></i> </span>
-										<h2>Weather Notification</h2>
+										<h2>Weather Alert</h2>
 									</header>
 									<!-- widget div-->
 									<div>

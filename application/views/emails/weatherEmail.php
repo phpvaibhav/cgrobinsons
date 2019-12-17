@@ -16,8 +16,8 @@
                 <table width="100%" border="0" cellpadding="30" cellspacing="0" bgcolor="#fff">
                     <tr>
                         <td>
-                            <h3 style="color: #333; font-size: 28px; font-weight: normal; margin: 0; text-transform: capitalize;">Weather Notification</h3>
-                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Today notification to weather alert for your customer addresses. Please check weather alert for below customers: </p>
+                            <h3 style="color: #333; font-size: 28px; font-weight: normal; margin: 0; text-transform: capitalize;">Weather Alert</h3>
+                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Please check weather alert for below customers: </p>
                         </td>
                     </tr>
                 </table>
