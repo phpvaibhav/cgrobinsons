@@ -30,7 +30,6 @@ class Background
         //For localhost and un-secure server
         $fp = fsockopen('ssl://' . $parts['host'], isset($parts['port'])  ? $parts['port'] : 443, $errno, $errstr, 30);
       break;
-
       default:
         //For localhost and un-secure server
         $fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80, $errno, $errstr, 30);
@@ -49,7 +48,6 @@ class Background
     if (isset($post_string)) $out.= $post_string;
     $s = fwrite($fp, $out);
     log_event($s, $this->background_log_file); 
-    
     fclose($fp);
   }//ENd Function
 }//ENd Class

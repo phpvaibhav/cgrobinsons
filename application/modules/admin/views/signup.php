@@ -47,9 +47,7 @@
 						</footer>
 						<div class="message">
 							<i class="fa fa-check"></i>
-							<p>
-								Thank you for your registration!
-							</p>
+							<p> Thank you for your registration!</p>
 						</div>
 					</form>
 				</div>

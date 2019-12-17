@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-
 <body style="font-family: 'Source Sans Pro', sans-serif; padding:0; margin:0;">
     <table style="max-width: 750px; margin: 0px auto; width: 100% ! important; background: #F3F3F3; padding:30px 30px 30px 30px;" width="100% !important" border="0" cellpadding="0" cellspacing="0">
         <tr>
@@ -22,21 +16,16 @@
                 <table width="100%" border="0" cellpadding="30" cellspacing="0" bgcolor="#fff">
                     <tr>
                         <td>
-                            <h3 style="color: #333; font-size: 28px; font-weight: normal; margin: 0; text-transform: capitalize;">Weather Notification</h3>                          
-                           <!--  <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Message</p> -->
-                           <!--  <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Thanks,<br><?php echo SITE_NAME; ?> team</p>   -->
-
-                           <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Today notification to weather alert for your customer addresses. Please find the checked below: </p>
+                            <h3 style="color: #333; font-size: 28px; font-weight: normal; margin: 0; text-transform: capitalize;">Weather Notification</h3>
+                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Today notification to weather alert for your customer addresses. Please find the checked below: </p>
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
         <!-- customer -->
-        <?php if(!empty($customerNotification)){
-                  
-            for ($x=0; $x <sizeof($customerNotification) ; $x++) {
-                   
+        <?php if(!empty($customerNotification)){    
+            for ($x=0; $x <sizeof($customerNotification) ; $x++) {          
         ?>
         <tr bgcolor="#fff">
             <td style="text-align: left;padding: 5px">
@@ -62,7 +51,6 @@
                     <tbody>
                         <?php 
                         $addresses = $customerNotification[$x]['addresses'];
-                        
                         foreach ($addresses as $y => $ad) {
                         ?>
                         <tr bgcolor="#EFF0F0">
@@ -121,5 +109,3 @@
         </tr>
     </table>
 </body>
-
-</html>

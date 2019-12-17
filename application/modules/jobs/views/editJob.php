@@ -16,20 +16,20 @@
 		cursor 		: pointer;
 	}
 </style>
-<?php $backend_assets = base_url().'backend_assets/';?>
+<?php $backend_assets 	= base_url().'backend_assets/';?>
 <?php 
-	$pointsArray = array();
+	$pointsArray 		= array();
 	if($job['points']):
-	  $pointsArray = array_values(array_filter(explode("|",$job['points'])));
+	  $pointsArray 		= array_values(array_filter(explode("|",$job['points'])));
 	endif;
 	$p = array();
 	for ($i=0; $i < sizeof($pointsArray) ; $i++) { 
-		$pp = explode(",",$pointsArray[$i]);
-		 $p[$i]['lat'] = $pp[0];
-		 $p[$i]['lng'] = $pp[1];
+		$pp 			= explode(",",$pointsArray[$i]);
+		$p[$i]['lat'] 	= $pp[0];
+		$p[$i]['lng'] 	= $pp[1];
 	}
-	$ppp  			= json_encode($p);
-	$polygonColor 	= !empty($job['polygonColor']) ?$job['polygonColor']:"#1E90FF";
+	$ppp  				= json_encode($p);
+	$polygonColor 		= !empty($job['polygonColor']) ?$job['polygonColor']:"#1E90FF";
 ?>
 <section id="widget-grid" class="">     
   	<!-- row -->
@@ -52,10 +52,9 @@
 							    <label class="select">
 							        <select name="jobTypeId" id="jobTypeId" onchange="getQuestions(this);">
 							            <option value="" selected="" disabled="">Job Type</option>
-							            <?php foreach ($jobTypes as $jt => $type) {?>
+						            <?php foreach ($jobTypes as $jt => $type) {?>
 							            <option value="<?php echo $type->jobTypeId; ?>" <?= $job['jobTypeId']==$type->jobTypeId ? "selected='selected'":'';  ?>><?php echo $type->jobType; ?></option>
-							        	<?php } ?>
-							           
+		        					<?php } ?>   
 							        </select> <i></i> </label>
 							</section>
 						</div>
@@ -185,7 +184,6 @@
 								</div>
 								<div class="col-md-6 text-right">
 									<a href="javascript:void(0);" type="button" class="btn hide" id="delete-button">Reset</a>
-
 									<button type="button" class="btn btn-warnig hide" id="delete-all-button">Delete</button>
 								</div>
 								<!-- map -->
@@ -200,9 +198,7 @@
 						</section>
 					</fieldset>
 					<footer>
-						<button type="submit" id="submit" class="btn btn-primary">
-							Update Job
-						</button>
+						<button type="submit" id="submit" class="btn btn-primary"> Update Job </button>
 					</footer>
 				</form>
 			</div>	
@@ -314,7 +310,9 @@
     	myPolygon.setMap(map);
  		// addMarker(myLatLng,'<?php echo $job['address']; ?>');
 		marker = new google.maps.Marker({
-			position : {lat: latitude, lng: longitude },
+			position : 	{ 	lat: latitude,
+						 	lng: longitude 
+						},
 			title 	 : "<?php echo $job['address']; ?>",
 			// map: map
 		});
@@ -327,7 +325,7 @@
   		/*Address*/
   		var acInputs = document.getElementsByClassName("mapautocomplete");
 		for (var i = 0; i < acInputs.length; i++) {
-        	var autocomplete = new google.maps.places.Autocomplete(acInputs[i]);
+        	var autocomplete 	 = new google.maps.places.Autocomplete(acInputs[i]);
         	autocomplete.inputId = acInputs[i].id;
     		google.maps.event.addListener(autocomplete, 'place_changed', function () {
 				var place   	= this.getPlace();
@@ -345,7 +343,9 @@
 				map.setCenter(LatLng);
 				marker.setMap(null);
 				marker = new google.maps.Marker({
-					position 		: {lat: latitude, lng: longitude },
+					position 		: 	{  	lat: latitude, 
+											lng: longitude 
+										},
 					title 			: place.formatted_address,
 					//map: map
 				});
@@ -355,8 +355,8 @@
 		        for (var j = 0; j < place.address_components.length; j++) {
 		          var addressType = place.address_components[j].types[0];
 		          if (componentForm[addressType]) {
-		            var val = place.address_components[j][componentForm[addressType]];
-		                 $('.'+addressType+aId).val(val);
+					var val = place.address_components[j][componentForm[addressType]];
+					$('.'+addressType+aId).val(val);
 		          }
 		        }
 	    	});
@@ -430,12 +430,13 @@
 					marker.setMap(null);
 				}
 				marker = new google.maps.Marker({
-					position: {lat: latitude, lng: longitude },
+					position: 	{ 	lat: latitude,
+									lng: longitude 
+								},
 					title 	: address,
 					//map: map
 				});
 				marker.setMap(map);
-
 			}else{
 				toastr.error('Please select any one address.', 'Alert!', {timeOut: 4000});
 			}

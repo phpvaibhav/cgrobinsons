@@ -67,15 +67,15 @@
             event.preventDefault();
             var formData = new FormData(this);
             $.ajax({
-                type: "POST",
-                url: base_url + ctrl + "/" + method,
-                data: formData, //only input
-                processData: false,
-                contentType: false,
-                beforeSend: function () {
+                type            : "POST",
+                url             : base_url + ctrl + "/" + method,
+                data            : formData, //only input
+                processData     : false,
+                contentType     : false,
+                beforeSend      : function () {
                     $(".loaders").fadeIn("slow");
                 },
-                success: function (response, textStatus, jqXHR) {
+                success         : function (response, textStatus, jqXHR) {
                     try {
                         var data = $.parseJSON(response);
                         if (data.status == 1)
@@ -119,13 +119,13 @@
 
     var editFn = function (ctrl, method, id) {
         $.ajax({
-            url: base_url + ctrl + "/" + method,
-            type: 'POST',
-            data: {'id': id},
-            beforeSend: function () {
+            url         :  base_url + ctrl + "/" + method,
+            type        : 'POST',
+            data        : {'id': id},
+            beforeSend  : function () {
                 $(".loaders").fadeIn("slow");
             },
-            success: function (data, textStatus, jqXHR) {
+            success     : function (data, textStatus, jqXHR) {
 
                 $('#form-modal-box').html(data);
                 $("#commonModal").modal('show');
@@ -137,14 +137,13 @@
 
     var viewFn = function (ctrl, method, id) {
         $.ajax({
-            url: base_url + ctrl + "/" + method,
-            type: 'POST',
-            data: {'id': id},
-            beforeSend: function () {
+            url         : base_url + ctrl + "/" + method,
+            type        : 'POST',
+            data        : {'id': id},
+            beforeSend  : function () {
                 $(".loaders").fadeIn("slow");
             },
-            success: function (data, textStatus, jqXHR) {
-
+            success     : function (data, textStatus, jqXHR) {
                 $('#form-modal-box').html(data);
                 $("#commonModal").modal('show');
                 addFormBoot();
@@ -155,9 +154,9 @@
 
     var open_modal = function (controller) {
         $.ajax({
-            url: base_url + controller + "/open_model",
-            type: 'POST',
-            success: function (data, textStatus, jqXHR) {
+            url         : base_url + controller + "/open_model",
+            type        : 'POST',
+            success     : function (data, textStatus, jqXHR) {
 
                 $('#form-modal-box').html(data);
                 $("#commonModal").modal('show');
@@ -172,18 +171,18 @@
             method = "users/delete";
         }
         bootbox.confirm({
-            message: "Are you sure you want to delete this item?",
-            buttons: {
-                confirm: {
-                    label: 'OK',
-                    className: 'btn btn-warning'
+            message     : "Are you sure you want to delete this item?",
+            buttons     : {
+                confirm : {
+                    label       : 'OK',
+                    className   : 'btn btn-warning'
                 },
-                cancel: {
-                    label: 'Cancel',
-                    className: 'btn-danger'
+                cancel  : {
+                    label       : 'Cancel',
+                    className   : 'btn-danger'
                 }
             },
-            callback: function (result) {
+            callback : function (result) {
                 if (result) {
                     var url = base_url+method;
                     $.ajax({
@@ -223,23 +222,23 @@
         bootbox.confirm({
             message: "Do you want to " + message + " it?",
             buttons: {
-                confirm: {
-                    label: 'Ok',
-                    className: 'v'
+                confirm         : {
+                    label       : 'Ok',
+                    className   : 'v'
                 },
-                cancel: {
-                    label: 'Cancel',
-                    className: 'btn-danger'
+                cancel          : {
+                    label       : 'Cancel',
+                    className   : 'btn-danger'
                 }
             },
             callback: function (result) {
                 if (result) {
                     var url = base_url+"admin/status";
                     $.ajax({
-                        method: "POST",
-                        url: url,
-                        data: {id: id, id_name: field, table: table, status: status},
-                        success: function (response) {
+                        method      : "POST",
+                        url         : url,
+                        data        : {id: id, id_name: field, table: table, status      : status},
+                        success     : function (response) {
                             if (response == 200) {
                                 setTimeout(function () {
                                     $("#message").html("<div class='alert alert-success'>Status changed</div>");
@@ -247,16 +246,13 @@
                                 window.location.reload();
                             }
                         },
-                        error: function (error, ror, r) {
+                        error       : function (error, ror, r) {
                             bootbox.alert(error);
                         },
                     });
                 }
             }
         });
-
-
     }
-
     /** end script in application **/
 

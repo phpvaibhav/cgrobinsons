@@ -6,7 +6,7 @@
         <div class="well no-padding">
           <form  id="resetpassForm"  method="post" action="<?php echo base_url('password/ChangePassword/update_password') ?>" enctype="multipart/form-data" class="smart-form client-form">
             <header>
-            Change Password
+              Change Password
             </header>
             <fieldset>
               <section>

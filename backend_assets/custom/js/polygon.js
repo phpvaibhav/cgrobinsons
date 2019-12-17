@@ -8,12 +8,12 @@ var colors        = ['#1E90FF', '#FF1493', '#32CD32', '#FF8C00', '#4B0082', '#C0
 var colorButtons  = {};
 var map           = '';
 var componentForm = {
-                    street_number     : 'short_name',
-                    route             : 'long_name',
-                    locality          : 'long_name',
-                    administrative_area_level_1: 'short_name',
-                    country           : 'long_name',
-                    postal_code       : 'short_name'
+                    street_number               : 'short_name',
+                    route                       : 'long_name',
+                    locality                    : 'long_name',
+                    administrative_area_level_1 : 'short_name',
+                    country                     : 'long_name',
+                    postal_code                 : 'short_name'
                   };
 function clearSelection() {
     if (selectedShape) {
@@ -92,17 +92,20 @@ function buildColorPalette() {
 function initialize() {
   //var latlng = new google.maps.LatLng(39.305, -76.617);
     map = new google.maps.Map(document.getElementById('map'), {
-    center        : new google.maps.LatLng(latitude,longitude),
-    zoom          : 19,
-    mapTypeId     : google.maps.MapTypeId.SATELLITE, //google.maps.MapTypeId.ROADMAP,
+    center          : new google.maps.LatLng(latitude,longitude),
+    zoom            : 19,
+    mapTypeId       : google.maps.MapTypeId.SATELLITE, //google.maps.MapTypeId.ROADMAP,
     disableDefaultUI: false,
-    draggable     : false, 
-    zoomControl   : true,
-    scrollwheel   : false, 
+    draggable       : false, 
+    zoomControl     : true,
+    scrollwheel     : false, 
     disableDoubleClickZoom: true
     });
   var marker = new google.maps.Marker({
-    position: {lat: latitude, lng: longitude },
+    position: {
+                lat: latitude, 
+                lng: longitude 
+              },
     map: map,
     // title: ''
   });
@@ -214,7 +217,9 @@ function initialize() {
       map.setCenter(LatLng);
       marker.setMap(null);
       marker  = new google.maps.Marker({
-        position  : {lat: latitude, lng: longitude },
+        position  : { lat: latitude, 
+                      lng: longitude 
+                    },
         title     : place.formatted_address,
         //map: map
       });  
@@ -276,8 +281,10 @@ $(document).ready(function(){
         marker.setMap(null);
       }           
       marker = new google.maps.Marker({
-      position: {lat: latitude, lng: longitude },
-      title: address,
+      position  : { lat : latitude, 
+                    lng : longitude 
+                  },
+      title     : address,
       //map: map
       }); 
       marker.setMap(map);

@@ -23,7 +23,7 @@ var driver_list = $('#driver_list').DataTable({
                       "dataType"  : "json",
                       "headers"   : { 'authToken':authToken},
                       "dataSrc"   : function (jsonData) {
-                          return jsonData.data;
+                        return jsonData.data;
                       }
                   },
                 //Set column definition initialisation properties.

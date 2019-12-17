@@ -137,11 +137,9 @@ class Api extends Common_Service_Controller{
                     default:
                     $response = array('status' => SUCCESS, 'message' => ResponseMessages::getStatusCodeMessage(106), 'users' => $result['userInfo']);
                 }
-            }
-            else{
+            }else{
                 $response = array('status' => FAIL, 'message' => ResponseMessages::getStatusCodeMessage(126));
             }
-            
             $this->response($response);
         }
     } //End Function     

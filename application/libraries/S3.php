@@ -125,18 +125,14 @@ class S3 {
 	public static function getRegion()
 	{
 		$region = self::$region;
-
 		// parse region from endpoint if not specific
 		/*if (empty($region)) {
 			if (preg_match("/s3[.-](?:website-|dualstack\.)?(.+)\.amazonaws\.com/i",self::$endpoint,$match) !== 0 && strtolower($match[1]) !== "external-1") {
 				$region = $match[1];
 			}		
 		}*/
-
 		return empty($region) ? 'us-east-2' : $region;
 	}
-
-
 	/**
 	 * Get a list of buckets
 	 *
@@ -391,8 +387,8 @@ class S3 {
 
 		if (is_string($input))
 			$input = array(
-				'data' => $input, 'size' => strlen($input),
-				'md5sum' => base64_encode(md5($input, true)),
+				'data' 		=> $input, 'size' => strlen($input),
+				'md5sum' 	=> base64_encode(md5($input, true)),
 				'sha256sum' => hash('sha256', $input)
 			);
 
@@ -526,12 +522,11 @@ class S3 {
 		if ($rest->response->error !== false)
 		{
 			trigger_error(sprintf("S3::getObject({$bucket}, {$uri}): [%s] %s",
-							$rest->response->error['code'], $rest->response->error['message']), E_USER_WARNING);
+			$rest->response->error['code'], $rest->response->error['message']), E_USER_WARNING);
 			return false;
 		}
 		return $rest->response;
 	}
-
 	/**
 	 * Get object information
 	 *
@@ -549,7 +544,7 @@ class S3 {
 		if ($rest->error !== false)
 		{
 			trigger_error(sprintf("S3::getObjectInfo({$bucket}, {$uri}): [%s] %s",
-							$rest->error['code'], $rest->error['message']), E_USER_WARNING);
+			$rest->error['code'], $rest->error['message']), E_USER_WARNING);
 			return false;
 		}
 		return $rest->code == 200 ? $returnInfo ? $rest->headers : true : false;
@@ -574,27 +569,27 @@ class S3 {
 		$rest->setHeader('Content-Length', 0);
 		foreach ($requestHeaders as $h => $v)
 			$rest->setHeader($h, $v);
-		foreach ($metaHeaders as $h => $v)
-			$rest->setAmzHeader('x-amz-meta-' . $h, $v);
-		if ($storageClass !== self::STORAGE_CLASS_STANDARD) // Storage class
-			$rest->setAmzHeader('x-amz-storage-class', $storageClass);
-		$rest->setAmzHeader('x-amz-acl', $acl);
-		$rest->setAmzHeader('x-amz-copy-source', sprintf('/%s/%s', $srcBucket, $srcUri));
-		if (sizeof($requestHeaders) > 0 || sizeof($metaHeaders) > 0)
-			$rest->setAmzHeader('x-amz-metadata-directive', 'REPLACE');
-		$rest = $rest->getResponse();
-		if ($rest->error === false && $rest->code !== 200)
-			$rest->error = array('code' => $rest->code, 'message' => 'Unexpected HTTP status');
-		if ($rest->error !== false)
-		{
-			trigger_error(sprintf("S3::copyObject({$srcBucket}, {$srcUri}, {$bucket}, {$uri}): [%s] %s",
-							$rest->error['code'], $rest->error['message']), E_USER_WARNING);
-			return false;
-		}
-		return isset($rest->body->LastModified, $rest->body->ETag) ? array(
-			'time' => strtotime((string) $rest->body->LastModified),
-			'hash' => substr((string) $rest->body->ETag, 1, -1)
-				) : false;
+			foreach ($metaHeaders as $h => $v)
+				$rest->setAmzHeader('x-amz-meta-' . $h, $v);
+				if ($storageClass !== self::STORAGE_CLASS_STANDARD) // Storage class
+					$rest->setAmzHeader('x-amz-storage-class', $storageClass);
+					$rest->setAmzHeader('x-amz-acl', $acl);
+					$rest->setAmzHeader('x-amz-copy-source', sprintf('/%s/%s', $srcBucket, $srcUri));
+					if (sizeof($requestHeaders) > 0 || sizeof($metaHeaders) > 0)
+						$rest->setAmzHeader('x-amz-metadata-directive', 'REPLACE');
+						$rest = $rest->getResponse();
+					if ($rest->error === false && $rest->code !== 200)
+						$rest->error = array('code' => $rest->code, 'message' => 'Unexpected HTTP status');
+					if ($rest->error !== false)
+					{
+						trigger_error(sprintf("S3::copyObject({$srcBucket}, {$srcUri}, {$bucket}, {$uri}): [%s] %s",
+										$rest->error['code'], $rest->error['message']), E_USER_WARNING);
+						return false;
+					}
+					return isset($rest->body->LastModified, $rest->body->ETag) ? array(
+						'time' => strtotime((string) $rest->body->LastModified),
+						'hash' => substr((string) $rest->body->ETag, 1, -1)
+							) : false;
 	}
 
 	/**
@@ -611,8 +606,8 @@ class S3 {
 		if ($targetBucket !== null && ($acp = self::getAccessControlPolicy($targetBucket, '')) !== false)
 		{
 			// Only add permissions to the target bucket when they do not exist
-			$aclWriteSet = false;
-			$aclReadSet = false;
+			$aclWriteSet 	= false;
+			$aclReadSet 	= false;
 			foreach ($acp['acl'] as $acl)
 				if ($acl['type'] == 'Group' && $acl['uri'] == 'http://acs.amazonaws.com/groups/s3/LogDelivery')
 				{
@@ -623,11 +618,15 @@ class S3 {
 				}
 			if (!$aclWriteSet)
 				$acp['acl'][] = array(
-					'type' => 'Group', 'uri' => 'http://acs.amazonaws.com/groups/s3/LogDelivery', 'permission' => 'WRITE'
+					'type' 	=> 'Group', 
+					'uri' 	=> 'http://acs.amazonaws.com/groups/s3/LogDelivery', 
+					'permission' => 'WRITE'
 				);
 			if (!$aclReadSet)
 				$acp['acl'][] = array(
-					'type' => 'Group', 'uri' => 'http://acs.amazonaws.com/groups/s3/LogDelivery', 'permission' => 'READ_ACP'
+					'type' => 'Group', 
+					'uri'  => 'http://acs.amazonaws.com/groups/s3/LogDelivery', 
+					'permission' => 'READ_ACP'
 				);
 			if (!$aclReadSet || !$aclWriteSet)
 				self::setAccessControlPolicy($targetBucket, '', $acp);
@@ -659,7 +658,7 @@ class S3 {
 		if ($rest->error !== false)
 		{
 			trigger_error(sprintf("S3::setBucketLogging({$bucket}, {$uri}): [%s] %s",
-							$rest->error['code'], $rest->error['message']), E_USER_WARNING);
+			$rest->error['code'], $rest->error['message']), E_USER_WARNING);
 			return false;
 		}
 		return true;
@@ -684,17 +683,16 @@ class S3 {
 		if ($rest->error !== false)
 		{
 			trigger_error(sprintf("S3::getBucketLogging({$bucket}): [%s] %s",
-							$rest->error['code'], $rest->error['message']), E_USER_WARNING);
+			$rest->error['code'], $rest->error['message']), E_USER_WARNING);
 			return false;
 		}
 		if (!isset($rest->body->LoggingEnabled))
 			return false; // No logging
- return array(
+ 		return array(
 			'targetBucket' => (string) $rest->body->LoggingEnabled->TargetBucket,
 			'targetPrefix' => (string) $rest->body->LoggingEnabled->TargetPrefix,
 		);
 	}
-
 	/**
 	 * Disable bucket logging
 	 *
@@ -722,7 +720,7 @@ class S3 {
 		if ($rest->error !== false)
 		{
 			trigger_error(sprintf("S3::getBucketLocation({$bucket}): [%s] %s",
-							$rest->error['code'], $rest->error['message']), E_USER_WARNING);
+			$rest->error['code'], $rest->error['message']), E_USER_WARNING);
 			return false;
 		}
 		return (isset($rest->body[0]) && (string) $rest->body[0] !== '') ? (string) $rest->body[0] : 'US';
@@ -738,10 +736,10 @@ class S3 {
 	 */
 	public static function setAccessControlPolicy($bucket, $uri = '', $acp = array())
 	{
-		$dom = new DOMDocument;
-		$dom->formatOutput = true;
-		$accessControlPolicy = $dom->createElement('AccessControlPolicy');
-		$accessControlList = $dom->createElement('AccessControlList');
+		$dom 					= new DOMDocument;
+		$dom->formatOutput 		= true;
+		$accessControlPolicy 	= $dom->createElement('AccessControlPolicy');
+		$accessControlList 		= $dom->createElement('AccessControlList');
 
 		// It seems the owner has to be passed along too
 		$owner = $dom->createElement('Owner');

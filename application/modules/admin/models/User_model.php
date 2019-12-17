@@ -54,7 +54,6 @@ class Service_model extends CI_Model {
                 }else{
                     $this->db->or_like(($emp), $_POST['search']['value']);
                 }
-
                 if(count($this->column_search) - 1 == $i) //last loop
                     $this->db->group_end(); //close bracket
             }
@@ -85,7 +84,6 @@ class Service_model extends CI_Model {
         }else{
         	$_POST['length']= isset($_POST['length']) ? $_POST['length'] :10;
         }
-        
         if(isset($_POST['start']) && $_POST['start'] > 1) {
             $_POST['start']= $_POST['start'];
         }

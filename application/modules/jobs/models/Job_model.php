@@ -44,9 +44,8 @@ class Job_model extends CI_Model {
         $sql = $this->db->get();
 
         if($sql->num_rows()):
-            $job = $sql->row_array();
-           
-            $timinig = $this->db->select('SEC_TO_TIME(SUM(TIME_TO_SEC(timediff(outDateTime, inDateTime)))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$job['jobId'],'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->group_by('jobId')->get();
+            $job        = $sql->row_array();
+            $timinig    = $this->db->select('SEC_TO_TIME(SUM(TIME_TO_SEC(timediff(outDateTime, inDateTime)))) as timeDuration')->from('jobTiming')->where(array('jobId'=>$job['jobId'],'inDateTime !='=>'0000-00-00 00:00:00','outDateTime !='=>'0000-00-00 00:00:00'))->order_by('jobTimeId','asc')->group_by('jobId')->get();
             //lq();
             if($timinig->num_rows()){
                 $time  = isset($timinig->row()->timeDuration) ? $timinig->row()->timeDuration:"NA";;

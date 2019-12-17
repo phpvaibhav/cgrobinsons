@@ -56,7 +56,8 @@
 							            <?php foreach ($jobTypes as $jt => $type) {?>
 							            <option value="<?php echo $type->jobTypeId; ?>" <?= $job['jobTypeId']==$type->jobTypeId ? "selected='selected'":'';  ?>><?php echo $type->jobType; ?></option>
 							        	<?php } ?>
-							        </select> <i></i> </label>
+							        </select> <i></i> 
+							    </label>
 							</section>
 						</div>
 						<div class="row">
@@ -96,12 +97,13 @@
 						<div class="row">
 							<section class="col col-6">
 								<label class="select">
-							<select name="workPriority">
-							<!-- <option value="" selected="" disabled="">Job Priority</option> -->
-								<option value="0" <?= $job['workPriority']==0 ? 'selected="seleted"':''; ?>  >Low Priority</option>
-								<option value="1" <?= $job['workPriority']==1 ? 'selected="seleted"':''; ?>>Medium Priority</option>
-								<option value="2" <?= $job['workPriority']==2 ? 'selected="seleted"':''; ?>>High Priority</option>
-							</select> <i></i> </label>
+									<select name="workPriority">
+										<!-- <option value="" selected="" disabled="">Job Priority</option> -->
+										<option value="0" <?= $job['workPriority']==0 ? 'selected="seleted"':''; ?>  >Low Priority</option>
+										<option value="1" <?= $job['workPriority']==1 ? 'selected="seleted"':''; ?>>Medium Priority</option>
+										<option value="2" <?= $job['workPriority']==2 ? 'selected="seleted"':''; ?>>High Priority</option>
+									</select> <i></i> 
+								</label>
 							</section>
 						</div>
 					</fieldset>
@@ -176,7 +178,6 @@
 							</section>
 						</div>
 						<section class="col col-md-12 boxshow">
-
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
@@ -190,8 +191,7 @@
 								</div>
 								<!-- map -->
 								<!-- map -->
-							</div>
-							
+							</div>		
 							<div class="row" id="html-content-holder">
 								<div id="map-canvas"></div>
 								<div id="map"></div>
@@ -201,9 +201,7 @@
 						</section>
 					</fieldset>
 					<footer>
-						<button type="submit" id="submit" class="btn btn-primary">
-							Save
-						</button>
+						<button type="submit" id="submit" class="btn btn-primary"> Save </button>
 					</footer>
 				</form>
 			</div>	
@@ -386,11 +384,11 @@
 	}
  	// Adds a marker to the map and push to the array.
   	function addMarker(location,formatted_address) {
-        var marker = new google.maps.Marker({
-					position 	: location,
-					title 		: formatted_address,
-					map 		: map
-        		});
+		var marker = new google.maps.Marker({
+			position 	: location,
+			title 		: formatted_address,
+			map 		: map
+		});
         markers.push(marker);
   	}
   	// Sets the map on all markers in the array.

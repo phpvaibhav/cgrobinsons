@@ -1,7 +1,7 @@
 <?php
-$latitude           = ISSET($_GET['latitude'])? $_GET['latitude']: 54.59029007;
-$longitude          = ISSET($_GET['longitude'])? $_GET['longitude'] : -1.30595410;
-$location           = true;
+$latitude                   = ISSET($_GET['latitude'])? $_GET['latitude']: 54.59029007;
+$longitude                  = ISSET($_GET['longitude'])? $_GET['longitude'] : -1.30595410;
+$location                   = true;
 $excludeParameterMetadata   = true;
 
 echo "*******************Global daily spot data 1.0.0 (WEATHER API)**************************<br>";
@@ -36,8 +36,8 @@ if ($err) {
   $data = json_decode($response,true);
    for ($i=0; $i <sizeof($data['features']) ; $i++) { 
       for ($j=0; $j <sizeof($data['features'][$i]['properties']['timeSeries']) ; $j++) { 
-        $d=$data['features'][$i]['properties']['timeSeries'][$j]['time'];
-        $data['features'][$i]['properties']['timeSeries'][$j]['time']=date('d-m-Y h:i A',strtotime($d));
+        $d = $data['features'][$i]['properties']['timeSeries'][$j]['time'];
+        $data['features'][$i]['properties']['timeSeries'][$j]['time'] = date('d-m-Y h:i A',strtotime($d));
       }
   }
   echo "<pre>";

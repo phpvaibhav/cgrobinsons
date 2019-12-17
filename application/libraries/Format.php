@@ -14,27 +14,27 @@ class Format {
     /**
      * Array output format
      */
-    const ARRAY_FORMAT = 'array';
+    const ARRAY_FORMAT  = 'array';
 
     /**
      * Comma Separated Value (CSV) output format
      */
-    const CSV_FORMAT = 'csv';
+    const CSV_FORMAT    = 'csv';
 
     /**
      * Json output format
      */
-    const JSON_FORMAT = 'json';
+    const JSON_FORMAT   = 'json';
 
     /**
      * HTML output format
      */
-    const HTML_FORMAT = 'html';
+    const HTML_FORMAT   = 'html';
 
     /**
      * PHP output format
      */
-    const PHP_FORMAT = 'php';
+    const PHP_FORMAT    = 'php';
 
     /**
      * Serialized output format
@@ -94,13 +94,10 @@ class Format {
             if (method_exists($this, '_from_'.$from_type))
             {
                 $data = call_user_func([$this, '_from_'.$from_type], $data);
-            }
-            else
-            {
+            }else{
                 throw new Exception('Format class does not support conversion from "'.$from_type.'".');
             }
         }
-
         // Set the member variable to the data passed
         $this->_data = $data;
     }
@@ -118,7 +115,6 @@ class Format {
     {
         // $class = __CLASS__;
         // return new $class();
-
         return new static($data, $from_type);
     }
 
@@ -152,13 +148,10 @@ class Format {
             if (is_object($value) === TRUE || is_array($value) === TRUE)
             {
                 $array[$key] = $this->to_array($value);
-            }
-            else
-            {
+            }else{
                 $array[$key] = $value;
             }
         }
-
         return $array;
     }
 
@@ -272,8 +265,8 @@ class Format {
         else
         {
             // Single array
-            $headings = array_keys($data);
-            $data = [$data];
+            $headings   = array_keys($data);
+            $data       = [$data];
         }
 
         // Load the table library
@@ -438,7 +431,6 @@ class Format {
         {
             $data = $this->_data;
         }
-
         return serialize($data);
     }
 
@@ -457,7 +449,6 @@ class Format {
         {
             $data = $this->_data;
         }
-
         return var_export($data, TRUE);
     }
 
@@ -488,13 +479,11 @@ class Format {
         {
             $delimiter = ',';
         }
-
         // If NULL, then set as the default enclosure
         if ($enclosure === NULL)
         {
             $enclosure = '"';
         }
-
         return str_getcsv($data, $delimiter, $enclosure);
     }
 
@@ -506,7 +495,6 @@ class Format {
     {
         return json_decode(trim($data));
     }
-
     /**
      * @param string $data Data to unserialize
      * @return mixed Unserialized data
@@ -515,7 +503,6 @@ class Format {
     {
         return unserialize(trim($data));
     }
-
     /**
      * @param string $data Data to trim leading and trailing whitespace
      * @return string Data with leading and trailing whitespace removed

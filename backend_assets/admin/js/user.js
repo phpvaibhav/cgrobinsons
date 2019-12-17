@@ -30,8 +30,8 @@ $("#smart-form-changepass").validate({
               required  : 'Please enter your new password'
             },
             rnpassword  : {
-              required  : 'Please re-enter your password',
-              equalTo   : 'Please enter the same password as above'
+                required  : 'Please re-enter your password',
+                equalTo   : 'Please enter the same password as above'
             }
          
           },
@@ -78,14 +78,14 @@ $("#smart-form-changepass").validate({
           // Rules for form validation
           rules : {
             fullName : {
-              required : true
+              required  : true
             },
             email : {
               required  : true,
               email     : true
             },
             contact : {
-              required : true,       
+              required  : true,       
             },
           },
 
@@ -103,7 +103,6 @@ $("#smart-form-changepass").validate({
             
             }, 
           },
-
           // Ajax form submition
          /* submitHandler : function(form) {
            
@@ -130,12 +129,12 @@ $(function() {
         data            : formData, //only input
         processData     : false,
         contentType     : false,
-        cache: false,
-        beforeSend: function () {
+        cache           : false,
+        beforeSend      : function () {
             preLoadshow(true);
             $('#submit').prop('disabled', true);
         },
-        success: function (res) {
+        success         : function (res) {
           preLoadshow(false);
           setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
           if(res.status=='success'){

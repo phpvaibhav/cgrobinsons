@@ -20,7 +20,7 @@ class Pdf extends TCPDF {
         $this->SetFont('helvetica', 'B', 20);
         // Title
         $this->Cell(0, 15, 'Sales Information for Products', 0, false, 'C', 0, '', 0, false, 'M', 'M');
-    }
+    }//End Function
 
     // Page footer
     public function Footer()
@@ -31,7 +31,7 @@ class Pdf extends TCPDF {
         $this->SetFont('helvetica', 'I', 8);
         // Page number
         $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
-    }
+    }//End Function
 
     // This function is the main contant
     public function mainContent()
@@ -42,10 +42,8 @@ class Pdf extends TCPDF {
         $this->SetFont('helvetica','I',8);
         // Page number
         $this->cell(0, 10, 'Page ');
-    }
-}
-
-
+    }//End Function
+}//End CLass
 /* End of file Pdf.php */
 /* Location: ./application/libraries/Pdf.php */
 ?>

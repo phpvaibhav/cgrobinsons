@@ -15,7 +15,7 @@ class Api_model extends CI_Model {
         $res = do_hash(time().mt_rand());
         $new_key = substr($res,0,config_item('rest_key_length'));
         return $new_key;
-    }
+    }//End Function
     /**
     * Update users deviceid and auth token while login
     */
@@ -35,7 +35,7 @@ class Api_model extends CI_Model {
             }
         }
         return true;
-    }
+    }//End Function
 	/*
 	Function for check provided token is resultid or not
 	*/
@@ -50,7 +50,7 @@ class Api_model extends CI_Model {
 			return $sql->row();
 		}	
 		return false;
-	}
+	}//End Function
 	function registration($user)
 	{	
         $checkEmail = $this->db->select('*')->where(array('email'=>$user['email']))->get(USERS);

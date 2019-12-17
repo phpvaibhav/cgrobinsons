@@ -85,7 +85,10 @@ function statusChange(e){
       $.ajax({
               type        : "POST",
               url         : base_url+'api/service/changeStatus',
-              data        : {srv:$(e).data('serid'),srs:$(e).data('sid')},
+              data        : {
+                              srv:$(e).data('serid'),
+                              srs:$(e).data('sid')
+                            },
               cache       : false,
               beforeSend  : function() {
                 preLoadshow(true);
@@ -215,8 +218,8 @@ function statusChangeuserDtails(e){
                  preLoadshow(false);
                 if(res.status=='success'){
                   toastr.success(res.message, 'Success', {timeOut: 3000});
-                // swal("Success", "Your process  has been successfully done.", "success");   
-                 setTimeout(function(){ location.reload(); },4000);
+                  // swal("Success", "Your process  has been successfully done.", "success");   
+                  setTimeout(function(){ location.reload(); },4000);
                 }else{
                   toastr.error(res.message, 'Alert!', {timeOut: 5000});
                 }   

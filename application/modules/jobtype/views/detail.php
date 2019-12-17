@@ -45,7 +45,7 @@
 						</div>
 					</li>
 					<?php } }else{   ?>
-					<li class="text-center">No results found right now</li>
+						<li class="text-center">No results found right now</li>
 					<?php }   ?>
 				</ul>
 			</div>

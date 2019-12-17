@@ -1,6 +1,6 @@
 <style>
   .error-text-2 {
-    text-align            : center;
+    text-align              : center;
     font-size               : 700%;
     font-weight             : bold;
     font-weight             : 100;
@@ -362,8 +362,8 @@
   }
 
   25% {
-  width     : 1.3rem;
-  height    : 1.3rem;
+  width             : 1.3rem;
+  height            : 1.3rem;
   }
 
   50% {
@@ -462,10 +462,10 @@
 <!--[if IE 9]>
 <style>
 .error-text {
-  color: #333 !important;
+  color   : #333 !important;
 }
 .particle {
-  display:none;
+  display :none;
 }
 </style>
 <![endif]-->

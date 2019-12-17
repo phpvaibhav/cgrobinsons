@@ -16,18 +16,18 @@ function getPrevious(e){
     },     
     success   : function (res) {
       preLoadshow(false);
-    if(res.status=='success'){
-      $(".getAddressshow").show();
-      $("#previousAddress").html(res.address);
-    }else{
-      $(".getAddressshow").hide();
-      $("#previousAddress").html('<div class="col-sm-12 col-md-12">No result found right now.</div>');
-    }
+      if(res.status=='success'){
+        $(".getAddressshow").show();
+        $("#previousAddress").html(res.address);
+      }else{
+        $(".getAddressshow").hide();
+        $("#previousAddress").html('<div class="col-sm-12 col-md-12">No result found right now.</div>');
+      }
     }
   });
   /*ajax*/
 }
 function radio_fun(e){
-    $(".setAddessLocation").removeClass("addressborder");
-    $(e).addClass("addressborder");
+  $(".setAddessLocation").removeClass("addressborder");
+  $(e).addClass("addressborder");
 }

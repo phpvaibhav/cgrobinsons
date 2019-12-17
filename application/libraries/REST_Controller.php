@@ -20,9 +20,9 @@ abstract class REST_Controller extends CI_Controller {
 
     // Informational
 
-    const HTTP_CONTINUE = 100;
-    const HTTP_SWITCHING_PROTOCOLS = 101;
-    const HTTP_PROCESSING = 102;            // RFC2518
+    const HTTP_CONTINUE             = 100;
+    const HTTP_SWITCHING_PROTOCOLS  = 101;
+    const HTTP_PROCESSING           = 102;            // RFC2518
 
     // Success
 

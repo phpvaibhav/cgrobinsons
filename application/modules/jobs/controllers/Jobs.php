@@ -112,7 +112,7 @@ class Jobs extends Common_Back_Controller {
     } //end function
 
     public function jobPdf()
-   {
+    {
 
       ob_start();
       // create new PDF document
@@ -230,7 +230,6 @@ class Jobs extends Common_Back_Controller {
           $colr = "background-color:#f1f1f1;";
           $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
             $content .='<td colspan="6" align="center">No job found.</td>';
-         
           $content .='</tr>';
       }
       $content .='</table>';
@@ -458,17 +457,16 @@ class Jobs extends Common_Back_Controller {
         if($job['geoFencing']==1){
           /*Geo fencing manage*/
           $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
-          $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4" ><b>GEO FENCING</b></th></tr>';
-          $content .= '<tr>';
-          $content .='<td colspan="4"><strong>Geo image :</strong>';
-          $content .='</td>';
-          $content .= '</tr>';
-          $content .= '<tr>';
-          $content .='<td colspan="4">';
-          $content .= '<img src="'.$job['geoFencingUrl'].'" alt="Map" border="0" />';
-          $content .='</td>';
-          $content .= '</tr>';
-
+            $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="4" ><b>GEO FENCING</b></th></tr>';
+            $content .= '<tr>';
+              $content .='<td colspan="4"><strong>Geo image :</strong>';
+              $content .='</td>';
+            $content .= '</tr>';
+            $content .= '<tr>';
+              $content .='<td colspan="4">';
+                $content .= '<img src="'.$job['geoFencingUrl'].'" alt="Map" border="0" />';
+              $content .='</td>';
+            $content .= '</tr>';
           $content .= '</table>';
           /*Geo fencing manage*/
         } 

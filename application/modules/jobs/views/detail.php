@@ -1,7 +1,7 @@
 <style type="text/css">
 	#map-show {
-		width: auto;
-		height:500px;
+		width 	: auto;
+		height  : 500px;
 	}
 </style>
 <?php $backend_assets = base_url().'backend_assets/'; ?>
@@ -116,13 +116,11 @@
 							<div class="col-lg-12 col-md-12 col-sm-12" >
 								<strong>Job Work Time Duration </strong>
 								<span class="pull-right"> <label class="text-center center-block padding-10 label label-info"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<?php echo $job['timeDuration']; ?></label></span>
-
 							</div>
 							<?php endif; ?>
 						</div>
 						<fieldset>
 							<ul class="list-unstyled">
-								
 								<li class="list-group-item">
 									<div class="row" >
 										<div class="col-lg-6 col-md-6 col-sm-12" >
@@ -180,10 +178,11 @@
 						<fieldset>
 							<ul class="list-unstyled">
 								<?php 
-									$colors = array('info', 'warning','success');
+								$colors = array('info', 'warning','success');
 								if(!empty($questions)){ 
 									
-									foreach ($questions as $key => $question) {  $rand_color = $colors[array_rand($colors)]; ?>
+									foreach ($questions as $key => $question) {  $rand_color = $colors[array_rand($colors)];
+								?>
 								<li class="list-group-item">
 									<div class="row smart-form">
 										<div class="col col-md-12 col-sm-12 col-lg-12">
@@ -206,27 +205,28 @@
 											}
 											
 											if($inputType=='text'){
-												?>
-												<div class="col col-md-11 col-sm-11 col-lg-11">
-												<?= !empty($question->answer) ? $question->answer :"NA";?></div>
-											<?php }else{ 
+										?>
+											<div class="col col-md-11 col-sm-11 col-lg-11">
+												<?= !empty($question->answer) ? $question->answer :"NA";?>	
+											</div>
+										<?php }else{ 
 												$answer  = !empty($question->answer) ? explode(",",$question->answer): array();
 												$options = (isset($question->options) && !empty($question->options)) ? json_decode($question->options,true):array();
 													for ($i=0; $i <sizeof($options) ; $i++) { 
-													?>
-													<div class="col col-md-4 col-sm-4 col-lg-4">
-													<label class="<?= $inputType; ?>">
-																<input type="<?= $inputType; ?>" name="<?= $inputType.$key; ?>" <?= in_array($options[$i],$answer)? 'checked="checked"':''; ?> onclick="return false;">
-																<i></i><?= $options[$i]; ?></label>	</div>
-													<?php }
-												?>
-												
-											<?php }
-									 	?>
+										?>
+											<div class="col col-md-4 col-sm-4 col-lg-4">
+												<label class="<?= $inputType; ?>">
+													<input type="<?= $inputType; ?>" name="<?= $inputType.$key; ?>" <?= in_array($options[$i],$answer)? 'checked="checked"':''; ?> onclick="return false;">
+																<i></i><?= $options[$i]; ?>
+												</label>	
+											</div>
+										<?php } ?> 
+									<?php }?>
 									</div>
 								</li>
 								<?php } }else{
-									$rand_color = $colors[array_rand($colors)];?>
+									$rand_color = $colors[array_rand($colors)];
+								?>
 								<li class="list-group-item">
 									<p class="text-center alert alert-<?= $rand_color; ?>"><strong>No questions found right now</strong></p>
 
@@ -443,12 +443,13 @@
 								</li>
 								<li class="list-group-item">
 									<div class="row">
-										<?php $aworkImage= (isset($after['workImage']) && !empty($after['workImage'])) ? $after['workImage'] :array(); for ($i=0; $i <sizeof($aworkImage) ; $i++) { ?>
+									<?php 
+										$aworkImage = (isset($after['workImage']) && !empty($after['workImage'])) ? $after['workImage'] :array(); 
+										for ($i=0; $i <sizeof($aworkImage) ; $i++) { ?>
 										<div class="col-sm-4 col-md-4 col-lg-4">
 											<img src="<?php echo S3JOBS_URL.$after['workImage'][$i];  ?>" class="img img-thumbnail" >
 										</div>
-										<?php } ?>
-										
+									<?php } ?>	
 									</div>	
 								</li>
 								<li class="list-group-item">
@@ -485,9 +486,9 @@
 	var markers 		= [];
 	var polygonArray 	= [];
 	var polygonColor 	= "<?php echo $polygonColor; ?>";
-	var address 		=  "<?php echo (isset($job['address']) && !empty($job['address'])) ?$job['address']:'NA'; ?>";
+	var address 		= "<?php echo (isset($job['address']) && !empty($job['address'])) ?$job['address']:'NA'; ?>";
 	var areaLatitude 	=  parseFloat("<?php echo (isset($job['latitude']) && !empty($job['latitude'])) ?$job['latitude']:22.719568; ?>");
-	var areaLongitude 	= parseFloat("<?php echo (isset($job['longitude']) && !empty($job['longitude'])) ?$job['longitude']:75.857727; ?>");
+	var areaLongitude 	=  parseFloat("<?php echo (isset($job['longitude']) && !empty($job['longitude'])) ?$job['longitude']:75.857727; ?>");
 	//var myPolygon;
 	function initMap() {
 		// Map Center
@@ -518,7 +519,6 @@
 			fillColor 		: polygonColor,
 			fillOpacity 	: 0.35
 		});
-
 		myPolygon.setMap(map);
 		/*var marker = new google.maps.Marker({
 			position: {lat: areaLatitude, lng: areaLongitude },
@@ -527,10 +527,9 @@
 		});*/
 		/* imarker tracking*/
 		google.maps.event.addDomListener(document.getElementById('add-markers'), 'click', function(event) {
-		addMarkers(map);
+			addMarkers(map);
 		});
 		google.maps.event.addDomListener(document.getElementById('remove-markers'), 'click', removeMarkers);
-	
 		/* imarker tracking*/
 		//google.maps.event.addListener(myPolygon, "dragend", getPolygonCoords);
 		google.maps.event.addListener(myPolygon.getPath(), "insert_at", getPolygonCoords);
@@ -542,7 +541,6 @@
 		var len 	= myPolygon.getPath().getLength();
 		var htmlStr = "";
 		for (var i 	= 0; i < len; i++) {
-		
 			htmlStr += myPolygon.getPath().getAt(i).toUrlValue(6)+"|";
 			//Use this one instead if you want to get rid of the wrap > new google.maps.LatLng(),
 			//htmlStr += "" + myPolygon.getPath().getAt(i).toUrlValue(5);

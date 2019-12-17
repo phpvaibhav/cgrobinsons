@@ -42,7 +42,6 @@ class Job_model extends CI_Model {
     public function set_data($where=''){
         $this->where = $where; 
     }//End function
-
     private function _get_query()
     {
         $sel_fields = array_filter($this->column_sel); 
@@ -97,12 +96,12 @@ class Job_model extends CI_Model {
         if(isset($_POST['length']) && $_POST['length'] < 1) {
             $_POST['length']= '10';
         }else{
-        	$_POST['length']= isset($_POST['length']) ? $_POST['length'] :10;
+        	$_POST['length'] = isset($_POST['length']) ? $_POST['length'] :10;
         }
         if(isset($_POST['start']) && $_POST['start'] > 1) {
-            $_POST['start']= $_POST['start'];
+            $_POST['start'] = $_POST['start'];
         }
-        $_POST['start']= isset($_POST['start']) ? $_POST['start']:0;
+        $_POST['start']     = isset($_POST['start']) ? $_POST['start']:0;
         $this->db->limit($_POST['length'], $_POST['start']);
         //print_r($_POST);die;
         $query = $this->db->get(); //lq();

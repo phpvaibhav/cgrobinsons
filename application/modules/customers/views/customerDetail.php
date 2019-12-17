@@ -5,7 +5,8 @@
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-4">
 					<div class="well well-light well-sm margin padding">
-						<ul class="demo-btns text-center">					<li>
+						<ul class="demo-btns text-center">					
+							<li>
 								<a href="javascript:void(0);" onclick="creditHoldStatus(this);" data-message="You want to credit hold <?php echo $customermeta['creditHoldStatus'] ?' NO' :'YES'; ?>" data-useid="<?php echo encoding($customermeta['userId']);?>"  class="btn btn-labeled btn-warning"> <span class="btn-label"><i class="glyphicon glyphicon-gbp"></i></span>Credit Hold </a>
 							</li>
 							<li>
@@ -189,21 +190,18 @@
 										<!-- widget content -->
 										<div class="widget-body padding">
 											<?php
-											/*echo "<pre>";
-											print_r($customerNotificationA);
-											echo "</pre>";*/
+										
 											$addressesA = isset($customerNotification[0]['addresses']) ? $customerNotification[0]['addresses']:array();
 
 											?>
-											<div class="table-responsive">
-<!-- 												<table class="table table-striped table-bordered table-hover" width="100%">
+											<div class="table-responsive"> 							
+												<table class="table table-striped table-bordered table-hover" width="100%">
 													<thead>			                
 														<tr>
 															<th data-hide="phone">ID</th>
 															<th data-hide="phone">Address</th>
 															<th data-hide="phone,tablet">Temperature</th>
 															<th data-hide="phone,tablet">Date & Time</th>
-	
 															<th data-hide="phone,tablet">Action</th>
 														</tr>
 													</thead>
@@ -212,7 +210,7 @@
 													$colors = array('info', 'warning','success','danger');
 
 													foreach ($addressesA  as $e => $add) {
-													$rand_color = $colors[array_rand($colors)];
+														$rand_color = $colors[array_rand($colors)];
 													?>
 													<tr class="<?= $rand_color;?>">
 														<td><?= ($e+1); ?></td>
@@ -230,7 +228,7 @@
 													</tr>
 													<?php } ?>
 													</tbody>
-												</table> -->
+												</table>
 											</div>
 										</div>
 										<!-- end widget content -->
@@ -281,7 +279,7 @@
 								<section class="col col-6">
 									<label class="input"> <i class="icon-append fa fa-envelope-o"></i>
 										<input type="email" name="email" placeholder="E-mail" value="<?php echo $customer['email']; ?>" maxlength="30" size="30">
-													</label>
+									</label>
 								</section>
 							</div>
 							<div class="row">
@@ -371,7 +369,7 @@
 								<section class="col col-6">
 									<label class="input"> <i class="icon-append fa fa-map-marker"></i>
 										<input type="text" name="city1" placeholder="City" class="localityautocomplete1" value="<?php echo $customermeta['billCity']; ?>" maxlength="30" size="30">
-											</label>
+									</label>
 								</section>
 								<section class="col col-6">
 									<label class="input"> <i class="icon-append fa fa-map-marker"></i>
@@ -388,7 +386,7 @@
 								<section class="col col-6">
 									<label class="input"> <i class="icon-append fa fa-map-marker"></i>
 										<input type="text" name="country1" placeholder="Country" class="countryautocomplete1" value="<?php echo $customermeta['billCountry']; ?>" maxlength="30" size="30">
-											</label>
+									</label>
 								</section>
 							</div>
 						</fieldset>

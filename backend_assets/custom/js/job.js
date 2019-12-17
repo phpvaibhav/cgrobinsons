@@ -231,7 +231,11 @@ function getQuestions(e){
   $.ajax({
           type          : "POST",
           url           : base_url+'adminapi/jobtype/getQuestions',
-          data          : {jobTypeId:jobTypeId,question:question,pendingJob:pendingJob},
+          data          : {   
+                            jobTypeId     : jobTypeId,
+                            question      : question,
+                            pendingJob    : pendingJob
+                          },
           headers       : { 'authToken':authToken},
           cache         : false,
           beforeSend    : function() {

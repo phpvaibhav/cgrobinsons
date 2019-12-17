@@ -49,8 +49,8 @@
 							            <?php foreach ($jobTypes as $jt => $type) {?>
 							            <option value="<?php echo $type->jobTypeId; ?>"><?php echo $type->jobType; ?></option>
 							        	<?php } ?>
-							           
-							        </select> <i></i> </label>
+							        </select> <i></i> 
+							    </label>
 							</section>
 						</div>
 						<div class="row">
@@ -90,12 +90,13 @@
 						<div class="row">
 							<section class="col col-6">
 								<label class="select">
-								<select name="workPriority">
-									<!-- <option value="" selected="" disabled="">Job Priority</option> -->
-									<option value="0"  selected="">Low Priority</option>
-									<option value="1">Medium Priority</option>
-									<option value="2">High Priority</option>
-								</select> <i></i> </label>
+									<select name="workPriority">
+										<!-- <option value="" selected="" disabled="">Job Priority</option> -->
+										<option value="0"  selected="">Low Priority</option>
+										<option value="1">Medium Priority</option>
+										<option value="2">High Priority</option>
+									</select> <i></i> 
+								</label>
 							</section>
 						</div>
 					</fieldset>

@@ -52,7 +52,10 @@ function jobTypeStatus(e){
       $.ajax({
               type          : "POST",
               url           : base_url+'adminapi/jobtype/jobTypeStatus',
-              data          : {use:$(e).data('useid'), status:$(e).data('status') },
+              data          : {   
+                                use     : $(e).data('useid'),
+                                status  : $(e).data('status') 
+                              },
               headers       : { 'authToken':authToken},
               cache         : false,
               beforeSend    : function() {
@@ -136,14 +139,14 @@ $("#createJobType").validate({// Rules for form validation
       $(element).addClass('valid');
     },
     rules : {
-      jobType : {
+      jobType    : {
         required : true
       }
     },
     // Messages for form validation
     messages : {
-      jobType : {
-        required : 'Please enter your job type'
+      jobType     : {
+        required  : 'Please enter your job type'
       }
   },
   // Ajax form submition
@@ -175,7 +178,7 @@ $("#createJobType").validate({// Rules for form validation
           });
     return false; // required to block normal submit since you used ajax
   },
-   onfocusout: injectTrim($.validator.defaults.onfocusout),
+  onfocusout: injectTrim($.validator.defaults.onfocusout),
   // Do not change code below
   errorPlacement : function(error, element) {
     error.insertAfter(element.parent());

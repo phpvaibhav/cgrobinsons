@@ -119,7 +119,9 @@ var vehilce_list = $('#vehilce_list').DataTable({
                     },
                     //Set column definition initialisation properties.
                     "columnDefs": [
-                      { orderable: false, targets: -1 },              
+                      { orderable : false, 
+                        targets   : -1 
+                      },              
                     ]
                   });
 /*listing vehilce_list*/
@@ -143,7 +145,7 @@ function vehilceStatus(e){
       $.ajax({
               type        : "POST",
               url         : base_url+'adminapi/vehicles/vehilceStatus',
-              data        : {use:$(e).data('useid') },
+              data        : { use:$(e).data('useid') },
               headers     : { 'authToken':authToken},
               cache       : false,
               beforeSend  : function() {
@@ -189,7 +191,7 @@ function vehicleDelete(e){
               type        : "POST",
               url         : base_url+'adminapi/vehicles/vehicleDelete',
               data        : {use:$(e).data('useid') },
-              headers     : { 'authToken':authToken},
+              headers     : { 'authToken':authToken },
               cache       : false,
               beforeSend  : function() {
                 preLoadshow(true);
@@ -376,15 +378,22 @@ var vehilce_list = $('#vehilceHistory_list').DataTable({
                       "type"    : "POST",
                       "dataType": "json",
                       //"data" : {vid: $('#v_detail').data('vid')}.
-                      "data"    : { 'vid':$('#v_detail').data('vid')},
-                      "headers" : { 'authToken':authToken},
+                      "data"    : { 
+                                    'vid':$('#v_detail').data('vid')
+                                  },
+                      "headers" : { 
+                                    'authToken':authToken
+                                  },
                       "dataSrc" : function (jsonData) {
                         return jsonData.data;
                       }
                     },
                     //Set column definition initialisation properties.
                     "columnDefs": [
-                        { orderable: false, targets: -1 },     
+                        { 
+                          orderable : false, 
+                          targets   : -1 
+                        },     
                     ]
                   });
 /*listing vehilceHistory_list*/

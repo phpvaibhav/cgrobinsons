@@ -32,7 +32,7 @@ $(function() {
 $("#login-form").validate({
   // Rules for form validation
   rules : {
-    email : {
+    email   : {
               required  : true,
               email     : true
             },
@@ -58,29 +58,29 @@ $("#login-form").validate({
           },
   // ajax 
   submitHandler: function (form) {
-      toastr.clear();
-      $('#submit').prop('disabled', true);
-        $.ajax({
-          type        : "POST",
-          url         : base_url+'adminapi/'+$(form).attr('action'),
-          data        : $(form).serialize(),
-          cache       : false,
-          beforeSend  : function() {
-            preLoadshow(true);
-            $('#submit').prop('disabled', true);  
-          },     
-          success: function (res) {
-            preLoadshow(false);
-            setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
-            if(res.status=='success'){
-              toastr.success(res.message, 'Success', {timeOut: 3000});
-              setTimeout(function(){ window.location = base_url+'dashboard'; },4000);
-            }else{
-              toastr.error(res.message, 'Alert!', {timeOut: 3000});
-            }
+    toastr.clear();
+    $('#submit').prop('disabled', true);
+      $.ajax({
+        type        : "POST",
+        url         : base_url+'adminapi/'+$(form).attr('action'),
+        data        : $(form).serialize(),
+        cache       : false,
+        beforeSend  : function() {
+          preLoadshow(true);
+          $('#submit').prop('disabled', true);  
+        },     
+        success: function (res) {
+          preLoadshow(false);
+          setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
+          if(res.status=='success'){
+            toastr.success(res.message, 'Success', {timeOut: 3000});
+            setTimeout(function(){ window.location = base_url+'dashboard'; },4000);
+          }else{
+            toastr.error(res.message, 'Alert!', {timeOut: 3000});
           }
-        });
-        return false; // required to block normal submit since you used ajax
+        }
+      });
+      return false; // required to block normal submit since you used ajax
   }
 });    // Validation
 //Forgot
@@ -160,7 +160,7 @@ $("#smart-form-register").validate({// Rules for form validation
   // Messages for form validation
   messages : {
     fullName : {
-      required : 'Please enter your full name'
+      required  : 'Please enter your full name'
     },
     email : {
       required  : 'Please enter your email address',
@@ -245,28 +245,27 @@ $("#smart-form-register").validate({// Rules for form validation
       toastr.clear();
       $('#submit').prop('disabled', true);
       $.ajax({
-          type       : "POST",
-          url        : $(form).attr('action'),
-          data       : $(form).serialize(),
-          dataType   :'json',
-          cache      : false,
-          beforeSend : function() {
-            preLoadshow(true);
-            $('#submit').prop('disabled', true);  
-          },     
-          success     : function (res) {
-             preLoadshow(false);
-              setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
-            if(res.status=='success'){
-             toastr.success(res.message, 'Success', {timeOut: 3000});
-              setTimeout(function(){ window.location = base_url; },4000);
-            
-            }else{
-              toastr.error(res.message, 'Alert!', {timeOut: 4000});
-            } 
-            //  $('#submit').prop('disabled', false);  
-          }
+        type       : "POST",
+        url        : $(form).attr('action'),
+        data       : $(form).serialize(),
+        dataType   :'json',
+        cache      : false,
+        beforeSend : function() {
+          preLoadshow(true);
+          $('#submit').prop('disabled', true);  
+        },     
+        success     : function (res) {
+          preLoadshow(false);
+          setTimeout(function(){  $('#submit').prop('disabled', false); },4000);
+          if(res.status=='success'){
+            toastr.success(res.message, 'Success', {timeOut: 3000});
+            setTimeout(function(){ window.location = base_url; },4000);
+          }else{
+            toastr.error(res.message, 'Alert!', {timeOut: 4000});
+          } 
+          //  $('#submit').prop('disabled', false);  
+        }
       });
-       return false; // required to block normal submit since you used ajax
+      return false; // required to block normal submit since you used ajax
     }
   });

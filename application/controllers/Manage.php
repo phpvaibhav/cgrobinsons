@@ -44,14 +44,14 @@ class Manage extends Common_Front_Controller {
 		$excludeParameterMetadata 	= true;
 		$addressId 					= $res['addressId'];
 		$customerId 			    = $res['customerId'];
-		/*$data_val['addressId'] 		= $addressId;
+		/*$data_val['addressId'] 	= $addressId;
 		$data_val['customerId'] 	= $data['customerId'];
 		$data_val['temperature'] 	= "test";
 		$data_val['alertDate'] 		= date("Y-m-d");
 		$data_val['alertTime'] 		= date('H:i A');*/
 		//$this->common_model->insertData('weatherNotification',$data_val);
 		/***********************************************************************/
-/*		$client_id 			= "8b291788-f31d-4d57-8c94-1ffff528d739" ;
+		/*$client_id 			= "8b291788-f31d-4d57-8c94-1ffff528d739" ;
 		$client_secret_key 	= "E6pM1yQ3sU0uC4nQ0dX2rE3rV5bX2vX5uQ3yM6xW8oB7cF8oL2";*/
 		$client_secret_key  = "yU4fL0cB2qB0jL1eM0lG5bA8cA4jT6dO5rM7mS1yS3yH0hY3fF";
 		$client_id      	= "2e873775-fdff-440e-ba04-2b66054945cc" ;
@@ -78,9 +78,8 @@ class Manage extends Common_Front_Controller {
 		curl_close($curl);
 
 		if ($err) {
-		
 		  return "cURL Error #:" . $err;
-		} else {
+		}else{
 			log_event($response,'background_log.txt'); 
 	  		$data = json_decode($response,true);
 	  		if(isset($data['features']) && !empty($data['features'])){
@@ -111,12 +110,6 @@ class Manage extends Common_Front_Controller {
 		  		/*test*/
 	  		}else{
 	  			log_event($data['httpMessage'],'background_log.txt'); 
-			/*	$data_val['addressId'] 		= $addressId;
-				$data_val['customerId'] 	= $customerId;
-				$data_val['temperature'] 	= $data['httpMessage'];
-				$data_val['alertDate'] 		= date("Y-m-d");
-				$data_val['alertTime'] 		= date('H:i A');
-				$this->common_model->insertData('weatherNotification',$data_val);*/
 		  	}
 		return true;
 		}
@@ -124,18 +117,15 @@ class Manage extends Common_Front_Controller {
 
 	}//End Function
 	function weatherEmailSent(){
-		$customerNotification = $this->common_model->customerNotification();
+		$customerNotification 			 = $this->common_model->customerNotification();
 		$data['url']    				 = base_url();
 		$data['customerNotification']    = $customerNotification;
 		$emails                      	 = $this->common_model->adminEmails();
 		$message        				 = $this->load->view('emails/weatherEmail',$data,TRUE);
 		$subject         				 = "Weather Notification";
-		
-		
-		$response = 0;
+		$response 					     = 0;
 		if(!empty($customerNotification)){
 		//	pr($customerNotification);
-		
 			$response 		= $this->smtp_email->send_mail_multiple($emails,$subject,$message);
 		}
 		if ($response)

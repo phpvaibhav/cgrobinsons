@@ -15,7 +15,7 @@ class Api_model extends CI_Model {
         $new_key    = substr($res,0,config_item('rest_key_length'));
         return $new_key;
 
-    }
+    }//End Function
     /**
     * Update users deviceid and auth token while login
     */

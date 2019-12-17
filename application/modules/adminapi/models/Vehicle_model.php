@@ -129,7 +129,8 @@ class Vehicle_model extends CI_Model {
             d.fullName,
             d.id as driverId,
             d.fullName,
-            d.latitude,d.longitude');
+            d.latitude,
+            d.longitude');
         $this->db->from('vehicles as v');
         
         $this->db->join('assignVehicle as av','av.vehicleId = v.vehicleId','left');
@@ -186,7 +187,7 @@ class Vehicle_model extends CI_Model {
             foreach ($data as $e => $u) {
                 $data[$e]->jobLink = base_url().'jobs/jobDetail/'.encoding($u->jobId);
             }
-           // pr($data);
+            // pr($data);
             return $data;
         endif;
         return array();

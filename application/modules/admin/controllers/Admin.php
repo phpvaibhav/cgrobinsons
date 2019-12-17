@@ -81,9 +81,9 @@ class Admin extends Common_Back_Controller {
                
             if(array_key_exists("image_name",$image)){
 
-                $admin_image = $image['image_name'];
+                $admin_image                = $image['image_name'];
                 if(!empty($admin_image)){
-                    $update_data['image'] = $admin_image;
+                    $update_data['image']   = $admin_image;
                     $this->Image_model->delete_image(USER_AVATAR_PATH,$existing_img);
                 }
             }

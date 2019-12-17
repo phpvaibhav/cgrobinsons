@@ -128,6 +128,7 @@ class Customers extends Common_Back_Controller {
     $customermeta = $this->common_model->getsingle('customerMeta',array('userId' =>$customer['id']));
     $this->load->model('jobs/job_model');
     $jobs         = $this->job_model->assignJobs(array('j.customerId'=>$userId));
+   
     ob_start();
     // create new PDF document
     $pdf          = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -194,7 +195,79 @@ class Customers extends Common_Back_Controller {
             $content .= '<td><strong>Billing Address</strong> :</td><td colspan="3">'.$customermeta['billAddress'].'</td>';
         $content .= '</tr>';
     $content .='</table>';
-    $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
+    $content .= '<table border="0" cellspacing="1" cellpadding="4">';
+           $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="7"><b>Customer Jobs</b></th></tr>';
+            $content .= '<tr style="background-color:#707070;color:#FFFFFF;"  nobr="true">
+                    <th width="17%">Job Name</th>
+                    <th  width="15%">Job Type</th>
+                    <th width="15%">Customer</th>
+                    <th  width="15%">Driver</th>
+                    <th  width="15%">Creation Date</th>
+                    <th  width="10%">Priority</th>
+                    <th  width="13%">Status</th>
+                </tr>';
+            //$content .= $this->fetch_employeePdf_info();
+         // $content .= '</table>';
+
+      if(!empty($jobs)){
+      foreach ($jobs as $k => $job) {
+        if($k++%2 == 1){
+          $colr = "background-color:#f1f1f1;";
+        }else{
+          $colr = "background-color:#fff;";
+        }
+
+           $labelShow ="";
+                switch ($job->jobStatus) {
+                  case 0:
+                    $labelShow =' <label color="orange" >Open</label>';
+                    break;
+                  case 1:
+                    $labelShow =' <label color="red">In Progress</label>';
+                    break;
+                  case 2:
+                  
+                    $labelShow =' <label color="green">Completed</label>';
+                    break;
+                  
+                  default:
+                    break;
+                } 
+            $workPriority ="";
+                switch ($job->workPriority) {
+                  case 0:
+                    $workPriority =' <label color="green" >'.$job->priority.'</label>';
+                    break;
+                  case 1:
+                    $workPriority ='<label color="blue">'.$job->priority.'</label>';
+                    break;
+                  case 2:
+                  
+                    $workPriority ='<label color="red">'.$job->priority.'</label>';
+                    break;
+                  
+                  default:
+                    break;
+                }
+          $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
+            $content .='<td>'.$job->jobName.'</td>';
+            $content .='<td>'.$job->jobType.'</td>';
+            $content .='<td>'.$job->customerName.'</td>';
+            $content .='<td>'.$job->driverName.'</td>';
+            $content .='<td>'.date("d/m/Y",strtotime($job->startDate))." ".$job->startTime.'</td>';
+            $content .='<td>'.$workPriority.'</td>';
+            $content .='<td>'.$labelShow.'</td>';
+          $content .='</tr>';
+      }
+      }else{
+          $colr = "background-color:#f1f1f1;";
+          $content .='<tr nobr="true" style="color:#000; '.$colr.'">';
+            $content .='<td colspan="7" align="center">No job found.</td>';
+         
+          $content .='</tr>';
+      }
+      $content .='</table>';
+/*    $content .= '<table  border="0" cellspacing="1" cellpadding="4">';
         $content .= '<tr  bgcolor="#cccccc"><th align="left" colspan="7"><b>Customer Jobs</b></th></tr>';
         $content .= '<tr  bgcolor="#EAECF0"><th width="5%"><b>#</b></th><th><b>Job Name</b></th><th><b>Job Type</b></th><th><b>Customer</b></th><th><b>Driver</b></th><th width="23.5%"><b>Creation Date</b></th><th><b>Status</b></th></tr>';
     if(!empty($jobs)):
@@ -214,7 +287,7 @@ class Customers extends Common_Back_Controller {
             $content .= '<td colspan="7"><p align="center">No record found</p></td>';
         $content .= '</tr>';
     endif;
-    $content .='</table>';
+    $content .='</table>';*/
     $pdf->writeHTML($content, true, false, true, false, '');
     // reset pointer to the last page
     $pdf->lastPage();

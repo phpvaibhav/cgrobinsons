@@ -94,7 +94,7 @@ $("#customerAddUpdate").validate({// Rules for form validation
     });
     return false; // required to block normal submit since you used ajax
   },
-   onfocusout: injectTrim($.validator.defaults.onfocusout),
+  onfocusout: injectTrim($.validator.defaults.onfocusout),
   // Do not change code below
   errorPlacement : function(error, element) {
     error.insertAfter(element.parent());
@@ -107,8 +107,8 @@ var customer_list = $('#customer_list').DataTable({
                       "order"         : [], //Initial no order.
                       "lengthChange"  : false,
                       "oLanguage"     : {
-                        "sEmptyTable" : '<center>No customer found</center>',
-                        "sSearch"     : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
+                          "sEmptyTable" : '<center>No customer found</center>',
+                          "sSearch"     : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>' 
                       },
                       "oLanguage": {
                         "sZeroRecords"  : '<center>No customer found</center>',
@@ -124,7 +124,7 @@ var customer_list = $('#customer_list').DataTable({
                           "dataType"  : "json",
                           "headers"   : { 'authToken':authToken},
                           "dataSrc"   : function (jsonData) {
-                              return jsonData.data;
+                            return jsonData.data;
                           }
                       },
                       //Set column definition initialisation properties.

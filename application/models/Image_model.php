@@ -218,11 +218,11 @@ class Image_model extends CI_Model{
 				$this->upload->initialize($configG);
 				if ($this->upload->do_upload($fileName))
 				{
-					$savedFile = $this->upload->data();//upload the image
-					$storedFile[$i]['name']  = $savedFile['file_name'];
-					$storedFile[$i]['type']  = $savedFile['file_type'];
+					$savedFile                 = $this->upload->data();//upload the image
+					$storedFile[$i]['name']    = $savedFile['file_name'];
+					$storedFile[$i]['type']    = $savedFile['file_type'];
 				}else{
-					$storedFile[$i]['error'] = $this->upload->display_errors();
+					$storedFile[$i]['error']   = $this->upload->display_errors();
 				}
 			} // END OF FOR LOOP 
 		return $storedFile;	  

@@ -5,9 +5,7 @@
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
         <div class="well no-padding">
           <form action="login" id="login-form" class="smart-form client-form">
-            <header>
-              Sign In
-            </header>
+            <header>Sign In</header>
             <fieldset>
               <section>
                 <label class="label">E-mail<span class="error">*</span></label>
@@ -19,11 +17,11 @@
               <section>
                 <label class="label">Password<span class="error">*</span></label>
                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                <input type="password" id="password" name="password">
-                <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Please enter your password</b> </label>
-                <div class="note">
-                  <a href="<?php echo base_url().'admin/forgot' ?>">Forgot password?</a>
-                </div>
+                  <input type="password" id="password" name="password">
+                  <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Please enter your password</b> </label>
+                  <div class="note">
+                    <a href="<?php echo base_url().'admin/forgot' ?>">Forgot password?</a>
+                  </div>
               </section>
               <section>
                 <label class="checkbox">

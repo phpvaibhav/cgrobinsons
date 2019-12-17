@@ -29,9 +29,7 @@
 						</section>		
 					</fieldset>
 					<footer>
-						<button type="submit" id="submit" class="btn btn-primary">
-							Change
-						</button>
+						<button type="submit" id="submit" class="btn btn-primary"> Change</button>
 					</footer>
 				</form>
 			</div>	

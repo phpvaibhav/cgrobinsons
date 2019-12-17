@@ -42,18 +42,15 @@ class Common_Service_Controller extends REST_Controller{
         $authToken = $header[$key];
         if(empty($authToken)){
             $this->response($this->token_error_msg(), BAD_REQUEST); //authentication failed 
-        }
-        
+        } 
         $userAuthData =  $this->api_model->isValidToken($authToken);
 
         if(!$userAuthData){
             $this->response($this->token_error_msg(2), BAD_REQUEST); //authentication failed 
         }
-
         if($userAuthData->status != 1){
             $this->response($this->token_error_msg(1), BAD_REQUEST); //authentication successfull,but user is inactive/disabled 
         } 
-        
         //user authenticated successfully
         $this->authData = $userAuthData; 
         return TRUE;
@@ -66,12 +63,9 @@ class Common_Service_Controller extends REST_Controller{
     public function token_error_msg($inactive_status=1){
 
         $res_arr = array('message'=>ResponseMessages::getStatusCodeMessage(101),'authToken'=>'','responseCode'=>300, 'isActive'=>1);
-
         if($inactive_status==1){
             $res_arr['isActive'] = 0; //user is inactive
         }
-
         return $res_arr;
     }//End function
-
 }//End Class 

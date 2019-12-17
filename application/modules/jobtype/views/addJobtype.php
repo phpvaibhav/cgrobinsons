@@ -50,9 +50,7 @@
 						<!-- add  -->
 					</fieldset>						
 					<footer>
-						<button type="submit" id="submit" class="btn btn-primary">
-							Save
-						</button>
+						<button type="submit" id="submit" class="btn btn-primary">Save</button>
 					</footer>
 				</form>
 			</div>	
