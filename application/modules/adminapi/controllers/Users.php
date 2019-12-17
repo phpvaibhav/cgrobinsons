@@ -57,6 +57,7 @@ class Users extends Common_Admin_Controller{
             $userauth           =  decoding($userid);
             $email              =  $this->post('email');
             $fullName           =  $this->post('fullName');
+            $weatherTemperature           =  $this->post('weatherTemperature');
             $isExist            =  $this->common_model->is_data_exists('admin',array('id'=>$userauth));
             if($isExist){
                 $isExistEmail   = $this->common_model->is_data_exists('admin',array('id  !='=>$userauth,'email'=>$email));
@@ -66,6 +67,7 @@ class Users extends Common_Admin_Controller{
                     $userData['fullName']           =   $fullName;
                     $userData['email']              =   $email;
                     $userData['contactNumber']      =   $this->post('contact');
+                    $userData['weatherTemperature'] =   $this->post('weatherTemperature');
                     //user info
                     // profile pic upload
                     $this->load->model('Image_model');

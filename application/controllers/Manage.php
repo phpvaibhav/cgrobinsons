@@ -37,6 +37,13 @@ class Manage extends Common_Front_Controller {
 		echo json_encode($responce);
 	}//End Function
 	function weatherHourlyWithCustomer(){
+		//weatherTemperature
+		$setTemp = 0;
+		$admin = $this->common_model->getsingle('admin');
+		if(!empty($admin)){
+			$setTemp = $admin['weatherTemperature'];
+		}
+		
 		$res 						= $this->input->post();
 		$latitude 					= $res['latitude'];
 		$longitude 					= $res['longitude'];
@@ -94,7 +101,7 @@ class Manage extends Common_Front_Controller {
 						$weatherdate = strtotime(date('Y-m-d',strtotime($d)));
 						$today = strtotime(date('Y-m-d'));
 						if($today==$weatherdate){
-							if($screenTemperature <=0){
+							if($screenTemperature <=$setTemp){
 								$data_val = array();
 								$data_val['addressId'] 		= $addressId;
 								$data_val['customerId'] 	= $res['customerId'];

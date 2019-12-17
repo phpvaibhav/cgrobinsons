@@ -17,7 +17,7 @@
                     <tr>
                         <td>
                             <h3 style="color: #333; font-size: 28px; font-weight: normal; margin: 0; text-transform: capitalize;">Weather Notification</h3>
-                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Today notification to weather alert for your customer addresses. Please find the checked below: </p>
+                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Today notification to weather alert for your customer addresses. Please check weather alert for below customers: </p>
                         </td>
                     </tr>
                 </table>
@@ -73,7 +73,7 @@
                 <table width="100%" border="0" cellpadding="30" cellspacing="0" bgcolor="#fff">
                     <tr>
                         <td>
-                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">You recently notification to weather alert for your customer address. Please click on button to any more information: </p>
+                            <p style="text-align: left;color: #333; font-size: 16px; line-height: 28px;">Please open dashboard for more details: </p>
                             <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td align="center">
@@ -83,7 +83,7 @@
                                                     <table border="0" cellspacing="0" cellpadding="0">
                                                         <tr>
                                                             <td>
-                                                                <a style="border: 10px #305C86 solid;background:#305C86;color: white;text-decoration: none;" class="button button--green" href="<?= $url;?>">Click Here</a>
+                                                                <a style="border: 10px #305C86 solid;background:#305C86;color: white;text-decoration: none;" class="button button--green" href="<?= $url;?>">Open Dashboard</a>
                                                             </td>
                                                         </tr>
                                                     </table>
