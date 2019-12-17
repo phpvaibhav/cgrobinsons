@@ -109,7 +109,7 @@
 								</label>
 							</section>
 							<section>
-								<label>Weather Temperature Set</label>
+								<label>Weather Temperature Set (°C)</label>
 								<label class="input"> <i class="icon-append fa fa-soundcloud"></i>
 									<input type="text" name="weatherTemperature" maxlength="3" size="3" class="number-only1" placeholder="Weather Temperature"  value="<?php echo $userData['weatherTemperature']; ?>" >
 									<b class="tooltip tooltip-bottom-right"> Please enter your Weather Temperature</b> 
