@@ -31,6 +31,7 @@ class Customers extends Common_Back_Controller {
     $data['customer']     = $result;
     $data['customermeta'] = $this->common_model->getsingle('customerMeta',array('userId' =>$result['id']));
     $customerNotification = $this->common_model->customerNotification(array('id' =>$result['id']));
+  //  lq();
     $data['customerNotificationA'] = $customerNotification;
     $data['front_scripts'] = array('backend_assets/custom/js/customer.js');
         $this->load->admin_render('customerDetail', $data, '');

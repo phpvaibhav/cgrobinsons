@@ -16,7 +16,7 @@
 								<a href="javascript:void(0);" class="btn btn-labeled btn-danger" onclick="customerDelete(this);" data-message="You want to delete this customer." data-useid="<?php echo encoding($customermeta['userId']);?>"> <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete </a>
 							</li>		
 						</ul>
-						<header>
+						<header><meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
 							<h5>Customer Information </h5>
 						</header>
 						<div class="timeline-seperator text-center"></div>
@@ -191,7 +191,7 @@
 										<div class="widget-body padding">
 											<?php
 										
-											$addressesA = isset($customerNotification[0]['addresses']) ? $customerNotification[0]['addresses']:array();
+											$addressesA = isset($customerNotificationA[0]['addresses']) ? $customerNotificationA[0]['addresses']:array();
 
 											?>
 											<div class="table-responsive"> 							
@@ -227,6 +227,11 @@
 														</td>
 													</tr>
 													<?php } ?>
+																										<?php if(empty($addressesA)): ?>
+													<tr>
+													<td colspan="6"> <center>No result found.</center></td>
+													</tr>
+													<?php endif; ?>
 													</tbody>
 												</table>
 											</div>
